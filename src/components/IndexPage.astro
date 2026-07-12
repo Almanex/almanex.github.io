@@ -97,6 +97,7 @@ const pageLabels = {
     reposTitle: "REPOSITORIES",
     reposSub: "A mix of open-source tools, localization projects, and weekend desktop experiments I’m proud to share.",
     viewOnGithub: "View on GitHub",
+    allProjects: "All projects",
     blogKicker: "latest dispatches // blog.txt",
     blogTitle: "Thoughts & Notes",
     blogSub: "[ SHORT-FORM ESSAYS ON SOFTWARE CRAFT, ARCHITECTURE & DESIGN ]",
@@ -129,6 +130,7 @@ const pageLabels = {
     reposTitle: "РЕПОЗИТОРИИ",
     reposSub: "Смесь инструментов с открытым исходным кодом, локализаций и десктопных экспериментов выходного дня, которыми я рад поделиться.",
     viewOnGithub: "Смотреть на GitHub",
+    allProjects: "Все проекты",
     blogKicker: "последние записи // blog.txt",
     blogTitle: "Мысли и Заметки",
     blogSub: "[ КОРОТКИЕ СТАТЬИ О РАЗРАБОТКЕ, АРХИТЕКТУРЕ И ДИЗАЙНЕ ]",
@@ -161,6 +163,7 @@ const pageLabels = {
     reposTitle: "REPOSITORIES",
     reposSub: "Eine Mischung aus Open-Source-Tools, Lokalisierungsprojekten und Desktop-Experimenten fürs Wochenende, die ich gerne teile.",
     viewOnGithub: "Auf GitHub ansehen",
+    allProjects: "Alle Projekte",
     blogKicker: "neueste meldungen // blog.txt",
     blogTitle: "Gedanken & Notizen",
     blogSub: "[ KURZARTIKEL ÜBER SOFTWARE-HANDWERK, ARCHITEKTUR & DESIGN ]",
@@ -317,9 +320,14 @@ const l = pageLabels[lang];
                       <p class="fc-meta"><span class="d"></span> {category}</p>
                       <h3 class="fc-name" style="font-size: clamp(34px, 4vw, 54px);">{project.title}</h3>
                       <p class="fc-desc">{subtitle}</p>
-                      <a href={project.github} target="_blank" class="fc-view">
-                        {l.viewOnGithub} <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                      </a>
+                      <div class="fc-actions" style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap; margin-top: 26px;">
+                        <a href={project.github} target="_blank" class="fc-view" style="margin-top: 0 !important;">
+                          {l.viewOnGithub} <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                        </a>
+                        <a href={getLocalizedPath('/work')} class="fc-view fc-all-projects" style="margin-top: 0 !important;">
+                          {l.allProjects} <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                        </a>
+                      </div>
                       <div class="fc-tags">
                         <span class="fc-tag">{project.lang}</span>
                         {project.platform && <span class="fc-tag">{project.platform}</span>}
