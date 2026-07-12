@@ -1,0 +1,127 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { UI_TRANSLATIONS } from '../data/translations.js';
+
+const pathname = Astro.url.pathname;
+let currentLang: 'en' | 'ru' | 'de' = 'en';
+if (pathname.startsWith('/ru/') || pathname === '/ru') {
+  currentLang = 'ru';
+} else if (pathname.startsWith('/de/') || pathname === '/de') {
+  currentLang = 'de';
+}
+
+const t = UI_TRANSLATIONS[currentLang];
+
+const labels = {
+  en: {
+    kicker: "error: 404 // page not found",
+    title: "Command Not Found",
+    desc: "The requested route does not exist or has been moved to a different branch.",
+    goHome: "cd ~ // Go Home",
+    terminalKicker: "system console log",
+    errorLog: "sh: route not found: "
+  },
+  ru: {
+    kicker: "ошибка: 404 // страница не найдена",
+    title: "Команда не найдена",
+    desc: "Запрошенный маршрут не существует или был перемещен в другую ветку.",
+    goHome: "cd ~ // На главную",
+    terminalKicker: "системный лог консоли",
+    errorLog: "sh: маршрут не найден: "
+  },
+  de: {
+    kicker: "fehler: 404 // seite nicht gefunden",
+    title: "Befehl nicht gefunden",
+    desc: "Die angeforderte Route existiert nicht oder wurde in einen anderen Branch verschoben.",
+    goHome: "cd ~ // Startseite",
+    terminalKicker: "systemkonsolenprotokoll",
+    errorLog: "sh: route nicht gefunden: "
+  }
+};
+
+const l = labels[currentLang];
+const displayTitle = `${l.title} — Almanex`;
+---
+
+<Layout title={displayTitle} activeTab="404">
+  <div class="page-header" style="padding: 140px 0 40px;">
+    <p class="kicker flt2" id="lbl-kicker" style="color: var(--magenta); font-family: var(--font-hand); font-size: clamp(24px, 4vw, 32px); margin-bottom: 12px;">{l.kicker}</p>
+    <h1 id="lbl-title" style="font-family: var(--font-display); text-transform: uppercase; font-size: clamp(38px, 6vw, 72px); font-weight: 900; letter-spacing: -0.03em; line-height: 1.05;">
+      {l.title}
+    </h1>
+    <p class="sub" id="lbl-desc" style="max-width: 52ch; margin: 20px auto 0; font-family: var(--font-body); font-size: 17px; color: var(--gray-2); line-height: 1.5;">
+      {l.desc}
+    </p>
+  </div>
+
+  <div class="timeline" style="max-width: 780px; margin: 0 auto 120px; padding: 0 26px;">
+    <div class="terminal-window" style="background: var(--surface) !important; border: 2px solid var(--ink) !important; border-radius: 12px !important; box-shadow: var(--shadow-sticker) !important; overflow: hidden !important;">
+      <div class="terminal-header" style="background: var(--bar) !important; border-bottom: 2px solid var(--ink) !important; padding: 10px 18px !important; display: flex !important; justify-content: space-between !important; align-items: center !important; height: 42px !important; user-select: none !important;">
+        <div class="terminal-buttons" style="display: flex !important; gap: 8px !important; align-items: center !important;">
+          <span style="display: inline-block !important; width: 12px !important; height: 12px !important; border-radius: 50% !important; border: 1.5px solid var(--ink) !important; background: var(--magenta) !important;"></span>
+          <span style="display: inline-block !important; width: 12px !important; height: 12px !important; border-radius: 50% !important; border: 1.5px solid var(--ink) !important; background: var(--amber) !important;"></span>
+          <span style="display: inline-block !important; width: 12px !important; height: 12px !important; border-radius: 50% !important; border: 1.5px solid var(--ink) !important; background: var(--green) !important;"></span>
+        </div>
+        <div style="font-family: var(--font-mono) !important; font-size: 12px !important; color: var(--gray-2) !important; font-weight: bold !important;">error_log.sys</div>
+        <div style="width: 52px !important;"></div>
+      </div>
+      <div class="terminal-body" style="padding: 26px 30px !important; font-family: var(--font-mono) !important; font-size: 14px !important; line-height: 1.6 !important; text-align: left !important; color: var(--ink) !important; background: var(--bar) !important;">
+        <p id="lbl-term-kicker" style="opacity: 0.5; margin-bottom: 8px;">// {l.terminalKicker}</p>
+        <p style="margin-bottom: 6px;"><span style="color: var(--cyan); font-weight: bold;">alex@almanex-pc</span>:<span style="color: var(--magenta);">~</span>$ get -r 404</p>
+        <p id="lbl-term-error" style="color: var(--magenta); font-weight: bold; margin-bottom: 16px;">{l.errorLog}{pathname}</p>
+        <p style="margin-bottom: 16px; color: var(--gray); font-style: italic;">
+          404 Object Not Found<br />
+          Directory: /pages<br />
+          Severity: High<br />
+          Status: Terminated
+        </p>
+        <p style="margin-bottom: 12px;">
+          <a href="/" id="lbl-home-btn" style="display: inline-flex !important; align-items: center !important; gap: 8px !important; background: var(--ink) !important; color: var(--paper) !important; border: 1.5px solid var(--ink) !important; padding: 10px 20px !important; border-radius: 8px !important; font-weight: bold !important; text-decoration: none !important; transition: transform 0.2s, box-shadow 0.2s !important; box-shadow: 3px 3px 0px var(--cyan) !important;" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';" class="btn-404-home">
+            {l.goHome}
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    // Client-side translation fallback for static hosting
+    const path = window.location.pathname;
+    let detectedLang = 'en';
+    if (path.startsWith('/ru/') || path === '/ru' || path.includes('/ru/')) {
+      detectedLang = 'ru';
+    } else if (path.startsWith('/de/') || path === '/de' || path.includes('/de/')) {
+      detectedLang = 'de';
+    }
+
+    if (detectedLang !== 'en') {
+      const trans = {
+        ru: {
+          kicker: "ошибка: 404 // страница не найдена",
+          title: "Команда не найдена",
+          desc: "Запрошенный маршрут не существует или был перемещен в другую ветку.",
+          goHome: "cd ~ // На главную",
+          terminalKicker: "системный лог консоли",
+          errorLog: "sh: маршрут не найден: "
+        },
+        de: {
+          kicker: "fehler: 404 // seite nicht gefunden",
+          title: "Befehl nicht gefunden",
+          desc: "Die angeforderte Route existiert nicht oder wurde in einen anderen Branch verschoben.",
+          goHome: "cd ~ // Startseite",
+          terminalKicker: "systemkonsolenprotokoll",
+          errorLog: "sh: route nicht gefunden: "
+        }
+      }[detectedLang];
+
+      document.getElementById('lbl-kicker').textContent = trans.kicker;
+      document.getElementById('lbl-title').textContent = trans.title;
+      document.getElementById('lbl-desc').textContent = trans.desc;
+      document.getElementById('lbl-term-kicker').textContent = '// ' + trans.terminalKicker;
+      document.getElementById('lbl-term-error').textContent = trans.errorLog + path;
+      document.getElementById('lbl-home-btn').textContent = trans.goHome;
+    } else {
+      document.getElementById('lbl-term-error').textContent = "sh: route not found: " + path;
+    }
+  </script>
+</Layout>
