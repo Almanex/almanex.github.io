@@ -312,6 +312,14 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
 </script>
 
 <style is:global>
+  /* Reduce spacing between page header and projects section */
+  #work-page-container .page-header {
+    padding-bottom: 20px !important;
+  }
+  #work-page-container .section {
+    padding-top: 20px !important;
+  }
+
   /* Work Pagination styling */
   .wk-pagination {
     display: flex;
