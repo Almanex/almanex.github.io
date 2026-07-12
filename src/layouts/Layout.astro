@@ -247,7 +247,7 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 						</div>
 						<div class="dash-col">
 							<h5>[SYS_CONNECT]</h5>
-							<p class="code-line"><a href="mailto:almanex@zohomail.eu">> SEND_EMAIL.CMD</a></p>
+							<p class="code-line"><a href="#" class="obfuscated-email-link" data-user="almanex" data-domain="zohomail.eu">> SEND_EMAIL.CMD</a></p>
 							<p class="code-line"><a href={getLocalizedPath('/contact')}>> BOOK_MEETING.BAT</a></p>
 							<p class="code-line"><a href="https://github.com/Almanex" target="_blank">> GITHUB_PROFILE.URL</a></p>
 						</div>
@@ -282,6 +282,18 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 
 	<!-- Client-side navigation & theme handling & fade-in reveal -->
 	<script is:inline>
+		// Obfuscated Email Link handler
+		document.addEventListener('DOMContentLoaded', () => {
+			document.querySelectorAll('.obfuscated-email-link').forEach(link => {
+				link.addEventListener('click', (e) => {
+					e.preventDefault();
+					const user = link.dataset.user;
+					const domain = link.dataset.domain;
+					window.location.href = `mailto:${user}@${domain}`;
+				});
+			});
+		});
+
 		// Theme toggle
 		const tt = document.querySelector('.theme-toggle');
 		if (tt) {

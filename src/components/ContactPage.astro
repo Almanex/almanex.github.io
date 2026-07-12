@@ -223,10 +223,10 @@ const l = contactLabels[lang];
               <span class="ch-icon cyan-ch-bg">✉️</span>
               <div>
                 <div class="ch-label">{l.directEmail}</div>
-                <div class="ch-value">almanex@zohomail.eu</div>
+                <div class="ch-value email-display-placeholder" data-user="almanex" data-domain="zohomail.eu">[protected]</div>
               </div>
             </div>
-            <button type="button" class="copy-btn" id="copy-email-btn" data-email="almanex@zohomail.eu">
+            <button type="button" class="copy-btn" id="copy-email-btn" data-user="almanex" data-domain="zohomail.eu">
               <span>{l.copyAddress}</span>
             </button>
           </div>
@@ -290,7 +290,9 @@ const l = contactLabels[lang];
     const copyBtn = document.getElementById('copy-email-btn');
     if (copyBtn) {
       copyBtn.addEventListener('click', () => {
-        const email = copyBtn.getAttribute('data-email');
+        const user = copyBtn.getAttribute('data-user');
+        const domain = copyBtn.getAttribute('data-domain');
+        const email = `${user}@${domain}`;
         navigator.clipboard.writeText(email).then(() => {
           copyBtn.innerHTML = `<span>${l.copied}</span>`;
           copyBtn.classList.add('copied');
@@ -301,6 +303,13 @@ const l = contactLabels[lang];
         }).catch(() => {});
       });
     }
+
+    // Populate email display dynamically to protect against scrapers
+    document.querySelectorAll('.email-display-placeholder').forEach(el => {
+      const user = el.getAttribute('data-user');
+      const domain = el.getAttribute('data-domain');
+      el.textContent = `${user}@${domain}`;
+    });
 
     // Page load time for bot checking
     const pageLoadTime = Date.now();

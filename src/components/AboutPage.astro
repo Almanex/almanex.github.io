@@ -392,9 +392,9 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
       </div>
       
       <div class="connect-actions" style="display: flex !important; flex-wrap: wrap !important; gap: 16px !important; justify-content: flex-start !important;">
-        <a href={`mailto:${l.contactBtnEmail}`} style="text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 10px !important; border: 2px solid var(--ink) !important; box-shadow: 3px 3px 0px var(--ink) !important; padding: 12px 22px !important; border-radius: 8px !important; font-weight: bold !important; color: var(--ink) !important; background: var(--cyan) !important; transition: transform 0.1s, box-shadow 0.1s !important; font-family: var(--font-mono) !important; font-size: 13px !important; text-transform: uppercase !important;">
+        <a href="#" class="obfuscated-email-btn" data-user="almanex" data-domain="zohomail.eu" style="text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 10px !important; border: 2px solid var(--ink) !important; box-shadow: 3px 3px 0px var(--ink) !important; padding: 12px 22px !important; border-radius: 8px !important; font-weight: bold !important; color: var(--ink) !important; background: var(--cyan) !important; transition: transform 0.1s, box-shadow 0.1s !important; font-family: var(--font-mono) !important; font-size: 13px !important; text-transform: uppercase !important;">
           <svg viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px;"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          {l.contactBtnEmail}
+          <span class="email-text"></span>
         </a>
         <a href={getLocalizedPath('/contact')} style="text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 10px !important; border: 2px solid var(--ink) !important; box-shadow: 3px 3px 0px var(--ink) !important; padding: 12px 22px !important; border-radius: 8px !important; font-weight: bold !important; color: var(--ink) !important; background: var(--paper) !important; transition: transform 0.1s, box-shadow 0.1s !important; font-family: var(--font-mono) !important; font-size: 13px !important; text-transform: uppercase !important;">
           {l.contactBtnGet}
@@ -407,6 +407,19 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
   <script is:inline>
     // Stats Counter Animation
     document.addEventListener('DOMContentLoaded', () => {
+      // Obfuscated Email Button handling
+      document.querySelectorAll('.obfuscated-email-btn').forEach(btn => {
+        const user = btn.dataset.user;
+        const domain = btn.dataset.domain;
+        const email = `${user}@${domain}`;
+        const textEl = btn.querySelector('.email-text');
+        if (textEl) textEl.textContent = email;
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.location.href = `mailto:${email}`;
+        });
+      });
+
       const counters = document.querySelectorAll('.stat-counter');
       const animateCounter = (el) => {
         const target = +el.getAttribute('data-target');
