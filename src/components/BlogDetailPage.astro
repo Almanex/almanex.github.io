@@ -68,7 +68,28 @@ const l = labels[lang];
 const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${path === '/' ? '' : path}`;
 ---
 
-<Layout title={`${post.data.title} — Almanex`} activeTab="blog" description={post.data.description}>
+<Layout 
+  title={`${post.data.title} — Almanex`} 
+  activeTab="blog" 
+  description={post.data.description}
+  image={post.data.image}
+  type="article"
+  publishDate={new Date(post.data.pubDate)}
+>
+  <!-- Article JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.data.title,
+    "image": post.data.image ? [new URL(post.data.image, Astro.site).href] : undefined,
+    "datePublished": new Date(post.data.pubDate).toISOString(),
+    "author": [{
+        "@type": "Person",
+        "name": "Alex",
+        "url": Astro.site?.href
+      }]
+  })} />
+
   <div id="scroll-progress-container">
     <div id="scroll-progress-fill"></div>
   </div>

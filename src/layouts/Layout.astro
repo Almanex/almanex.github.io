@@ -3,9 +3,19 @@ interface Props {
 	title: string;
 	description?: string;
 	activeTab?: string;
+	image?: string;
+	type?: string;
+	publishDate?: Date;
 }
 
-const { title, description = "Alex is a software engineer building lightweight desktop tools, localizations, and mobile apps.", activeTab = "index" } = Astro.props;
+const { 
+	title, 
+	description = "Alex is a software engineer building lightweight desktop tools, localizations, and mobile apps.", 
+	activeTab = "index",
+	image = "/favicon.svg", // Default image fallback
+	type = "website",
+	publishDate
+} = Astro.props;
 import '../styles/global.css';
 import { UI_TRANSLATIONS } from '../data/translations.js';
 
@@ -29,6 +39,15 @@ function getPathForLang(lang: string) {
   if (lang === 'en') return cleanPath;
   return `/${lang}${cleanPath === '/' ? '' : cleanPath}`;
 }
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+
+const languages = ['en', 'ru', 'de'];
+const hrefLangs = languages.map(lang => ({
+  lang,
+  href: new URL(getPathForLang(lang), Astro.site).href
+}));
+const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 ---
 
 <!DOCTYPE html>
@@ -58,6 +77,42 @@ function getPathForLang(lang: string) {
 	<meta name="description" content={description} />
 	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 	<meta name="author" content="Alex" />
+
+	<!-- Canonical URL -->
+	<link rel="canonical" href={canonicalURL} />
+
+	<!-- Hreflang Tags -->
+	{hrefLangs.map(({ lang, href }) => (
+		<link rel="alternate" hreflang={lang} href={href} />
+	))}
+	<link rel="alternate" hreflang="x-default" href={defaultHref} />
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content={type} />
+	<meta property="og:url" content={canonicalURL} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:image" content={new URL(image, Astro.site).href} />
+	<meta property="og:site_name" content="Almanex" />
+	<meta property="og:locale" content={currentLang} />
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image" />
+	<meta property="twitter:url" content={canonicalURL} />
+	<meta property="twitter:title" content={title} />
+	<meta property="twitter:description" content={description} />
+	<meta property="twitter:image" content={new URL(image, Astro.site).href} />
+
+	<!-- JSON-LD Base -->
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "Person",
+		"name": "Alex",
+		"url": Astro.site?.href,
+		"sameAs": [
+			"https://github.com/Almanex"
+		]
+	})} />
 </head>
 <body>
 	<div class="canvas-bg"></div>

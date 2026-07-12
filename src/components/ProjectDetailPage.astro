@@ -53,7 +53,29 @@ const subtitle = PROJECT_TRANSLATIONS[lang]?.[project]?.subtitle || projectData.
 const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${path === '/' ? '' : path}`;
 ---
 
-<Layout title={`${projectData.title} — Almanex`} activeTab="work" description={subtitle}>
+<Layout 
+  title={`${projectData.title} — Almanex`} 
+  activeTab="work" 
+  description={subtitle}
+  image={projectData.image ? `/${projectData.image}` : undefined}
+  type="website"
+>
+  <!-- SoftwareApplication JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": projectData.title,
+    "operatingSystem": projectData.platform,
+    "applicationCategory": category,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "url": projectData.github,
+    "image": projectData.image ? [new URL(`/${projectData.image}`, Astro.site).href] : undefined
+  })} />
+
   <div class="detail-container" id="project-detail-container" data-lang={lang}>
     <a href={getLocalizedPath('/work')} class="back-btn">{l.back}</a>
     
