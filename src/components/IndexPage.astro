@@ -102,12 +102,6 @@ const pageLabels = {
     blogSub: "[ SHORT-FORM ESSAYS ON SOFTWARE CRAFT, ARCHITECTURE & DESIGN ]",
     blogExploreBtn: "EXPLORE ALL LOGS // BLOG.TXT",
     blogPostsCount: "10+ POSTS ↗",
-    newsletterKicker: "stay in touch",
-    newsletterTitle: "The occasional note",
-    newsletterSub: "A few times a year - new work, what I'm learning, nothing else.",
-    newsletterBtn: "Subscribe",
-    newsletterNote: "No spam. Unsubscribe anytime.",
-    newsletterPlaceholder: "you@example.com",
     fmHoverPreview: "Hover over a file for preview",
     fmWaiting: "Waiting for selection...",
     fmLoading: "Loading files...",
@@ -135,12 +129,6 @@ const pageLabels = {
     blogSub: "[ КОРОТКИЕ СТАТЬИ О РАЗРАБОТКЕ, АРХИТЕКТУРЕ И ДИЗАЙНЕ ]",
     blogExploreBtn: "ВСЕ ЗАПИСИ // BLOG.TXT",
     blogPostsCount: "10+ СТАТЕЙ ↗",
-    newsletterKicker: "оставаться на связи",
-    newsletterTitle: "Периодическая рассылка",
-    newsletterSub: "Несколько раз в год — новые работы, инсайты и ничего лишнего.",
-    newsletterBtn: "Подписаться",
-    newsletterNote: "Без спама. Отписка в любое время.",
-    newsletterPlaceholder: "you@example.com",
     fmHoverPreview: "Наведите курсор на файл для предпросмотра",
     fmWaiting: "Ожидание выбора...",
     fmLoading: "Загрузка файлов...",
@@ -168,12 +156,6 @@ const pageLabels = {
     blogSub: "[ KURZARTIKEL ÜBER SOFTWARE-HANDWERK, ARCHITEKTUR & DESIGN ]",
     blogExploreBtn: "ALLE LOGS ANSEHEN // BLOG.TXT",
     blogPostsCount: "10+ BEITRÄGE ↗",
-    newsletterKicker: "in kontakt bleiben",
-    newsletterTitle: "Gelegentliche Notizen",
-    newsletterSub: "Ein paar Mal im Jahr — neue Arbeiten, Erkenntnisse, sonst nichts.",
-    newsletterBtn: "Abonnieren",
-    newsletterNote: "Kein Spam. Jederzeit abbestellbar.",
-    newsletterPlaceholder: "you@example.com",
     fmHoverPreview: "Bewege den Cursor über eine Datei für die Vorschau",
     fmWaiting: "Warten auf Auswahl...",
     fmLoading: "Dateien laden...",
@@ -442,21 +424,6 @@ const l = pageLabels[lang];
           <span>{l.blogExploreBtn}</span>
           <span style="background: var(--cyan); border: 1.5px solid var(--ink); border-radius: 6px; padding: 2px 8px; font-size: 11px;">{l.blogPostsCount}</span>
         </a>
-      </div>
-    </section>
-
-    <section class="newsletter">
-      <div class="newsletter-band">
-        <div class="nl-inner">
-          <p class="kicker">{l.newsletterKicker}</p>
-          <h2>{l.newsletterTitle}</h2>
-          <p class="sub">{l.newsletterSub}</p>
-          <form class="nl-form" action="https://buttondown.email/api/emails/embed-subscribe/yourname" method="POST" target="_blank">
-            <input type="email" name="email" placeholder={l.newsletterPlaceholder} required aria-label="Email address">
-            <button type="submit">{l.newsletterBtn}</button>
-          </form>
-          <p class="nl-note">{l.newsletterNote}</p>
-        </div>
       </div>
     </section>
   </div>
