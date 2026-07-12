@@ -97,7 +97,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
               </div>
               <div class="commit-message">{post.data.title}</div>
 
-              <a href={getLocalizedPath(`/blog/${post.id}`)} class="commit-card">
+              <a href={getLocalizedPath(`/blog/${baseSlug}`)} class="commit-card">
                 <div class="cc-img-wrap">
                   <img src={post.data.image} alt={post.data.title} loading="lazy" />
                   <span class="cc-cat">{post.data.category}</span>
