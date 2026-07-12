@@ -347,17 +347,6 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 			});
 		}
 
-		// Dynamic 24h clock inside footer
-		const clockEl = document.querySelector('.ft-time');
-		if (clockEl) {
-			const updateClock = () => {
-				const now = new Date();
-				clockEl.textContent = now.toTimeString().split(' ')[0];
-			};
-			setInterval(updateClock, 1000);
-			updateClock();
-		}
-
 		// Fade-in-up animation on scroll
 		const reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
 		const els = document.querySelectorAll("[data-reveal]");
