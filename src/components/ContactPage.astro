@@ -148,6 +148,8 @@ const l = contactLabels[lang];
           </div>
           
           <form class="dispatch-form" id="terminal-contact-form" action="https://formspree.io/f/yourFormId" method="POST">
+            <!-- Bot protection honeypot field -->
+            <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off" />
             <input type="hidden" id="cf-topic" name="topic" value="Open Source / Collab">
             
             <div class="field-group">
@@ -221,10 +223,10 @@ const l = contactLabels[lang];
               <span class="ch-icon cyan-ch-bg">✉️</span>
               <div>
                 <div class="ch-label">{l.directEmail}</div>
-                <div class="ch-value">hello@example.com</div>
+                <div class="ch-value">almanex@zohomail.eu</div>
               </div>
             </div>
-            <button type="button" class="copy-btn" id="copy-email-btn" data-email="hello@example.com">
+            <button type="button" class="copy-btn" id="copy-email-btn" data-email="almanex@zohomail.eu">
               <span>{l.copyAddress}</span>
             </button>
           </div>
@@ -300,26 +302,72 @@ const l = contactLabels[lang];
       });
     }
 
-    // Terminal Form Simulation Log
+    // Page load time for bot checking
+    const pageLoadTime = Date.now();
+
+    // Terminal Form Simulation & AJAX dispatch
     const form = document.getElementById('terminal-contact-form');
     const output = document.getElementById('dispatch-output');
     const linesContainer = document.getElementById('console-lines');
     if (form && output && linesContainer) {
-      form.addEventListener('submit', (e) => {
-        if (form.getAttribute('action').includes('yourFormId')) {
-          e.preventDefault();
-          output.classList.remove('hidden');
-          linesContainer.innerHTML = '';
-          
-          const msgs = l.consoleLogs;
-          
-          msgs.forEach((msg, idx) => {
-            setTimeout(() => {
-              const p = document.createElement('p');
-              p.innerHTML = msg;
-              linesContainer.appendChild(p);
-            }, idx * 400);
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // 1. Honeypot check
+        const gotcha = form.querySelector('input[name="_gotcha"]');
+        if (gotcha && gotcha.value) {
+          console.warn("Spam detected via honeypot");
+          return;
+        }
+
+        // 2. Time-based check (bots submit too fast)
+        const timeElapsed = Date.now() - pageLoadTime;
+        if (timeElapsed < 2000) {
+          console.warn("Spam detected - submitted too fast");
+          return;
+        }
+
+        // 3. Trigger log animation
+        output.classList.remove('hidden');
+        linesContainer.innerHTML = '';
+        const msgs = l.consoleLogs;
+
+        msgs.forEach((msg, idx) => {
+          setTimeout(() => {
+            const p = document.createElement('p');
+            p.innerHTML = msg;
+            linesContainer.appendChild(p);
+          }, idx * 400);
+        });
+
+        // 4. Submit to Formspree if the endpoint is updated (not "yourFormId")
+        const action = form.getAttribute('action');
+        if (action.includes('yourFormId')) {
+          // Mock success
+          return;
+        }
+
+        try {
+          const formData = new FormData(form);
+          const response = await fetch(action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
           });
+
+          if (!response.ok) {
+            throw new Error('Network error');
+          }
+        } catch (error) {
+          // Append error message to console after animation completes
+          setTimeout(() => {
+            const p = document.createElement('p');
+            p.style.color = 'var(--magenta)';
+            p.innerHTML = '> ERROR: Socket transmission failed. Check connection.';
+            linesContainer.appendChild(p);
+          }, msgs.length * 400);
         }
       });
     }
