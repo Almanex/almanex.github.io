@@ -100,10 +100,6 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
               <a href={getLocalizedPath(`/blog/${post.id}`)} class="commit-card">
                 <div class="cc-img-wrap">
                   <img src={post.data.image} alt={post.data.title} loading="lazy" />
-                  <div class="cc-img-handles">
-                    <span class="cc-handle"></span>
-                    <span class="cc-handle"></span>
-                  </div>
                   <span class="cc-cat">{post.data.category}</span>
                 </div>
                 <div class="cc-body">
@@ -523,24 +519,6 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     height: 100%;
     object-fit: cover;
     display: block;
-  }
-  .cc-img-handles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 10px;
-  }
-  .cc-handle {
-    width: 10px;
-    height: 10px;
-    border: 2px solid var(--ink);
-    border-radius: 2px;
-    background: var(--paper);
-    opacity: 0.7;
-  }
   .cc-cat {
     position: absolute;
     bottom: 10px;
