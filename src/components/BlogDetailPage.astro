@@ -38,8 +38,7 @@ const nextPost = sortedPosts[currentIndex + 1] || sortedPosts[0];
 
 const sizeMap: Record<string, string> = {
   'vscode-agents': '5.2 KB',
-  'dotnet-support-end': '3.6 KB',
-  'wsl-containers': '4.8 KB'
+  'wsl-containers': '12.4 KB'
 };
 const baseSlug = nextPost ? nextPost.id.split('/').pop() || '' : '';
 const nextPostSize = sizeMap[baseSlug] || '3.0 KB';
