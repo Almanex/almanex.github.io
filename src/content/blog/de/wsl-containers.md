@@ -3,7 +3,7 @@ title: "Linux-Container in WSL ohne Docker Desktop ausführen"
 description: "Ein umfassender Leitfaden zur nativen Container-Unterstützung in WSL — Einrichtung, CLI-Nutzung, Netzwerk, Sicherheit und warum es ein Gamechanger für Windows-Entwickler ist."
 pubDate: 2026-06-29
 category: "WSL"
-image: "/images/blog/wsl-containers.jpg"
+image: "/images/blog/wsl-containers.webp"
 readTime: "8 Min"
 status: "PUB"
 ---

@@ -3,7 +3,7 @@ title: "How to Run Linux Containers in WSL Without Docker Desktop"
 description: "A comprehensive guide to WSL's native container support — setup, CLI usage, networking, security, and why it's a game-changer for Windows developers."
 pubDate: 2026-06-29
 category: "WSL"
-image: "/images/blog/wsl-containers.jpg"
+image: "/images/blog/wsl-containers.webp"
 readTime: "8 min"
 status: "PUB"
 ---

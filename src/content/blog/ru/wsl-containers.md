@@ -3,7 +3,7 @@ title: "Как запускать Linux-контейнеры в WSL без Docke
 description: "Подробное руководство по нативной поддержке контейнеров в WSL — настройка, CLI, сетевые возможности, безопасность и почему это важно для Windows-разработчиков."
 pubDate: 2026-06-29
 category: "WSL"
-image: "/images/blog/wsl-containers.jpg"
+image: "/images/blog/wsl-containers.webp"
 readTime: "8 мин"
 status: "PUB"
 ---
