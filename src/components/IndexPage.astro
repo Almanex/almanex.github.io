@@ -211,7 +211,7 @@ const l = pageLabels[lang];
           <span class="ide-value"><span class="ide-quote">"</span>open-source<span class="ide-quote">"</span></span><span class="ide-blinking-cursor"></span>
         </span>
       </h1>
-      <p class="mono-label avail"><span class="dot"></span> {l.heroAvail}</p>
+      <p class="mono-label avail"><span class="prompt-badge"><span class="prompt-bracket">[</span><span class="prompt-chevron">&gt;</span><span class="prompt-bracket">]</span></span> {l.heroAvail}</p>
       
       <div class="enter-button-wrapper">
         <div id="keyboard-backdrop" class="keyboard-backdrop"></div>
@@ -1421,5 +1421,34 @@ const l = pageLabels[lang];
     border-bottom: 2px solid var(--accent) !important;
     border-right: 2px solid var(--accent) !important;
     border-radius: 0 !important;
+  }
+
+  /* CONSOLE PROMPT BADGE FOR HERO AVAILABILITY ([>]) */
+  .prompt-badge {
+    font-family: var(--font-mono) !important;
+    font-weight: 900 !important;
+    margin-right: 8px !important;
+    font-size: 15px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    letter-spacing: -0.05em !important;
+    user-select: none !important;
+  }
+  .prompt-bracket {
+    color: var(--ink) !important;
+    opacity: 0.3 !important;
+  }
+  [data-theme=dark] .prompt-bracket {
+    opacity: 0.4 !important;
+  }
+  .prompt-chevron {
+    color: var(--cyan) !important;
+    text-shadow: 0 0 6px rgba(54, 197, 240, 0.6) !important;
+    animation: blink-chevron 1.4s infinite step-end !important;
+    margin: 0 1px !important;
+  }
+  @keyframes blink-chevron {
+    from, to { opacity: 1; }
+    50% { opacity: 0.25; }
   }
 </style>
