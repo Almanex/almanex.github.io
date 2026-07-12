@@ -1384,4 +1384,42 @@ const l = pageLabels[lang];
     transform: translate(0, 0);
     box-shadow: 2px 2px 0px var(--ink) !important;
   }
+
+  /* VIEWPORT BRACKETS FOR CARD PHOTO CORNERS (.handle tl, tr, bl, br) */
+  .project-terminal .fc-img .handle {
+    border: none !important;
+    background: transparent !important;
+    width: 12px !important;
+    height: 12px !important;
+    position: absolute !important;
+    z-index: 3 !important;
+  }
+  .project-terminal .fc-img .handle.tl {
+    top: -3px !important;
+    left: -3px !important;
+    border-top: 2px solid var(--accent) !important;
+    border-left: 2px solid var(--accent) !important;
+    border-radius: 0 !important;
+  }
+  .project-terminal .fc-img .handle.tr {
+    top: -3px !important;
+    right: -3px !important;
+    border-top: 2px solid var(--accent) !important;
+    border-right: 2px solid var(--accent) !important;
+    border-radius: 0 !important;
+  }
+  .project-terminal .fc-img .handle.bl {
+    bottom: -3px !important;
+    left: -3px !important;
+    border-bottom: 2px solid var(--accent) !important;
+    border-left: 2px solid var(--accent) !important;
+    border-radius: 0 !important;
+  }
+  .project-terminal .fc-img .handle.br {
+    bottom: -3px !important;
+    right: -3px !important;
+    border-bottom: 2px solid var(--accent) !important;
+    border-right: 2px solid var(--accent) !important;
+    border-radius: 0 !important;
+  }
 </style>
