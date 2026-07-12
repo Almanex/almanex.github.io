@@ -92,10 +92,10 @@ const pageLabels = {
     heroAvail: "Available for coding projects & open-source",
     heroContact: "Contact me",
     techStack: "tech stack",
-    statement: "I build efficient & useful software",
+    statement: "We do what we must, because we can",
     reposKicker: "git show-ref --tags",
     reposTitle: "REPOSITORIES",
-    reposSub: "A collection of open-source utilities, localizations, and desktop experiments.",
+    reposSub: "A mix of open-source tools, localization projects, and weekend desktop experiments I’m proud to share.",
     viewOnGithub: "View on GitHub",
     blogKicker: "latest dispatches // blog.txt",
     blogTitle: "Thoughts & Notes",
@@ -124,10 +124,10 @@ const pageLabels = {
     heroAvail: "Доступен для коммерческих и open-source проектов",
     heroContact: "Написать мне",
     techStack: "технологический стек",
-    statement: "Создаю эффективное и полезное программное обеспечение",
+    statement: "Мы делаем то, что должны, потому что можем",
     reposKicker: "git show-ref --tags",
     reposTitle: "РЕПОЗИТОРИИ",
-    reposSub: "Коллекция утилит с открытым исходным кодом, локализаций и десктопных экспериментов.",
+    reposSub: "Смесь инструментов с открытым исходным кодом, локализаций и десктопных экспериментов выходного дня, которыми я рад поделиться.",
     viewOnGithub: "Смотреть на GitHub",
     blogKicker: "последние записи // blog.txt",
     blogTitle: "Мысли и Заметки",
@@ -156,10 +156,10 @@ const pageLabels = {
     heroAvail: "Verfügbar für Coding-Projekte & Open-Source",
     heroContact: "Kontaktieren",
     techStack: "Tech-Stack",
-    statement: "Ich entwickle effiziente & nützliche Software",
+    statement: "Wir tun, was wir tun müssen, weil wir es können",
     reposKicker: "git show-ref --tags",
     reposTitle: "REPOSITORIES",
-    reposSub: "Eine Sammlung von Open-Source-Utilities, Lokalisierungen und Desktop-Experimenten.",
+    reposSub: "Eine Mischung aus Open-Source-Tools, Lokalisierungsprojekten und Desktop-Experimenten fürs Wochenende, die ich gerne teile.",
     viewOnGithub: "Auf GitHub ansehen",
     blogKicker: "neueste meldungen // blog.txt",
     blogTitle: "Gedanken & Notizen",
@@ -270,9 +270,11 @@ const l = pageLabels[lang];
     <section class="statement">
       <h2 data-reveal>
         {lang === 'ru' ? (
-          <>Создаю <span class="g cyan"><svg viewBox="0 0 24 24" fill="none"><path d="M8 6L3 12l5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16 6l5 6-5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 4l-4 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></span> эффективное & полезное ПО <span class="g magenta"><svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="18" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="6" cy="19" r="2.2" stroke="currentColor" stroke-width="2"></circle><path d="M6 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M18 7c0 5-5 7-12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></span></>
+          <>Мы делаем <span class="g cyan"><svg viewBox="0 0 24 24" fill="none"><path d="M8 6L3 12l5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16 6l5 6-5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 4l-4 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></span> то, что должны, потому <span class="g magenta"><svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="18" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="6" cy="19" r="2.2" stroke="currentColor" stroke-width="2"></circle><path d="M6 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M18 7c0 5-5 7-12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></span> что можем</>
+        ) : lang === 'de' ? (
+          <>Wir tun <span class="g cyan"><svg viewBox="0 0 24 24" fill="none"><path d="M8 6L3 12l5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16 6l5 6-5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 4l-4 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></span> was wir müssen, weil <span class="g magenta"><svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="18" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="6" cy="19" r="2.2" stroke="currentColor" stroke-width="2"></circle><path d="M6 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M18 7c0 5-5 7-12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></span> wir es können</>
         ) : (
-          <>I build <span class="g cyan"><svg viewBox="0 0 24 24" fill="none"><path d="M8 6L3 12l5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16 6l5 6-5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 4l-4 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></span> efficient & useful software <span class="g magenta"><svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="18" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="6" cy="19" r="2.2" stroke="currentColor" stroke-width="2"></circle><path d="M6 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M18 7c0 5-5 7-12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></span></>
+          <>We do <span class="g cyan"><svg viewBox="0 0 24 24" fill="none"><path d="M8 6L3 12l5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16 6l5 6-5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 4l-4 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></span> what we must, because <span class="g magenta"><svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="18" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="6" cy="19" r="2.2" stroke="currentColor" stroke-width="2"></circle><path d="M6 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M18 7c0 5-5 7-12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></span> we can</>
         )}
       </h2>
     </section>
