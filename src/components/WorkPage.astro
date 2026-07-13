@@ -183,11 +183,16 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = html;
       tempDiv.querySelectorAll('img').forEach(img => {
-        const parentLink = img.closest('a');
-        if (parentLink) {
-          parentLink.remove();
+        const detailsParent = img.closest('details');
+        if (detailsParent) {
+          detailsParent.remove();
         } else {
-          img.remove();
+          const parentLink = img.closest('a');
+          if (parentLink) {
+            parentLink.remove();
+          } else {
+            img.remove();
+          }
         }
       });
       tempDiv.querySelectorAll('p').forEach(p => {
