@@ -188,11 +188,12 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
       }
 
       // Resolve relative images and links in README to their respective GitHub raw/blob locations
-      function resolveRelativePaths(html: string, proj: any) {
+      function resolveRelativePaths(html: string, proj: any, isDocsFolder: boolean = false) {
         if (!html || !proj || !proj.github) return html;
         const baseRepo = proj.github.replace(/\/$/, "");
-        const baseRaw = baseRepo.replace("github.com", "raw.githubusercontent.com") + "/main/";
-        const baseBlob = baseRepo + "/blob/main/";
+        const subPath = isDocsFolder ? "/main/docs/" : "/main/";
+        const baseRaw = baseRepo.replace("github.com", "raw.githubusercontent.com") + subPath;
+        const baseBlob = baseRepo + "/blob" + subPath;
         
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = html;
@@ -334,11 +335,18 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
 
       if (project) {
         // 1. First extract images from README to initialize slider gallery regardless of starting tab
+        let isReadmeDocs = false;
         let readme = project.readme;
-        if (lang === 'ru' && project.readme_ru) readme = project.readme_ru;
-        if (lang === 'de' && project.readme_de) readme = project.readme_de;
+        if (lang === 'ru' && project.readme_ru) {
+          readme = project.readme_ru;
+          isReadmeDocs = true;
+        }
+        if (lang === 'de' && project.readme_de) {
+          readme = project.readme_de;
+          isReadmeDocs = true;
+        }
 
-        const resolvedReadmeHtml = resolveRelativePaths(parseMarkdown(readme), project);
+        const resolvedReadmeHtml = resolveRelativePaths(parseMarkdown(readme), project, isReadmeDocs);
         const readmeProcessResult = processReadmeAndExtractImages(resolvedReadmeHtml);
         initSlider(readmeProcessResult.images);
 
@@ -361,9 +369,13 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
           let filepath = '';
           if (viewMode === 'guide' && hasGuide) {
             filepath = `projects/${projectId}/docs/GUIDE.md`;
-            sourceHtml = resolveRelativePaths(parseMarkdown(guide), project);
+            if (lang === 'ru' && project.guide_ru) filepath = `projects/${projectId}/docs/GUIDE_RU.md`;
+            if (lang === 'de' && project.guide_de) filepath = `projects/${projectId}/docs/GUIDE_DE.md`;
+            sourceHtml = resolveRelativePaths(parseMarkdown(guide), project, true);
           } else {
             filepath = `projects/${projectId}/README.md`;
+            if (lang === 'ru' && project.readme_ru) filepath = `projects/${projectId}/docs/README_RU.md`;
+            if (lang === 'de' && project.readme_de) filepath = `projects/${projectId}/docs/README_DE.md`;
             sourceHtml = readmeProcessResult.cleanHtml;
           }
 
