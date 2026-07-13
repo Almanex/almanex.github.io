@@ -2611,35 +2611,6 @@ IconForge is a lightweight native Windows application developed on the WinUI 3 (
 
 For a detailed walkthrough of all options and features, see the [User Guide](docs/GUIDE.md).
 
-## Application Interface
-
-<details open>
-  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 1. Main Window - File Drag and Drop</b></summary>
-  <br/>
-  <p align="center"><img src="/images/projects/icoboo/screenshot1.png" width="95%" /></p>
-</details>
-<details>
-  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 2. Settings and Target Directory Selection</b></summary>
-  <br/>
-  <p align="center"><img src="/images/projects/icoboo/screenshot2.png" width="95%" /></p>
-</details>
-<details>
-  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 3. Android Adaptive Icon Configuration and Color Swatches</b></summary>
-  <br/>
-  <p align="center"><img src="/images/projects/icoboo/screenshot3.png" width="95%" /></p>
-</details>
-<details>
-  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 4. Shell Integration - Windows Explorer Context Menu</b></summary>
-  <br/>
-  <p align="center"><img src="/images/projects/icoboo/screenshot4.png" width="95%" /></p>
-</details>
-<details>
-  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 5. Active Process State and Toast Notifications</b></summary>
-  <br/>
-  <p align="center"><img src="/images/projects/icoboo/screenshot5.png" width="95%" /></p>
-</details>
-
----
 
 ## Main Features
 
@@ -2784,34 +2755,6 @@ This project is licensed under the MIT License - see the \`LICENSE\` file for de
 IconForge — это легкое нативное Windows-приложение (утилита), разработанное на фреймворке WinUI 3 (Windows App SDK) и C#, с полной поддержкой 3 языков интерфейса (русский, английский, немецкий). Оно предназначено для пакетной генерации наборов иконок для Windows (\`.ico\`, \`Assets\`) и Android (\`Adaptive Icons\`) из одного исходного изображения формата PNG или SVG.
 
 Подробное описание всех настроек и возможностей см. в [Руководстве пользователя](GUIDE_RU.md).
-
-## Интерфейс приложения
-
-<details open>
-  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 1. Главное окно - Drag and Drop файлов</b></summary>
-  <br/>
-  <p align="center"><img src="/images/projects/icoboo/screenshot1.png" width="95%" /></p>
-</details>
-<details>
-  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 2. Настройки и выбор папки назначения</b></summary>
-  <br/>
-  <p align="center"><img src="/images/projects/icoboo/screenshot2.png" width="95%" /></p>
-</details>
-<details>
-  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 3. Кастомизация адаптивных иконок Android и палитры цветов</b></summary>
-  <br/>
-  <p align="center"><img src="/images/projects/icoboo/screenshot3.png" width="95%" /></p>
-</details>
-<details>
-  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 4. Интеграция в систему - контекстное меню проводника Windows</b></summary>
-  <br/>
-  <p align="center"><img src="/images/projects/icoboo/screenshot4.png" width="95%" /></p>
-</details>
-<details>
-  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 5. Активный процесс генерации и всплывающие уведомления</b></summary>
-  <br/>
-  <p align="center"><img src="/images/projects/icoboo/screenshot5.png" width="95%" /></p>
-</details>
 
 ---
 
@@ -2959,34 +2902,6 @@ dotnet publish -c Release -r win-x64 --self-contained true
 IconForge ist eine schlanke native Windows-Anwendung, die auf dem WinUI 3 (Windows App SDK)-Framework und C# entwickelt wurde und standardmäßig 3 Sprachen (Englisch, Russisch, Deutsch) unterstützt. Sie ist für die Batch-Generierung von Symbolsätzen für Windows (\`.ico\`, \`Assets\`) und Android (\`Adaptive Icons\`) aus einem einzigen Quellbild im PNG- oder SVG-Format konzipiert.
 
 Eine detaillierte Beschreibung aller Einstellungen und Funktionen finden Sie im [Benutzerhandbuch](GUIDE_DE.md).
-
-## Anwendungsschnittstelle
-
-<details open>
-  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 1. Hauptfenster - Datei-Drag-and-Drop</b></summary>
-  <br/>
-  <p align="center"><img src="/images/projects/icoboo/screenshot1.png" width="95%" /></p>
-</details>
-<details>
-  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 2. Einstellungen und Auswahl des Zielordners</b></summary>
-  <br/>
-  <p align="center"><img src="/images/projects/icoboo/screenshot2.png" width="95%" /></p>
-</details>
-<details>
-  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 3. Anpassung von Android Adaptive Icons und Farbpaletten</b></summary>
-  <br/>
-  <p align="center"><img src="/images/projects/icoboo/screenshot3.png" width="95%" /></p>
-</details>
-<details>
-  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 4. Systemintegration - Windows Explorer-Kontextmenü</b></summary>
-  <br/>
-  <p align="center"><img src="/images/projects/icoboo/screenshot4.png" width="95%" /></p>
-</details>
-<details>
-  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 5. Aktiver Prozesszustand und Toast-Benachrichtigungen</b></summary>
-  <br/>
-  <p align="center"><img src="/images/projects/icoboo/screenshot5.png" width="95%" /></p>
-</details>
 
 ---
 
