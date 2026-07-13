@@ -409,17 +409,41 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
         const initialMode = (urlParams.get('view') === 'guide' || window.location.hash === '#guide') && hasGuide ? 'guide' : 'readme';
         switchTab(initialMode);
 
-        // Intercept scroll to top clicks
+        // Intercept anchor clicks
         document.getElementById('readme-html')!.addEventListener('click', (e: any) => {
           const a = e.target.closest('a');
           if (a) {
             const href = a.getAttribute('href');
-            if (href && (href.startsWith('#') || a.textContent.includes('Наверх') || a.textContent.includes('top') || a.textContent.includes('oben'))) {
-              e.preventDefault();
-              window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-              });
+            if (href) {
+              if (a.classList.contains('top-scroll-btn') || href === '#' || a.textContent.includes('Наверх') || a.textContent.includes('top') || a.textContent.includes('oben')) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              } else if (href.startsWith('#') && href.length > 1) {
+                // Internal anchor links (e.g. Table of Contents)
+                e.preventDefault();
+                const targetId = decodeURIComponent(href.slice(1));
+                let targetElement = document.getElementById(targetId) || document.querySelector(`a[name="${targetId}"]`);
+                
+                if (!targetElement) {
+                  // Fallback: search for a heading that matches the slug
+                  const headings = document.getElementById('readme-html')!.querySelectorAll('h1, h2, h3, h4, h5, h6');
+                  for (let i = 0; i < headings.length; i++) {
+                    const h = headings[i];
+                    // Clean heading text to match marked slug behavior
+                    const hSlug = h.textContent!.toLowerCase().replace(/[^\w\d\u0400-\u04FF\s-]/g, '').trim().replace(/\s+/g, '-');
+                    if (hSlug === targetId || h.id === targetId) {
+                      targetElement = h;
+                      break;
+                    }
+                  }
+                }
+                
+                if (targetElement) {
+                  // Scroll to the target element with smooth animation (offset for padding)
+                  const y = targetElement.getBoundingClientRect().top + window.scrollY - 80;
+                  window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+              }
             }
           }
         });
