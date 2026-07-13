@@ -1310,7 +1310,7 @@ MIT`
     license: "MIT",
     github: "https://github.com/Almanex/ShortcutDock",
     image: "https://raw.githubusercontent.com/Almanex/ShortcutDock/main/screenshots/screenshot3.png",
-    readme: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+    readme: `[ English ](README.md) • [ Русский ](docs/README_RU.md) • [ Deutsch ](docs/README_DE.md)
 
 # ShortcutDock
 
@@ -1331,7 +1331,7 @@ ShortcutDock is a modern, lightweight Windows desktop dock panel designed to org
 > **First stable release available!**  
 > You can download the ready-made compiled file **\`ShortcutDock.exe\`** on the [Releases](https://github.com/Almanex/ShortcutDock/releases/tag/v2.0.0) page and run it on your computer without installing additional libraries.
 
-For detailed instructions on configuring all features, read the [User Guide (GUIDE.md)](GUIDE.md).
+For detailed instructions on configuring all features, read the [User Guide (GUIDE.md)](docs/GUIDE.md).
 
 ---
 
@@ -1521,7 +1521,7 @@ We use SemVer for versioning. For available versions, see the tags on this repos
 
 ## License
 This project is licensed under the MIT License - see the \`LICENSE\` file for details.`,
-    readme_ru: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+    readme_ru: `[ English ](../README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
 
 # ShortcutDock
 
@@ -1732,7 +1732,7 @@ dotnet build -c Release
 
 ## Лицензия
 Этот проект распространяется под лицензией MIT — подробности смотрите в файле \`LICENSE\`.`,
-    readme_de: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+    readme_de: `[ English ](../README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
 
 # ShortcutDock
 
@@ -1942,7 +1942,446 @@ Wir verwenden SemVer für die Versionsverwaltung. Verfügbare Versionen und Tags
 ---
 
 ## Lizenz
-Dieses Projekt ist unter der MIT-Lizenz lizenziert - siehe die \`LICENSE\`-Datei für Details.`
+Dieses Projekt ist unter der MIT-Lizenz lizenziert - siehe die \`LICENSE\`-Datei für Details.`,
+    guide: `[ English ](GUIDE.md) • [ Русский ](GUIDE_RU.md) • [ Deutsch ](GUIDE_DE.md)
+
+# ShortcutDock User Guide
+
+Welcome to **ShortcutDock** — a modern and functional dock panel for quick launching applications, folders, and managing system elements on Windows 11 and 10.
+
+This guide will help you quickly understand all the features of the application and configure it to suit your needs.
+
+---
+
+## Table of Contents
+1. [System Requirements](#1-system-requirements)
+2. [Installation and First Launch](#2-installation-and-first-launch)
+3. [Adding Shortcuts to the Panel](#3-adding-shortcuts-to-the-panel)
+4. [Managing and Sorting Shortcuts](#4-managing-and-sorting-shortcuts)
+5. [Configuring Appearance and Effects](#5-configuring-appearance-and-effects)
+6. [Recycle Bin Integration](#6-recycle-bin-integration)
+7. [System Tray Integration](#7-system-tray-integration)
+8. [Where Settings are Stored (Portability)](#8-where-settings-are-stored-portability)
+9. [Troubleshooting](#9-troubleshooting)
+
+---
+
+## 1. System Requirements
+* **Operating System:** Windows 10 (build 19041 and higher) or Windows 11.
+* **Architecture:** x64.
+* **Optional:** The Lightweight version requires the [.NET 8 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/8.0) (or higher) installed. The Self-Contained version runs without any additional runtimes.
+
+---
+
+## 2. Installation and First Launch
+The application is delivered as a single \`ShortcutDock.exe\` file and does not require a full installation:
+1. Download the latest version from the [Releases](https://github.com/Almanex/ShortcutDock/releases) page.
+2. Place the \`ShortcutDock.exe\` file in any convenient folder on your computer (e.g., \`C:\\Program Files\\ShortcutDock\` or your personal user directory).
+3. Double-click the \`ShortcutDock.exe\` file to launch it.
+4. On the first launch, an empty semi-transparent panel with a \`+\` button will appear at the bottom of the screen.
+
+> [!IMPORTANT]
+> **Windows Defender SmartScreen Warning:**  
+> Since the application executable is not signed with a paid commercial developer digital certificate (which is normal for free open-source projects), Windows Defender SmartScreen might block the launch on the first run, showing a *"Windows protected your PC"* popup.  
+> **How to run the application:** Click the **"More info"** link (in the top-left area of the warning popup), and then click the appeared **"Run anyway"** button. Windows will remember your choice, and the warning won't appear on subsequent launches.
+
+---
+
+## 3. Adding Shortcuts to the Panel
+You can add new programs, folders, or drives to the panel in three ways:
+
+### Method A: Drag-and-Drop
+* Simply drag any executable file (\`.exe\`), shortcut (\`.lnk\`), folder, or a whole drive from Windows File Explorer and drop it onto any empty space on the panel. ShortcutDock will automatically extract the high-resolution icon and add the item.
+
+### Method B: Via the "+" Button
+1. If the option to show the \`+\` button is enabled in the settings, click it.
+2. In the opened dialog window, select the desired program file or shortcut and click "Open".
+
+### Method C: Via the Context Menu
+* Right-click on any empty space of the panel and select **"Add Application"**.
+
+---
+
+## 4. Managing and Sorting Shortcuts
+
+### Reordering Icons
+* Hold the left mouse button on any icon and drag it left/right (or up/down for a vertical panel) to change its position relative to other items. Release the mouse button at the desired position — the order is saved automatically.
+
+### Run as Administrator
+* Right-click (RMB) the desired application on the panel and select **"Run as Administrator"**.
+
+### Changing the Icon
+1. Right-click the shortcut and select **"Change Icon..."**.
+2. Select any \`.png\` image or \`.ico\` icon file. The panel will instantly update the icon.
+
+### Removing from the Panel
+* Right-click the shortcut on the panel and select **"Remove from Panel"** (the program file on the disk will not be affected).
+
+---
+
+## 5. Configuring Appearance and Effects
+To open the settings window, right-click on any empty space on the panel or on the application tray icon and select **"Panel Settings"**.
+
+* **Screen Position:** 
+  * *Bottom* or *Top* (horizontal panel).
+  * *Left* or *Right* (the panel automatically switches to vertical mode).
+  * When moved to screen edges, the panel automatically reserves desktop space (AppBar technology) — other windows will not overlap it when maximized.
+* **Blur Effect:**
+  * *None:* Fully transparent background (only icons float over the wallpaper).
+  * *Mica:* Windows 11 signature semi-transparent effect matching your wallpaper color. Automatically switches between dark and light themes depending on system settings.
+  * *Acrylic:* Translucent frosted glass effect. Also dynamically adapts to system theme changes (light/dark).
+* **Icon Size:**
+  * You can select icon sizes: **32px**, **40px**, **48px**, or **64px**. The panel resizes instantly.
+* **Keep on Top:**
+  * When enabled, the panel is always visible on top of other windows and reserves desktop space. When disabled, the panel behaves like a normal window and can be overlapped.
+* **Interface Language:**
+  * Allows you to switch the application language (*English*, *Русский*, *Deutsch*). The changes apply instantly to all elements, including context menus and system tray. On first launch, the language is chosen automatically based on Windows settings.
+* **Show "+" button on the panel:**
+  * Allows you to hide the add button on the dock panel for a clean, minimalist look (enabled by default on first launch).
+* **Start with Windows:**
+  * Adds the application to Windows startup folder to launch the panel automatically when you log in.
+* **Auto-Hide:**
+  * When enabled, the panel smoothly slides out of the screen when it loses mouse focus, leaving a thin 2px trigger strip. Hovering the mouse over this strip instantly brings the panel back. The AppBar space reservation is temporarily disabled while the panel is hidden, allowing other windows to occupy the full screen. The panel will not hide if a context menu is open.
+* **Hover Zoom Effect:**
+  * Enables a smooth wave-like icon scaling effect on mouse hover, similar to macOS dock. This makes the selected shortcut stand out and easier to click.
+* **Show Indicators for Running Programs:**
+  * Displays small dots of the accent color under the icons of currently active programs.
+  * Clicking an active program icon will focus and bring its existing window to the foreground instead of launching a new duplicate process.
+
+---
+
+## 6. Recycle Bin Integration
+In the panel settings, you can enable the option **"Show Recycle Bin on the panel"**.
+
+* **Dynamic State:** The Recycle Bin icon changes in real-time depending on whether it is empty or contains deleted files.
+* **Empty Recycle Bin:** Right-click the Recycle Bin icon on the panel and select **"Empty Recycle Bin"**.
+* **Open Recycle Bin:** Left-click the Recycle Bin icon to open it in Windows File Explorer.
+* *Note:* The Recycle Bin is always pinned to the very end of the panel; it cannot be dragged to the middle.
+
+---
+
+## 7. System Tray Integration
+When ShortcutDock is running, its icon appears in the system tray (near the Windows clock).
+
+* **Quick Show/Hide:** Double-click the tray icon to quickly hide the panel (or restore it).
+* **Tray Context Menu:** Right-click the tray icon to open Settings or exit the application completely ("Exit").
+
+---
+
+## 8. Where Settings are Stored (Portability)
+All user settings, added shortcuts, and cache icons are stored in your user profile directory:
+\`%AppData%\\ShortcutDock\\\` (typically \`C:\\Users\\Username\\AppData\\Roaming\\ShortcutDock\`).
+
+* **Configuration File:** \`settings.json\` — contains settings for positions, sizes, and the list of shortcuts.
+* **Cache Folder:** \`Cache\\\` — stores extracted PNG icons for fast rendering on startup.
+* All paths within the configuration file are saved in a portable format (using the \`%AppData%\` variable), allowing you to copy settings to another computer easily.
+
+---
+
+## 9. Troubleshooting
+
+### Application icons display incorrectly
+* Try removing the shortcut and adding the application again, or manually replace the icon using the context menu -> "Change Icon...".
+
+### The panel overlaps the Windows Taskbar
+* Change the panel position in settings. For example, if the Windows taskbar is at the bottom, pin ShortcutDock to the top, left, or right edge to avoid interface overlap.
+
+### Autostart does not work
+* Make sure you haven't moved the \`ShortcutDock.exe\` file after enabling autostart. If you did, simply disable and re-enable autostart in the settings to update the path in the Windows registry.
+`,
+    guide_ru: `[ English ](GUIDE.md) • [ Русский ](GUIDE_RU.md) • [ Deutsch ](GUIDE_DE.md)
+
+# Руководство пользователя ShortcutDock
+
+
+Добро пожаловать в **ShortcutDock** — современную и функциональную док-панель для быстрого запуска приложений, папок и управления системными элементами на Windows 11 и 10.
+
+Это руководство поможет вам быстро разобраться во всех функциях приложения и настроить его под свои нужды.
+
+---
+
+## Содержание
+1. [Системные требования](#1-системные-требования)
+2. [Установка и первый запуск](#2-установка-и-первый-запуск)
+3. [Добавление ярлыков на панель](#3-добавление-ярлыков-на-панель)
+4. [Управление ярлыками и их сортировка](#4-управление-ярлыками-и-их-сортировка)
+5. [Настройка внешнего вида и эффектов](#5-настройка-внешнего-вида-и-эффектов)
+6. [Интеграция с Корзиной](#6-интеграция-с-корзиной)
+7. [Работа через системный трей](#7-работа-через-системный-трей)
+8. [Где хранятся настройки (Портативность)](#8-где-хранятся-настройки-портативность)
+9. [Решение возможных проблем](#9-решение-возможных-проблем)
+
+---
+
+## 1. Системные требования
+* **Операционная система:** Windows 10 (билд 19041 и выше) или Windows 11.
+* **Архитектура:** x64.
+* **Дополнительно:** Для легковесной версии (Lightweight) требуется установленный компонент [.NET 8 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/8.0). Автономная версия (Self-Contained) работает без дополнительных библиотек.
+
+---
+
+## 2. Установка и первый запуск
+Приложение поставляется как единый файл \`ShortcutDock.exe\` и не требует полноценной установки:
+1. Скачайте последнюю версию программы со страницы [Релизов](https://github.com/Almanex/ShortcutDock/releases).
+2. Поместите файл \`ShortcutDock.exe\` в любую удобную папку на компьютере (например, \`C:\\Program Files\\ShortcutDock\` или вашу персональную папку).
+3. Дважды кликните по файлу \`ShortcutDock.exe\` для запуска.
+4. При первом запуске появится пустая полупрозрачная панель с кнопкой \`+\` в нижней части экрана.
+
+> [!IMPORTANT]
+> **Предупреждение Windows Defender SmartScreen:**  
+> Поскольку исполняемый файл приложения не подписан платной коммерческой цифровой подписью разработчика (что является стандартом для бесплатных open-source проектов), при первом запуске фильтр SmartScreen в Microsoft Defender может заблокировать запуск, выведя окно *«Система Windows защитила ваш компьютер»*.  
+> **Как запустить приложение:** Нажмите ссылку **«Подробнее»** (в левой верхней части предупреждения), а затем — появившуюся кнопку **«Выполнить в любом случае»**. После этого Windows запомнит выбор, и приложение будет запускаться без предупреждений.
+
+---
+
+## 3. Добавление ярлыков на панель
+Добавить новые программы, папки или диски на панель можно тремя способами:
+
+### Способ А: Простое перетаскивание (Drag-and-Drop)
+* Просто перетащите любой исполняемый файл (\`.exe\`), ярлык (\`.lnk\`), папку или целый жесткий диск прямо из проводника Windows на любое свободное место панели. ShortcutDock автоматически извлечет иконку высокого разрешения и добавит элемент.
+
+### Способ Б: Через кнопку «+»
+1. Если в настройках включена опция отображения кнопки \`+\`, кликните на неё.
+2. В открывшемся окне выберите нужный файл программы или ярлык и нажмите «Открыть».
+
+### Способ В: Через контекстное меню
+* Кликните правой кнопкой мыши по пустому пространству панели и выберите **«Добавить приложение»**.
+
+---
+
+## 4. Управление ярлыками и их сортировка
+
+### Смена порядка значков
+* Зажмите левую кнопку мыши на любой иконке и перетащите её влево/вправо (или вверх/вниз для вертикальной панели), чтобы изменить её положение относительно других элементов. Отпустите мышь в нужном месте — порядок сохранится автоматически.
+
+### Запуск от имени администратора
+* Кликните правой кнопкой мыши (ПКМ) по нужному приложению на панели и выберите **«Запустить от имени администратора»**.
+
+### Изменение значка (иконки)
+1. Нажмите ПКМ по ярлыку и выберите **«Изменить значок...»**.
+2. Выберите любое изображение в формате \`.png\` или файл иконки \`.ico\`. Панель мгновенно обновит отображение значка.
+
+### Удаление с панели
+* Нажмите ПКМ по ярлыку на панели и выберите **«Удалить с панели»**. (Сам файл программы на диске при этом не пострадает).
+
+---
+
+## 5. Настройка внешнего вида и эффектов
+Чтобы открыть окно настроек, кликните ПКМ по свободному месту на панели или по иконке приложения в трее и выберите **«Настройки панели»**.
+
+* **Положение на экране:** 
+  * *Снизу* или *Сверху* (панель будет горизонтальной).
+  * *Слева* или *Справа* (панель автоматически переключится в вертикальный режим).
+  * При перемещении к краям экрана панель автоматически зарезервирует место на Рабочем столе (технология AppBar) — другие окна не будут перекрывать её при разворачивании на весь экран.
+* **Эффект размытия:**
+  * *Нет:* Полностью прозрачный фон (на экране отображаются только значки, парящие над обоями).
+  * *Mica:* Фирменный полупрозрачный эффект Windows 11, подстраивающийся под цвет обоев. Автоматически переключается между темной и светлой палитрой в зависимости от системной темы Windows.
+  * *Acrylic:* Эффект матового полупрозрачного стекла. Также динамически реагирует на смену системного оформления (светлое/темное).
+* **Размер значков:**
+  * Вы можете выбрать размер значков: **32px**, **40px**, **48px** или **64px**. Панель изменит свои размеры мгновенно под выбранный пресет.
+* **Поверх всех окон (Keep on Top):**
+  * Если включено, панель всегда видна на экране и резервирует под себя место. Если отключено, панель ведет себя как обычное окно и может перекрываться другими программами.
+* **Язык интерфейса:**
+  * Позволяет переключать язык приложения (доступны *English*, *Русский*, *Deutsch*). Смена языка происходит мгновенно для всех элементов интерфейса, включая трей и контекстные меню. При первом запуске язык выбирается автоматически на основе настроек Windows.
+* **Показывать кнопку «+» на панели:**
+  * Позволяет скрыть кнопку добавления на док-панели для создания чистого и минималистичного вида (по умолчанию включено при первом запуске).
+* **Запускать вместе с Windows:**
+  * Добавляет приложение в системный автозапуск, чтобы панель появлялась на экране сразу при старте компьютера.
+* **Автоматически скрывать панель (Auto-Hide):**
+  * При включении панель плавно уезжает за границы экрана при потере фокуса мыши, оставляя тонкую полоску в 2px. Наведение мыши на эту полоску мгновенно возвращает панель. При этом резервирование рабочего пространства AppBar временно отключается, давая открытым окнам занять весь экран. Если у вас открыто контекстное меню на панели, док не будет скрываться.
+* **Эффект увеличения при наведении (Hover Zoom):**
+  * Включает плавное волновое масштабирование значков при наведении мыши в стиле дока macOS. Это делает выделенный ярлык заметным и облегчает клик по нему.
+* **Индикаторы запущенных программ:**
+  * Отображает маленькие точки акцентного цвета под иконками активных в данный момент программ.
+  * При повторном клике по значку запущенного приложения док сфокусирует и выведет его существующее окно на передний план вместо запуска новой копии.
+
+---
+
+## 6. Интеграция с Корзиной
+В настройках панели вы можете включить опцию **«Отображать Корзину на панели»**.
+
+* **Динамическое состояние:** Иконка корзины меняется в реальном времени в зависимости от того, пуста она или содержит удаленные файлы.
+* **Очистка корзины:** Нажмите ПКМ по значку Корзины на панели и выберите **«Очистить корзину»**.
+* **Открытие корзины:** Нажмите ЛКМ по значку Корзины, чтобы открыть её стандартное окно проводника.
+* *Примечание:* Корзина всегда автоматически закрепляется в самом конце панели, её нельзя случайно переместить в середину.
+
+---
+
+## 7. Работа через системный трей
+Когда панель ShortcutDock запущена, в системном трее (рядом с часами Windows) появляется иконка приложения.
+
+* **Быстрое скрытие/показ панели:** Кликните дважды ЛКМ по иконке в трее, чтобы мгновенно скрыть панель с экрана (или показать её обратно).
+* **Контекстное меню трея:** Кликнив ПКМ, можно открыть настройки или полностью завершить работу приложения («Выход»).
+
+---
+
+## 8. Где хранятся настройки (Портативность)
+Все пользовательские настройки, добавленные ярлыки и кэш иконок хранятся в вашей системной папке пользователя:
+\`%AppData%\\ShortcutDock\\\` (обычно это \`C:\\Users\\Имя_Пользователя\\AppData\\Roaming\\ShortcutDock\`).
+
+* **Файл конфигурации:** \`settings.json\` — содержит настройки расположения, размеров и перечень ваших ярлыков.
+* **Папка кэша:** \`Cache\\\` — здесь хранятся извлеченные PNG-иконки для быстрой отрисовки панели при старте.
+* Все пути к файлам внутри конфигурационного файла сохраняются в портативном виде (с использованием переменной \`%AppData%\`), что позволяет переносить настройки на другие компьютеры.
+
+---
+
+## 9. Решение возможных проблем
+
+### Значки приложений отображаются некорректно
+* Попробуйте удалить иконку с панели и добавить приложение заново, либо вручную замените значок через контекстное меню ярлыка -> «Изменить значок...».
+
+### Панель перекрывает панель задач Windows
+* Измените положение панели в настройках. Например, если панель задач Windows находится снизу, закрепите ShortcutDock сверху, слева или справа во избежание наложения интерфейсов.
+
+### Автозапуск не работает
+* Убедитесь, что вы не перемещали файл \`ShortcutDock.exe\` после того, как включили тумблер автозапуска в настройках. Если переместили, просто выключите и включите автозапуск заново, чтобы обновить путь в реестре Windows.
+`,
+    guide_de: `[ English ](GUIDE.md) • [ Русский ](GUIDE_RU.md) • [ Deutsch ](GUIDE_DE.md)
+
+# ShortcutDock Benutzerhandbuch
+
+Willkommen bei **ShortcutDock** — einer modernen und funktionalen Schnellstartleiste zur Organisation Ihrer Anwendungen, Ordner und zur Verwaltung von Systemelementen unter Windows 10 und 11.
+
+Dieses Handbuch hilft Ihnen, sich schnell mit allen Funktionen der Anwendung vertraut zu machen und sie an Ihre Bedürfnisse anzupassen.
+
+---
+
+## Inhaltsverzeichnis
+1. [Systemanforderungen](#1-systemanforderungen)
+2. [Installation und erster Start](#2-installation-und-erster-start)
+3. [Hinzufügen von Verknüpfungen zur Leiste](#3-hinzugügen-von-verknüpfungen-zur-leiste)
+4. [Verknüpfungen verwalten und sortieren](#4-verknüpfungen-verwalten-und-sortieren)
+5. [Einstellung von Aussehen und Effekten](#5-einstellung-von-aussehen-und-effekten)
+6. [Integration des Papierkorbs](#6-integration-des-papierkorbs)
+7. [Arbeiten über das System-Tray](#7-arbeiten-über-das-system-tray)
+8. [Speicherort der Einstellungen (Portabilität)](#8-speicherort-der-einstellungen-portabilität)
+9. [Problembehandlung](#9-problembehandlung)
+
+---
+
+## 1. Systemanforderungen
+* **Betriebssystem:** Windows 10 (Build 19041 und höher) oder Windows 11.
+* **Architektur:** x64.
+* **Optional:** Für die Leichtgewichts-Version (Lightweight) ist die Installation der [.NET 8 Desktop-Laufzeitumgebung](https://dotnet.microsoft.com/download/dotnet/8.0) (oder höher) erforderlich. Die eigenständige Version (Self-Contained) läuft ohne zusätzliche Bibliotheken.
+
+---
+
+## 2. Installation und erster Start
+Die Anwendung wird als einzelne Datei \`ShortcutDock.exe\` geliefert und erfordert keine vollständige Installation:
+1. Laden Sie die neueste Version von der [Releases](https://github.com/Almanex/ShortcutDock/releases)-Seite herunter.
+2. Legen Sie die Datei \`ShortcutDock.exe\` in einen beliebigen Ordner auf Ihrem Computer (z. B. \`C:\\Program Files\\ShortcutDock\` oder Ihren persönlichen Benutzerordner).
+3. Doppelklicken Sie auf die Datei \`ShortcutDock.exe\`, um sie zu starten.
+4. Beim ersten Start erscheint eine leere, halbtransparente Leiste mit einer \`+\`-Schaltfläche am unteren Bildschirmrand.
+
+> [!IMPORTANT]
+> **Windows Defender SmartScreen-Warnung:**  
+> Da die ausführbare Datei der Anwendung nicht mit einem kostenpflichtigen digitalen Zertifikat des Entwicklers signiert ist (was bei kostenlosen Open-Source-Projekten üblich ist), blockiert Windows Defender SmartScreen möglicherweise den Start beim ersten Ausführen und zeigt ein Popup *"Der Computer wurde durch Windows geschützt"* an.  
+> **So starten Sie die Anwendung:** Klicken Sie auf den Link **„Weitere Informationen“** (oben links im Warnungs-Popup) und dann auf die Schaltfläche **„Trotzdem ausführen“**. Windows merkt sich Ihre Entscheidung und die Warnung wird bei zukünftigen Starts nicht mehr angezeigt.
+
+---
+
+## 3. Hinzufügen von Verknüpfungen zur Leiste
+Sie können neue Programme, Ordner oder Laufwerke auf drei Arten zur Leiste hinzufügen:
+
+### Methode A: Drag-and-Drop
+* Ziehen Sie einfach eine ausführbare Datei (\`.exe\`), eine Verknüpfung (\`.lnk\`), einen Ordner oder ein ganzes Laufwerk aus dem Windows-Explorer an eine beliebige freie Stelle auf der Leiste. ShortcutDock extrahiert automatisch das hochauflösende Symbol und fügt das Element hinzu.
+
+### Methode B: Über die „+“-Schaltfläche
+1. Wenn die Option zum Anzeigen der \`+\`-Schaltfläche in den Einstellungen aktiviert ist, klicken Sie darauf.
+2. Wählen Sie im geöffneten Dialogfenster die gewünschte Programmdatei oder Verknüpfung aus und klicken Sie auf „Öffnen“.
+
+### Methode C: Über das Kontextmenü
+* Klicken Sie mit der rechten Maustaste auf eine freie Stelle der Leiste und wählen Sie **„Anwendung hinzufügen“**.
+
+---
+
+## 4. Verknüpfungen verwalten und sortieren
+
+### Ändern der Symbolreihenfolge
+* Halten Sie die linke Maustaste auf einem Symbol gedrückt und ziehen Sie es nach links/rechts (oder bei einer vertikalen Leiste nach oben/unten), um seine Position im Verhältnis zu anderen Elementen zu ändern. Lassen Sie die Maustaste an der gewünschten Stelle los — die Reihenfolge wird automatisch gespeichert.
+
+### Als Administrator ausführen
+* Klicken Sie mit der rechten Maustaste (RMB) auf die gewünschte Anwendung auf der Leiste und wählen Sie **„Als Administrator ausführen“**.
+
+### Symbol (Icon) ändern
+1. Klicken Sie mit der rechten Maustaste auf die Verknüpfung und wählen Sie **„Symbol ändern...“**.
+2. Wählen Sie ein beliebiges \`.png\`-Bild oder eine \`.ico\`-Symboldatei aus. Die Leiste aktualisiert die Anzeige des Symbols sofort.
+
+### Von der Leiste entfernen
+* Klicken Sie mit der rechten Maustaste auf die Verknüpfung auf der Leiste und wählen Sie **„Von der Leiste entfernen“** (die Programmdatei auf der Festplatte wird dabei nicht gelöscht).
+
+---
+
+## 5. Einstellung von Aussehen und Effekten
+Um das Einstellungsfenster zu öffnen, klicken Sie mit der rechten Maustaste auf eine freie Stelle auf der Leiste oder auf das Anwendungssymbol im System-Tray und wählen Sie **„Leisten-Einstellungen“**.
+
+* **Bildschirmposition:** 
+  * *Unten* oder *Oben* (horizontale Leiste).
+  * *Links* oder *Rechts* (die Leiste wechselt automatisch in den vertikalen Modus).
+  * Wenn die Leiste an die Ränder des Bildschirms verschoben wird, reserviert sie automatisch Platz auf dem Desktop (AppBar-Technologie) — andere Fenster überdecken sie beim Maximieren nicht.
+* **Weichzeichnungseffekt:**
+  * *Kein:* Völlig transparenter Hintergrund (nur Symbole schweben über dem Hintergrundbild).
+  * *Mica:* Der typische halbtransparente Windows 11-Effekt, der sich an die Farbe Ihres Hintergrundbilds anpasst. Wechselt automatisch zwischen dunklen und hellen Designs je nach Systemeinstellung.
+  * *Acrylic:* Transluzenter Milchglaseffekt. Reagiert ebenfalls dynamisch auf Änderungen des Systemdesigns (hell/dunkel).
+* **Symbolgröße:**
+  * Sie können die Symbolgröße wählen: **32px**, **40px**, **48px** oder **64px**. Die Leiste ändert ihre Größe sofort.
+* **Im Vordergrund (Keep on Top):**
+  * Wenn aktiviert, ist die Leiste immer sichtbar und reserviert Platz auf dem Desktop. Wenn deaktiviert, verhält sich die Leiste wie ein normales Fenster und kann von anderen Programmen überdeckt werden.
+* **Oberflächensprache:**
+  * Ermöglicht das Umschalten der Anwendungssprache (*English*, *Русский*, *Deutsch*). Die Änderungen werden sofort auf alle Elemente angewendet, einschließlich Kontextmenüs und System-Tray. Beim ersten Start wird die Sprache automatisch basierend auf den Windows-Einstellungen ausgewählt.
+* **„+“-Schaltfläche auf der Leiste anzeigen:**
+  * Ermöglicht das Ausblenden der Hinzufügen-Schaltfläche auf der Leiste für ein klares, minimalistisches Erscheinungsbild (standardmäßig beim ersten Start aktiviert).
+* **Mit Windows starten:**
+  * Fügt die Anwendung zum Windows-Autostart hinzu, sodass die Leiste direkt beim Start des Computers angezeigt wird.
+* **Automatisch ausblenden (Auto-Hide):**
+  * Wenn aktiviert, gleitet die Leiste reibungslos aus dem Bildschirm, wenn sie den Mausfokus verliert, und hinterlässt einen dünnen 2-px-Auslöserstreifen. Wenn Sie die Maus über diesen Streifen bewegen, kehrt die Leiste sofort zurück. Die AppBar-Platzreservierung wird vorübergehend deaktiviert, während die Leiste ausgeblendet ist, sodass andere Fenster den gesamten Bildschirm einnehmen können. Die Leiste wird nicht ausgeblendet, wenn ein Kontextmenü geöffnet ist.
+* **Hover-Zoom-Effekt:**
+  * Aktiviert einen wellenartigen Skalierungseffekt der Symbole beim Bewegen der Maus darüber, ähnlich wie beim macOS-Dock. Dies hebt die ausgewählte Verknüpfung hervor und erleichtert das Anklicken.
+* **Indikatoren für laufende Programme:**
+  * Zeigt kleine Punkte in der Akzentfarbe unter den Symbolen der derzeit aktiven Programme an.
+  * Durch Klicken auf ein aktives Programmsymbol wird das vorhandene Fenster fokussiert und in den Vordergrund gebracht, anstatt einen neuen doppelten Prozess zu starten.
+
+---
+
+## 6. Integration des Papierkorbs
+In den Leisten-Einstellungen können Sie die Option **„Papierkorb auf der Leiste anzeigen“** aktivieren.
+
+* **Dynamischer Status:** Das Papierkorbsymbol ändert sich in Echtzeit, je nachdem, ob er leer ist oder gelöschte Dateien enthält.
+* **Papierkorb leeren:** Klicken Sie mit der rechten Maustaste auf das Papierkorbsymbol auf der Leiste und wählen Sie **„Papierkorb leeren“**.
+* **Papierkorb openen:** Klicken Sie mit der linken Maustaste auf das Papierkorbsymbol, um ihn im Windows-Explorer zu öffnen.
+* *Hinweis:* Der Papierkorb ist immer am Ende der Leiste angeheftet; er kann nicht in die Mitte gezogen werden.
+
+---
+
+## 7. Arbeiten über das System-Tray
+Wenn ShortcutDock ausgeführt wird, wird sein Symbol im System-Tray (neben der Windows-Uhr) angezeigt.
+
+* **Schnelles Ausblenden/Einblenden:** Doppelklicken Sie auf das Tray-Symbol, um die Leiste schnell auszublenden (oder wiederherzustellen).
+* **Tray-Kontextmenü:** Klicken Sie mit der rechten Maustaste auf das Tray-Symbol, um die Einstellungen zu öffnen oder die Anwendung vollständig zu beenden („Beenden“).
+
+---
+
+## 8. Speicherort der Einstellungen (Portabilität)
+Alle Benutzereinstellungen, hinzugefügten Verknüpfungen und Symbol-Caches werden in Ihrem Benutzerprofilverzeichnis gespeichert:
+\`%AppData%\\ShortcutDock\\\` (normalerweise \`C:\\Users\\Benutzername\\AppData\\Roaming\\ShortcutDock\`).
+
+* **Konfigurationsdatei:** \`settings.json\` — enthält Einstellungen für Positionen, Größen und die Liste der Verknüpfungen.
+* **Cache-Ordner:** \`Cache\\\` — speichert extrahierte PNG-Symbole für schnelles Rendern beim Start.
+* Alle Pfade in der Konfigurationsdatei werden in einem portablen Format gespeichert (unter Verwendung der Variable \`%AppData%\`), sodass Sie Einstellungen problemlos auf einen anderen Computer kopieren können.
+
+---
+
+## 9. Problembehandlung
+
+### Anwendungssymbole werden nicht korrekt angezeigt
+* Versuchen Sie, die Verknüpfung zu entfernen und die Anwendung erneut hinzuzufügen, oder ersetzen Sie das Symbol manuell über das Kontextmenü -> „Symbol ändern...“.
+
+### Die Leiste überlappt die Windows-Taskleiste
+* Ändern Sie die Position der Leiste in den Einstellungen. Wenn sich beispielsweise die Windows-Taskleiste unten befindet, heften Sie ShortcutDock an den oberen, linken oder rechten Rand an, um Interface-Überlappungen zu vermeiden.
+
+### Autostart funktioniert nicht
+* Stellen Sie sicher, dass Sie die Datei \`ShortcutDock.exe\` nach dem Aktivieren des Autostarts nicht verschoben haben. Wenn Sie dies getan haben, deaktivieren und aktivieren Sie den Autostart einfach erneut in den Einstellungen, um den Pfad in der Windows-Registrierung zu aktualisieren.
+`
   },
   "shelter-fork": {
     title: "Shelter Fork",

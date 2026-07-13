@@ -20,7 +20,9 @@ const labels = {
     license: "License",
     stars: "GitHub Stars",
     view: "VIEW REPOSITORY ON GITHUB ↗",
-    top: "⬆ Scroll to top"
+    top: "⬆ Scroll to top",
+    tabReadme: "Tech Specs // README",
+    tabGuide: "User Guide // MANUAL"
   },
   ru: {
     back: "← К проектам",
@@ -30,7 +32,9 @@ const labels = {
     license: "Лицензия",
     stars: "Звезды GitHub",
     view: "СМОТРЕТЬ РЕПОЗИТОРИЙ НА GITHUB ↗",
-    top: "⬆ Наверх"
+    top: "⬆ Наверх",
+    tabReadme: "Технический обзор // README",
+    tabGuide: "Руководство // GUIDE"
   },
   de: {
     back: "← Zurück zu Projekten",
@@ -40,7 +44,9 @@ const labels = {
     license: "Lizenz",
     stars: "GitHub-Sterne",
     view: "REPOSITORY AUF GITHUB ANSEHEN ↗",
-    top: "⬆ Nach oben"
+    top: "⬆ Nach oben",
+    tabReadme: "Tech-Übersicht // README",
+    tabGuide: "Anleitung // GUIDE"
   }
 };
 
@@ -121,6 +127,16 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
 
     <!-- IDE File Viewer -->
     <div class="proj-card-window">
+      <div class="ide-tabs-bar" id="ide-tabs-bar">
+        <button class="ide-tab active" id="tab-readme" type="button" data-view="readme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px; height:14px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span>{l.tabReadme}</span>
+        </button>
+        <button class="ide-tab" id="tab-guide" type="button" data-view="guide" style="display: none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px; height:14px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span>{l.tabGuide}</span>
+        </button>
+      </div>
       <div class="window-header">
         <span class="window-title" id="window-filepath">README.md</span>
         <div class="window-controls">
@@ -317,24 +333,81 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
       }
 
       if (project) {
-        document.getElementById('window-filepath')!.textContent = `projects/${projectId}/README.md`;
-        
-        // Select localized readme or fallback
+        // 1. First extract images from README to initialize slider gallery regardless of starting tab
         let readme = project.readme;
         if (lang === 'ru' && project.readme_ru) readme = project.readme_ru;
         if (lang === 'de' && project.readme_de) readme = project.readme_de;
 
-        const resolvedHtml = resolveRelativePaths(parseMarkdown(readme), project);
-        const processResult = processReadmeAndExtractImages(resolvedHtml);
-        
-        let cleanHtml = processResult.cleanHtml;
-        const topText = lang === 'ru' ? '⬆ Наверх' : (lang === 'de' ? '⬆ Nach oben' : '⬆ Scroll to top');
-        if (!cleanHtml.toLowerCase().includes('top') && !cleanHtml.toLowerCase().includes('наверх') && !cleanHtml.toLowerCase().includes('oben')) {
-          cleanHtml += `<p style="text-align: right; margin-top: 32px; font-family: var(--font-mono); font-size: 13px;"><a href="#" class="top-scroll-btn">${topText}</a></p>`;
-        }
-        document.getElementById('readme-html')!.innerHTML = cleanHtml;
+        const resolvedReadmeHtml = resolveRelativePaths(parseMarkdown(readme), project);
+        const readmeProcessResult = processReadmeAndExtractImages(resolvedReadmeHtml);
+        initSlider(readmeProcessResult.images);
 
-        initSlider(processResult.images);
+        // 2. Check for GUIDE availability
+        let guide = project.guide || '';
+        if (lang === 'ru' && project.guide_ru) guide = project.guide_ru;
+        if (lang === 'de' && project.guide_de) guide = project.guide_de;
+        const hasGuide = Boolean(guide && guide.trim().length > 0);
+
+        const tabReadme = document.getElementById('tab-readme');
+        const tabGuide = document.getElementById('tab-guide');
+        if (hasGuide && tabGuide) {
+          tabGuide.style.display = 'inline-flex';
+        }
+
+        const topText = lang === 'ru' ? '⬆ Наверх' : (lang === 'de' ? '⬆ Nach oben' : '⬆ Scroll to top');
+
+        function renderTabContent(viewMode: string) {
+          let sourceHtml = '';
+          let filepath = '';
+          if (viewMode === 'guide' && hasGuide) {
+            filepath = `projects/${projectId}/docs/GUIDE.md`;
+            sourceHtml = resolveRelativePaths(parseMarkdown(guide), project);
+          } else {
+            filepath = `projects/${projectId}/README.md`;
+            sourceHtml = readmeProcessResult.cleanHtml;
+          }
+
+          document.getElementById('window-filepath')!.textContent = filepath;
+
+          if (!sourceHtml.toLowerCase().includes('top') && !sourceHtml.toLowerCase().includes('наверх') && !sourceHtml.toLowerCase().includes('oben')) {
+            sourceHtml += `<p style="text-align: right; margin-top: 32px; font-family: var(--font-mono); font-size: 13px;"><a href="#" class="top-scroll-btn">${topText}</a></p>`;
+          }
+          const container = document.getElementById('readme-html')!;
+          container.innerHTML = sourceHtml;
+
+          // Generate line numbers dynamically based on rendered height
+          const height = container.scrollHeight;
+          const lineCount = Math.max(30, Math.ceil(height / 28));
+          let numsHtml = '';
+          for (let i = 1; i <= lineCount; i++) {
+            numsHtml += `${i}<br>`;
+          }
+          document.getElementById('line-numbers-container')!.innerHTML = numsHtml;
+        }
+
+        function switchTab(mode: string) {
+          if (mode === 'guide' && !hasGuide) mode = 'readme';
+          if (tabReadme) tabReadme.classList.toggle('active', mode === 'readme');
+          if (tabGuide) tabGuide.classList.toggle('active', mode === 'guide');
+          renderTabContent(mode);
+
+          // Update URL parameter without reloading the page
+          const url = new URL(window.location.href);
+          if (mode === 'guide') {
+            url.searchParams.set('view', 'guide');
+          } else {
+            url.searchParams.delete('view');
+          }
+          window.history.replaceState({}, '', url);
+        }
+
+        if (tabReadme) tabReadme.addEventListener('click', () => switchTab('readme'));
+        if (tabGuide) tabGuide.addEventListener('click', () => switchTab('guide'));
+
+        // Check URL parameters / hash on initial load
+        const urlParams = new URLSearchParams(window.location.search);
+        const initialMode = (urlParams.get('view') === 'guide' || window.location.hash === '#guide') && hasGuide ? 'guide' : 'readme';
+        switchTab(initialMode);
 
         // Intercept scroll to top clicks
         document.getElementById('readme-html')!.addEventListener('click', (e: any) => {
@@ -350,16 +423,6 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
             }
           }
         });
-
-        // Generate line numbers
-        const container = document.getElementById('readme-html')!;
-        const height = container.scrollHeight;
-        const lineCount = Math.max(30, Math.ceil(height / 28));
-        let numsHtml = '';
-        for (let i = 1; i <= lineCount; i++) {
-          numsHtml += `${i}<br>`;
-        }
-        document.getElementById('line-numbers-container')!.innerHTML = numsHtml;
       }
     });
   </script>
@@ -430,6 +493,50 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     margin-bottom: 60px;
   }
   
+  .ide-tabs-bar {
+    display: flex;
+    background: var(--surface-2, #181b20);
+    border-bottom: 2px solid var(--ink);
+    padding: 0 16px;
+    gap: 6px;
+    overflow-x: auto;
+  }
+
+  .ide-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 2px solid transparent;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    padding: 10px 18px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gray-2);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 8px;
+    white-space: nowrap;
+  }
+
+  .ide-tab:hover {
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .ide-tab.active {
+    background: var(--bar);
+    border-color: var(--ink);
+    color: var(--ink);
+    position: relative;
+    z-index: 2;
+    margin-bottom: -2px;
+    padding-bottom: 12px;
+    box-shadow: 0 -3px 0 var(--accent, #36c5f0) inset;
+  }
+
   .window-header {
     background: var(--bar);
     border-bottom: 2px solid var(--ink);
