@@ -2230,116 +2230,214 @@ MIT`
     stars: "0",
     license: "MIT",
     github: "https://github.com/Almanex/Rokey",
-    image: "images/projects/rokey.jpg",
-    readme: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+    image: "/images/projects/rokey.jpg",
+    readme: `[ English ](README.md) • [ Русский ](docs/README_RU.md) • [ Deutsch ](docs/README_DE.md)
+# Rokey Keyboard Layout Converter (Windows 11 Style)
 
-# Roke
+**Rokey** is an ultra-lightweight and fast Windows utility designed to instantly translate selected text from an incorrect keyboard layout to the correct one (for example, \`ghbdtn\` → \`привет\` or \`work\` → \`работа\`).
 
-**Keyboard layout converter utility styled in Windows 11 design**
+The project is developed in pure C++ using the Win32 API, which allows it to use minimal system resources (around 1.5 MB of RAM) and build into **a single independent executable** file without external dependencies.
 
-Roke is a system utility to instantly convert selected text from incorrect keyboard layout to the correct one (EN <-> RU) in any active Windows text field.
+---
 
-## Architecture
+## Features
 
-To save system resources, the project is split into two independent components:
-- Roke.exe: A lightweight background process (uses ~1.5 MB RAM) written in pure Win32 C++ that monitors keyboard layout hooks and manages the system tray icon.
-- RokeSettings.exe: A Fluent settings window built with WinUI 3 (Windows App SDK) and C++/WinRT. It opens on demand from the tray and exits completely after saving settings, freeing system memory.
+- **Portability**: Works out of the box, does not require installing any libraries or packages (MSIX, Windows App SDK, etc.).
+- **Lightweight**: All functionality (background key hook, system tray icon, and graphical settings interface) is packed into a single executable file \`Roke.exe\` (~150 KB).
+- **Windows 11 Integration**: The settings interface is adapted to the Windows 11 style (supports system dark/light themes, uses Segoe UI font, and handles DPI scaling).
+
+---
 
 ## Usage
 
-1. Select text with incorrect layout in any application.
-2. Press the hotkey combination (default: Ctrl+Shift+Q).
-3. The text is automatically replaced with the correct layout translation.
+1. Select the text with the incorrect layout in any application.
+2. Press the hotkey combination (default: **Ctrl+Shift+Q**).
+3. The text will be automatically replaced with the correct layout translation.
 
-Examples:
-- \`ghbdtn\` <-> \`привет\`
-- \`rhjcnf\` <-> \`работа\`
+**Examples:**
+- \`ghbdtn\` → \`привет\`
+- \`rhjcnf\` → \`работа\`
+- \`dcf\` → \`все\`
+
+---
+
+## Settings & Autostart
+
+![Rokey Settings](ro.jpg)
+
+Settings can be accessed via the context menu of the application's icon in the system tray (right-click on the icon → **Show Settings**).
+
+Settings are saved in the Windows registry at:
+\`HKEY_CURRENT_USER\\\\Software\\\\Roke\`
+
+### Supported Options:
+- **Restore Clipboard**: Saves and restores the original contents of the clipboard after completing layout conversion.
+- **Switch System Layout**: Automatically changes the input language in the active window to the correct one after replacing the text.
+- **Sound Notification**: Plays a system sound on successful layout conversion.
+- **Run at Windows Startup**: Adds the program to system autostart.
+- **Activation Hotkey**: Choose between three combinations:
+  - \`Ctrl + Shift + Q\` (default)
+  - \`Ctrl + Alt + Q\`
+  - \`F12\`
+
+---
 
 ## Building from Source
 
-### Requirements
-- Visual Studio 2022 with Desktop Development with C++ workload.
-- Windows 11 SDK (10.0.26100.0 or newer).
+### Requirements:
+- **Visual Studio 2022** or **Visual Studio Build Tools 2022** with the "Desktop development with C++" workload.
+- Windows SDK (Windows 10 SDK 10.0.19041.0 / Windows 11 SDK 10.0.26100.0 or newer).
 
-### Build Script
+### Instructions:
+Run the automatic build script in the project root directory:
 \`\`\`cmd
-.\\build.bat
+.\\\\build.bat
 \`\`\`
-The script resolves NuGet dependencies (Windows App SDK, C++/WinRT) and builds the application in Release x64 mode. Output binaries are saved to \`bin\\Release\\\`.
 
-## License
+The script will automatically initialize the Visual Studio build environment and compile the application in **Release x64** mode.
 
-MIT`,
-    readme_ru: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+The build output (a single file \`Roke.exe\`) will be located in:
+\`\`\`text
+bin\\\\Release\\\\
+\`\`\``,
+    readme_ru: `[ English ](README.md) • [ Русский ](docs/README_RU.md) • [ Deutsch ](docs/README_DE.md)
+# Rokey Keyboard Layout Converter (Windows 11 Style)
 
-# Roke
+**Rokey** — это сверхлегкая и быстрая утилита для Windows, предназначенная для быстрого перевода выделенного текста из неверной раскладки клавиатуры в правильную (например, \`ghbdtn\` → \`привет\` или \`work\` → \`работа\`).
 
-**Утилита автоматической конвертации раскладки клавиатуры в стиле Windows 11**
+Проект разработан на чистом C++ с использованием Win32 API, благодаря чему занимает минимум системных ресурсов (около 1.5 МБ ОЗУ) и собирается в **один независимый исполняемый файл** без внешних зависимостей.
 
-Быстрый перевод выделенного текста из неверной раскладки клавиатуры в нужную (EN ↔ RU) в любом текстовом поле Windows.
+---
 
-## Архитектура проекта
+## Особенности / Features
 
-Проект разделен на два компонента для оптимизации ресурсов:
-- Roke.exe — фоновый процесс (~1.5 МБ ОЗУ) на чистом Win32 C++, отслеживающий глобальный хук клавиатуры и управляющий иконкой трея.
-- RokeSettings.exe — современное окно настроек на WinUI 3 (Windows App SDK) и C++/WinRT, которое запускается по запросу и закрывается после сохранения настроек, освобождая ОЗУ.
+- **Автономность**: Работает «из коробки», не требует установки библиотек или пакетов (MSIX, Windows App SDK и т.д.).
+- **Легковесность**: Весь функционал (фоновый перехватчик клавиш, иконка в трее и графический интерфейс настроек) упакован в один исполняемый файл \`Roke.exe\` (~150 КБ).
+- **Интеграция с Windows 11**: Интерфейс настроек адаптирован под стиль Windows 11 (поддерживает системную темную/светлую тему, использует шрифт Segoe UI и учитывает масштабирование DPI).
 
-## Использование
+---
 
-1. Выделите текст с неверной раскладкой.
-2. Нажмите комбинацию клавиш (по умолчанию Ctrl+Shift+Q).
+## Использование / Usage
+
+1. Выделите текст с неверной раскладкой в любом приложении.
+2. Нажмите горячую клавишу (по умолчанию **Ctrl+Shift+Q**).
 3. Текст автоматически заменится на правильный.
 
-## Сборка проекта
+**Примеры / Examples:**
+- \`ghbdtn\` → \`привет\`
+- \`rhjcnf\` → \`работа\`
+- \`dcf\` → \`все\`
 
-### Требования
-- Visual Studio 2022 с нагрузкой «Разработка классических приложений на C++».
-- Windows 11 SDK (10.0.26100.0 или новее).
+---
 
-### Сборка
+## Настройки и автозапуск / Settings & Autostart
+
+![Rokey Settings](ro.jpg)
+
+Доступ к настройкам осуществляется через контекстное меню иконки приложения в системном трее (правой кнопкой мыши по иконке → **Показать настройки**).
+
+Параметры сохраняются в системный реестр Windows по пути:
+\`HKEY_CURRENT_USER\\\\Software\\\\Roke\`
+
+### Поддерживаемые опции:
+- **Восстанавливать буфер обмена**: Сохраняет и возвращает исходное содержимое буфера обмена после завершения автозамены.
+- **Переключать раскладку системы**: Автоматически изменяет язык ввода в активном окне на правильный после замены текста.
+- **Звуковой сигнал**: Воспроизводит системный звук при успешной конвертации.
+- **Запускать при старте Windows**: Добавляет программу в автозапуск при входе в систему.
+- **Сочетание клавиш активации**: Выбор между тремя комбинациями:
+  - \`Ctrl + Shift + Q\` (по умолчанию)
+  - \`Ctrl + Alt + Q\`
+  - \`F12\`
+
+---
+
+## Сборка проекта / Building
+
+### Требования:
+- **Visual Studio 2022** или **Visual Studio Build Tools 2022** с установленной рабочей нагрузкой «Разработка классических приложений на C++».
+- Пакет Windows SDK (Windows 10 SDK 10.0.19041.0 / Windows 11 SDK 10.0.26100.0 или новее).
+
+### Инструкция:
+Запустите скрипт автоматической сборки в корне проекта:
 \`\`\`cmd
-.\\build.bat
+.\\\\build.bat
 \`\`\`
-Скрипт скомпилирует проект в режиме Release x64. Исполняемые файлы будут сохранены в папке \`bin\\Release\\\`.
 
-## Лицензия
+Скрипт автоматически инициализирует среду сборки Visual Studio и скомпилирует приложение в режиме **Release x64**.
 
-MIT`,
-    readme_de: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+Результат сборки (один файл \`Roke.exe\`) будет находиться в папке:
+\`\`\`text
+bin\\\\Release\\\\
+\`\`\``,
+    readme_de: `[ English ](README.md) • [ Русский ](docs/README_RU.md) • [ Deutsch ](docs/README_DE.md)
+# Rokey Tastaturlayout-Konverter (Windows 11-Stil)
 
-# Roke
+**Rokey** ist ein extrem leichtgewichtiges und schnelles Windows-Dienstprogramm, mit dem markierter Text sofort von einem falschen Tastaturlayout in das richtige übersetzt werden kann (z. B. \`ghbdtn\` → \`привет\` oder \`work\` → \`работа\`).
 
-**Tastaturlayout-Konverter im Windows 11 Design**
+Das Projekt wurde in reinem C++ unter Verwendung der Win32-API entwickelt. Dadurch verbraucht es minimale Systemressourcen (ca. 1,5 MB RAM) und lässt sich ohne externe Abhängigkeiten in **eine einzige unabhängige ausführbare Datei** kompilieren.
 
-Roke ist ein Systemprogramm zum sofortigen Konvertieren von markiertem Text aus einem falschen Tastaturlayout in das richtige (EN <-> RU) in jedem aktiven Windows-Textfeld.
+---
 
-## Architektur
+## Funktionen
 
-Um Systemressourcen zu sparen, ist das Projekt in zwei Komponenten unterteilt:
-- Roke.exe: Ein leichtgewichtiger Hintergrundprozess (~1,5 MB RAM) in reinem Win32 C++, der Tastatur-Hooks überwacht und das System-Tray-Symbol verwaltet.
-- RokeSettings.exe: Ein modernes Einstellungsfenster, entwickelt mit WinUI 3 (Windows App SDK) und C++/WinRT. Es wird bei Bedarf geöffnet und nach dem Speichern geschlossen, um Arbeitsspeicher freizugeben.
+- **Portabilität**: Funktioniert sofort ohne Installation von Bibliotheken oder Paketen (MSIX, Windows App SDK usw.).
+- **Leichtgewicht**: Die gesamte Funktionalität (Hintergrund-Tastatur-Hook, System-Tray-Symbol und grafische Einstellungsoberfläche) ist in einer einzigen ausführbaren Datei \`Roke.exe\` (~150 KB) enthalten.
+- **Windows 11-Integration**: Die Einstellungsoberfläche ist an den Windows 11-Stil angepasst (unterstützt das dunkle/helles Systemdesign, verwendet die Schriftart Segoe UI und berücksichtigt DPI-Skalierung).
+
+---
 
 ## Verwendung
 
-1. Markieren Sie fehlerhaft eingegebenen Text.
-2. Drücken Sie den Hotkey (Standard: Ctrl+Shift+Q).
-3. Der Text wird automatisch übersetzt und ersetzt.
+1. Markieren Sie den Text mit dem falschen Layout in einer beliebigen Anwendung.
+2. Drücken Sie die Tastenkombination (Standard: **Ctrl+Shift+Q**).
+3. Der Text wird automatisch durch die korrekte Layoutübersetzung ersetzt.
+
+**Beispiele:**
+- \`ghbdtn\` → \`привет\`
+- \`rhjcnf\` → \`работа\`
+- \`dcf\` → \`все\`
+
+---
+
+## Einstellungen & Autostart
+
+![Rokey Settings](ro.jpg)
+
+Die Einstellungen können über das Kontextmenü des Programmsymbols in der Systemleiste aufgerufen werden (Rechtsklick auf das Symbol → **Einstellungen anzeigen**).
+
+Die Parameter werden in der Windows-Registrierung unter folgendem Pfad gespeichert:
+\`HKEY_CURRENT_USER\\\\Software\\\\Roke\`
+
+### Unterstützte Optionen:
+- **Zwischenablage wiederherstellen**: Speichert und stellt den ursprünglichen Inhalt der Zwischenablage nach der Konvertierung wieder her.
+- **System-Layout wechseln**: Ändert die Eingabesprache im aktiven Fenster nach dem Ersetzen des Textes automatisch auf die richtige.
+- **Sound-Benachrichtigung**: Spielt einen Systemton ab, wenn die Konvertierung erfolgreich war.
+- **Mit Windows starten**: Fügt das Programm zum Windows-Autostart hinzu.
+- **Aktivierungs-Hotkey**: Auswahl zwischen drei Kombinationen:
+  - \`Ctrl + Shift + Q\` (Standard)
+  - \`Ctrl + Alt + Q\`
+  - \`F12\`
+
+---
 
 ## Build aus Quellcode
 
-### Anforderungen
-- Visual Studio 2022 mit C++-Desktopentwicklung.
-- Windows 11 SDK (10.0.26100.0 oder neuer).
+### Anforderungen:
+- **Visual Studio 2022** oder **Visual Studio Build Tools 2022** mit der Arbeitslast „Desktopentwicklung mit C++“.
+- Windows SDK (Windows 10 SDK 10.0.19041.0 / Windows 11 SDK 10.0.26100.0 oder neuer).
 
-### Ausführung
+### Anleitung:
+Führen Sie das automatische Build-Skript im Projektverzeichnis aus:
 \`\`\`cmd
-.\\build.bat
+.\\\\build.bat
 \`\`\`
-Das Skript lädt Abhängigkeiten und kompiliert die Anwendung im Release-x64-Modus unter \`bin\\Release\\\`.
 
-## Lizenz
+Das Skript initialisiert die Visual Studio-Buildumgebung und kompiliert die Anwendung im Modus **Release x64**.
 
-MIT`
+Die ausführbare Datei (\`Roke.exe\`) befindet sich nach dem Build im Ordner:
+\`\`\`text
+bin\\\\Release\\\\
+\`\`\``
   },
   "screentation-v2": {
     title: "Screentation V2",
