@@ -2601,8 +2601,8 @@ Verwenden Sie diese Tastenkombinationen, um schnell in der Anwendung zu navigier
 [![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)](https://twitter.com/intent/tweet?text=Check%20out%20IconForge%20-%20A%20native%20icon%20generator%20for%20Windows%2011!&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/cover.png" alt="IconForge main" width="49%" />
-  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/editor.png" alt="IconForge settings" width="49%" />
+  <img src="/images/projects/icoboo/cover.png" alt="IconForge main" width="49%" />
+  <img src="/images/projects/icoboo/editor.png" alt="IconForge settings" width="49%" />
 </p>
 
 ---
@@ -2616,27 +2616,27 @@ For a detailed walkthrough of all options and features, see the [User Guide](doc
 <details open>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 1. Main Window - File Drag and Drop</b></summary>
   <br/>
-  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot1.png" width="95%" /></p>
+  <p align="center"><img src="/images/projects/icoboo/screenshot1.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 2. Settings and Target Directory Selection</b></summary>
   <br/>
-  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot2.png" width="95%" /></p>
+  <p align="center"><img src="/images/projects/icoboo/screenshot2.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 3. Android Adaptive Icon Configuration and Color Swatches</b></summary>
   <br/>
-  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot3.png" width="95%" /></p>
+  <p align="center"><img src="/images/projects/icoboo/screenshot3.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 4. Shell Integration - Windows Explorer Context Menu</b></summary>
   <br/>
-  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot4.png" width="95%" /></p>
+  <p align="center"><img src="/images/projects/icoboo/screenshot4.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 5. Active Process State and Toast Notifications</b></summary>
   <br/>
-  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot5.png" width="95%" /></p>
+  <p align="center"><img src="/images/projects/icoboo/screenshot5.png" width="95%" /></p>
 </details>
 
 ---
@@ -2775,8 +2775,8 @@ This project is licensed under the MIT License - see the \`LICENSE\` file for de
 [![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)](https://twitter.com/intent/tweet?text=Check%20out%20IconForge%20-%20A%20native%20icon%20generator%20for%20Windows%2011!&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/cover.png" alt="IconForge main" width="49%" />
-  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/editor.png" alt="IconForge settings" width="49%" />
+  <img src="/images/projects/icoboo/cover.png" alt="IconForge main" width="49%" />
+  <img src="/images/projects/icoboo/editor.png" alt="IconForge settings" width="49%" />
 </p>
 
 ---
@@ -2790,27 +2790,27 @@ IconForge — это легкое нативное Windows-приложение 
 <details open>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 1. Главное окно - Drag and Drop файлов</b></summary>
   <br/>
-  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot1.png" width="95%" /></p>
+  <p align="center"><img src="/images/projects/icoboo/screenshot1.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 2. Настройки и выбор папки назначения</b></summary>
   <br/>
-  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot2.png" width="95%" /></p>
+  <p align="center"><img src="/images/projects/icoboo/screenshot2.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 3. Кастомизация адаптивных иконок Android и палитры цветов</b></summary>
   <br/>
-  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot3.png" width="95%" /></p>
+  <p align="center"><img src="/images/projects/icoboo/screenshot3.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 4. Интеграция в систему - контекстное меню проводника Windows</b></summary>
   <br/>
-  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot4.png" width="95%" /></p>
+  <p align="center"><img src="/images/projects/icoboo/screenshot4.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 5. Активный процесс генерации и всплывающие уведомления</b></summary>
   <br/>
-  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot5.png" width="95%" /></p>
+  <p align="center"><img src="/images/projects/icoboo/screenshot5.png" width="95%" /></p>
 </details>
 
 ---
@@ -2950,8 +2950,8 @@ dotnet publish -c Release -r win-x64 --self-contained true
 [![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)](https://twitter.com/intent/tweet?text=Check%20out%20IconForge%20-%20A%20native%20icon%20generator%20for%20Windows%2011!&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/cover.png" alt="IconForge main" width="49%" />
-  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/editor.png" alt="IconForge settings" width="49%" />
+  <img src="/images/projects/icoboo/cover.png" alt="IconForge main" width="49%" />
+  <img src="/images/projects/icoboo/editor.png" alt="IconForge settings" width="49%" />
 </p>
 
 ---
@@ -2965,27 +2965,27 @@ Eine detaillierte Beschreibung aller Einstellungen und Funktionen finden Sie im 
 <details open>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 1. Hauptfenster - Datei-Drag-and-Drop</b></summary>
   <br/>
-  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot1.png" width="95%" /></p>
+  <p align="center"><img src="/images/projects/icoboo/screenshot1.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 2. Einstellungen und Auswahl des Zielordners</b></summary>
   <br/>
-  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot2.png" width="95%" /></p>
+  <p align="center"><img src="/images/projects/icoboo/screenshot2.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 3. Anpassung von Android Adaptive Icons und Farbpaletten</b></summary>
   <br/>
-  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot3.png" width="95%" /></p>
+  <p align="center"><img src="/images/projects/icoboo/screenshot3.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 4. Systemintegration - Windows Explorer-Kontextmenü</b></summary>
   <br/>
-  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot4.png" width="95%" /></p>
+  <p align="center"><img src="/images/projects/icoboo/screenshot4.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 5. Aktiver Prozesszustand und Toast-Benachrichtigungen</b></summary>
   <br/>
-  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot5.png" width="95%" /></p>
+  <p align="center"><img src="/images/projects/icoboo/screenshot5.png" width="95%" /></p>
 </details>
 
 ---
@@ -3121,8 +3121,8 @@ Welcome to the **IconForge** user guide. This document provides step-by-step ins
 ---
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/cover.png" alt="IconForge main" width="49%" />
-  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/editor.png" alt="IconForge settings" width="49%" />
+  <img src="/images/projects/icoboo/cover.png" alt="IconForge main" width="49%" />
+  <img src="/images/projects/icoboo/editor.png" alt="IconForge settings" width="49%" />
 </p>
 
 ---
@@ -3209,8 +3209,8 @@ This warning is standard for free, open-source software that does not have a pai
 ---
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/cover.png" alt="IconForge main" width="49%" />
-  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/editor.png" alt="IconForge settings" width="49%" />
+  <img src="/images/projects/icoboo/cover.png" alt="IconForge main" width="49%" />
+  <img src="/images/projects/icoboo/editor.png" alt="IconForge settings" width="49%" />
 </p>
 
 ---
@@ -3297,8 +3297,8 @@ Willkommen beim Benutzerhandbuch für **IconForge**. Dieses Dokument bietet Schr
 ---
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/cover.png" alt="IconForge main" width="49%" />
-  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/editor.png" alt="IconForge settings" width="49%" />
+  <img src="/images/projects/icoboo/cover.png" alt="IconForge main" width="49%" />
+  <img src="/images/projects/icoboo/editor.png" alt="IconForge settings" width="49%" />
 </p>
 
 ---
