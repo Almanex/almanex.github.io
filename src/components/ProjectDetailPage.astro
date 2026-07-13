@@ -339,11 +339,11 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
         let readme = project.readme;
         if (lang === 'ru' && project.readme_ru) {
           readme = project.readme_ru;
-          isReadmeDocs = true;
+          isReadmeDocs = project.readme_ru.includes('](../README.md)');
         }
         if (lang === 'de' && project.readme_de) {
           readme = project.readme_de;
-          isReadmeDocs = true;
+          isReadmeDocs = project.readme_de.includes('](../README.md)');
         }
 
         const resolvedReadmeHtml = resolveRelativePaths(parseMarkdown(readme), project, isReadmeDocs);
@@ -373,9 +373,15 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
             if (lang === 'de' && project.guide_de) filepath = `projects/${projectId}/docs/GUIDE_DE.md`;
             sourceHtml = resolveRelativePaths(parseMarkdown(guide), project, true);
           } else {
-            filepath = `projects/${projectId}/README.md`;
-            if (lang === 'ru' && project.readme_ru) filepath = `projects/${projectId}/docs/README_RU.md`;
-            if (lang === 'de' && project.readme_de) filepath = `projects/${projectId}/docs/README_DE.md`;
+            if (lang === 'ru' && project.readme_ru) {
+              const isDocs = project.readme_ru.includes('](../README.md)');
+              filepath = `projects/${projectId}/${isDocs ? 'docs/README_RU.md' : 'README_RU.md'}`;
+            } else if (lang === 'de' && project.readme_de) {
+              const isDocs = project.readme_de.includes('](../README.md)');
+              filepath = `projects/${projectId}/${isDocs ? 'docs/README_DE.md' : 'README_DE.md'}`;
+            } else {
+              filepath = `projects/${projectId}/README.md`;
+            }
             sourceHtml = readmeProcessResult.cleanHtml;
           }
 
