@@ -4149,7 +4149,7 @@ Alle Benutzereinstellungen, hinzugefügten Verknüpfungen und Symbol-Caches werd
     stars: "0",
     license: "GPL-3.0",
     github: "https://github.com/Almanex/Shelter-fork",
-    image: "images/projects/shelter-fork.jpg",
+    image: "/images/projects/shelter-fork.avif",
     readme: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
 
 # Shelter Fork
