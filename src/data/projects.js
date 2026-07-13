@@ -2580,7 +2580,7 @@ Verwenden Sie diese Tastenkombinationen, um schnell in der Anwendung zu navigier
   },
   "icoboo": {
     title: "icoboo",
-    subtitle: "A simple icon extraction and image to ICO conversion utility for Windows developers.",
+    subtitle: "A native WinUI 3 icon generator and converter supporting 3 languages (English, Russian, German).",
     category: "Utility",
     lang: "C#",
     platform: "Windows 10/11",
@@ -2601,13 +2601,13 @@ Verwenden Sie diese Tastenkombinationen, um schnell in der Anwendung zu navigier
 [![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)](https://twitter.com/intent/tweet?text=Check%20out%20IconForge%20-%20A%20native%20icon%20generator%20for%20Windows%2011!&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)
 
 <p align="center">
-  <img src="Screenshots/cover.png" alt="IconForge main" width="49%" />
-  <img src="Screenshots/editor.png" alt="IconForge settings" width="49%" />
+  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/cover.png" alt="IconForge main" width="49%" />
+  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/editor.png" alt="IconForge settings" width="49%" />
 </p>
 
 ---
 
-IconForge is a lightweight native Windows application developed on the WinUI 3 (Windows App SDK) framework and C#. It is designed for batch generation of icon sets for Windows (\`.ico\`, \`Assets\`) and Android (\`Adaptive Icons\`) from a single source image in PNG or SVG format.
+IconForge is a lightweight native Windows application developed on the WinUI 3 (Windows App SDK) framework and C#, supporting 3 languages (English, Russian, German) out of the box. It is designed for batch generation of icon sets for Windows (\`.ico\`, \`Assets\`) and Android (\`Adaptive Icons\`) from a single source image in PNG or SVG format.
 
 For a detailed walkthrough of all options and features, see the [User Guide](docs/GUIDE.md).
 
@@ -2616,27 +2616,27 @@ For a detailed walkthrough of all options and features, see the [User Guide](doc
 <details open>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 1. Main Window - File Drag and Drop</b></summary>
   <br/>
-  <p align="center"><img src="Screenshots/screenshot1.png" width="95%" /></p>
+  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot1.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 2. Settings and Target Directory Selection</b></summary>
   <br/>
-  <p align="center"><img src="Screenshots/screenshot2.png" width="95%" /></p>
+  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot2.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 3. Android Adaptive Icon Configuration and Color Swatches</b></summary>
   <br/>
-  <p align="center"><img src="Screenshots/screenshot3.png" width="95%" /></p>
+  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot3.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 4. Shell Integration - Windows Explorer Context Menu</b></summary>
   <br/>
-  <p align="center"><img src="Screenshots/screenshot4.png" width="95%" /></p>
+  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot4.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 5. Active Process State and Toast Notifications</b></summary>
   <br/>
-  <p align="center"><img src="Screenshots/screenshot5.png" width="95%" /></p>
+  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot5.png" width="95%" /></p>
 </details>
 
 ---
@@ -2775,13 +2775,13 @@ This project is licensed under the MIT License - see the \`LICENSE\` file for de
 [![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)](https://twitter.com/intent/tweet?text=Check%20out%20IconForge%20-%20A%20native%20icon%20generator%20for%20Windows%2011!&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)
 
 <p align="center">
-  <img src="../Screenshots/cover.png" alt="IconForge main" width="49%" />
-  <img src="../Screenshots/editor.png" alt="IconForge settings" width="49%" />
+  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/cover.png" alt="IconForge main" width="49%" />
+  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/editor.png" alt="IconForge settings" width="49%" />
 </p>
 
 ---
 
-IconForge — это легкое нативное Windows-приложение (утилита), разработанное на фреймворке WinUI 3 (Windows App SDK) и C#. Оно предназначено для пакетной генерации наборов иконок для Windows (\`.ico\`, \`Assets\`) и Android (\`Adaptive Icons\`) из одного исходного изображения формата PNG или SVG.
+IconForge — это легкое нативное Windows-приложение (утилита), разработанное на фреймворке WinUI 3 (Windows App SDK) и C#, с полной поддержкой 3 языков интерфейса (русский, английский, немецкий). Оно предназначено для пакетной генерации наборов иконок для Windows (\`.ico\`, \`Assets\`) и Android (\`Adaptive Icons\`) из одного исходного изображения формата PNG или SVG.
 
 Подробное описание всех настроек и возможностей см. в [Руководстве пользователя](GUIDE_RU.md).
 
@@ -2790,27 +2790,27 @@ IconForge — это легкое нативное Windows-приложение 
 <details open>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 1. Главное окно - Drag and Drop файлов</b></summary>
   <br/>
-  <p align="center"><img src="../Screenshots/screenshot1.png" width="95%" /></p>
+  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot1.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 2. Настройки и выбор папки назначения</b></summary>
   <br/>
-  <p align="center"><img src="../Screenshots/screenshot2.png" width="95%" /></p>
+  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot2.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 3. Кастомизация адаптивных иконок Android и палитры цветов</b></summary>
   <br/>
-  <p align="center"><img src="../Screenshots/screenshot3.png" width="95%" /></p>
+  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot3.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 4. Интеграция в систему - контекстное меню проводника Windows</b></summary>
   <br/>
-  <p align="center"><img src="../Screenshots/screenshot4.png" width="95%" /></p>
+  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot4.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 5. Активный процесс генерации и всплывающие уведомления</b></summary>
   <br/>
-  <p align="center"><img src="../Screenshots/screenshot5.png" width="95%" /></p>
+  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot5.png" width="95%" /></p>
 </details>
 
 ---
@@ -2950,13 +2950,13 @@ dotnet publish -c Release -r win-x64 --self-contained true
 [![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)](https://twitter.com/intent/tweet?text=Check%20out%20IconForge%20-%20A%20native%20icon%20generator%20for%20Windows%2011!&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)
 
 <p align="center">
-  <img src="../Screenshots/cover.png" alt="IconForge main" width="49%" />
-  <img src="../Screenshots/editor.png" alt="IconForge settings" width="49%" />
+  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/cover.png" alt="IconForge main" width="49%" />
+  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/editor.png" alt="IconForge settings" width="49%" />
 </p>
 
 ---
 
-IconForge ist eine schlanke native Windows-Anwendung, die auf dem WinUI 3 (Windows App SDK)-Framework und C# entwickelt wurde. Sie ist für die Batch-Generierung von Symbolsätzen für Windows (\`.ico\`, \`Assets\`) und Android (\`Adaptive Icons\`) aus einem einzigen Quellbild im PNG- oder SVG-Format konzipiert.
+IconForge ist eine schlanke native Windows-Anwendung, die auf dem WinUI 3 (Windows App SDK)-Framework und C# entwickelt wurde und standardmäßig 3 Sprachen (Englisch, Russisch, Deutsch) unterstützt. Sie ist für die Batch-Generierung von Symbolsätzen für Windows (\`.ico\`, \`Assets\`) und Android (\`Adaptive Icons\`) aus einem einzigen Quellbild im PNG- oder SVG-Format konzipiert.
 
 Eine detaillierte Beschreibung aller Einstellungen und Funktionen finden Sie im [Benutzerhandbuch](GUIDE_DE.md).
 
@@ -2965,27 +2965,27 @@ Eine detaillierte Beschreibung aller Einstellungen und Funktionen finden Sie im 
 <details open>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 1. Hauptfenster - Datei-Drag-and-Drop</b></summary>
   <br/>
-  <p align="center"><img src="../Screenshots/screenshot1.png" width="95%" /></p>
+  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot1.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 2. Einstellungen und Auswahl des Zielordners</b></summary>
   <br/>
-  <p align="center"><img src="../Screenshots/screenshot2.png" width="95%" /></p>
+  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot2.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 3. Anpassung von Android Adaptive Icons und Farbpaletten</b></summary>
   <br/>
-  <p align="center"><img src="../Screenshots/screenshot3.png" width="95%" /></p>
+  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot3.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 4. Systemintegration - Windows Explorer-Kontextmenü</b></summary>
   <br/>
-  <p align="center"><img src="../Screenshots/screenshot4.png" width="95%" /></p>
+  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot4.png" width="95%" /></p>
 </details>
 <details>
   <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 5. Aktiver Prozesszustand und Toast-Benachrichtigungen</b></summary>
   <br/>
-  <p align="center"><img src="../Screenshots/screenshot5.png" width="95%" /></p>
+  <p align="center"><img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/screenshot5.png" width="95%" /></p>
 </details>
 
 ---
@@ -3121,8 +3121,8 @@ Welcome to the **IconForge** user guide. This document provides step-by-step ins
 ---
 
 <p align="center">
-  <img src="../Screenshots/cover.png" alt="IconForge main" width="49%" />
-  <img src="../Screenshots/editor.png" alt="IconForge settings" width="49%" />
+  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/cover.png" alt="IconForge main" width="49%" />
+  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/editor.png" alt="IconForge settings" width="49%" />
 </p>
 
 ---
@@ -3209,8 +3209,8 @@ This warning is standard for free, open-source software that does not have a pai
 ---
 
 <p align="center">
-  <img src="../Screenshots/cover.png" alt="IconForge main" width="49%" />
-  <img src="../Screenshots/editor.png" alt="IconForge settings" width="49%" />
+  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/cover.png" alt="IconForge main" width="49%" />
+  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/editor.png" alt="IconForge settings" width="49%" />
 </p>
 
 ---
@@ -3297,8 +3297,8 @@ Willkommen beim Benutzerhandbuch für **IconForge**. Dieses Dokument bietet Schr
 ---
 
 <p align="center">
-  <img src="../Screenshots/cover.png" alt="IconForge main" width="49%" />
-  <img src="../Screenshots/editor.png" alt="IconForge settings" width="49%" />
+  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/cover.png" alt="IconForge main" width="49%" />
+  <img src="https://raw.githubusercontent.com/Almanex/icoboo/main/Screenshots/editor.png" alt="IconForge settings" width="49%" />
 </p>
 
 ---
