@@ -76,7 +76,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     "image": projectData.image ? [projectData.image.startsWith('http') ? projectData.image : new URL(`/${projectData.image}`, Astro.site).href] : undefined
   })} />
 
-  <div class="detail-container" id="project-detail-container" data-lang={lang}>
+  <div class="detail-container" id="project-detail-container" data-lang={lang} data-project={project}>
     <a href={getLocalizedPath('/work')} class="back-btn">{l.back}</a>
     
     <div class="proj-header" style="margin-top:24px;">
@@ -157,10 +157,8 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
       if (!containerEl) return;
       const lang = containerEl.dataset.lang || 'en';
 
-      // Get project ID from pathname (e.g. /projects/classic-windows-image-viewer)
-      const pathParts = window.location.pathname.split('/');
-      const cleanParts = pathParts.filter(Boolean);
-      const projectId = cleanParts[cleanParts.length - 1];
+      // Get project ID from dataset attribute set by server compilation
+      const projectId = containerEl.dataset.project || '';
       const project = PROJECTS_DATA[projectId];
 
       // Markdown renderer using Marked.js
@@ -238,6 +236,14 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
           }
         });
         
+        // Remove empty Screenshots header since they are displayed in the slider
+        tempDiv.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(header => {
+          const text = header.textContent.trim().toLowerCase();
+          if (text === 'screenshots' || text === 'скриншоты') {
+            header.remove();
+          }
+        });
+
         tempDiv.querySelectorAll('p').forEach(p => {
           if (p.innerHTML.trim() === '') {
             p.remove();
