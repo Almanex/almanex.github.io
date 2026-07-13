@@ -2918,132 +2918,412 @@ bin\\\\Release\\\\
     stars: "0",
     license: "MIT",
     github: "https://github.com/Almanex/Screentation-V2",
-    image: "images/projects/screentation-v2.jpg",
+    image: "/images/projects/screentation-v2.png",
     readme: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
 
 # Screentation
 
-**Desktop screenshot capture, annotation, and batch-saving tool**
+**Screentation** is a native Windows application for quickly creating, editing and annotating screenshots. Written in C# using the modern interface **WinUI 3 (Windows App SDK)** and the graphics library **Win2D** for hardware rendering.
 
-Screentation is a lightweight and modern desktop application for screenshot annotation and batch export, designed for technical writers, developers, and QA engineers. The app intercepts new screenshots from the clipboard and lets you add borders, arrows, steps, and blur private data in a few clicks.
+The application allows you to instantly capture screenshots from the clipboard (including in a minimized state), apply arrows, frames, text on top of them, blur sensitive data, crop images and automatically number instruction steps (both in numbers and in Latin letters).
 
-## Key Features
+---
 
-- Clipboard Auto-Capture: Instantly loads screenshots from clipboard or supports drag-and-drop.
-- Annotation Tools (Konva.js): Rectangles (hollow/filled), Arrows, step numbers (auto-incrementing), and high-quality blur.
-- Smart Eraser: Clone stamp utility to clean text or icons while restoring the original background behind them.
-- Batch Export: Exports screenshots to PNG, JPEG, or WebP with customizable quality and filename naming templates.
-- Tray Support: Minimizes to system tray and continues background clipboard monitoring.
+<p align="center">
+  <img src="screenshots/screentation_01.png" alt="Screentation Canvas" width="49%" />
+  <img src="screenshots/screentation_02.png" alt="Screentation Editor" width="49%" />
+</p>
 
-## Technology Stack
+---
 
-- Core Shell: Electron, Node.js
-- Frontend Framework: React, TypeScript, Vite
-- Canvas Library: Konva.js (react-konva)
-- Image Processing: sharp (for high-speed server-side compression)
+## User Guide
 
-## Quick Start
+### Key Features
+1. **Automatic Capture**: When the application is open or simply minimized to tray, when you click \`PrintScreen\` (or take a photo using Windows Snipping Tool), the screenshot is automatically added to the list on the left.
+2. **Annotation Tools**:
+ - **Select**: Select, move and resize applied elements.
+ - **Frame (Rect)**: Creates rectangular areas (optional with translucent fill).
+ - **Arrow**: Create directional arrows.
+ - **Blur**: Gaussian blur effect to hide sensitive information.
+ - **Eraser**: Copy and transfer texture (clone area) to hide interface elements.
+ - **Text**: Enter custom text on the canvas with the ability to change font size and color.
+ - **Step**: Automatic sequence of steps.
+3. **Smart Crop**:
+ - Allows you to crop the screenshot to any rectangular area.
+ - When cropping is confirmed, all previously drawn elements are shifted to the corresponding vector, remaining exactly in their places relative to the cropped frame.
+4. **Zoom & Pan**:
+ - Scaling is performed by holding the **\`Ctrl\` key + mouse wheel** (focuses on the cursor) or by dragging the **scaling slider** in the right panel.
+ - Moving around the enlarged canvas is done by **holding the middle mouse button (wheel)** and dragging.
+ - The **“Reset”** button returns the scale to the “fit to window” mode.
+5. **Numbering of steps**:
+ - Supports 3 formats: Numbers (\`1, 2, 3...\`), Latin capital letters (\`A, B... Z, AA...\`), Latin small letters (\`a, b... z, aa...\`).
+ - The “Next step” field allows you to set the starting number or change the current index.
+6. **Color selection**:
+ - Ready-made quick colors available.
+ - The **“Select color...”** button opens the spectral palette (ColorPicker) for selecting any custom shade. The selected color is retained between application restarts.
+
+### Localization & System Tray
+
+* **Supported Languages**: English (\`en-US\`), Russian (\`ru-RU\`), and German (\`de-DE\`). 
+  - The application automatically detects your Windows display language (configured in **Settings -> Time & Language -> Language**) and loads the corresponding interface strings.
+* **System Tray Behavior**:
+  - Closing the main window (using the \`X\` button) does not terminate the application. Instead, it hides it to the system tray to continue background clipboard monitoring.
+  - To restore the window, double-click the system tray icon, or right-click the icon and choose **Open Screentation**.
+  - To completely close the application, right-click the system tray icon and choose **Exit**.
+
+### Keyboard Shortcuts
+| Key | Action |
+| :--- | :--- |
+| \`Ctrl + V\` | Paste screenshot from clipboard manually |
+| \`Ctrl + Z\` | Undo last action (Undo) |
+| \`Ctrl + Y\` / \`Ctrl + Shift + Z\` | Redo a undone action (Redo) |
+| \`Ctrl + S\` | Save active screenshot to disk |
+| \`Ctrl + Shift + S\` | Save all screenshots (batch saving) |
+| \`Delete\` / \`Backspace\` | Delete selected annotation element |
+| \`Escape\` | Exit current mode / reset selection |
+| \`Enter\` *(in frame mode)* | Apply crop |
+| \`Escape\` *(in frame mode)* | Undo crop |
+| \`1\`, \`2\`, \`3\`, \`4\`, \`5\` | Quick selection of tools: Frame, Step, Arrow, Blur, Stamp |
+
+---
+
+## Developer Guide
+
+### Technology stack
+* **Platform**: .NET 10.0, Windows 10/11
+* **UI Framework**: WinUI 3 (Windows App SDK 2.2.0)
+* **Graphics**: Win2D (Microsoft.Graphics.Win2D 1.4.0) hardware 2D rendering based on Direct2D
+* **System integration**: Subclassing windows (Comctl32) to intercept Win32 clipboard events
+
+### Project structure
+\`\`\`
+Screentation/
+├── Assets/                    # Иконки, заставки и графические ресурсы
+├── Properties/                # Параметры запуска (launchSettings.json)
+├── Models.cs                  # Модели данных (ScreenshotSession, AnnotationElement, etc.)
+├── AnnotationCanvas.cs        # Интерактивный холст (обработка мыши, отрисовка, логика инструментов)
+├── AnnotationDrawer.cs        # Рендеринг фигур и текста на холсте через Win2D
+├── ClipboardMonitor.cs        # Фоновый Win32-мониторинг буфера обмена (WM_CLIPBOARDUPDATE)
+├── HistoryManager.cs          # Стек отмены/повтора действий (Undo/Redo)
+├── SettingsManager.cs         # Чтение и запись конфигурации пользователя (JSON)
+├── ExportManager.cs           # Экспорт скриншотов в форматы PNG, JPEG, WebP
+├── MainPage.xaml / .cs        # Основной экран интерфейса (панель инструментов, настройки)
+├── MainWindow.xaml / .cs      # Корневое окно приложения и интеграция с треем
+└── Screentation.csproj        # Файл конфигурации проекта
+\`\`\`
+
+### Key Component Architecture
+
+#### 1. Background clipboard interception (\`ClipboardMonitor.cs\`)
+To reliably intercept screenshots in a minimized state, the Win32 function \`AddClipboardFormatListener\` is used, which registers the application window in the clipboard listening chain. When data changes, the window receives the \`WM_CLIPBOARDUPDATE\` system message.
+* **Lock protection**: Because the snapshot source (eg Windows Clipboard) locks the buffer while it is being written, it pauses for 100 ms before reading the data and starts a cycle of 10 access attempts (\`OpenClipboard\`).
+* **Deduplication**: Windows sends multiple updates in a row for different formats of the same data. To prevent duplicates, the DIB image header is read, reference pixels are calculated and checked against the previous image. If the content is identical and received within 2 seconds of the previous snapshot, it is cut off as a system duplicate.
+
+#### 2. Interactive canvas (\`AnnotationCanvas.cs\`)
+Inherits from \`Grid\` and contains \`CanvasControl\` (Win2D). 
+* **Grid**: All annotation coordinates are stored in the original screenshot resolution. When rendering, a transformation matrix is ​​applied to the Win2D context (\`Matrix3x2.CreateScale(_scale) * Matrix3x2.CreateTranslation(_offsetX, _offsetY)\`), due to which all shapes are scaled and moved smoothly and without loss of clarity.
+* **Text editor**: When placing text on the canvas, the standard \`TextBox\` control is dynamically projected with the \`Loaded\` focus property enabled and aligned to the top-left edge of the canvas. Losing focus or pressing \`Enter\` bakes the text into a vector \`TextElement\`.
+
+#### 3. Rendering shapes (\`AnnotationDrawer.cs\`)
+Static class that performs low-level drawing of vector primitives on the \`CanvasDrawingSession\`. Blurring is implemented using the \`GaussianBlurEffect\` effect based on the original \`CanvasBitmap\` texture cache.
+
+---
+
+## ️ Build & Run
 
 ### Requirements
-- Node.js (LTS 18+)
-- Git
+* OS: Windows 10 (version 1809 / build 17763) or newer.
+* Visual Studio 2022 with **Application development for the Windows platform (UWP/WinUI)** or .NET 10 SDK installed.
 
-### Build & Run
+###Build commands in the CLI
+Build the project:
 \`\`\`bash
-git clone https://github.com/Almanex/Screentation.git
-cd Screentation
-npm install
-npm run dev
+dotnet build
 \`\`\`
 
-### Create Installer
+Launching the application:
 \`\`\`bash
-npx electron-builder --win
+dotnet run
 \`\`\`
 
-## License
-
-MIT`,
+Publishing (fully autonomous single-file release):
+\`\`\`bash
+dotnet publish -c Release -r win-x64 --self-contained true
+\`\`\`
+The result will be saved in \`Screentation/bin/Release/net10.0-windows10.0.26100.0/win-x64/publish/\` and consists of:
+- **\`Screentation.exe\`** (a single ~300 MB executable containing the .NET 10.0 Runtime, Windows App SDK, and all dependency DLLs)
+- **\`Assets/\`** (folder containing icons and logos)
+- **\`Screentation.pdb\`** (debug symbols, optional for distribution)`,
     readme_ru: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
 
 # Screentation
 
-**Инструмент для захвата, аннотирования и пакетного сохранения скриншотов**
+**Screentation** это нативное Windows-приложение для быстрого создания, редактирования и аннотирования скриншотов. Написано на C# с использованием современного интерфейса **WinUI 3 (Windows App SDK)** и графической библиотеки **Win2D** для аппаратного рендеринга.
 
-Screentation — легкое десктопное приложение для редактирования скриншотов и их пакетного экспорта. Полезно для технических писателей, тестировщиков и разработчиков при создании инструкций и баг-репортов. Программа перехватывает скриншоты из буфера обмена и позволяет быстро наложить рамки, стрелки, нумерацию шагов или скрыть личные данные.
+Приложение позволяет мгновенно захватывать скриншоты из буфера обмена (в том числе в свернутом состоянии), наносить поверх них стрелки, рамки, текст, размывать конфиденциальные данные, обрезать изображения и автоматически нумеровать шаги инструкций (как цифрами, так и латинскими буквами).
 
-## Основные возможности
+---
 
-- Автозахват буфера обмена: Мгновенный импорт скриншотов при создании или через Drag-and-Drop.
-- Графические аннотации (Konva.js): Рамки, указательные стрелки, маркеры шагов с автоувеличением номера, размытие.
-- Умный ластик: Инструмент штампа для стирания конфиденциальных данных с восстановлением текстуры фона.
-- Пакетный экспорт: Сохранение в PNG, JPEG, WebP с настройкой качества сжатия.
-- Фоновый режим: Работа из системного трея Windows.
+<p align="center">
+  <img src="screenshots/screentation_01.png" alt="Screentation Canvas" width="49%" />
+  <img src="screenshots/screentation_02.png" alt="Screentation Editor" width="49%" />
+</p>
 
-## Технологический стек
+---
 
-- Ядро: Electron, Node.js
-- Фронтенд: React, TypeScript, Vite
-- Графика: Konva.js (react-konva) для холста
-- Обработка изображений: sharp для сжатия в главном процессе
+## Руководство пользователя (User Guide)
 
-## Быстрый старт
+### Основные возможности
+1. **Автоматический захват**: Когда приложение открыто или просто свёрнуто в трей, при нажатии \`PrintScreen\` (или создании снимка через «Ножницы» Windows) скриншот автоматически добавляется в список слева.
+2. **Инструменты аннотирования**:
+- **Выбор (Select)**: Выделение, перемещение и изменение размеров нанесенных элементов.
+- **Рамка (Rect)**: Создание прямоугольных областей (опционально с полупрозрачной заливкой).
+- **Стрелка (Arrow)**: Создание указательных стрелок.
+- **Размытие (Blur)**: Эффект размытия по Гауссу для скрытия конфиденциальной информации.
+- **Штамп (Eraser)**: Копирование и перенос текстуры (клонирование области) для скрытия элементов интерфейса.
+- **Текст (Text)**: Ввод произвольного текста на холсте с возможностью изменения размера шрифта и цвета.
+- **Шаг (Step)**: Автоматическая последовательность шагов.
+3. **Умное кадрирование (Crop)**:
+- Позволяет обрезать снимок экрана по любой прямоугольной области.
+- При подтверждении обрезки все ранее нарисованные элементы смещаются на соответствующий вектор, оставаясь точно на своих местах относительно обрезанного кадра.
+4. **Масштабирование и навигация (Zoom & Pan)**:
+- Масштабирование выполняется зажатием клавиши **\`Ctrl\` + колесико мыши** (фокусируется на курсоре) либо перетаскиванием **ползунка масштабирования (Slider)** в правой панели.
+- Перемещение по увеличенному холсту выполняется **зажатием средней кнопки мыши (колесика)** и перетаскиванием.
+- Кнопка **«Сбросить»** возвращает масштаб в режим «по размеру окна».
+5. **Нумерация шагов**:
+- Поддерживает 3 формата: Цифры (\`1, 2, 3...\`), Латинские заглавные (\`A, B... Z, AA...\`), Латинские строчные (\`a, b... z, aa...\`).
+- Поле «Следующий шаг» позволяет задавать стартовый номер или изменять текущий индекс.
+6. **Выбор цвета**:
+- Доступны готовые быстрые цвета.
+- Кнопка **«Выбрать цвет...»** открывает спектральную палитру (ColorPicker) для выбора любого пользовательского оттенка. Выбранный цвет сохраняется между перезапусками приложения.
 
-### Требования
-- Node.js (LTS 18+)
-- Git
+### Локализация и системный трей
 
-### Команды сборки
-\`\`\`bash
-git clone https://github.com/Almanex/Screentation.git
-cd Screentation
-npm install
-npm run dev
+* **Поддерживаемые языки**: Русский (\`ru-RU\`), Английский (\`en-US\`) и Немецкий (\`de-DE\`).
+  - Приложение автоматически определяет язык интерфейса Windows (заданный в разделе **Параметры -> Время и язык -> Язык**) и загружает соответствующий перевод.
+* **Работа с системным треем**:
+  - Нажатие на кнопку закрытия окна (\`X\`) не завершает работу программы, а сворачивает её в системный трей для продолжения фонового мониторинга буфера обмена.
+  - Чтобы восстановить окно, дважды кликните по иконке в трее или нажмите правой кнопкой мыши и выберите **Открыть Screentation**.
+  - Для полного закрытия приложения нажмите правой кнопкой мыши по иконке в трее и выберите **Выход**.
+
+### Горячие клавиши (Keyboard Shortcuts)
+| Клавиша | Действие |
+| :--- | :--- |
+| \`Ctrl + V\` | Вставить скриншот из буфера обмена вручную |
+| \`Ctrl + Z\` | Отменить последнее действие (Undo) |
+| \`Ctrl + Y\` / \`Ctrl + Shift + Z\` | Повторить отмененное действие (Redo) |
+| \`Ctrl + S\` | Сохранить активный скриншот на диск |
+| \`Ctrl + Shift + S\` | Сохранить все скриншоты (пакетное сохранение) |
+| \`Delete\` / \`Backspace\` | Удалить выделенный элемент аннотации |
+| \`Escape\` | Выйти из текущего режима / сбросить выделение |
+| \`Enter\` *(в режиме кадра)* | Применить обрезку |
+| \`Escape\` *(в режиме кадра)* | Отменить обрезку |
+| \`1\`, \`2\`, \`3\`, \`4\`, \`5\` | Быстрый выбор инструментов: Рамка, Шаг, Стрелка, Размытие, Штамп |
+
+---
+
+## Руководство разработчика (Developer Guide)
+
+### Стек технологий
+* **Платформа**: .NET 10.0, Windows 10/11
+* **UI Framework**: WinUI 3 (Windows App SDK 2.2.0)
+* **Графика**: Win2D (Microsoft.Graphics.Win2D 1.4.0) аппаратный 2D-рендеринг на базе Direct2D
+* **Системная интеграция**: Subclassing окон (Comctl32) для перехвата Win32-событий буфера обмена
+
+### Структура проекта
+\`\`\`
+Screentation/
+Assets/ # Иконки, заставки и графические ресурсы
+Properties/ # Параметры запуска (launchSettings.json)
+Models.cs # Модели данных (ScreenshotSession, AnnotationElement, etc.)
+AnnotationCanvas.cs # Интерактивный холст (обработка мыши, отрисовка, логика инструментов)
+AnnotationDrawer.cs # Рендеринг фигур и текста на холсте через Win2D
+ClipboardMonitor.cs # Фоновый Win32-мониторинг буфера обмена (WM_CLIPBOARDUPDATE)
+HistoryManager.cs # Стек отмены/повтора действий (Undo/Redo)
+SettingsManager.cs # Чтение и запись конфигурации пользователя (JSON)
+ExportManager.cs # Экспорт скриншотов в форматы PNG, JPEG, WebP
+MainPage.xaml / .cs # Основной экран интерфейса (панель инструментов, настройки)
+MainWindow.xaml / .cs # Корневое окно приложения и интеграция с треем
+Screentation.csproj # Файл конфигурации проекта
 \`\`\`
 
-## Лицензия
+### Архитектура ключевых компонентов
 
-MIT`,
+#### 1. Фоновый перехват буфера обмена (\`ClipboardMonitor.cs\`)
+Для стабильного перехвата скриншотов в свёрнутом состоянии используется Win32-функция \`AddClipboardFormatListener\`, регистрирующая окно приложения в цепочке прослушивания буфера обмена. При изменении данных окно получает системное сообщение \`WM_CLIPBOARDUPDATE\`.
+* **Защита от блокировок**: Поскольку источник снимка (например, ножницы Windows) блокирует буфер на время записи, перед чтением данных делается пауза в 100 мс и запускается цикл из 10 попыток обращения (\`OpenClipboard\`).
+* **Дедупликация**: Windows отправляет несколько обновлений подряд для разных форматов одних и тех же данных. Для предотвращения дубликатов считывается заголовок DIB-картинки, вычисляются контрольные пиксели и сверяются с предыдущим снимком. Если контент идентичен и получен в пределах 2 секунд от прошлого снимка, он отсекается как системный дубликат.
+
+#### 2. Интерактивный холст (\`AnnotationCanvas.cs\`)
+Наследуется от \`Grid\` и содержит \`CanvasControl\` (Win2D).
+* **Координатная сетка**: Все координаты аннотаций хранятся в оригинальном разрешении скриншота. При отрисовке к контексту Win2D применяется матрица трансформации (\`Matrix3x2.CreateScale(_scale) * Matrix3x2.CreateTranslation(_offsetX, _offsetY)\`), благодаря чему все фигуры масштабируются и перемещаются плавно и без потери четкости.
+* **Текстовый редактор**: При размещении текста на холст динамически проецируется стандартный контрол \`TextBox\` с включенным свойством \`Loaded\`-фокусировки и выравниванием по левому-верхнему краю холста. Потеря фокуса или клавиша \`Enter\` запекают текст в векторный \`TextElement\`.
+
+#### 3. Рендеринг фигур (\`AnnotationDrawer.cs\`)
+Статический класс, выполняющий низкоуровневую прорисовку векторных примитивов на \`CanvasDrawingSession\`. Размытие реализуется с помощью эффекта \`GaussianBlurEffect\` на базе исходного кэша текстуры \`CanvasBitmap\`.
+
+---
+
+## ️ Сборка и запуск (Build & Run)
+
+### Требования
+* ОС: Windows 10 (версия 1809 / сборка 17763) или более новая.
+* Visual Studio 2022 с установленным компонентом **Разработка приложений для платформы Windows (UWP/WinUI)** или .NET 10 SDK.
+
+### Команды сборки в CLI
+Сборка проекта:
+\`\`\`bash
+dotnet build
+\`\`\`
+
+Запуск приложения:
+\`\`\`bash
+dotnet run
+\`\`\`
+
+Публикация (полностью автономный релиз в один файл):
+\`\`\`bash
+dotnet publish -c Release -r win-x64 --self-contained true
+\`\`\`
+Результат будет сохранен в папку \`Screentation/bin/Release/net10.0-windows10.0.26100.0/win-x64/publish/\` и будет состоять из:
+- **\`Screentation.exe\`** (один исполняемый файл ~300 МБ, содержащий .NET 10.0 Runtime, Windows App SDK и все системные DLL)
+- **\`Assets/\`** (папка с иконками и логотипами)
+- **\`Screentation.pdb\`** (символы отладки, не обязательны для работы)`,
     readme_de: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
 
 # Screentation
 
-**Desktop-Tool zum Erfassen, Kommentieren und Stapelspeichern von Screenshots**
+**Screentation** ist eine native Windows-Anwendung zum schnellen Erstellen, Bearbeiten und Kommentieren von Screenshots. Geschrieben in C# unter Verwendung der modernen Schnittstelle **WinUI 3 (Windows App SDK)** und der Grafikbibliothek **Win2D** für Hardware-Rendering.
 
-Screentation ist eine leichtgewichtige Desktop-Anwendung zur Screenshot-Annotation und zum Stapel-Export, entwickelt für technische Redakteure, Entwickler und QA-Ingenieure. Die App erfasst Screenshots aus der Zwischenablage und ermöglicht das Hinzufügen von Rahmen, Pfeilen, Schrittnummern und Weichzeichnern.
+Mit der Anwendung können Sie sofort Screenshots aus der Zwischenablage aufnehmen (auch im minimierten Zustand), Pfeile, Rahmen und Text darauf anwenden, vertrauliche Daten verwischen, Bilder zuschneiden und Anweisungsschritte automatisch nummerieren (sowohl in Zahlen als auch in lateinischen Buchstaben).
 
-## Hauptfunktionen
+---
 
-- Automatischer Capture: Lädt Screenshots direkt aus der Zwischenablage oder per Drag-and-Drop.
-- Zeichenwerkzeuge (Konva.js): Rahmen, Pfeile, automatisch inkrementierende Schrittnummern und Weichzeichner.
-- Intelligenter Radierer: Kopierstempel-Werkzeug zum Entfernen vertraulicher Daten unter Wiederherstellung des Hintergrunds.
-- Stapel-Export: Speichern in PNG, JPEG oder WebP mit Qualitätskontrolle.
-- Tray-Modus: Minimiert sich im Windows-System-Tray und läuft im Hintergrund weiter.
+<p align="center">
+  <img src="screenshots/screentation_01.png" alt="Screentation Canvas" width="49%" />
+  <img src="screenshots/screentation_02.png" alt="Screentation Editor" width="49%" />
+</p>
 
-## Technologie-Stack
+---
 
-- Kern: Electron, Node.js
-- Frontend: React, TypeScript, Vite
-- Canvas-Bibliothek: Konva.js (react-konva)
-- Bildkomprimierung: sharp (für serverseitige Verarbeitung)
+## Benutzerhandbuch
 
-## Schnellstart
+### Hauptmerkmale
+1. **Automatische Aufnahme**: Wenn die Anwendung geöffnet oder einfach in der Taskleiste minimiert ist und Sie auf „PrintScreen“ klicken (oder ein Foto mit dem Windows Snipping Tool aufnehmen), wird der Screenshot automatisch zur Liste auf der linken Seite hinzugefügt.
+2. **Anmerkungstools**:
+ - **Auswählen**: Angewandte Elemente auswählen, verschieben und in der Größe ändern.
+ - **Rahmen (Rect)**: Erstellt rechteckige Bereiche (optional mit durchscheinender Füllung).
+ - **Pfeil**: Richtungspfeile erstellen.
+ - **Unschärfe**: Gaußscher Unschärfeeffekt zum Ausblenden vertraulicher Informationen.
+ - **Radiergummi**: Textur kopieren und übertragen (Klonbereich), um Oberflächenelemente auszublenden.
+ - **Text**: Geben Sie benutzerdefinierten Text auf der Leinwand ein und haben Sie die Möglichkeit, Schriftgröße und -farbe zu ändern.
+ - **Schritt**: Automatische Abfolge von Schritten.
+3. **Intelligentes Zuschneiden**:
+ - Ermöglicht das Zuschneiden des Screenshots auf einen beliebigen rechteckigen Bereich.
+ - Wenn das Zuschneiden bestätigt wird, werden alle zuvor gezeichneten Elemente auf den entsprechenden Vektor verschoben und bleiben genau an ihren Plätzen relativ zum zugeschnittenen Rahmen.
+4. **Zoom & Schwenk**:
+ - Die Skalierung erfolgt durch Halten der **\`Strg\`-Taste + Mausrad** (fokussiert auf den Cursor) oder durch Ziehen des **Skalierungsschiebereglers** im rechten Bereich.
+ - Das Bewegen auf der vergrößerten Leinwand erfolgt durch **Halten der mittleren Maustaste (Rad)** und Ziehen.
+ - Mit der Schaltfläche **Zurücksetzen** kehrt die Skala in den Modus „An Fenster anpassen“ zurück.
+5. **Nummerierung der Schritte**:
+ - Unterstützt 3 Formate: Zahlen (\`1, 2, 3...\`), lateinische Großbuchstaben (\`A, B... Z, AA...\`), lateinische Kleinbuchstaben (\`a, b... z, aa...\`).
+ - Im Feld „Nächster Schritt“ können Sie die Startnummer festlegen oder den aktuellen Index ändern.
+6. **Farbauswahl**:
+ - Fertige Schnellfarben verfügbar.
+ - Die Schaltfläche **Farbe auswählen...** öffnet die Spektralpalette (ColorPicker) zur Auswahl eines beliebigen benutzerdefinierten Farbtons. Die ausgewählte Farbe bleibt zwischen Anwendungsneustarts erhalten.
 
-### Anforderungen
-- Node.js (LTS 18+)
-- Git
+### Lokalisierung & System-Tray
 
-### Befehle
-\`\`\`bash
-git clone https://github.com/Almanex/Screentation.git
-cd Screentation
-npm install
-npm run dev
+* **Unterstützte Sprachen**: Deutsch (\`de-DE\`), Englisch (\`en-US\`) und Russisch (\`ru-RU\`).
+  - Die Anwendung erkennt automatisch die Windows-Anzeigesprache (konfiguriert unter **Einstellungen -> Zeit und Sprache -> Sprache**) und lädt die entsprechende Übersetzung.
+* **Verhalten im System-Tray**:
+  - Das Schließen des Hauptfensters (über die Schaltfläche \`X\`) beendet die Anwendung nicht. Stattdessen wird sie im System-Tray ausgeblendet, um die Hintergrundüberwachung der Zwischenablage fortzusetzen.
+  - Um das Fenster wiederherzustellen, doppelklicken Sie auf das System-Tray-Symbol oder klicken Sie mit der rechten Maustaste auf das Symbol und wählen Sie **Screentation öffnen**.
+  - Um die Anwendung vollständig zu beenden, klicken Sie mit der rechten Maustaste auf das System-Tray-Symbol und wählen Sie **Beenden**.
+
+### Tastaturkürzel
+| Schlüssel | Aktion |
+| :--- | :--- |
+| \`Strg + V\` | Screenshot manuell aus der Zwischenablage einfügen |
+| \`Strg + Z\` | Letzte Aktion rückgängig machen (Rückgängig) |
+| „Strg + Y“ / „Strg + Umschalt + Z“ | Eine rückgängig gemachte Aktion wiederherstellen (Redo) |
+| \`Strg + S\` | Aktiven Screenshot auf Festplatte speichern |
+| \`Strg + Umschalt + S\` | Alle Screenshots speichern (Stapelspeicherung) |
+| „Löschen“ / „Rücktaste“ | Ausgewähltes Anmerkungselement löschen |
+| „Flucht“ | Aktuellen Modus verlassen / Auswahl zurücksetzen |
+| \`Enter\` *(im Frame-Modus)* | Zuschneiden anwenden |
+| \`Escape\` *(im Frame-Modus)* | Zuschneiden rückgängig machen |
+| „1“, „2“, „3“, „4“, „5“ | Schnelle Auswahl an Werkzeugen: Rahmen, Schritt, Pfeil, Unschärfe, Stempel |
+
+---
+
+## Entwicklerhandbuch
+
+### Technologie-Stack
+* **Plattform**: .NET 10.0, Windows 10/11
+* **UI-Framework**: WinUI 3 (Windows App SDK 2.2.0)
+* **Grafik**: Win2D (Microsoft.Graphics.Win2D 1.4.0) Hardware-2D-Rendering basierend auf Direct2D
+* **Systemintegration**: Unterklassen von Windows (Comctl32), um Win32-Zwischenablageereignisse abzufangen
+
+### Projektstruktur
+\`\`\`
+Screentation/
+├── Assets/                    # Иконки, заставки и графические ресурсы
+├── Properties/                # Параметры запуска (launchSettings.json)
+├── Models.cs                  # Модели данных (ScreenshotSession, AnnotationElement, etc.)
+├── AnnotationCanvas.cs        # Интерактивный холст (обработка мыши, отрисовка, логика инструментов)
+├── AnnotationDrawer.cs        # Рендеринг фигур и текста на холсте через Win2D
+├── ClipboardMonitor.cs        # Фоновый Win32-мониторинг буфера обмена (WM_CLIPBOARDUPDATE)
+├── HistoryManager.cs          # Стек отмены/повтора действий (Undo/Redo)
+├── SettingsManager.cs         # Чтение и запись конфигурации пользователя (JSON)
+├── ExportManager.cs           # Экспорт скриншотов в форматы PNG, JPEG, WebP
+├── MainPage.xaml / .cs        # Основной экран интерфейса (панель инструментов, настройки)
+├── MainWindow.xaml / .cs      # Корневое окно приложения и интеграция с треем
+└── Screentation.csproj        # Файл конфигурации проекта
 \`\`\`
 
-## Lizenz
+### Schlüsselkomponentenarchitektur
 
-MIT`
+#### 1. Abfangen der Zwischenablage im Hintergrund („ClipboardMonitor.cs“)
+Um Screenshots im minimierten Zustand zuverlässig abzufangen, wird die Win32-Funktion „AddClipboardFormatListener“ verwendet, die das Anwendungsfenster in der Abhörkette der Zwischenablage registriert. Wenn sich Daten ändern, empfängt das Fenster die Systemmeldung „WM_CLIPBOARDUPDATE“.
+* **Sperrschutz**: Da die Snapshot-Quelle (z. B. Windows-Zwischenablage) den Puffer während des Schreibens sperrt, pausiert sie vor dem Lesen der Daten 100 ms und startet einen Zyklus von 10 Zugriffsversuchen („OpenClipboard“).
+* **Deduplizierung**: Windows sendet mehrere Updates hintereinander für verschiedene Formate derselben Daten. Um Duplikate zu vermeiden, wird der DIB-Bildkopf gelesen, Referenzpixel berechnet und mit dem vorherigen Bild verglichen. Wenn der Inhalt identisch ist und innerhalb von 2 Sekunden nach dem vorherigen Schnappschuss empfangen wird, wird er als Systemduplikat abgeschnitten.
+
+#### 2. Interaktive Leinwand (\`AnnotationCanvas.cs\`)
+Erbt von „Grid“ und enthält „CanvasControl“ (Win2D). 
+* **Raster**: Alle Anmerkungskoordinaten werden in der ursprünglichen Screenshot-Auflösung gespeichert. Beim Rendern wird eine Transformationsmatrix auf den Win2D-Kontext angewendet („Matrix3x2.CreateScale(_scale) * Matrix3x2.CreateTranslation(_offsetX, _offsetY)“), wodurch alle Formen reibungslos und ohne Verlust der Klarheit skaliert und verschoben werden.
+* **Texteditor**: Beim Platzieren von Text auf der Leinwand wird das Standardsteuerelement „TextBox“ dynamisch mit aktivierter Fokuseigenschaft „Geladen“ projiziert und am oberen linken Rand der Leinwand ausgerichtet. Wenn Sie den Fokus verlieren oder die Eingabetaste drücken, wird der Text in einen Vektor „TextElement“ umgewandelt.
+
+#### 3. Formen rendern (\`AnnotationDrawer.cs\`)
+Statische Klasse, die das Zeichnen von Vektorprimitiven auf niedriger Ebene in der „CanvasDrawingSession“ durchführt. Die Unschärfe wird mithilfe des Effekts „GaussianBlurEffect“ implementiert, der auf dem ursprünglichen Textur-Cache „CanvasBitmap“ basiert.
+
+---
+
+##️ Bauen und ausführen
+
+### Anforderungen
+* Betriebssystem: Windows 10 (Version 1809 / Build 17763) oder neuer.
+* Visual Studio 2022 mit installierter **Anwendungsentwicklung für die Windows-Plattform (UWP/WinUI)** oder .NET 10 SDK.
+
+###Befehle in der CLI erstellen
+Erstellen Sie das Projekt:
+\`\`\`bash
+dotnet build
+\`\`\`
+
+Starten der Anwendung:
+\`\`\`bash
+dotnet run
+\`\`\`
+
+Veröffentlichung (vollständig autonome Single-File-Version):
+\`\`\`bash
+dotnet publish -c Release -r win-x64 --self-contained true
+\`\`\`
+Das Ergebnis wird im Verzeichnis \`Screentation/bin/Release/net10.0-windows10.0.26100.0/win-x64/publish/\` gespeichert und besteht aus:
+- **\`Screentation.exe\`** (eine einzelne ~300 MB große ausführbare Datei, die die .NET 10.0-Laufzeitumgebung, das Windows App SDK und alle abhängigen DLLs enthält)
+- **\`Assets/\`** (Ordner mit Symbolen und Logos)
+- **\`Screentation.pdb\`** (Debugschnittstellensymbole, optional für den Vertrieb)`
   },
   "shortcutdock": {
     title: "ShortcutDock",
