@@ -627,31 +627,39 @@ Dieses Handbuch basiert auf dem Artikel:
     stars: "1",
     license: "MIT",
     github: "https://github.com/Almanex/Portable-App-Sync",
-    image: "images/projects/portable-app-sync.jpg",
-    readme: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+    image: "/images/projects/portable-app-sync.png",
+    readme: `[ English ](README.md) • [ Русский ](docs/README_RU.md) • [ Deutsch ](docs/README_DE.md) | [ Quick Start ](docs/QUICKSTART.md) • [ User Guide ](docs/GUIDE.md)
 
 # PAS (Portable App Sync)
 
 **A portable utility to automate backup and restore of installed Windows applications**
 
-- Automatic logging of all operations
-- Portable — no installation required, single executable file
-- Modern Fluent UI — styled with WPF-UI 4.3.0, supporting Light/Dark themes and system theme matching
-- Smart filtering — by default indexes only user applications (with option to show hidden system components)
-- Detailed info — background loading of official descriptions and human-readable names
+- **Automatic logging** of all operations
+- **Portable** no installation required, single \`.exe\` file
+- **Modern Fluent UI** styled with WPF-UI 4.3.0, supporting Light/Dark themes and system theme matching
+- **Smart filtering** by default indexes only user applications (with option to show hidden system components)
+- **Detailed info** background loading of official descriptions and human-readable names. If the app name is not yet loaded, the package ID is displayed instead (they are often identical).
+
+**[Russian version of README / Russian version](docs/README_RU.md)**
+
+<p align="center">
+  <img src="screenshots/cover.png" alt="Portable App Sync" width="95%" />
+</p>
+
+---
 
 ## Technologies
 
-- .NET 10.0 — modern development platform
-- WPF & WPF-UI (v4.3.0) — Fluent design system and modern controls
-- Winget — Windows Package Manager for package management
-- MVVM — architectural pattern for separation of logic and presentation
+- **.NET 10.0** modern development platform
+- **WPF & WPF-UI (v4.3.0)** Fluent design system and modern controls
+- **Winget** Windows Package Manager for package management
+- **MVVM** architectural pattern for separation of logic and presentation
 
 ## System Requirements
 
-- OS: Windows 10 (version 1809+) or Windows 11
-- Winget: Must be installed (usually pre-installed in Windows 11)
-- .NET Runtime: Not required (self-contained build)
+- **OS**: Windows 10 (version 1809+) or Windows 11
+- **Winget**: Must be installed (usually pre-installed in Windows 11)
+- **.NET Runtime**: Not required (self-contained build)
 
 ## Usage
 
@@ -660,21 +668,21 @@ Dieses Handbuch basiert auf dem Artikel:
 1. Run \`PAS.exe\`
 2. Wait for system scanning to complete (only user desktop applications are indexed)
 3. Select the applications you want to save
-   - The filter [All Visible / Available Offline / Online Fallback / Excluded by Default] helps quickly check what will go into the offline package, fallback script, or be excluded
+   - The filter **All Visible / Available Offline / Online Fallback / Excluded by Default** helps quickly check what will go into the offline package, fallback script, or be excluded
 4. Select export mode:
-   - Online Script — creates a \`.bat\` or \`.ps1\` file for auto-installation via winget (recommended)
-   - Offline Package — creates a hybrid set: downloads available distributions and adds an online fallback script for unsupported applications if necessary
+   - **Online Script** creates a \`.bat\` or \`.ps1\` file for auto-installation via winget (recommended)
+   - **Offline Package** creates a hybrid set: downloads available distributions and adds an online fallback script for unsupported applications if necessary
 5. Click the export button and specify the save location
-6. After completion, use the summary of the last export and the [Open Export Folder] button
+6. After completion, use the summary of the last export and the **Open Export Folder** button
 
 ### Restoring Applications
 
-#### Online Script Mode
+#### "Online Script" Mode
 1. Copy the created \`RestoreApps.bat\` or \`RestoreApps.ps1\` file to the new system
 2. Run the file as administrator
 3. Wait for all applications to be installed automatically
 
-#### Offline Package Mode
+#### "Offline Package" Mode
 1. Copy the folder with downloaded distributions to the new system
 2. Run \`install_all.bat\` as administrator
 3. If \`RestoreOnlineFallback.bat\` was created, run it after offline installation on a machine with internet access
@@ -691,8 +699,8 @@ Dieses Handbuch basiert auf dem Artikel:
 
 \`\`\`powershell
 # Clone the repository
-git clone https://github.com/Almanex/Almanex-PAS_Portable-App-Sync.git
-cd PAS
+git clone https://github.com/Almanex/Portable-App-Sync.git
+cd Portable-App-Sync
 
 # Build the project
 dotnet build
@@ -704,11 +712,11 @@ dotnet run
 dotnet publish -c Release
 \`\`\`
 
-The final executable file will be located in \`dist\\\\PAS.exe\`
+The final \`.exe\` file will be located in \`dist\\PAS.exe\`
 
 ## Project Structure
 
-\`\`\`text
+\`\`\`
 PAS/
 ├── Models/              # Data models
 │   ├── InstalledApp.cs
@@ -723,7 +731,7 @@ PAS/
 │   ├── LoggingService.cs
 │   ├── CacheService.cs
 │   └── OfflineCompatibilityService.cs
-├── ViewModels/          # ViewModels
+├── ViewModels/          # MVVM ViewModels
 │   ├── MainViewModel.cs
 │   └── RelayCommand.cs
 ├── Views/               # UI views
@@ -734,7 +742,8 @@ PAS/
 ├── Converters/          # XAML converters
 │   └── ValueConverters.cs
 ├── App.xaml             # Entry point
-│   └── App.xaml.cs
+├── App.xaml.cs
+├── AssemblyInfo.cs
 └── icon.ico             # Application icon
 \`\`\`
 
@@ -743,74 +752,143 @@ PAS/
 ### Application Filtering
 
 By default, the application hides:
-- Microsoft Store Apps (MSIX packages)
-- System Components (Redistributables, Runtimes, drivers)
-- Technical Dependencies (WindowsAppRuntime, etc.)
+- **Microsoft Store Apps** (MSIX packages: Calculator, Photos, Xbox, etc.)
+- **System Components** (Visual C++ Redistributable, .NET Runtime, drivers)
+- **Technical Dependencies** (WindowsAppRuntime, VCLibs, etc.)
 
-Only user desktop applications installed via \`.exe\` or \`.msi\` installers are displayed in the list.
-Check "Show system and hidden applications" to disable this filter.
+Only **user desktop applications** installed via \`.exe\` or \`.msi\` installers are displayed in the list.
+**If you need hidden packages:** you can instantly disable this filter in the interface by checking *"Show system and hidden applications"*.
+
+Service components and updater packages, such as \`Microsoft Edge Update\`, are excluded from export by default. They don't disappear completely: enable system/hidden apps and select the **Excluded by Default** filter to see what exactly was excluded.
+
+### Winget Check
+
+In older Windows 10 builds, Winget might be missing. Scripts automatically check for its presence and provide instructions for installing App Installer from the Microsoft Store.
+
+### Offline Mode Limitations
+
+**Not all applications support downloading distributions** via \`winget download\`. Examples:
+- **Visual Studio Code** (\`Microsoft.VisualStudioCode\`)
+- **Git** (\`Git.Git\`)
+- **Android Studio** (\`Google.AndroidStudio\`)
+- And other applications where manufacturers restricted direct downloading
+
+For such applications, PAS now uses a **hybrid offline mode**:
+- Supported packages are downloaded locally to the selected folder
+- An \`RestoreOnlineFallback.bat\` is automatically created for unsupported packages
+- As a result, export doesn't fail due to these apps: they are marked as \`Skipped\` and moved to the fallback script
+
+Recommended restore order:
+1. Run \`install_all.bat\`
+2. Then, if it was created, run \`RestoreOnlineFallback.bat\` on a machine with internet
+
+**Recommendation**: Use the "Online Script" mode if you want a single universal scenario without separating into offline and fallback.
 
 ### Security and Reliability
 
-- Injection Protection: All interaction with Winget CLI passes through strict package ID validation.
-- Process Stability: Hard timeouts are implemented for all external calls.
-- Data Integrity: Caching system is protected from corrupted data.
-- Log Rotation: Automatic log size management prevents uncontrolled disk usage.
-- DI Architecture: Dependency Injection ensures service isolation.
+The project is designed with a focus on industrial-grade stability and security:
+
+- **[Security] Injection Protection**: All interaction with Winget CLI passes through strict package ID validation (\`SafeIdPattern\`). This eliminates the possibility of executing arbitrary commands through app name manipulation.
+- **[Stability] Process Stability**: Hard timeouts (120s) are implemented for all external calls. If a Winget process hangs, the application correctly terminates its process tree, leaving no "zombie" processes.
+- **[Reliability] Data Integrity**: The caching system is protected from corrupted data and memory overflow (50 MB limit per file). JSON structure is validated before reading.
+- **[Einschränkung] Log Rotation**: Automatic log file size management (5 MB limit) prevents uncontrolled disk data growth.
+- **[Architecture] DI Architecture (Dependency Injection)**: Use of a dependency container ensures component isolation, simplifies testing, and eliminates service initialization errors.
+- **[Threads] Thread Safety**: All interface updates and background tasks are synchronized, eliminating crashes during parallel description loading or app installation.
+
+All operations are transparent and logged in \`PAS.log\` in real-time.
+
+## Logging
+
+All operations are recorded in the \`PAS.log\` file in the \`%LocalAppData%\\PAS\\\` folder. The log contains:
+- Information messages on progress
+- Warnings about issues
+- Errors with full stack traces
+- Fatal exceptions (if the application crashed)
+
+## Contributing
+
+Any improvements are welcome! Please:
+1. Fork the project
+2. Create a branch for your changes
+3. Submit a Pull Request
 
 ## License
 
-This project is distributed under the MIT License.`,
-    readme_ru: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+This project is distributed under the MIT License. See the \`LICENSE\` file for details.
+
+## Acknowledgments
+
+- Microsoft for [Winget](https://github.com/microsoft/winget-cli)
+- .NET Community for excellent development tools
+
+---
+
+**Note**: This application uses the official Windows Package Manager (Winget) and contains no malicious code. All operations are transparent and can be verified in the source code.`,
+    readme_ru: `[ English ](../README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md) | [ Быстрый старт ](QUICKSTART_RU.md) • [ Руководство пользователя ](GUIDE_RU.md)
 
 # PAS (Portable App Sync)
 
 **Портативная утилита для автоматизации резервного копирования и восстановления установленных приложений Windows**
 
-- Автоматическое логирование всех операций
-- Портативность — не требует установки, один исполняемый файл
-- Современный Fluent UI — на базе WPF-UI 4.3.0 с поддержкой темной/светлой тем
-- Умная фильтрация — скрывает системные компоненты по умолчанию
-- Детальная информация — фоновая загрузка описаний пакетов
+- **Автоматическое логирование** всех операций.
+- **Портативность:** не требует установки, один исполняемый файл \`.exe\`.
+- **Современный Fluent UI:** стилизован с помощью WPF-UI 4.3.0, поддерживает светлую/темную темы и автоподстройку под системную тему.
+- **Умная фильтрация:** по умолчанию индексируются только пользовательские приложения (с возможностью отображения скрытых и системных компонентов).
+- **Подробная информация:** фоновое скачивание официальных описаний и понятных человеку имен программ. Если название приложения еще не загружено, вместо него отображается Package ID (они часто совпадают).
+
+---
+
+<p align="center">
+  <img src="../screenshots/cover.png" alt="Portable App Sync" width="95%" />
+</p>
+
+---
 
 ## Технологии
 
-- .NET 10.0 — современная платформа разработки
-- WPF & WPF-UI (v4.3.0) — система дизайна Fluent и современные элементы управления
-- Winget — диспетчер пакетов Windows
-- MVVM — архитектурный паттерн разделения логики и представления
+- **.NET 10.0:** современная платформа разработки.
+- **WPF и WPF-UI (v4.3.0):** система Fluent-дизайна и современные элементы управления.
+- **Winget:** Windows Package Manager для управления пакетами.
+- **MVVM:** архитектурный паттерн для разделения логики и представления.
 
 ## Системные требования
 
-- ОС: Windows 10 (версия 1809+) или Windows 11
-- Winget: Должен быть установлен в системе
-- .NET Runtime: Не требуется (автономная сборка)
+- **ОС:** Windows 10 (версия 1809+) или Windows 11.
+- **Winget:** должен быть установлен (по умолчанию предустановлен в Windows 11).
+- **.NET Runtime:** не требуется (сборка self-contained).
 
 ## Использование
 
 ### Создание резервной копии
 
-1. Запустите \`PAS.exe\`
-2. Дождитесь завершения сканирования системы
-3. Выберите приложения для сохранения
+1. Запустите \`PAS.exe\`.
+2. Дождитесь завершения сканирования системы (индексируются только пользовательские настольные приложения).
+3. Выберите приложения, которые вы хотите сохранить.
+   - Фильтр **Все видимые / Доступны оффлайн / Онлайн-резерв / Исключены по умолчанию** помогает быстро проверить, какие приложения попадут в оффлайн-пакет, какие в онлайн-скрипт восстановления, а какие будут пропущены.
 4. Выберите режим экспорта:
-   - Онлайн-скрипт — создает файл \`.bat\` или \`.ps1\` для автоустановки через winget
-   - Офлайн-пакет — скачивает дистрибутивы и создает локальный скрипт установки
-5. Нажмите кнопку экспорта и укажите путь сохранения
+   - **Онлайн-скрипт:** создает файл \`.bat\` или \`.ps1\` для автоматической установки через winget (рекомендуется).
+   - **Оффлайн-пакет:** создает гибридный набор — скачивает доступные дистрибутивы программ локально и при необходимости добавляет онлайн-скрипт резервного восстановления для неподдерживаемых приложений.
+5. Нажмите кнопку экспорта и укажите место для сохранения.
+6. После завершения ознакомьтесь со сводкой экспорта и воспользуйтесь кнопкой **"Открыть папку экспорта"**.
 
 ### Восстановление приложений
 
-#### Режим онлайн-скрипта
-1. Скопируйте файл \`RestoreApps.bat\` на новую систему
-2. Запустите файл от имени администратора
+#### Режим "Онлайн-скрипт"
+1. Скопируйте созданный файл \`RestoreApps.bat\` или \`RestoreApps.ps1\` на новую систему.
+2. Запустите файл от имени администратора.
+3. Дождитесь автоматической установки всех приложений.
 
-#### Режим офлайн-пакета
-1. Скопируйте папку с дистрибутивами на новую систему
-2. Запустите \`install_all.bat\` от имени администратора
+#### Режим "Оффлайн-пакет"
+1. Скопируйте папку с загруженными дистрибутивами на новую систему.
+2. Запустите \`install_all.bat\` от имени администратора.
+3. Если был создан файл \`RestoreOnlineFallback.bat\`, запустите его после завершения оффлайн-установки на компьютере с доступом в интернет.
+4. Приложения, доступные для оффлайн-установки, будут установлены из локальных файлов, а неподдерживаемые оффлайн-загрузку — доустановлены через \`winget install\`.
+
+---
 
 ## Сборка из исходников
 
-### Требования к разработке
+### Требования для разработки
 
 - .NET 10 SDK
 - Visual Studio 2022 или JetBrains Rider (опционально)
@@ -818,73 +896,198 @@ This project is distributed under the MIT License.`,
 ### Команды сборки
 
 \`\`\`powershell
-# Клонировать репозиторий
-git clone https://github.com/Almanex/Almanex-PAS_Portable-App-Sync.git
-cd PAS
+# Клонирование репозитория
+git clone https://github.com/Almanex/Portable-App-Sync.git
+cd Portable-App-Sync
 
-# Собрать проект
+# Сборка проекта
 dotnet build
 
-# Запустить приложение
+# Запуск приложения
 dotnet run
 
-# Опубликовать как один файл (Portable)
+# Публикация портативной версии (один файл .exe)
 dotnet publish -c Release
 \`\`\`
 
+Готовый файл \`.exe\` будет находиться в папке \`dist\\PAS.exe\`
+
+## Структура проекта
+
+\`\`\`
+PAS/
+├── Models/              # Модели данных
+│   ├── InstalledApp.cs
+│   ├── ExportMode.cs
+│   ├── ExportResult.cs
+│   └── WingetExportModels.cs
+├── Services/            # Бизнес-логика
+│   ├── WingetService.cs
+│   ├── SystemScanService.cs
+│   ├── ScriptGeneratorService.cs
+│   ├── DownloadService.cs
+│   ├── LoggingService.cs
+│   ├── CacheService.cs
+│   └── OfflineCompatibilityService.cs
+├── ViewModels/          # Вьюмодели MVVM
+│   ├── MainViewModel.cs
+│   └── RelayCommand.cs
+├── Views/               # Представления UI (WPF)
+│   ├── MainWindow.xaml
+│   ├── MainWindow.xaml.cs
+│   ├── HelpWindow.xaml
+│   └── HelpWindow.xaml.cs
+├── Converters/          # XAML конвертеры
+│   └── ValueConverters.cs
+├── App.xaml             # Точка входа приложения
+├── App.xaml.cs
+├── AssemblyInfo.cs
+└── icon.ico             # Иконка приложения
+\`\`\`
+
+---
+
+## Важные примечания
+
+### Фильтрация приложений
+
+По умолчанию приложение скрывает из списка:
+- **Microsoft Store Apps** (пакеты MSIX: Калькулятор, Фотографии, Xbox и т.д.).
+- **Системные компоненты** (Visual C++ Redistributable, .NET Runtime, драйверы).
+- **Технические зависимости** (WindowsAppRuntime, VCLibs и т.д.).
+
+В списке отображаются только **пользовательские настольные приложения**, установленные через \`.exe\` или \`.msi\` инсталляторы.
+**Если вам нужны скрытые пакеты:** вы можете мгновенно отключить этот фильтр в интерфейсе, установив флажок *"Показывать системные и скрытые приложения"*.
+
+Служебные компоненты и пакеты обновлений, такие как \`Microsoft Edge Update\`, исключаются из экспорта по умолчанию. Они не исчезают бесследно: включите отображение системных/скрытых приложений и выберите фильтр **Исключены по умолчанию**, чтобы увидеть, что именно было отсеяно.
+
+### Проверка Winget
+
+В устаревших сборках Windows 10 утилита Winget может отсутствовать. Создаваемые скрипты автоматически проверяют ее наличие и предлагают инструкции по установке App Installer из Microsoft Store.
+
+### Ограничения автономного (оффлайн) режима
+
+**Не все приложения поддерживают скачивание дистрибутивов** через \`winget download\`. Примеры:
+- **Visual Studio Code** (\`Microsoft.VisualStudioCode\`)
+- **Git** (\`Git.Git\`)
+- **Android Studio** (\`Google.AndroidStudio\`)
+- И другие программы, производители которых ограничили возможность прямой загрузки.
+
+Для таких приложений PAS использует **гибридный оффлайн-режим**:
+- Поддерживаемые пакеты скачиваются локально в выбранную папку.
+- Для неподдерживаемых автоматически создается скрипт \`RestoreOnlineFallback.bat\`.
+- В результате экспорт не прерывается ошибками: такие программы помечаются как \`Пропущено (Skipped)\` и переносятся в файл онлайн-резерва.
+
+Рекомендуемый порядок восстановления:
+1. Запустите \`install_all.bat\`.
+2. После этого (если файл был создан) запустите \`RestoreOnlineFallback.bat\` на машине с интернетом.
+
+**Рекомендация:** Используйте режим "Онлайн-скрипт", если вам нужен один универсальный сценарий без разделения на оффлайн и резерв.
+
+### Безопасность и надежность
+
+Проект разработан с фокусом на промышленную стабильность и безопасность:
+
+- **[Безопасность] Защита от инъекций:** все взаимодействия с Winget CLI проходят через строгую валидацию Package ID (\`SafeIdPattern\`). Это исключает возможность выполнения произвольных команд через манипуляцию именами программ.
+- **[Стабильность] Процесс стабильности:** для всех внешних вызовов реализованы жесткие таймауты (120 секунд). Если процесс Winget зависнет, приложение корректно завершит всё дерево процессов, не оставляя «зомби».
+- **[Надежность] Целостность данных:** кэш-система защищена от поврежденных файлов и переполнения памяти (лимит 50 МБ на файл). Структура JSON проверяется перед чтением.
+- **[Ограничения] Ротация логов:** автоматическое ограничение размера лог-файла (до 5 МБ) предотвращает неконтролируемый рост дискового пространства.
+- **[Архитектура] DI-Архитектура (Dependency Injection):** использование контейнера зависимостей изолирует компоненты, упрощает тестирование и исключает ошибки инициализации сервисов.
+- **[Потоки] Потокобезопасность:** все обновления интерфейса и фоновые задачи синхронизированы, исключая сбои при параллельной загрузке описаний или установке программ.
+
+Все операции прозрачны и фиксируются в \`PAS.log\` в режиме реального времени.
+
+## Логирование
+
+Все операции записываются в файл \`PAS.log\` в папке \`%LocalAppData%\\PAS\\\`. Лог содержит:
+- Информационные сообщения о прогрессе выполнения задач.
+- Предупреждения о потенциальных проблемах.
+- Ошибки с полными трассировками стека (stack traces).
+- Фатальные исключения (в случае сбоя приложения).
+
+## Участие в разработке
+
+Любые улучшения приветствуются! Пожалуйста:
+1. Создайте форк проекта.
+2. Создайте ветку для ваших изменений.
+3. Отправьте Pull Request.
+
 ## Лицензия
 
-Этот проект распространяется под лицензией MIT.`,
-    readme_de: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+Этот проект распространяется под лицензией MIT. Подробности см. в файле \`LICENSE\`.
+
+## Благодарности
+
+- Microsoft за [Winget](https://github.com/microsoft/winget-cli).
+- Сообществу .NET за прекрасные инструменты разработки.
+
+---
+
+**Примечание:** Данное приложение использует официальный менеджер пакетов Windows (Winget) и не содержит вредоносного кода. Все выполняемые операции прозрачны и могут быть проверены в исходном коде.
+`,
+    readme_de: `[ English ](../README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md) | [ Quick Start ](QUICKSTART.md) • [ User Guide ](GUIDE.md)
 
 # PAS (Portable App Sync)
 
-**Ein portables Dienstprogramm zur Automatisierung der Sicherung und Wiederherstellung installierter Windows-Anwendungen**
+**Ein tragbares Dienstprogramm zur Automatisierung der Sicherung und Wiederherstellung installierter Windows-Anwendungen**
 
-- Automatische Protokollierung aller Vorgänge
-- Portabel — keine Installation erforderlich, einzelne ausführbare Datei
-- Modernes Fluent UI — basierend auf WPF-UI 4.3.0, unterstützt Hell/Dunkel-Designs
-- Intelligente Filterung — filtert standardmäßig Systemkomponenten heraus
-- Detaillierte Informationen — Hintergrundladen von Paketbeschreibungen
+- **Automatische Protokollierung** aller Vorgänge
+- **Portabel**, keine Installation erforderlich, einzelne „.exe“-Datei
+- **Moderne Fluent-Benutzeroberfläche** im Stil von WPF-UI 4.3.0, unterstützt Hell/Dunkel-Themen und System-Theme-Abgleich
+- **Intelligente Filterung** indiziert standardmäßig nur Benutzeranwendungen (mit der Option, versteckte Systemkomponenten anzuzeigen)
+- **Detaillierte Informationen** Laden offizieller Beschreibungen und für Menschen lesbarer Namen im Hintergrund. Wenn der App-Name noch nicht geladen ist, wird stattdessen die Paket-ID angezeigt (diese sind oft identisch).
+
+**[Russische Version von README / Russische Version](README_RU.md)**
+
+<p align="center">
+  <img src="../screenshots/cover.png" alt="Portable App Sync" width="95%" />
+</p>
+
+---
 
 ## Technologien
 
-- .NET 10.0 — moderne Entwicklungsplattform
-- WPF & WPF-UI (v4.3.0) — Fluent-Designsystem und moderne Steuerelemente
-- Winget — Windows Package Manager
-- MVVM — Architekturmuster zur Trennung von Logik und Präsentation
+- **.NET 10.0** moderne Entwicklungsplattform
+- **WPF & WPF-UI (v4.3.0)** Fließendes Designsystem und moderne Steuerung
+- **Winget** Windows Package Manager für die Paketverwaltung
+- **MVVM**-Architekturmuster zur Trennung von Logik und Präsentation
 
 ## Systemanforderungen
 
-- Betriebssystem: Windows 10 (Version 1809+) oder Windows 11
-- Winget: Muss installiert sein
-- .NET-Laufzeitumgebung: Nicht erforderlich (Self-Contained Build)
+- **Betriebssystem**: Windows 10 (Version 1809+) oder Windows 11
+- **Winget**: Muss installiert sein (normalerweise vorinstalliert in Windows 11)
+- **.NET Runtime**: Nicht erforderlich (eigenständiger Build)
 
 ## Verwendung
 
-### Sicherung erstellen
+### Erstellen eines Backups
 
-1. Führen Sie \`PAS.exe\` aus
-2. Warten Sie, bis der Systemscan abgeschlossen ist
+1. Führen Sie „PAS.exe“ aus
+2. Warten Sie, bis der Systemscan abgeschlossen ist (nur Benutzer-Desktopanwendungen werden indiziert)
 3. Wählen Sie die Anwendungen aus, die Sie speichern möchten
-4. Wählen Sie den Exportmodus:
-   - Online-Skript — erstellt eine \`.bat\`- oder \`.ps1\`-Datei zur automatischen Installation via winget
-   - Offline-Paket — lädt Setups herunter und erstellt ein lokales Installationsskript
-5. Klicken Sie auf die Export-Schaltfläche und wählen Sie den Speicherort
+   - Der Filter **Alle sichtbar / Offline verfügbar / Online-Fallback / Standardmäßig ausgeschlossen** hilft dabei, schnell zu überprüfen, was in das Offline-Paket oder Fallback-Skript aufgenommen oder ausgeschlossen wird
+4. Exportmodus auswählen:
+   - **Online Script** erstellt eine „.bat“- oder „.ps1“-Datei für die automatische Installation über Winget (empfohlen)
+   - **Offline Package** erstellt einen Hybridsatz: lädt verfügbare Distributionen herunter und fügt bei Bedarf ein Online-Fallback-Skript für nicht unterstützte Anwendungen hinzu
+5. Klicken Sie auf die Schaltfläche „Exportieren“ und geben Sie den Speicherort an
+6. Verwenden Sie nach Abschluss die Zusammenfassung des letzten Exports und die Schaltfläche **Exportordner öffnen**
 
 ### Anwendungen wiederherstellen
 
-#### Online-Skript-Modus
-1. Kopieren Sie die Datei \`RestoreApps.bat\` auf das neue System
+#### Modus „Online-Skript“
+1. Kopieren Sie die erstellte Datei „RestoreApps.bat“ oder „RestoreApps.ps1“ auf das neue System
 2. Führen Sie die Datei als Administrator aus
+3. Warten Sie, bis alle Anwendungen automatisch installiert werden
 
-#### Offline-Paket-Modus
-1. Kopieren Sie den Ordner mit den Setups auf das neue System
-2. Führen Sie \`install_all.bat\` als Administrator aus
+#### Modus „Offline-Paket“
+1. Kopieren Sie den Ordner mit den heruntergeladenen Distributionen auf das neue System
+2. Führen Sie „install_all.bat“ als Administrator aus
+3. Wenn „RestoreOnlineFallback.bat“ erstellt wurde, führen Sie es nach der Offline-Installation auf einem Computer mit Internetzugang aus
+4. Offline verfügbare Anwendungen werden aus lokalen Dateien installiert, während nicht unterstützte Anwendungen über „winget install“ bereitgestellt werden
 
-## Build aus Quellcode
+## Aufbau aus der Quelle
 
-### Anforderungen
+### Entwicklungsanforderungen
 
 - .NET 10 SDK
 - Visual Studio 2022 oder JetBrains Rider (optional)
@@ -892,23 +1095,415 @@ dotnet publish -c Release
 ### Build-Befehle
 
 \`\`\`powershell
-# Repository klonen
-git clone https://github.com/Almanex/Almanex-PAS_Portable-App-Sync.git
-cd PAS
+# Clone the repository
+git clone https://github.com/Almanex/Portable-App-Sync.git
+cd Portable-App-Sync
 
-# Projekt erstellen
+# Build the project
 dotnet build
 
-# Anwendung ausführen
+# Run the application
 dotnet run
 
-# Als einzelne Datei veröffentlichen (Portable)
+# Create a portable executable (single file)
 dotnet publish -c Release
 \`\`\`
 
+Die endgültige „.exe“-Datei befindet sich unter „dist\\PAS.exe“.
+
+## Projektstruktur
+
+\`\`\`
+PAS/
+├── Models/              # Data models
+│   ├── InstalledApp.cs
+│   ├── ExportMode.cs
+│   ├── ExportResult.cs
+│   └── WingetExportModels.cs
+├── Services/            # Business logic
+│   ├── WingetService.cs
+│   ├── SystemScanService.cs
+│   ├── ScriptGeneratorService.cs
+│   ├── DownloadService.cs
+│   ├── LoggingService.cs
+│   ├── CacheService.cs
+│   └── OfflineCompatibilityService.cs
+├── ViewModels/          # ViewModels MVVM
+│   ├── MainViewModel.cs
+│   └── RelayCommand.cs
+├── Views/               # UI-Ansichten (WPF)
+│   ├── MainWindow.xaml
+│   ├── MainWindow.xaml.cs
+│   ├── HelpWindow.xaml
+│   └── HelpWindow.xaml.cs
+├── Converters/          # XAML-Konverter
+│   └── ValueConverters.cs
+├── App.xaml             # Einstiegspunkt
+├── App.xaml.cs
+├── AssemblyInfo.cs
+└── icon.ico             # Anwendungs-Icon
+\`\`\`
+
+## Wichtige Hinweise
+
+### Anwendungsfilterung
+
+Standardmäßig verbirgt die Anwendung Folgendes:
+- **Microsoft Store Apps** (MSIX-Pakete: Rechner, Fotos, Xbox usw.)
+- **Systemkomponenten** (Visual C++ Redistributable, .NET Runtime, Treiber)
+- **Technische Abhängigkeiten** (WindowsAppRuntime, VCLibs usw.)
+
+In der Liste werden nur **Benutzer-Desktopanwendungen** angezeigt, die über „.exe“- oder „.msi“-Installationsprogramme installiert wurden.
+**Wenn Sie versteckte Pakete benötigen:** Sie können diesen Filter in der Benutzeroberfläche sofort deaktivieren, indem Sie *"System und versteckte Anwendungen anzeigen"* aktivieren.
+
+Dienstkomponenten und Updater-Pakete wie „Microsoft Edge Update“ sind standardmäßig vom Export ausgeschlossen. Sie verschwinden nicht vollständig: Aktivieren Sie System-/versteckte Apps und wählen Sie den Filter **Standardmäßig ausgeschlossen**, um zu sehen, was genau ausgeschlossen wurde.
+
+### Winget-Check
+
+In älteren Windows 10-Builds fehlt Winget möglicherweise. Skripte prüfen automatisch, ob es vorhanden ist, und geben Anweisungen für die Installation des App Installers aus dem Microsoft Store.
+
+### Einschränkungen im Offline-Modus
+
+**Nicht alle Anwendungen unterstützen das Herunterladen von Distributionen** über „winget download“. Beispiele:
+- **Visual Studio Code** (\`Microsoft.VisualStudioCode\`)
+- **Git** (\`Git.Git\`)
+- **Android Studio** (\`Google.AndroidStudio\`)
+- Und andere Anwendungen, bei denen die Hersteller das direkte Herunterladen eingeschränkt haben
+
+Für solche Anwendungen verwendet PAS jetzt einen **hybriden Offline-Modus**:
+- Unterstützte Pakete werden lokal in den ausgewählten Ordner heruntergeladen
+- Für nicht unterstützte Pakete wird automatisch eine „RestoreOnlineFallback.bat“ erstellt
+- Dadurch schlägt der Export aufgrund dieser Apps nicht fehl: Sie werden als „Übersprungen“ markiert und in das Fallback-Skript verschoben
+
+Empfohlene Wiederherstellungsreihenfolge:
+1. Führen Sie „install_all.bat“ aus
+2. Wenn es dann erstellt wurde, führen Sie „RestoreOnlineFallback.bat“ auf einem Computer mit Internet aus
+
+**Empfehlung**: Verwenden Sie den Modus „Online-Skript“, wenn Sie ein einziges universelles Szenario ohne Trennung in Offline und Fallback wünschen.
+
+### Sicherheit und Zuverlässigkeit
+
+Das Projekt ist mit dem Schwerpunkt auf Stabilität und Sicherheit auf Industrieniveau konzipiert:
+
+- **[Sicherheit] Injektionsschutz**: Alle Interaktionen mit der Winget-CLI durchlaufen eine strenge Paket-ID-Validierung („SafeIdPattern“). Dadurch wird die Möglichkeit der Ausführung beliebiger Befehle durch Manipulation des App-Namens ausgeschlossen.
+- **[Stabilität] Prozessstabilität**: Für alle externen Aufrufe sind harte Timeouts (120s) implemetiert. Wenn ein Winget-Prozess hängt, beendet die Anwendung korrekt ihren Prozessbaum und hinterlässt keine „Zombie“-Prozesse.
+- **[Zuverlässigkeit] Datenintegrität**: Das Caching-System ist vor beschädigten Daten und Speicherüberlauf geschützt (50 MB-Limit pro Datei). Die JSON-Struktur wird vor dem Lesen validiert.
+- **[Einschränkung] Protokollrotation**: Die automatische Verwaltung der Protokolldateigröße (5 MB-Grenze) verhindert ein unkontrolliertes Datenwachstum auf der Festplatte.
+- **[Architektur] DI-Architektur (Abhängigkeitsinjektion)**: Die Verwendung eines Abhängigkeitscontainers gewährleistet die Komponentenisolation, vereinfacht das Testen und eliminiert Fehler bei der Dienstinitialisierung.
+- **[Threads] Thread-Sicherheit**: Alle Schnittstellenaktualisierungen und Hintergrundaufgaben werden synchronisiert, wodurch Abstürze beim parallelen Laden von Beschreibungen oder bei der App-Installation vermieden werden.
+
+Alle Vorgänge sind transparent und werden in Echtzeit in „PAS.log“ protokolliert.
+
+## Protokollierung
+
+Alle Vorgänge werden in der Datei „PAS.log“ im Ordner „%LocalAppData%\\PAS\\“ aufgezeichnet. Das Protokoll enthält:
+- Informationsmeldungen zum Fortschritt
+- Warnungen zu Problemen
+- Fehler mit Full-Stack-Traces
+- Fatale Ausnahmen (wenn die Anwendung abgestürzt ist)
+
+## Mitwirken
+
+Alle Verbesserungen sind willkommen! Bitte:
+1. Forken Sie das Projekt
+2. Erstellen Sie einen Zweig für Ihre Änderungen
+3. Senden Sie eine Pull-Anfrage
+
 ## Lizenz
 
-Dieses Projekt lizenziert unter der MIT-Lizenz.`
+Dieses Projekt wird unter der MIT-Lizenz vertrieben. Einzelheiten finden Sie in der Datei „LICENSE“.
+
+## Danksagungen
+
+- Microsoft für [Winget](https://github.com/microsoft/winget-cli)
+- .NET-Community für hervorragende Entwicklungstools
+
+---
+
+**Hinweis**: Diese Anwendung verwendet den offiziellen Windows-Paketmanager (Winget) und enthält keinen Schadcode. Alle Vorgänge sind transparent und können im Quellcode überprüft werden.
+`,
+    guide: `[ English ](../README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md) | [ Quick Start ](QUICKSTART.md) • [ User Guide ](GUIDE.md) • [ Руководство пользователя ](GUIDE_RU.md)
+
+# PAS (Portable App Sync) — Comprehensive User Guide
+
+Welcome to the comprehensive user guide for **PAS (Portable App Sync)**! This guide will walk you through the inner workings of the application, help you understand the backup and restore processes, explain the filter systems, and show you how to resolve common troubleshooting scenarios.
+
+---
+
+<p align="center">
+  <img src="../screenshots/cover.png" alt="Portable App Sync" width="95%" />
+</p>
+
+---
+
+## Application Workflow
+
+The diagram below outlines the overall workflow of backing up and restoring your applications using PAS.
+
+\`\`\`mermaid
+flowchart TD
+    Start([Launch PAS.exe]) --> Scan[Scan System via Winget]
+    Scan --> Populate[Populate Interactive UI List]
+    
+    subgraph Filtering & Selection
+        Populate --> Filter{Apply Filters}
+        Filter -- "Show System/Hidden" --> ShowAll[Show All Packages]
+        Filter -- "User Apps Only (Default)" --> ShowUser[Show Desktop Apps]
+        ShowAll & ShowUser --> Select[Select Apps via Checkboxes]
+    end
+    
+    Select --> Mode{Choose Export Mode}
+    
+    subgraph Exporting
+        Mode -- "Online Script" --> GenOnline[Generate RestoreApps.bat / .ps1]
+        Mode -- "Offline Package" --> DownLocal[Download installers to local folder]
+        DownLocal --> CheckComp{Supported by Winget Download?}
+        CheckComp -- Yes --> SaveInst[Save installer file]
+        CheckComp -- No --> MarkSkip[Mark as Skipped & Add to Fallback]
+        SaveInst & MarkSkip --> GenOffline[Generate install_all.bat & RestoreOnlineFallback.bat]
+    end
+
+    GenOnline & GenOffline --> End([Ready to restore on new system])
+\`\`\`
+
+---
+
+## Understanding Application Filtering
+
+By default, PAS scans all installed applications on your computer using the Windows Package Manager (Winget). To prevent cluttering your backup list with system packages or runtime libraries, the application applies smart filters:
+
+- **User Desktop Applications (Default)**: Displays standard applications installed by the user (e.g., Google Chrome, VS Code, Discord, WinRAR).
+- **Microsoft Store Apps**: Hidden by default. Includes pre-installed Windows packages (UWP/MSIX), such as Calculator, Xbox, Photos, etc.
+- **System Components**: Hidden by default. Includes compilers, drivers, configuration packages, and shared runtimes (e.g., C++ Redistributables, .NET Runtimes).
+- **Technical Dependencies**: Hidden by default. Framework runtimes and libraries like \`VCLibs\` or \`WindowsAppRuntime\`.
+
+### How to Toggle Filters
+If you want to back up a hidden system component (like a specific runtime or store app):
+1. Check the box **"Show system and hidden applications"** at the top of the interface.
+2. The list will instantly refresh to display all scanned packages.
+3. Use the view filter selection:
+   - **All Visible**: Displays all currently unfiltered programs.
+   - **Available Offline**: Displays only applications that support downloading their installers via Winget.
+   - **Online Fallback**: Displays applications that will need to be downloaded from the internet during recovery because they don't support direct downloading.
+   - **Excluded by Default**: Displays updater components or system utilities that are excluded from backups by default (e.g., \`Microsoft Edge Update\`) to prevent conflict.
+
+---
+
+## Export Modes Explained
+
+PAS offers two distinct methods for backing up your application configuration. Choosing the right one depends on your destination machine's environment.
+
+### 1. Online Script (Recommended)
+This mode generates a lightweight command script that pulls installers directly from Microsoft's official Winget repositories during the restore process.
+
+- **Files Generated**: \`RestoreApps.bat\` (and/or \`RestoreApps.ps1\`).
+- **Ideal For**: Restoring applications on a machine with a stable internet connection.
+- **Pros**: 
+  - Ultra-small backup size (only a few kilobytes).
+  - Always installs the **latest versions** of the apps at the time of restoration.
+  - Highly reliable.
+- **Cons**: Requires active internet connection during restore.
+
+### 2. Offline Package
+This mode attempts to download all installer files (\`.exe\`, \`.msi\`, \`.msix\`) to a local folder so they can be installed without internet access.
+
+- **Files Generated**: A folder containing installer files, \`install_all.bat\` (offline installer script), and potentially \`RestoreOnlineFallback.bat\` (online fallback script).
+- **Ideal For**: Air-gapped machines, corporate networks with restricted internet, or saving bandwidth.
+- **Pros**: Installs applications fast without downloading them during setup.
+- **Cons**: Large backup size (several gigabytes depending on selected apps).
+
+> [!IMPORTANT]
+> **The Hybrid Fallback Mechanism**: Many publishers (e.g., Microsoft for VS Code, Git, Android Studio) restrict direct installer downloading via Winget. 
+> 
+> To prevent backup failures, PAS automatically identifies these unsupported packages, skips downloading them offline, and puts them into \`RestoreOnlineFallback.bat\`. 
+> 
+> When restoring, run \`install_all.bat\` first to install offline packages, then run \`RestoreOnlineFallback.bat\` once you have an internet connection to install the remaining applications.
+
+---
+
+## Restoration Steps
+
+To restore your applications on a fresh Windows installation, follow these procedures.
+
+### How to run the Online Script
+1. Copy \`RestoreApps.bat\` or \`RestoreApps.ps1\` to the target computer.
+2. Right-click the script and select **"Run as Administrator"**.
+3. A command prompt window will open. If Winget is not installed, the script will prompt you and provide instructions on how to install it.
+4. Wait for the automated installer to finish.
+
+### How to run the Offline Package
+1. Copy the exported folder containing \`install_all.bat\` and the installers to the target computer.
+2. Right-click \`install_all.bat\` and select **"Run as Administrator"**.
+3. All local installers will be run silently or with basic progress indicators.
+4. If a \`RestoreOnlineFallback.bat\` was created, run it as Administrator after connecting the computer to the internet to fetch the remaining applications.
+
+---
+
+## Troubleshooting Common Issues
+
+### 1. Winget is missing on the target machine
+**Symptom**: The restore script warns that the \`winget\` command was not found.
+- **Solution**: Winget is pre-installed on Windows 11 and recent builds of Windows 10. If it is missing:
+  1. Open the Microsoft Store and search for **"App Installer"**.
+  2. Click **"Update"** or **"Install"**.
+  3. Alternatively, download the latest \`.msixbundle\` from the official [GitHub repository](https://github.com/microsoft/winget-cli/releases) and run it.
+
+### 2. Apps are skipped during offline download
+**Symptom**: PAS log shows warnings about skipped downloads, and some apps are not in the offline folder.
+- **Explanation**: This is normal behavior due to licensing or publisher constraints. The installer cannot be downloaded ahead of time. These applications are automatically placed into the online fallback script.
+
+### 3. Permission Errors
+**Symptom**: Scripts fail to run, or installers exit with errors.
+- **Solution**: Ensure you are running the scripts **as Administrator**. Many desktop applications require administrative privileges to write to \`C:\\Program Files\` and register system services.
+
+### 4. Logging & Diagnostics
+If the application crashes or an operation fails, you can find logs here:
+- **Log Location**: \`%LocalAppData%\\PAS\\PAS.log\` (paste this in the Windows Explorer address bar).
+- **Log Properties**:
+  - Automatically rotated when it exceeds **5 MB**.
+  - Contains complete exception details and Winget CLI process outputs for quick diagnostic parsing.
+`,
+    guide_ru: `[ English ](../README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md) | [ Быстрый старт ](QUICKSTART_RU.md) • [ Руководство пользователя ](GUIDE_RU.md)
+
+# PAS (Portable App Sync) — Полное руководство пользователя
+
+Добро пожаловать в руководство пользователя для **PAS (Portable App Sync)**! Данный документ подробно описывает принципы работы приложения, процессы резервного копирования и восстановления, систему фильтрации, а также способы решения часто возникающих проблем.
+
+---
+
+<p align="center">
+  <img src="../screenshots/cover.png" alt="Portable App Sync" width="95%" />
+</p>
+
+---
+
+## Схема работы приложения
+
+Ниже представлена диаграмма, описывающая процесс резервного копирования и восстановления приложений с помощью PAS.
+
+\`\`\`mermaid
+flowchart TD
+    Start([Запуск PAS.exe]) --> Scan[Сканирование системы через Winget]
+    Scan --> Populate[Заполнение интерактивного списка в UI]
+    
+    subgraph Фильтрация и выбор
+        Populate --> Filter{Применить фильтры}
+        Filter -- "Показывать системные/скрытые" --> ShowAll[Показать все пакеты]
+        Filter -- "Только пользовательские (по умолчанию)" --> ShowUser[Показать настольные приложения]
+        ShowAll & ShowUser --> Select[Выбор программ галочками]
+    end
+    
+    Select --> Mode{Выбор режима экспорта}
+    
+    subgraph Экспорт
+        Mode -- "Онлайн-скрипт" --> GenOnline[Создать RestoreApps.bat / .ps1]
+        Mode -- "Оффлайн-пакет" --> DownLocal[Скачивание установщиков в локальную папку]
+        DownLocal --> CheckComp{Поддерживается winget download?}
+        CheckComp -- Да --> SaveInst[Сохранить файл установщика]
+        CheckComp -- Нет --> MarkSkip[Пометить как пропущенное и добавить в резерв]
+        SaveInst & MarkSkip --> GenOffline[Создать install_all.bat и RestoreOnlineFallback.bat]
+    end
+
+    GenOnline & GenOffline --> End([Готово к восстановлению на новой ОС])
+\`\`\`
+
+---
+
+## Понимание фильтрации приложений
+
+По умолчанию PAS сканирует все установленные на компьютере программы с помощью диспетчера пакетов Windows (Winget). Чтобы не перегружать список резервного копирования техническими пакетами или библиотеками времени выполнения, приложение использует умные фильтры:
+
+- **Пользовательские приложения (по умолчанию)**: Отображает стандартные настольные программы, установленные пользователем (например, Google Chrome, VS Code, Discord, WinRAR).
+- **Приложения Microsoft Store**: Скрыты по умолчанию. Включает предустановленные пакеты Windows (UWP/MSIX), такие как Калькулятор, Xbox, Фотографии и т. д.
+- **Системные компоненты**: Скрыты по умолчанию. Включает компиляторы, драйверы, пакеты конфигурации и общие среды выполнения (например, Microsoft Visual C++ Redistributable, .NET Runtime).
+- **Технические зависимости**: Скрыты по умолчанию. Библиотеки и фреймворки типа \`VCLibs\` или \`WindowsAppRuntime\`.
+
+### Как переключить фильтры
+Если вам нужно сделать резервную копию скрытого системного компонента (например, конкретной библиотеки или приложения Store):
+1. Установите флажок **"Показывать системные и скрытые приложения"** в верхней части окна.
+2. Список мгновенно обновится и отобразит все найденные пакеты.
+3. Используйте фильтр отображения для быстрой навигации:
+   - **Все видимые**: Отображает все текущие неотфильтрованные программы.
+   - **Доступны оффлайн**: Показывает только приложения, которые поддерживают скачивание файлов установщиков на диск.
+   - **Онлайн-резерв**: Показывает программы, установщики которых не могут быть скачаны локально; при восстановлении они будут загружаться из интернета.
+   - **Исключены по умолчанию**: Показывает службы обновлений или служебные утилиты, которые исключаются из резервной копии во избежание конфликтов (например, \`Microsoft Edge Update\`).
+
+---
+
+## Режимы экспорта
+
+PAS предлагает два метода для сохранения конфигурации приложений. Выбор зависит от наличия интернета на целевом компьютере.
+
+### 1. Онлайн-скрипт (Рекомендуется)
+Этот режим создает легковесный скрипт, который скачивает установщики из официальных репозиториев Winget непосредственно в процессе восстановления приложений.
+
+- **Создаваемые файлы**: \`RestoreApps.bat\` (и/или \`RestoreApps.ps1\`).
+- **Сфера применения**: Восстановление программ на компьютере со стабильным подключением к интернету.
+- **Преимущества**:
+  - Минимальный размер резервной копии (всего несколько килобайт).
+  - При восстановлении всегда устанавливаются **самые свежие версии** приложений.
+  - Высокая надежность работы.
+- **Недостатки**: Требуется активное интернет-подключение при восстановлении.
+
+### 2. Оффлайн-пакет
+Этот режим скачивает файлы инсталляторов приложений (\`.exe\`, \`.msi\`, \`.msix\`) в локальную папку, чтобы их можно было установить вообще без доступа к сети.
+
+- **Создаваемые файлы**: Папка с файлами установщиков, скрипт тихой установки \`install_all.bat\` и (при необходимости) резервный скрипт \`RestoreOnlineFallback.bat\`.
+- **Сфера применения**: Компьютеры в изолированных сетях, корпоративные рабочие места без доступа к интернету или экономия трафика.
+- **Преимущества**: Быстрая установка приложений без скачивания во время развертывания.
+- **Недостатки**: Большой размер резервной копии (может достигать нескольких гигабайт).
+
+> [!IMPORTANT]
+> **Гибридный механизм резервного восстановления**: Многие разработчики (например, Microsoft для VS Code, Git, Android Studio) запрещают прямое скачивание дистрибутивов через Winget.
+> 
+> Чтобы экспорт не прерывался ошибками, PAS автоматически распознает такие пакеты, пропускает их оффлайн-скачивание и вносит их в скрипт онлайн-резерва \`RestoreOnlineFallback.bat\`.
+> 
+> При восстановлении сначала запустите \`install_all.bat\` (установит программы без интернета), а затем, подключившись к сети, запустите \`RestoreOnlineFallback.bat\`, чтобы доустановить оставшиеся приложения.
+
+---
+
+## Процесс восстановления
+
+Для развертывания программ на новой системе следуйте инструкциям ниже.
+
+### Запуск Онлайн-скрипта
+1. Скопируйте файл \`RestoreApps.bat\` или \`RestoreApps.ps1\` на новый компьютер.
+2. Щелкните правой кнопкой мыши по файлу и выберите **"Запуск от имени администратора"**.
+3. Откроется окно командной строки. Если утилита Winget отсутствует в системе, скрипт сообщит об этом и покажет инструкцию по установке.
+4. Дождитесь завершения автоматической установки.
+
+### Запуск Оффлайн-пакета
+1. Скопируйте экспортированную папку (со скриптом \`install_all.bat\` и установщиками) на новый компьютер.
+2. Щелкните правой кнопкой мыши по файлу \`install_all.bat\` и выберите **"Запуск от имени администратора"**.
+3. Все локальные инсталляторы будут выполнены в тихом режиме или с минимальным отображением прогресса.
+4. Если был создан файл \`RestoreOnlineFallback.bat\`, подключите компьютер к интернету, щелкните по нему правой кнопкой мыши и выберите **"Запуск от имени администратора"**, чтобы доустановить пропущенные программы.
+
+---
+
+## Решение частых проблем
+
+### 1. Утилита Winget не найдена на новом компьютере
+**Симптом**: Скрипт восстановления выдает ошибку о том, что команда \`winget\` не найдена.
+- **Решение**: Утилита Winget предустановлена в Windows 11 и последних версиях Windows 10. Если она отсутствует:
+  1. Откройте Microsoft Store и найдите **"Установщик приложения"** (App Installer).
+  2. Нажмите **"Обновить"** или **"Установить"**.
+  3. В качестве альтернативы скачайте последний пакет \`.msixbundle\` из официального [репозитория на GitHub](https://github.com/microsoft/winget-cli/releases) and run it.
+
+### 2. Приложения пропускаются при оффлайн-скачивании
+**Симптом**: В логе PAS появляются предупреждения о пропуске скачивания программ, и некоторых установщиков нет в оффлайн-папке.
+- **Объяснение**: Это штатное поведение, обусловленное лицензионными ограничениями авторов программ. Их дистрибутивы нельзя скачать заранее через Winget. Такие программы автоматически переносятся в файл онлайн-резерва \`RestoreOnlineFallback.bat\`.
+
+### 3. Ошибки прав доступа
+**Симптом**: Скрипты завершаются с ошибками, или установщики завершают работу аварийно.
+- **Решение**: Всегда запускайте скрипты **от имени администратора**. Большинство настольных программ требуют привилегий администратора для записи файлов в \`C:\\Program Files\` и регистрации системных служб.
+
+### 4. Логирование и диагностика
+Если приложение закрылось с ошибкой или экспорт прошел неудачно, вы можете изучить логи:
+- **Путь к файлу лога**: \`%LocalAppData%\\PAS\\PAS.log\` (скопируйте этот путь и вставьте его в адресную строку Проводника).
+- **Свойства лога**:
+  - Автоматически ротируется (очищается старое) при превышении размера **5 МБ**.
+  - Содержит полные данные об исключениях, а также вывод консоли Winget CLI для точной диагностики.
+`
   },
   "ru-privatezilla": {
     title: "Ru-Privatezilla",
