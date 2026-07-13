@@ -21,14 +21,14 @@ export async function getStaticPaths({ paginate }) {
     const mdMatches = md.matchAll(/!\[.*?\]\((.*?)\)/g);
     for (const match of mdMatches) {
       const src = match[1];
-      if (src && !src.toLowerCase().includes('.svg')) {
+      if (src && !src.toLowerCase().includes('.svg') && !src.includes('shields.io') && !src.includes('badge')) {
         return resolveSinglePath(src, project);
       }
     }
     const htmlMatches = md.matchAll(/<img[^>]*?src=["'](.*?)["']/g);
     for (const match of htmlMatches) {
       const src = match[1];
-      if (src && !src.toLowerCase().includes('.svg')) {
+      if (src && !src.toLowerCase().includes('.svg') && !src.includes('shields.io') && !src.includes('badge')) {
         return resolveSinglePath(src, project);
       }
     }

@@ -216,7 +216,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
         const imageUrls: any[] = [];
         tempDiv.querySelectorAll('img').forEach(img => {
           const src = img.getAttribute('src');
-          if (src && src.toLowerCase().includes('.svg')) {
+          if (src && (src.toLowerCase().includes('.svg') || src.includes('shields.io') || src.includes('badge'))) {
             return;
           }
           
