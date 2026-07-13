@@ -8,7 +8,7 @@ export const PROJECTS_DATA = {
     stars: "1",
     license: "Other",
     github: "https://github.com/Almanex/Classic-Windows-image-viewer-for-Windows-11",
-    image: "images/projects/classic-windows-image-viewer.jpg",
+    image: "/images/projects/classic-windows-image-viewer.png",
     readme: `[ English ](README.md) • [ Русский ](docs/README_RU.md) • [ Deutsch ](docs/README_DE.md)
 
 # Shell Image Viewer
