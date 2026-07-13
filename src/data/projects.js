@@ -20,6 +20,11 @@ export const PROJECTS_DATA = {
 [![Language: C++17](https://img.shields.io/badge/Language-C%2B%2B17-blue.svg)](#)
 [![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FClassic-Windows-image-viewer-for-Windows-11)](https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20project&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FClassic-Windows-image-viewer-for-Windows-11)
 
+
+<p align="center">
+  <img src="screenshots/cover.png" alt="Shell Image Viewer" width="95%" />
+</p>
+
 ---
 
 ## Overview
@@ -140,6 +145,11 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 [![Платформа: Windows](https://img.shields.io/badge/%D0%9F%D0%BB%D0%B0%D1%82%D1%84%D0%BE%D1%80%D0%BC%D0%B0-Windows-0078d7.svg)](#)
 [![Язык: C++17](https://img.shields.io/badge/%D0%AF%D0%B7%D1%8B%D0%BA-C%2B%2B17-blue.svg)](#)
 [![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FClassic-Windows-image-viewer-for-Windows-11)](https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20project&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FClassic-Windows-image-viewer-for-Windows-11)
+
+
+<p align="center">
+  <img src="../screenshots/cover.png" alt="Shell Image Viewer" width="95%" />
+</p>
 
 ---
 
@@ -263,6 +273,11 @@ release/PhotoViewer.exe --formats
 [![Sprache: C++17](https://img.shields.io/badge/Sprache-C%2B%2B17-blue.svg)](#)
 [![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FClassic-Windows-image-viewer-for-Windows-11)](https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20project&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FClassic-Windows-image-viewer-for-Windows-11)
 
+
+<p align="center">
+  <img src="../screenshots/cover.png" alt="Shell Image Viewer" width="95%" />
+</p>
+
 ---
 
 ## Überblick
@@ -382,6 +397,11 @@ Das Projekt ist unter der freien MIT-Lizenz lizenziert. Weitere Details finden S
 
 This guide describes how to restore the classic Windows photo viewer interface using the portable utility **Shell Image Viewer**.
 
+
+<p align="center">
+  <img src="../screenshots/cover.png" alt="Shell Image Viewer" width="95%" />
+</p>
+
 ---
 
 ## Step 1. Download the Application
@@ -453,6 +473,11 @@ This guide is based on the article:
 
 В этой инструкции описано, как вернуть классический интерфейс просмотра изображений с помощью портативного приложения **Shell Image Viewer**.
 
+
+<p align="center">
+  <img src="../screenshots/cover.png" alt="Shell Image Viewer" width="95%" />
+</p>
+
 ---
 
 ## Шаг 1. Скачивание приложения
@@ -523,6 +548,11 @@ This guide is based on the article:
 *Schritt-für-Schritt-Anleitung zur Einrichtung und Verwendung des klassischen Windows-Bildbetrachters unter Windows 10 und 11.*
 
 Diese Anleitung beschreibt, wie Sie die klassische Benutzeroberfläche zur Bildanzeige mit dem portablen Dienstprogramm **Shell Image Viewer** wiederherstellen.
+
+
+<p align="center">
+  <img src="../screenshots/cover.png" alt="Shell Image Viewer" width="95%" />
+</p>
 
 ---
 
