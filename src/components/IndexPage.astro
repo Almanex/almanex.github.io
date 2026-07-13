@@ -97,6 +97,8 @@ const pageLabels = {
     reposSub: "A mix of open-source tools, localization projects, and weekend desktop experiments I’m proud to share.",
     viewOnGithub: "View on GitHub",
     allProjects: "All projects",
+    readmeView: "README // Specs",
+    guideView: "User Guide",
     blogKicker: "latest dispatches // blog.txt",
     blogTitle: "Thoughts & Notes",
     blogSub: "[ SHORT-FORM ESSAYS ON SOFTWARE CRAFT, ARCHITECTURE & DESIGN ]",
@@ -124,6 +126,8 @@ const pageLabels = {
     reposSub: "Смесь инструментов с открытым исходным кодом, локализаций и десктопных экспериментов выходного дня, которыми я рад поделиться.",
     viewOnGithub: "Смотреть на GitHub",
     allProjects: "Все проекты",
+    readmeView: "README // Спеки",
+    guideView: "Инструкция",
     blogKicker: "последние записи // blog.txt",
     blogTitle: "Мысли и Заметки",
     blogSub: "[ КОРОТКИЕ СТАТЬИ О РАЗРАБОТКЕ, АРХИТЕКТУРЕ И ДИЗАЙНЕ ]",
@@ -151,6 +155,8 @@ const pageLabels = {
     reposSub: "Eine Mischung aus Open-Source-Tools, Lokalisierungsprojekten und Desktop-Experimenten fürs Wochenende, die ich gerne teile.",
     viewOnGithub: "Auf GitHub ansehen",
     allProjects: "Alle Projekte",
+    readmeView: "README // Spez.",
+    guideView: "Anleitung",
     blogKicker: "neueste meldungen // blog.txt",
     blogTitle: "Gedanken & Notizen",
     blogSub: "[ KURZARTIKEL ÜBER SOFTWARE-HANDWERK, ARCHITEKTUR & DESIGN ]",
@@ -302,7 +308,19 @@ const l = pageLabels[lang];
                       <p class="fc-meta"><span class="d"></span> {category}</p>
                       <h3 class="fc-name" style="font-size: clamp(34px, 4vw, 54px);">{project.title}</h3>
                       <p class="fc-desc">{subtitle}</p>
-                      <div class="fc-actions" style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap; margin-top: 26px;">
+                      <div class="fc-project-links" style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 24px;">
+                        <a href={getLocalizedPath(`/projects/${id}`)} class="fc-project-btn btn-readme">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px; height:13px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                          <span>{l.readmeView}</span>
+                        </a>
+                        {Boolean(project.guide || project.guide_ru || project.guide_de) && (
+                          <a href={getLocalizedPath(`/projects/${id}?view=guide`)} class="fc-project-btn btn-guide">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px; height:13px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            <span>{l.guideView}</span>
+                          </a>
+                        )}
+                      </div>
+                      <div class="fc-actions" style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap; margin-top: 18px;">
                         <a href={project.github} target="_blank" class="fc-view" style="margin-top: 0 !important;">
                           {l.viewOnGithub} <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                         </a>
@@ -1422,5 +1440,42 @@ const l = pageLabels[lang];
     color: var(--cyan) !important;
     text-shadow: 0 0 6px rgba(54, 197, 240, 0.6) !important;
     margin: 0 1px !important;
+  }
+
+  /* PROJECT SLIDER FOLDER CARD BUTTONS */
+  .fc-project-btn {
+    font-family: var(--font-mono) !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    padding: 6px 14px !important;
+    border: 1.6px solid var(--ink) !important;
+    border-radius: 6px !important;
+    background: var(--paper) !important;
+    color: var(--ink) !important;
+    box-shadow: 2px 2px 0px var(--ink) !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    transition: all 0.1s ease !important;
+  }
+  .fc-project-btn:hover {
+    transform: translate(-1px, -1px) !important;
+    box-shadow: 3px 3px 0px var(--ink) !important;
+    background: var(--hover) !important;
+  }
+  .fc-project-btn:active {
+    transform: translate(0, 0) !important;
+    box-shadow: 1px 1px 0px var(--ink) !important;
+  }
+  .fc-project-btn.btn-readme {
+    background: var(--cyan) !important;
+    color: #111212 !important;
+  }
+  .fc-project-btn.btn-guide {
+    background: var(--amber) !important;
+    color: #111212 !important;
   }
 </style>
