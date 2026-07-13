@@ -2578,6 +2578,805 @@ Verwenden Sie diese Tastenkombinationen, um schnell in der Anwendung zu navigier
 - **llama.cpp-Protokolle**: Fehlerbehebungsprotokolle für den lokalen Server-Subprozess werden in Ihren temporären Windows-Verzeichnissen oder App-Datenordnern gespeichert. Wenn der Server nicht startet, prüfen Sie, ob der Standardport von einem anderen Prozess belegt ist.
 `
   },
+  "icoboo": {
+    title: "icoboo",
+    subtitle: "A simple icon extraction and image to ICO conversion utility for Windows developers.",
+    category: "Utility",
+    lang: "C#",
+    platform: "Windows 10/11",
+    stars: "0",
+    license: "MIT",
+    github: "https://github.com/Almanex/icoboo",
+    image: "/images/projects/icoboo.png",
+    readme: `[ English ](README.md) • [ Русский ](docs/README_RU.md) • [ Deutsch ](docs/README_DE.md)
+
+# IconForge
+
+*Native icon generator for Windows 11*
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Platform: Windows](https://img.shields.io/badge/Platform-Windows%2010%20%2F%2011-blue)](https://www.microsoft.com/windows)
+[![Framework: .NET 8.0](https://img.shields.io/badge/Framework-.NET%208.0-blue)](https://dotnet.microsoft.com/download)
+[![UI: WinUI 3](https://img.shields.io/badge/UI-WinUI%203-blue)](https://learn.microsoft.com/windows/apps/winui/winui3/)
+[![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)](https://twitter.com/intent/tweet?text=Check%20out%20IconForge%20-%20A%20native%20icon%20generator%20for%20Windows%2011!&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)
+
+<p align="center">
+  <img src="Screenshots/cover.png" alt="IconForge main" width="49%" />
+  <img src="Screenshots/editor.png" alt="IconForge settings" width="49%" />
+</p>
+
+---
+
+IconForge is a lightweight native Windows application developed on the WinUI 3 (Windows App SDK) framework and C#. It is designed for batch generation of icon sets for Windows (\`.ico\`, \`Assets\`) and Android (\`Adaptive Icons\`) from a single source image in PNG or SVG format.
+
+For a detailed walkthrough of all options and features, see the [User Guide](docs/GUIDE.md).
+
+## Application Interface
+
+<details open>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 1. Main Window - File Drag and Drop</b></summary>
+  <br/>
+  <p align="center"><img src="Screenshots/screenshot1.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 2. Settings and Target Directory Selection</b></summary>
+  <br/>
+  <p align="center"><img src="Screenshots/screenshot2.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 3. Android Adaptive Icon Configuration and Color Swatches</b></summary>
+  <br/>
+  <p align="center"><img src="Screenshots/screenshot3.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 4. Shell Integration - Windows Explorer Context Menu</b></summary>
+  <br/>
+  <p align="center"><img src="Screenshots/screenshot4.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 5. Active Process State and Toast Notifications</b></summary>
+  <br/>
+  <p align="center"><img src="Screenshots/screenshot5.png" width="95%" /></p>
+</details>
+
+---
+
+## Main Features
+
+### Generating Icon Packs
+
+* **Windows (Classic .ico):**
+  * Build a multi-format \`.ico\` file containing resolutions: \`16x16\`, \`24x24\`, \`32x32\`, \`48x48\`, \`64x64\`, \`128x128\`, \`256x256\` pixels.
+  * **Micro-sharpening:** For small sizes (16-48px), a special contour sharpening filter is automatically applied to prevent blurriness in Windows Explorer.
+* **Windows Modern Assets (PNG):**
+  * Export individual images for the manifest of modern Windows applications (\`Square44x44Logo\`, \`Square150x150Logo\`, \`StoreLogo\`) at all system scales: \`scale-100\`, \`scale-125\`, \`scale-150\`, \`scale-200\`, \`scale-400\`.
+* **Android (Adaptive and Legacy Icons):**
+  * Layer separation: the logo is automatically positioned inside the safe-zone (72dp) of the \`Foreground.png\` layer, and the \`Background.png\` layer is filled with the selected color or a texture file.
+  * Export by project folder structure (\`mipmap-mdpi\` to \`mipmap-xxxhdpi\`).
+  * Generate a round Legacy icon (\`ic_launcher.png\`) by masking and layering.
+  * Export promo icon for Google Play Console in size \`512x512\` pixels.
+
+### Modern Windows 11 Interface (UI/UX)
+
+* Translucent Mica Alt system material (adapts to desktop wallpaper).
+* Full support for Windows 11 system Dark and Light themes.
+* Interactive Drag-and-Drop zone with dynamic border color changes and built-in preview for PNG/SVG files.
+* Quick color swatches for choosing the background color of Android adaptive icons.
+
+### System Integration (Shell Integration)
+
+* **Explorer context menu:** Option to embed the "Generate icons in IconForge" item directly into the Windows Explorer menu when right-clicking a PNG/SVG file. Registration occurs locally in the \`HKEY_CURRENT_USER\` hive and does not require administrator rights (UAC).
+* **Toast Notifications:** When processing is complete, the app sends a native Windows 11 toast notification with an interactive button to open the destination folder.
+
+---
+
+## Tech Stack
+
+| Layer / Component | Technology | Details / Purpose |
+| --- | --- | --- |
+| Language | C# (.NET 8.0) | net8.0-windows target framework |
+| UI Platform | WinUI 3 | Windows App SDK 2.2.0 |
+| Graphics Rendering | SkiaSharp | Lanczos3 resize and filtering |
+| SVG Rendering | Svg.Skia | Rendering vector graphics to raster |
+| Packaging Type | Unpackaged Self-Contained | Runs without global Windows App Runtime installation |
+
+---
+
+## File Export Structure
+
+After generation, the following directory structure is created in the selected destination folder:
+
+\`\`\`text
+[Destination_Folder]/
+├── Windows/
+│   ├── app_icon.ico
+│   └── Assets/
+│       ├── Square44x44Logo.scale-100.png
+│       ├── Square44x44Logo.scale-200.png
+│       └── ... (all assets in all scales)
+└── Android/
+    ├── play_store_512.png
+    └── res/
+        ├── mipmap-mdpi/
+        │   ├── ic_launcher.png
+        │   ├── ic_launcher_background.png
+        │   └── ic_launcher_foreground.png
+        └── mipmap-xxxhdpi/ ...
+\`\`\`
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+* [.NET 8.0 SDK](https://dotnet.microsoft.com/download) or later.
+
+### Building and Running from Console
+
+1. Clone the repository:
+   \`\`\`powershell
+   git clone https://github.com/Almanex/icoboo.git
+   cd icoboo
+   \`\`\`
+2. Compile the project:
+   \`\`\`powershell
+   dotnet build
+   \`\`\`
+3. Launch the application:
+   \`\`\`powershell
+   dotnet run
+   \`\`\`
+
+### Publishing (Self-Contained EXE with Assets)
+
+To generate a single executable package:
+\`\`\`powershell
+dotnet publish -c Release -r win-x64 --self-contained true
+\`\`\`
+This compilation merges assemblies into a single executable \`IconForge.exe\` and copies the \`Assets/\` folder alongside it inside the \`publish/\` directory.
+
+> [!IMPORTANT]
+> The \`Assets/\` folder **must** be kept in the same directory as \`IconForge.exe\` for the application to load UI assets and start successfully. When distributing the app, package both the executable and the \`Assets/\` directory together (e.g., in a ZIP archive).
+
+---
+
+## Contributing
+
+We welcome contributions! Please open an issue or submit a pull request if you want to improve the application.
+
+---
+
+## Versioning
+
+We use [SemVer](https://semver.org/) for versioning. For the versions available, see the tags on this repository.
+
+---
+
+## Authors
+
+* **Almanex** - *Initial development* - [Almanex Profile](https://github.com/Almanex)
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the \`LICENSE\` file for details.`,
+    readme_ru: `[ English ](../README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+
+# IconForge
+
+*Нативный генератор иконок для Windows 11*
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Platform: Windows](https://img.shields.io/badge/Platform-Windows%2010%20%2F%2011-blue)](https://www.microsoft.com/windows)
+[![Framework: .NET 8.0](https://img.shields.io/badge/Framework-.NET%208.0-blue)](https://dotnet.microsoft.com/download)
+[![UI: WinUI 3](https://img.shields.io/badge/UI-WinUI%203-blue)](https://learn.microsoft.com/windows/apps/winui/winui3/)
+[![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)](https://twitter.com/intent/tweet?text=Check%20out%20IconForge%20-%20A%20native%20icon%20generator%20for%20Windows%2011!&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)
+
+<p align="center">
+  <img src="../Screenshots/cover.png" alt="IconForge main" width="49%" />
+  <img src="../Screenshots/editor.png" alt="IconForge settings" width="49%" />
+</p>
+
+---
+
+IconForge — это легкое нативное Windows-приложение (утилита), разработанное на фреймворке WinUI 3 (Windows App SDK) и C#. Оно предназначено для пакетной генерации наборов иконок для Windows (\`.ico\`, \`Assets\`) и Android (\`Adaptive Icons\`) из одного исходного изображения формата PNG или SVG.
+
+Подробное описание всех настроек и возможностей см. в [Руководстве пользователя](GUIDE_RU.md).
+
+## Интерфейс приложения
+
+<details open>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 1. Главное окно - Drag and Drop файлов</b></summary>
+  <br/>
+  <p align="center"><img src="../Screenshots/screenshot1.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 2. Настройки и выбор папки назначения</b></summary>
+  <br/>
+  <p align="center"><img src="../Screenshots/screenshot2.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 3. Кастомизация адаптивных иконок Android и палитры цветов</b></summary>
+  <br/>
+  <p align="center"><img src="../Screenshots/screenshot3.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 4. Интеграция в систему - контекстное меню проводника Windows</b></summary>
+  <br/>
+  <p align="center"><img src="../Screenshots/screenshot4.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 5. Активный процесс генерации и всплывающие уведомления</b></summary>
+  <br/>
+  <p align="center"><img src="../Screenshots/screenshot5.png" width="95%" /></p>
+</details>
+
+---
+
+## Основные возможности
+
+### Генерация пакетов иконок
+
+* **Windows (Классический .ico):**
+  * Сборка мультиформатного \`.ico\` файла, содержащего разрешения: \`16x16\`, \`24x24\`, \`32x32\`, \`48x48\`, \`64x64\`, \`128x128\`, \`256x256\` пикселей.
+  * **Микро-шарпинг:** Для мелких размеров (16-48px) автоматически применяется специальный контурный фильтр резкости, чтобы иконка не размывалась в Проводнике Windows.
+* **Windows Modern Assets (PNG):**
+  * Экспорт отдельных изображений для манифеста современных Windows-приложений (\`Square44x44Logo\`, \`Square150x150Logo\`, \`StoreLogo\`) во всех системных масштабах: \`scale-100\`, \`scale-125\`, \`scale-150\`, \`scale-200\`, \`scale-400\`.
+* **Android (Adaptive и Legacy Icons):**
+  * Разделение слоев: логотип автоматически позиционируется внутри безопасной зоны (safe-zone 72dp) слоя \`Foreground.png\`, а слой \`Background.png\` заливается выбранным цветом или текстурным файлом.
+  * Экспорт по структуре папок проекта (\`mipmap-mdpi\` до \`mipmap-xxxhdpi\`).
+  * Генерация круглой Legacy-иконки (\`ic_launcher.png\`) путем маскирования и наложения слоев.
+  * Экспорт промо-иконки для Google Play Console в размере \`512x512\` пикселей.
+
+### Современный интерфейс Windows 11 (UI/UX)
+
+* Использование системного полупрозрачного материала Mica Alt (адаптируется под обои рабочего стола).
+* Полная поддержка системной Темной и Светлой темы Windows 11.
+* Интерактивная зона Drag-and-Drop с динамическим изменением цвета границ и встроенным превью для файлов PNG/SVG.
+* Быстрые палитры (свотчи) для выбора фонового цвета Android-иконки.
+
+### Системная интеграция (Shell Integration)
+
+* **Контекстное меню Проводника:** Опция встраивания пункта "Сгенерировать иконки в IconForge" прямо в меню Проводника Windows при правом клике на PNG/SVG. Регистрация происходит локально в кусте \`HKEY_CURRENT_USER\` и не требует прав администратора (UAC).
+* **Всплывающие уведомления (Toast):** По окончании работы приложение отправляет нативное всплывающее уведомление Windows 11 с интерактивной кнопкой "Открыть папку".
+
+---
+
+## Стек технологий
+
+| Компонент / Слой | Технология | Описание / Назначение |
+| --- | --- | --- |
+| Язык | C# (.NET 8.0) | net8.0-windows целевой фреймворк |
+| UI-платформа | WinUI 3 | Windows App SDK 2.2.0 |
+| Графика | SkiaSharp | Lanczos3-ресайз и фильтрация |
+| Векторная графика | Svg.Skia | Отрисовка векторной графики в растр |
+| Тип приложения | Unpackaged Self-Contained | Запуск без глобальной установки Windows App Runtime |
+
+---
+
+## Структура экспорта файлов
+
+После генерации в выбранной папке создается следующая структура каталогов:
+
+\`\`\`text
+[Папка_Назначения]/
+├── Windows/
+│   ├── app_icon.ico
+│   └── Assets/
+│       ├── Square44x44Logo.scale-100.png
+│       ├── Square44x44Logo.scale-200.png
+│       └── ... (все логотипы во всех масштабах)
+└── Android/
+    ├── play_store_512.png
+    └── res/
+        ├── mipmap-mdpi/
+        │   ├── ic_launcher.png
+        │   ├── ic_launcher_background.png
+        │   └── ic_launcher_foreground.png
+        └── mipmap-xxxhdpi/ ...
+\`\`\`
+
+---
+
+## Как собрать и запустить
+
+### Требования
+
+* [.NET 8.0 SDK](https://dotnet.microsoft.com/download) или новее.
+
+### Сборка и запуск из консоли
+
+1. Клонируйте репозиторий:
+   \`\`\`powershell
+   git clone https://github.com/Almanex/icoboo.git
+   cd icoboo
+   \`\`\`
+2. Скомпилируйте проект:
+   \`\`\`powershell
+   dotnet build
+   \`\`\`
+3. Запустите приложение:
+   \`\`\`powershell
+   dotnet run
+   \`\`\`
+
+### Публикация (Self-Contained EXE с ресурсами)
+
+Для генерации единого исполняемого пакета:
+\`\`\`powershell
+dotnet publish -c Release -r win-x64 --self-contained true
+\`\`\`
+Эта компиляция объединяет сборки в один исполняемый файл \`IconForge.exe\` и копирует папку \`Assets/\` рядом с ним в каталог \`publish/\`.
+
+> [!IMPORTANT]
+> Папка \`Assets/\` **обязательно** должна находиться в одной директории с \`IconForge.exe\`, чтобы приложение могло загрузить графические ресурсы интерфейса и успешно запуститься. При распространении программы упаковывайте исполняемый файл и папку \`Assets/\` вместе (например, в ZIP-архив).
+
+---
+
+## Участие в разработке
+
+Будем рады вашему участию! Создавайте issue или присылайте pull request, если хотите предложить улучшения.
+
+---
+
+## Версионирование
+
+Мы используем [SemVer](https://semver.org/) для версионирования. Доступные версии можно посмотреть по тегам в этом репозитории.
+
+---
+
+## Авторы
+
+* **Almanex** - *Начальная разработка* - [Профиль Almanex](https://github.com/Almanex)
+
+---
+
+## Лицензия
+
+Этот проект лицензирован по лицензии MIT - подробности см. в файле \`LICENSE\`.
+`,
+    readme_de: `[ English ](../README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+
+# IconForge
+
+*Nativer Icon-Generator für Windows 11*
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Platform: Windows](https://img.shields.io/badge/Platform-Windows%2010%20%2F%2011-blue)](https://www.microsoft.com/windows)
+[![Framework: .NET 8.0](https://img.shields.io/badge/Framework-.NET%208.0-blue)](https://dotnet.microsoft.com/download)
+[![UI: WinUI 3](https://img.shields.io/badge/UI-WinUI%203-blue)](https://learn.microsoft.com/windows/apps/winui/winui3/)
+[![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)](https://twitter.com/intent/tweet?text=Check%20out%20IconForge%20-%20A%20native%20icon%20generator%20for%20Windows%2011!&url=https%3A%2F%2Fgithub.com%2FAlmanex%2Ficoboo)
+
+<p align="center">
+  <img src="../Screenshots/cover.png" alt="IconForge main" width="49%" />
+  <img src="../Screenshots/editor.png" alt="IconForge settings" width="49%" />
+</p>
+
+---
+
+IconForge ist eine schlanke native Windows-Anwendung, die auf dem WinUI 3 (Windows App SDK)-Framework und C# entwickelt wurde. Sie ist für die Batch-Generierung von Symbolsätzen für Windows (\`.ico\`, \`Assets\`) und Android (\`Adaptive Icons\`) aus einem einzigen Quellbild im PNG- oder SVG-Format konzipiert.
+
+Eine detaillierte Beschreibung aller Einstellungen und Funktionen finden Sie im [Benutzerhandbuch](GUIDE_DE.md).
+
+## Anwendungsschnittstelle
+
+<details open>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 1. Hauptfenster - Datei-Drag-and-Drop</b></summary>
+  <br/>
+  <p align="center"><img src="../Screenshots/screenshot1.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 2. Einstellungen und Auswahl des Zielordners</b></summary>
+  <br/>
+  <p align="center"><img src="../Screenshots/screenshot2.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 3. Anpassung von Android Adaptive Icons und Farbpaletten</b></summary>
+  <br/>
+  <p align="center"><img src="../Screenshots/screenshot3.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 4. Systemintegration - Windows Explorer-Kontextmenü</b></summary>
+  <br/>
+  <p align="center"><img src="../Screenshots/screenshot4.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 5. Aktiver Prozesszustand und Toast-Benachrichtigungen</b></summary>
+  <br/>
+  <p align="center"><img src="../Screenshots/screenshot5.png" width="95%" /></p>
+</details>
+
+---
+
+## Hauptmerkmale
+
+### Generierung von Icon-Paketen
+
+* **Windows (Klassisches .ico):**
+  * Erstellen Sie eine Multiformat-\`.ico\`-Datei mit den Auflösungen: \`16x16\`, \`24x24\`, \`32x32\`, \`48x48\`, \`64x64\`, \`128x128\`, \`256x256\` Pixel.
+  * **Mikroschärfung:** Für kleine Auflösungen (16-48 Pixel) wird automatisch ein spezieller Konturschärfungsfilter angewendet, um Unschärfe im Windows Explorer zu verhindern.
+* **Windows Modern Assets (PNG):**
+  * Exportieren Sie einzelne Bilder für das Manifest moderner Windows-Anwendungen (\`Square44x44Logo\`, \`Square150x150Logo\`, \`StoreLogo\`) in allen Systemmaßstäben: \`scale-100\`, \`scale-125\`, \`scale-150\`, \`scale-200\`, \`scale-400\`.
+* **Android (Adaptive und Legacy Icons):**
+  * Ebenentrennung: Das Logo wird automatisch innerhalb der sicheren Zone (72dp) der \`Foreground.png\`-Ebene positioniert und die \`Background.png\`-Ebene wird mit der ausgewählten Farbe oder einer Texturdatei gefüllt.
+  * Export nach Projektordnerstruktur (\`mipmap-mdpi\` bis \`mipmap-xxxhdpi\`).
+  * Erzeugen Sie ein rundes Legacy-Symbol (\`ic_launcher.png\`) durch Maskierung und Überlagerung.
+  * Exportieren Sie das Promo-Symbol für die Google Play Console in der Größe \`512x512\` Pixel.
+
+### Moderne Windows 11-Oberfläche (UI/UX)
+
+* Verwendung des systemtransparenten Materials Mica Alt (passt sich dem Desktop-Hintergrund an).
+* Volle Unterstützung für das dunkle und helle Design von Windows 11.
+* Interaktiver Drag-and-Drop-Bereich mit dynamischer Änderung der Rahmenfarbe und integrierter Vorschau für PNG- und SVG-Dateien.
+* Schnellfarbfelder zur Auswahl der Hintergrundfarbe für adaptive Android-Symbole.
+
+### Systemintegration (Shell-Integration)
+
+* **Explorer-Kontextmenü:** Option zum direkten Einbetten des Elements "Symbole in IconForge generieren" in das Windows Explorer-Kontextmenü beim Rechtsklick auf eine PNG- oder SVG-Datei. Die Registrierung erfolgt lokal im Hive \`HKEY_CURRENT_USER\` und erfordert keine Administratorrechte (UAC).
+* **Toast-Benachrichtigungen:** Nach Abschluss der Verarbeitung sendet die App eine native Windows 11-Toast-Benachrichtigung mit einer interaktiven Schaltfläche zum Öffnen des Zielordners.
+
+---
+
+## Technologie-Stack
+
+| Komponente / Schicht | Technologie | Details / Zweck |
+| --- | --- | --- |
+| Sprache | C# (.NET 8.0) | net8.0-windows Ziel-Framework |
+| UI-Plattform | WinUI 3 | Windows App SDK 2.2.0 |
+| Grafik-Rendering | SkiaSharp | Lanczos3-Größenänderung und Filterung |
+| SVG-Rendering | Svg.Skia | Rendern von Vektorgrafiken in Raster |
+| Verpackungsart | Unpackaged Self-Contained | Läuft ohne globale Installation der Windows App Runtime |
+
+---
+
+## Dateiexportstruktur
+
+Nach der Generierung wird im ausgewählten Zielordner folgende Verzeichnisstruktur erstellt:
+
+\`\`\`text
+[Zielordner]/
+├── Windows/
+│   ├── app_icon.ico
+│   └── Assets/
+│       ├── Square44x44Logo.scale-100.png
+│       ├── Square44x44Logo.scale-200.png
+│       └── ... (alle Assets in allen Skalierungen)
+└── Android/
+    ├── play_store_512.png
+    └── res/
+        ├── mipmap-mdpi/
+        │   ├── ic_launcher.png
+        │   ├── ic_launcher_background.png
+        │   └── ic_launcher_foreground.png
+        └── mipmap-xxxhdpi/ ...
+\`\`\`
+
+---
+
+## Erste Schritte
+
+### Anforderungen
+
+* [.NET 8.0 SDK](https://dotnet.microsoft.com/download) oder neuer.
+
+### Erstellen und Ausführen über die Konsole
+
+1. Klonen Sie das Repository:
+   \`\`\`powershell
+   git clone https://github.com/Almanex/icoboo.git
+   cd icoboo
+   \`\`\`
+2. Kompilieren Sie das Projekt:
+   \`\`\`powershell
+   dotnet build
+   \`\`\`
+3. Starten Sie die Anwendung:
+   \`\`\`powershell
+   dotnet run
+   \`\`\`
+
+### Veröffentlichen (eigenständige EXE mit Assets)
+
+So generieren Sie ein einzelnes ausführbares Paket:
+\`\`\`powershell
+dotnet publish -c Release -r win-x64 --self-contained true
+\`\`\`
+Diese Kompilierung führt die Assemblies in eine einzige ausführbare Datei \`IconForge.exe\` zusammen und kopiert den Ordner \`Assets/\` daneben in das Verzeichnis \`publish/\`.
+
+> [!IMPORTANT]
+> Der Ordner \`Assets/\` **muss** im selben Verzeichnis wie \`IconForge.exe\` aufbewahrt werden, damit die Anwendung UI-Assets laden und erfolgreich starten kann. Wenn Sie die App verteilen, packen Sie sowohl die ausführbare Datei als auch das \`Assets/\`-Verzeichnis zusammen (z. B. in ein ZIP-Archiv).
+
+---
+
+## Mitwirken
+
+Beiträge sind herzlich willkommen! Bitte öffnen Sie ein Issue oder senden Sie einen Pull-Request, wenn Sie Verbesserungen vorschlagen möchten.
+
+---
+
+## Versionierung
+
+Wir verwenden [SemVer](https://semver.org/) für die Versionierung. Die verfügbaren Versionen finden Sie unter den Tags in diesem Repository.
+
+---
+
+## Autoren
+
+* **Almanex** - *Ursprüngliche Entwicklung* - [Almanex Profil](https://github.com/Almanex)
+
+---
+
+## Lizenz
+
+Dieses Projekt ist unter der MIT-Lizenz lizenziert - siehe die Datei \`LICENSE\` für Details.
+`,
+    guide: `[ English ](GUIDE.md) • [ Русский ](GUIDE_RU.md) • [ Deutsch ](GUIDE_DE.md)
+
+# IconForge User Guide
+
+Welcome to the **IconForge** user guide. This document provides step-by-step instructions and technical details on how to get the most out of the application.
+
+---
+
+<p align="center">
+  <img src="../Screenshots/cover.png" alt="IconForge main" width="49%" />
+  <img src="../Screenshots/editor.png" alt="IconForge settings" width="49%" />
+</p>
+
+---
+
+## 1. Quick Start Workflow
+
+IconForge is designed to be straightforward and fast:
+
+1. **Select Source File:** Drag and drop a PNG or SVG image into the dashed drop zone, or click **"Browse file on disk..."** to open a file selection dialog.
+2. **Choose Destination:** Specify where you want the generated icons to be saved by entering a path or clicking the folder browser icon.
+3. **Configure Settings:** Choose your preferred export options (Windows \`.ico\`, modern Assets, or Android Adaptive layouts).
+4. **Generate:** Click **"Generate icons"**. A notification will appear once the process is complete, and you can click the notification or open the target folder to view your assets.
+
+> [!IMPORTANT]
+> **Executable Dependency:** The \`IconForge.exe\` single-file executable relies on the \`Assets/\` directory containing the app's internal icons and assets to load its UI correctly. Always ensure the \`Assets/\` folder is present in the same directory as \`IconForge.exe\` when running it. If you download a release ZIP archive, make sure to extract all contents before running the program.
+
+---
+
+## 2. Icon Formats and Technical Specifications
+
+### Windows Classic .ico Generation
+
+The Classic Windows Icon format (\`.ico\`) is a container that bundles multiple resolutions into a single file. This is crucial for keeping icons crisp at different Explorer view options (e.g. details, list, tiles, medium, large, and extra-large icons).
+
+* **Bundled Resolutions:** \`16x16\`, \`24x24\`, \`32x32\`, \`48x48\`, \`64x64\`, \`128x128\`, \`256x256\` pixels.
+* **Micro-sharpening Filter:** To prevent small resolutions (\`16x16\` up to \`48x48\` pixels) from looking blurry or muddy in the Windows Explorer shell, IconForge automatically applies a custom contour sharpening filter after scaling using the SkiaSharp Lanczos3 algorithm.
+
+### Windows Modern Assets
+
+Modern Windows Apps (UWP and WinUI 3 packaged applications) use separate PNG files declared in their package manifest (\`Package.appxmanifest\`). These assets are scaled depending on the user's monitor DPI settings.
+
+* **Asset Templates:** \`Square44x44Logo\`, \`Square150x150Logo\`, \`StoreLogo\`.
+* **Scales Generated:** \`scale-100\` (100%), \`scale-125\` (125%), \`scale-150\` (150%), \`scale-200\` (200%), and \`scale-400\` (400%).
+
+### Android Adaptive & Legacy Icons
+
+Android 8.0 (API level 26) introduced **Adaptive Icons**, which can display a variety of shapes across different device models (circles, squircles, rounded rectangles). To support this, Android requires icons to consist of separate foreground and background layers.
+
+* **Foreground Layer (\`ic_launcher_foreground.png\`):**
+  * The source image is automatically scaled down and centered inside a safe zone.
+  * **Safe Zone Rule:** To prevent the logo from being cropped by different device masks, the core icon must reside within a central 72dp circle of the 108dp total canvas size. IconForge handles this positioning automatically.
+* **Background Layer (\`ic_launcher_background.png\`):**
+  * You can select a background color using a Hex code (e.g. \`#FFFFFF\` or \`#3DDC84\`), pick a predefined color from the quick swatches, or select a custom background image file (such as a pattern or texture).
+* **Densities Supported:** Folder structure ranges from \`mipmap-mdpi\` up to \`mipmap-xxxhdpi\`.
+* **Legacy Icon (\`ic_launcher.png\`):**
+  * For older Android versions, a standard round legacy icon is automatically compiled by combining the foreground and background layers and applying a circular mask.
+* **Google Play Console Promo Icon:**
+  * Generates a high-quality \`512x512\` pixel PNG representation of the final icon, ready to upload to the developer console.
+
+---
+
+## 3. Shell Integration (Explorer Context Menu)
+
+IconForge lets you register a shortcut directly in the Windows Explorer context menu so you can right-click any image and generate icons immediately.
+
+### Registry Location and Privileges
+
+* **Registry Path:** Keys are added under:
+  * \`HKEY_CURRENT_USER\\Software\\Classes\\SystemFileAssociations\\.png\\Shell\\IconForge\`
+  * \`HKEY_CURRENT_USER\\Software\\Classes\\SystemFileAssociations\\.svg\\Shell\\IconForge\`
+* **No Administrator Rights Required:** Because the application writes to the user-specific registry hive (\`HKEY_CURRENT_USER\`) instead of the system-wide machine hive (\`HKEY_LOCAL_MACHINE\`), **you do not need administrator privileges (UAC prompt)** to toggle this feature. It is entirely sandboxed to the current Windows user profile.
+
+---
+
+## 4. Troubleshooting Windows Defender SmartScreen
+
+If you compile IconForge from source or download an unsigned binary release, Windows Defender SmartScreen might block it on first launch, showing a warning: *"Windows Defender SmartScreen prevented an unrecognized app from starting."*
+
+### Why does this happen?
+This warning is standard for free, open-source software that does not have a paid digital code-signing certificate (which cost several hundred dollars annually). It does not mean the application is unsafe.
+
+### How to bypass the warning:
+1. In the SmartScreen window, click on the **"More info"** link.
+2. The publisher name will show as *Unknown Publisher*.
+3. Click the **"Run anyway"** button that appears at the bottom.
+4. The application will launch normally and will not show the warning again.
+`,
+    guide_ru: `[ English ](GUIDE.md) • [ Русский ](GUIDE_RU.md) • [ Deutsch ](GUIDE_DE.md)
+
+# Руководство пользователя IconForge
+
+Добро пожаловать в руководство пользователя **IconForge**. Этот документ содержит пошаговые инструкции и технические характеристики, которые помогут вам максимально эффективно использовать возможности приложения.
+
+---
+
+<p align="center">
+  <img src="../Screenshots/cover.png" alt="IconForge main" width="49%" />
+  <img src="../Screenshots/editor.png" alt="IconForge settings" width="49%" />
+</p>
+
+---
+
+## 1. Быстрый старт
+
+Процесс работы в IconForge разработан таким образом, чтобы быть максимально простым и быстрым:
+
+1. **Выберите исходный файл:** Перетащите файл PNG или SVG в пунктирную зону сброса или нажмите кнопку **"Выбрать файл на диске..."**, чтобы открыть диалоговое окно выбора файла.
+2. **Укажите папку назначения:** Введите путь или нажмите на значок папки, чтобы указать, куда следует сохранить сгенерированные иконки.
+3. **Настройте параметры:** Выберите форматы для экспорта (классический Windows \`.ico\`, современные Windows Assets или адаптивные слои Android).
+4. **Сгенерируйте иконки:** Нажмите кнопку **"Сгенерировать иконки"**. По завершении работы появится всплывающее уведомление, кликнув на которое (или открыв указанную папку), вы сможете просмотреть готовые файлы.
+
+> [!IMPORTANT]
+> **Зависимость от ресурсов:** Исполняемый файл \`IconForge.exe\` требует наличия папки \`Assets/\` с внутренними иконками приложения в том же каталоге для корректного отображения интерфейса. Обязательно убедитесь, что папка \`Assets/\` находится рядом с файлом \`IconForge.exe\` перед запуском. Если вы скачали ZIP-архив релиза, обязательно полностью распакуйте все файлы перед использованием.
+
+---
+
+## 2. Форматы иконок и технические характеристики
+
+### Классический .ico для Windows
+
+Классический формат иконок Windows (\`.ico\`) представляет собой контейнер, который упаковывает несколько разрешений в один файл. Это необходимо для того, чтобы иконка оставалась четкой при любых режимах отображения в Проводнике (таблица, список, плитка, мелкие, средние, крупные или огромные значки).
+
+* **Упакованные разрешения:** \`16x16\`, \`24x24\`, \`32x32\`, \`48x48\`, \`64x64\`, \`128x128\`, \`256x256\` пикселей.
+* **Фильтр микро-резкости (Micro-sharpening):** Чтобы иконки небольшого размера (от \`16x16\` до \`48x48\` пикселей) не выглядели размытыми в Проводнике Windows, IconForge автоматически применяет специальный контурный фильтр резкости после масштабирования с использованием алгоритма SkiaSharp Lanczos3.
+
+### Современные Windows Assets
+
+Современные приложения Windows (пакетированные приложения UWP и WinUI 3) используют отдельные PNG-файлы, прописанные в манифесте пакета (\`Package.appxmanifest\`). Эти ресурсы масштабируются в зависимости от настроек DPI монитора пользователя.
+
+* **Шаблоны ресурсов:** \`Square44x44Logo\`, \`Square150x150Logo\`, \`StoreLogo\`.
+* **Масштабы генерации:** \`scale-100\` (100%), \`scale-125\` (125%), \`scale-150\` (150%), \`scale-200\` (200%) и \`scale-400\` (400%).
+
+### Адаптивные и классические иконки Android
+
+В Android 8.0 (API level 26) появились **адаптивные иконки** (Adaptive Icons), которые могут принимать различную форму на разных устройствах (круг, квадрат со скругленными углами, скругленный прямоугольник). Для этого Android требует разделения иконки на два слоя: передний план (логотип) и задний план (фон).
+
+* **Слой переднего плана (\`ic_launcher_foreground.png\`):**
+  * Исходное изображение автоматически масштабируется и выравнивается по центру внутри безопасной зоны.
+  * **Правило безопасной зоны:** Чтобы логотип не срезался масками на разных устройствах, важные элементы значка должны находиться внутри центрального круга диаметром 72dp при общем размере холста 108dp. IconForge автоматически позиционирует изображение с учетом этого требования.
+* **Слой заднего плана (\`ic_launcher_background.png\`):**
+  * Вы можете выбрать цвет фона, введя Hex-код (например, \`#FFFFFF\` или \`#3DDC84\`), выбрав готовый цвет из быстрых палитр (свотчей) или указав файл с пользовательским фоновым изображением (текстурой или паттерном).
+* **Поддерживаемые плотности:** Структура папок экспортируется от \`mipmap-mdpi\` до \`mipmap-xxxhdpi\`.
+* **Классическая (Legacy) иконка (\`ic_launcher.png\`):**
+  * Для старых версий Android автоматически собирается стандартная круглая иконка путем наложения слоев переднего и заднего плана с применением круглой маски.
+* **Промо-иконка Google Play Console:**
+  * Создает высококачественное PNG-изображение размером \`512x512\` пикселей, готовое для загрузки в консоль разработчика.
+
+---
+
+## 3. Системная интеграция (Контекстное меню Проводника)
+
+IconForge позволяет зарегистрировать ярлык непосредственно в контекстном меню Проводника Windows. После этого вы сможете кликнуть правой кнопкой мыши на любое изображение и сразу запустить процесс генерации.
+
+### Разделы реестра и права доступа
+
+* **Путь в реестре:** Записи добавляются в следующие ветки:
+  * \`HKEY_CURRENT_USER\\Software\\Classes\\SystemFileAssociations\\.png\\Shell\\IconForge\`
+  * \`HKEY_CURRENT_USER\\Software\\Classes\\SystemFileAssociations\\.svg\\Shell\\IconForge\`
+* **Права администратора не требуются:** Поскольку приложение записывает параметры в пользовательский куст реестра (\`HKEY_CURRENT_USER\`), а не в общесистемный (\`HKEY_LOCAL_MACHINE\`), **вам не нужны права администратора (UAC-запрос)** для включения или отключения этой функции. Настройки полностью изолированы в профиле текущего пользователя Windows.
+
+---
+
+## 4. Обход предупреждений Windows Defender SmartScreen
+
+При компиляции IconForge из исходного кода или при запуске загруженной неопубликованной сборки фильтр Windows Defender SmartScreen может заблокировать запуск, показав предупреждение: *"Система Windows Defender SmartScreen предотвратила запуск неопознанного приложения."*
+
+### Почему это происходит?
+Это предупреждение является стандартным для бесплатного программного обеспечения с открытым исходным кодом, которое не имеет платного цифрового сертификата подписи кода (стоимость которого составляет несколько сотен долларов в год). Это не означает, что приложение небезопасно.
+
+### Как обойти предупреждение:
+1. В окне SmartScreen нажмите на ссылку **"Подробнее"** (или **"More info"**).
+2. Появится имя издателя: *Неизвестный издатель*.
+3. Нажмите на появившуюся кнопку **"Выполнить в любом случае"** (или **"Run anyway"**) в нижней части окна.
+4. Приложение запустится в обычном режиме и при последующих запусках предупреждение больше не появится.
+`,
+    guide_de: `[ English ](GUIDE.md) • [ Русский ](GUIDE_RU.md) • [ Deutsch ](GUIDE_DE.md)
+
+# IconForge Benutzerhandbuch
+
+Willkommen beim Benutzerhandbuch für **IconForge**. Dieses Dokument bietet Schritt-für-Schritt-Anleitungen und technische Details, um die Anwendung optimal zu nutzen.
+
+---
+
+<p align="center">
+  <img src="../Screenshots/cover.png" alt="IconForge main" width="49%" />
+  <img src="../Screenshots/editor.png" alt="IconForge settings" width="49%" />
+</p>
+
+---
+
+## 1. Schnellstart-Workflow
+
+IconForge ist so konzipiert, dass es einfach und schnell zu bedienen ist:
+
+1. **Quelldatei auswählen:** Ziehen Sie ein PNG- oder SVG-Bild per Drag-and-Drop in den gestrichelten Ablagebereich oder klicken Sie auf **"Datei auf der Festplatte auswählen..."**, um den Dateiauswahldialog zu öffnen.
+2. **Zielordner angeben:** Legen Sie fest, wo die generierten Symbole gespeichert werden sollen, indem Sie einen Pfad eingeben oder auf das Ordnersymbol klicken.
+3. **Einstellungen konfigurieren:** Wählen Sie Ihre bevorzugten Exportoptionen aus (klassisches Windows \`.ico\`, moderne Windows Assets oder Android Adaptive Layouts).
+4. **Generieren:** Klicken Sie auf **"Symbole generieren"**. Nach Abschluss des Vorgangs wird eine Benachrichtigung angezeigt. Sie können auf die Benachrichtigung klicken oder den Zielordner öffnen, um die Dateien anzuzeigen.
+
+> [!IMPORTANT]
+> **Ressourcenabhängigkeit:** Die ausführbare Datei \`IconForge.exe\` benötigt das Verzeichnis \`Assets/\` mit den internen Anwendungssymbolen im selben Ordner, um die Benutzeroberfläche korrekt zu laden. Stellen Sie vor dem Starten sicher, dass sich der Ordner \`Assets/\` im selben Verzeichnis wie \`IconForge.exe\` befindet. Wenn Sie das ZIP-Archiv des Releases heruntergeladen haben, entpacken Sie bitte alle Dateien vollständig vor der Verwendung.
+
+---
+
+## 2. Symbolformate und technische Spezifikationen
+
+### Klassische Windows .ico-Generierung
+
+Das klassische Windows-Symbolformat (\`.ico\`) ist ein Container, der mehrere Auflösungen in einer einzigen Datei zusammenfasst. Dies ist wichtig, damit Symbole bei verschiedenen Explorer-Ansichtsoptionen (z. B. Details, Liste, Kacheln, mittel, groß und extra groß) gestochen scharf bleiben.
+
+* **Bündelauflösungen:** \`16x16\`, \`24x24\`, \`32x32\`, \`48x48\`, \`64x64\`, \`128x128\`, \`256x256\` Pixel.
+* **Mikroschärfungsfilter:** Um zu verhindern, dass niedrige Auflösungen (von \`16x16\` bis \`48x48\` Pixel) im Windows Explorer verschwommen oder matschig wirken, wendet IconForge nach der Skalierung mit dem SkiaSharp Lanczos3-Algorithmus automatisch einen benutzerdefinierten Konturschärfungsfilter an.
+
+### Moderne Windows-Assets
+
+Moderne Windows-Apps (UWP- und WinUI 3-Anwendungen) verwenden separate PNG-Dateien, die in ihrem Paketmanifest (\`Package.appxmanifest\`) deklariert sind. Diese Assets werden je nach DPI-Einstellung des Monitors skaliert.
+
+* **Asset-Vorlagen:** \`Square44x44Logo\`, \`Square150x150Logo\`, \`StoreLogo\`.
+* **Generierte Skalierungen:** \`scale-100\` (100%), \`scale-125\` (125%), \`scale-150\` (150%), \`scale-200\` (200%) und \`scale-400\` (400%).
+
+### Android Adaptive & Legacy-Symbole
+
+Android 8.0 (API-Level 26) führte **Adaptive Symbole** (Adaptive Icons) ein, die auf verschiedenen Gerätemodellen unterschiedliche Formen anzeigen können (Kreise, abgerundete Quadrate usw.). Um dies zu unterstützen, verlangt Android, dass Symbole aus separaten Vordergrund- und Hintergrundebenen bestehen.
+
+* **Vordergrundebene (\`ic_launcher_foreground.png\`):**
+  * Das Quellbild wird automatisch verkleinert und innerhalb einer sicheren Zone zentriert.
+  * **Sicherheitszonen-Regel:** Um zu verhindern, dass das Logo durch Gerätemasken abgeschnitten wird, muss sich das Kernsymbol innerhalb eines zentralen Kreises von 72dp bei einer Gesamtgröße von 108dp befinden. IconForge übernimmt diese Positionierung automatisch.
+* **Hintergrundebene (\`ic_launcher_background.png\`):**
+  * Sie können eine Hintergrundfarbe mithilfe eines Hex-Codes auswählen (z. B. \`#FFFFFF\` oder \`#3DDC84\`), eine vordefinierte Farbe aus den Schnellfarbfeldern wählen oder eine benutzerdefinierte Hintergrundbilddatei (z. B. ein Muster oder eine Textur) auswählen.
+* **Unterstützte Dichten:** Die Ordnerstruktur reicht von \`mipmap-mdpi\` bis \`mipmap-xxxhdpi\`.
+* **Legacy-Symbol (\`ic_launcher.png\`):**
+  * Für ältere Android-Versionen wird automatisch ein rundes Standard-Legacy-Symbol erstellt, indem die Vorder- und Hintergrundebenen kombiniert und eine kreisförmige Maske angewendet werden.
+* **Google Play Console Promo-Symbol:**
+  * Generiert ein hochwertiges PNG-Bild mit \`512x512\` Pixeln, das in die Entwicklerkonsole hochgeladen werden kann.
+
+---
+
+## 3. Systemintegration (Explorer-Kontextmenü)
+
+Mit IconForge können Sie eine Verknüpfung direkt im Windows Explorer-Kontextmenü registrieren, sodass Sie mit der rechten Maustaste auf ein beliebiges Bild klicken und sofort Symbole generieren können.
+
+### Registrierungspfad und Berechtigungen
+
+* **Registrierungspfad:** Die Schlüssel werden unter folgendem Pfad hinzugefügt:
+  * \`HKEY_CURRENT_USER\\Software\\Classes\\SystemFileAssociations\\.png\\Shell\\IconForge\`
+  * \`HKEY_CURRENT_USER\\Software\\Classes\\SystemFileAssociations\\.svg\\Shell\\IconForge\`
+* **Keine Administratorrechte erforderlich:** Da die Anwendung in den benutzerspezifischen Registrierungs-Hive (\`HKEY_CURRENT_USER\`) statt in den systemweiten Hive (\`HKEY_LOCAL_MACHINE\`) schreibt, **benötigen Sie keine Administratorrechte (UAC-Eingabeaufforderung)**, um diese Funktion zu aktivieren oder zu deaktivieren. Sie ist vollständig auf das aktuelle Windows-Benutzerprofil beschränkt.
+
+---
+
+## 4. Problembehebung bei Windows Defender SmartScreen
+
+Wenn Sie IconForge aus dem Quellcode kompilieren oder eine nicht signierte Binärdatei ausführen, blockiert Windows Defender SmartScreen die Ausführung möglicherweise beim ersten Start mit der Warnung: *"Der Computer wurde durch Windows Defender SmartScreen geschützt. Von Windows Defender SmartScreen wurde der Start einer unbekannten App verhindert."*
+
+### Warum passiert das?
+Diese Warnung ist Standard für kostenlose Open-Source-Software, die nicht über ein kostenpflichtiges digitales Codesignaturzertifikat verfügt (das jährlich mehrere hundert Dollar kostet). Dies bedeutet nicht, dass die Anwendung unsicher ist.
+
+### So umgehen Sie die Warnung:
+1. Klicken Sie im SmartScreen-Fenster auf den Link **"Weitere Informationen"** (oder **"More info"**).
+2. Der Name des Herausgebers wird als *Unbekannter Herausgeber* angezeigt.
+3. Klicken Sie auf die Schaltfläche **"Trotzdem ausführen"** (oder **"Run anyway"**), die unten im Fenster angezeigt wird.
+4. Die Anwendung startet normal und die Warnung wird bei zukünftigen Starts nicht mehr angezeigt.
+`
+  },
   "lingospaced": {
     title: "LingoSpaced",
     subtitle: "An Android flashcard application utilizing spaced repetition for language learning.",
