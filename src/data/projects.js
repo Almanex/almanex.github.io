@@ -9,132 +9,584 @@ export const PROJECTS_DATA = {
     license: "Other",
     github: "https://github.com/Almanex/Classic-Windows-image-viewer-for-Windows-11",
     image: "images/projects/classic-windows-image-viewer.jpg",
-    readme: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+    readme: `[ English ](README.md) • [ Русский ](docs/README_RU.md) • [ Deutsch ](docs/README_DE.md)
 
 # Shell Image Viewer
 
-Classic Windows image viewer for Windows 10/11.
+*Classic Windows Photo Viewer launcher for Windows 10 and 11.*
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Platform: Windows](https://img.shields.io/badge/Platform-Windows-0078d7.svg)](#)
+[![Language: C++17](https://img.shields.io/badge/Language-C%2B%2B17-blue.svg)](#)
+[![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FClassic-Windows-image-viewer-for-Windows-11)](https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20project&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FClassic-Windows-image-viewer-for-Windows-11)
+
+---
 
 ## Overview
 
-Microsoft has removed the classic Windows Photo Viewer interface in Windows 10 and 11, but the underlying system library \`shimgvw.dll\` remains to support legacy functionality. 
+Microsoft has removed the classic Windows Photo Viewer interface in Windows 10 and 11, but the underlying system library \`shimgvw.dll\` remains to support legacy functionality.
 
-\`PhotoViewer.exe\` is a tiny launcher that calls \`ImageView_FullscreenW\` from \`shimgvw.dll\` to bring back the familiar full-screen viewing experience.
+\`PhotoViewer.exe\` is a tiny launcher written in C++ that calls \`ImageView_FullscreenW\` from \`shimgvw.dll\` to bring back the familiar full-screen viewing experience.
 
-If your system version lacks \`shimgvw.dll\` (common in some lite or "N" editions), you can find compatible versions in the \`DLL/\` directory of this project.
+If your system version lacks \`shimgvw.dll\` (common in some lite or "N" editions), you can find compatible versions in the \`DLL/\` directory of this project and place them next to the executable.
 
-## Usage
+---
 
-\`\`\`powershell
-PhotoViewer.exe "C:\\Pictures\\photo.jpg"
-PhotoViewer.exe
-\`\`\`
+## Key Features
 
-## Build
+- Fullscreen viewing of images with the original Windows Photo Viewer user interface.
+- Automatic system-wide lookup of \`shimgvw.dll\`.
+- Support for loading local \`shimgvw.dll\` adjacent to the executable if not found in the system.
+- Open files through command-line argument passing or standard file selection dialog.
+- Command-line flags to retrieve help, version information, and supported image formats.
 
-Requirements:
+---
+
+## Tech Stack
+
+| Layer / Component | Technology | Details / Purpose |
+| --- | --- | --- |
+| Language | C++17 | Standard compliance for modern and safe codebase |
+| Build System | CMake 3.16+ | Cross-platform build configuration |
+| UI Library | Win32 API / Common Dialogs | Native lightweight file picking dialog and message boxes |
+| Core Dependency | shimgvw.dll | Native Windows Photo Viewer library |
+
+---
+
+## Getting Started
+
+For a detailed step-by-step graphical setup guide, see the [User Guide](docs/GUIDE.md).
+
+### Prerequisites
+
 - Windows 10/11
 - CMake 3.16+
 - MinGW-w64 or MSVC with C++17 support
 
+### Installation & Running
+
+Run the following commands in your shell:
+
 \`\`\`powershell
+git clone https://github.com/Almanex/Classic-Windows-image-viewer-for-Windows-11.git
+cd Classic-Windows-image-viewer-for-Windows-11
 cmake -B build -G "MinGW Makefiles"
 cmake --build build --config Release
 \`\`\`
 
-Result: \`release/PhotoViewer.exe\`
+The resulting binary will be built at \`release/PhotoViewer.exe\`.
 
-## Supported formats
+---
 
-BMP, JPG, JPEG, PNG, GIF, TIF, TIFF, ICO, WMF, EMF
+## Running the Tests
+
+The project does not contain automated unit tests. Testing is conducted manually by executing the launcher with diagnostic parameters:
+
+\`\`\`powershell
+release/PhotoViewer.exe /?
+release/PhotoViewer.exe --about
+release/PhotoViewer.exe --formats
+\`\`\`
+
+---
+
+## Deployment
+
+To deploy the application, simply copy the compiled standalone \`PhotoViewer.exe\` binary to the target system.
+
+> [!WARNING]
+> **Windows Defender SmartScreen** may block the application on its first launch.
+> * **Reason**: The application is unsigned (does not have a paid digital code-signing certificate), which is standard for free, open-source projects.
+> * **Instruction**: To bypass this warning, click **"More info"**, and then select **"Run anyway"**.
+
+---
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues or submit Pull Requests for bugs, enhancements, and translation updates.
+
+---
+
+## Versioning
+
+This project adheres to Semantic Versioning (SemVer). To see available tags and releases, check the releases section of this repository.
+
+---
+
+## Authors & Contributors
+
+- Initial author: [Almanex](https://github.com/Almanex)
+- Contributors & community
+
+---
 
 ## License
 
-MIT`,
-    readme_ru: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## Acknowledgments
+
+- Developers of the original \`shimgvw.dll\`.
+- Community testers and contributors.`,
+    readme_ru: `[ English ](../README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
 
 # Shell Image Viewer
 
-Классическое средство просмотра изображений Windows для Windows 10/11.
+*Классический просмотрщик изображений Windows для Windows 10 и 11.*
+
+[![Лицензия: MIT](https://img.shields.io/badge/%D0%9B%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F-MIT-blue.svg)](../LICENSE)
+[![Платформа: Windows](https://img.shields.io/badge/%D0%9F%D0%BB%D0%B0%D1%82%D1%84%D0%BE%D1%80%D0%BC%D0%B0-Windows-0078d7.svg)](#)
+[![Язык: C++17](https://img.shields.io/badge/%D0%AF%D0%B7%D1%8B%D0%BA-C%2B%2B17-blue.svg)](#)
+[![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FClassic-Windows-image-viewer-for-Windows-11)](https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20project&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FClassic-Windows-image-viewer-for-Windows-11)
+
+---
 
 ## Обзор
 
-Microsoft удалила классический интерфейс средства просмотра фотографий в Windows 10 и 11, но базовая системная библиотека \`shimgvw.dll\` осталась для поддержки устаревших функций.
+Microsoft удалила классический интерфейс средства просмотра фотографий Windows (Windows Photo Viewer) в Windows 10 и 11, однако системная библиотека \`shimgvw.dll\` всё ещё присутствует в системе для обеспечения обратной совместимости.
 
-\`PhotoViewer.exe\` — это крошечный загрузчик, который вызывает функцию \`ImageView_FullscreenW\` из \`shimgvw.dll\`, чтобы вернуть привычный полноэкранный режим просмотра.
+\`PhotoViewer.exe\` — это крошечный лаунчер, написанный на C++, который вызывает функцию \`ImageView_FullscreenW\` из библиотеки \`shimgvw.dll\` для возврата привычного полноэкранного режима просмотра изображений.
 
-Если в вашей версии системы отсутствует библиотека \`shimgvw.dll\` (часто встречается в облегченных версиях или Windows редакций «N»), вы можете найти совместимые версии в директории \`DLL/\` этого проекта.
+Если в вашей системе отсутствует библиотека \`shimgvw.dll\` (например, в некоторых облегченных сборках или Windows "N" версиях), вы можете найти совместимые версии в папке \`DLL/\` этого проекта и разместить её рядом с исполняемым файлом.
 
-## Использование
+---
+
+## Основные возможности
+
+- Полноэкранный просмотр изображений с помощью оригинального интерфейса Windows Photo Viewer.
+- Автоматический поиск системной библиотеки \`shimgvw.dll\`.
+- Возможность использования локальной копии DLL при отсутствии системной.
+- Поддержка открытия файлов через аргументы командной строки или стандартный диалог выбора.
+- Встроенные параметры командной строки для получения информации о версии, справки и списка форматов.
+
+---
+
+## Стек технологий
+
+| Компонент / Уровень | Технология | Описание / Назначение |
+| --- | --- | --- |
+| Язык программирования | C++17 | Использование современного стандарта для безопасного и эффективного кода |
+| Система сборки | CMake 3.16+ | Кросс-компиляция и конфигурация сборщика |
+| Интерфейс пользователя | Win32 API / Common Dialogs | Минималистичный нативный диалог открытия файлов и информационные окна |
+| Основная зависимость | shimgvw.dll | Нативная библиотека Windows Photo Viewer |
+
+---
+
+## Начало работы
+
+Подробное пошаговое руководство с иллюстрациями по настройке приложения см. в [Руководстве пользователя](GUIDE_RU.md).
+
+### Требования
+
+- Операционная система Windows 10/11
+- Установленный CMake 3.16+
+- Компилятор MinGW-w64 или MSVC с поддержкой C++17
+
+### Сборка и запуск
+
+Выполните следующие команды в терминале:
 
 \`\`\`powershell
-PhotoViewer.exe "C:\\Pictures\\photo.jpg"
-PhotoViewer.exe
-\`\`\`
-
-## Сборка
-
-Требования:
-- Windows 10/11
-- CMake 3.16+
-- MinGW-w64 или MSVC с поддержкой C++17
-
-\`\`\`powershell
+git clone https://github.com/Almanex/Classic-Windows-image-viewer-for-Windows-11.git
+cd Classic-Windows-image-viewer-for-Windows-11
 cmake -B build -G "MinGW Makefiles"
 cmake --build build --config Release
 \`\`\`
 
-Результат: \`release/PhotoViewer.exe\`
+Исполняемый файл будет скомпилирован в \`release/PhotoViewer.exe\`.
 
-## Поддерживаемые форматы
+---
 
-BMP, JPG, JPEG, PNG, GIF, TIF, TIFF, ICO, WMF, EMF
+## Тестирование
+
+В проекте нет автоматических юнит-тестов. Тестирование производится вручную запуском исполняемого файла с различными параметрами командной строки:
+
+\`\`\`powershell
+release/PhotoViewer.exe /?
+release/PhotoViewer.exe --about
+release/PhotoViewer.exe --formats
+\`\`\`
+
+---
+
+## Развертывание
+
+Для развертывания приложения достаточно скопировать скомпилированный файл \`PhotoViewer.exe\` на целевую систему.
+
+> [!WARNING]
+> **Windows Defender SmartScreen** может заблокировать запуск приложения при первом старте.
+> * **Причина**: Приложение не подписано платным сертификатом разработчика, что является стандартной практикой для бесплатных проектов с открытым исходным кодом.
+> * **Инструкция**: Чтобы обойти это предупреждение, нажмите **«Подробнее»** (More info), а затем выберите **«Выполнить в любом случае»** (Run anyway).
+
+---
+
+## Участие в разработке
+
+Мы рады любому участию в улучшении проекта! Вы можете создавать сообщения об ошибках (Issues) или присылать свои исправления (Pull Requests).
+
+---
+
+## Версионирование
+
+Этот проект использует семантическое версионирование (SemVer). Все доступные версии и теги можно просмотреть на вкладке релизов в репозитории.
+
+---
+
+## Авторы и контрибьюторы
+
+- Начальный автор: [Almanex](https://github.com/Almanex)
+- Сообщество и контрибьюторы
+
+---
 
 ## Лицензия
 
-MIT`,
-    readme_de: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+Проект распространяется под свободной лицензией MIT. Подробности см. в файле [LICENSE](../LICENSE).
+
+---
+
+## Благодарности
+
+- Разработчикам оригинальной библиотеки \`shimgvw.dll\`.
+- Сообществу за поддержку и тестирование.
+`,
+    readme_de: `[ English ](../README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
 
 # Shell Image Viewer
 
-Klassischer Windows-Bildbetrachter für Windows 10/11.
+*Klassischer Windows-Bildbetrachter für Windows 10 und 11.*
 
-## Übersicht
+[![Lizenz: MIT](https://img.shields.io/badge/Lizenz-MIT-blue.svg)](../LICENSE)
+[![Plattform: Windows](https://img.shields.io/badge/Plattform-Windows-0078d7.svg)](#)
+[![Sprache: C++17](https://img.shields.io/badge/Sprache-C%2B%2B17-blue.svg)](#)
+[![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FClassic-Windows-image-viewer-for-Windows-11)](https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20project&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FClassic-Windows-image-viewer-for-Windows-11)
 
-Microsoft hat die klassische Windows-Fotoanzeige in Windows 10 und 11 entfernt, aber die zugrunde liegende Systembibliothek \`shimgvw.dll\` bleibt erhalten, um Legacy-Funktionalitäten zu unterstützen.
+---
 
-\`PhotoViewer.exe\` is ein winziger Launcher, der \`ImageView_FullscreenW\` aus der \`shimgvw.dll\` aufruft, um das vertraute Vollbild-Bilderlebnis zurückzubringen.
+## Überblick
 
-Wenn Ihrer Systemversion die \`shimgvw.dll\` fehlt (häufig in einigen Lite- oder N-Editionen), finden Sie kompatible Versionen im Verzeichnis \`DLL/\` dieses Projekts.
+Microsoft hat die klassische Windows Photo Viewer-Schnittstelle in Windows 10 und 11 entfernt, aber die zugrunde liegende Systembibliothek \`shimgvw.dll\` unterstützt weiterhin die Legacy-Funktionalität.
 
-## Verwendung
+\`PhotoViewer.exe\` ist ein kleiner Launcher, der in C++ geschrieben wurde und \`ImageView_FullscreenW\` von \`shimgvw.dll\` aufruft, um das bekannte Vollbild-Anzeigeerlebnis wiederherzustellen.
+
+Wenn Ihrer Systemversion \`shimgvw.dll\` fehlt (häufig in einigen Lite- oder „N“-Editionen), finden Sie kompatible Versionen im Verzeichnis \`DLL/\` dieses Projekts und können diese neben der ausführbaren Datei platzieren.
+
+---
+
+## Hauptfunktionen
+
+- Vollbild-Bildbetrachtung über die originale Windows Photo Viewer-Schnittstelle.
+- Automatische Suche nach der Systembibliothek \`shimgvw.dll\`.
+- Option zur Verwendung einer lokalen Kopie der DLL, wenn die System-DLL fehlt.
+- Unterstützung für das Öffnen von Dateien über Befehlszeilenargumente oder den Standard-Auswahldialog.
+- Integrierte Befehlszeilenparameter für Versionsinformationen, Hilfe und Liste der unterstützten Formate.
+
+---
+
+## Technologie-Stack
+
+| Komponente / Ebene | Technologie | Details / Zweck |
+| --- | --- | --- |
+| Programmiersprache | C++17 | Einhaltung moderner Standards für sicheren und effizienten Code |
+| Build-System | CMake 3.16+ | Plattformübergreifende Build-Automatisierung |
+| Benutzeroberfläche | Win32-API / Common Dialogs | Schlanker nativer Dateiauswahldialog und Informationsfenster |
+| Hauptabhängigkeit | shimgvw.dll | Native Windows Photo Viewer-Bibliothek |
+
+---
+
+## Erste Schritte
+
+Eine detaillierte Schritt-für-Schritt-Anleitung mit Bildern zur Einrichtung der App finden Sie im [Benutzerhandbuch](GUIDE_DE.md).
+
+### Voraussetzungen
+
+- Betriebssystem Windows 10/11
+- CMake 3.16+ installiert
+- MinGW-w64- oder MSVC-Compiler mit C++17-Unterstützung
+
+### Erstellung und Ausführung
+
+Führen Sie folgende Befehle im Terminal aus:
 
 \`\`\`powershell
-PhotoViewer.exe "C:\\Pictures\\photo.jpg"
-PhotoViewer.exe
-\`\`\`
-
-## Build
-
-Anforderungen:
-- Windows 10/11
-- CMake 3.16+
-- MinGW-w64 oder MSVC mit C++17-Unterstützung
-
-\`\`\`powershell
+git clone https://github.com/Almanex/Classic-Windows-image-viewer-for-Windows-11.git
+cd Classic-Windows-image-viewer-for-Windows-11
 cmake -B build -G "MinGW Makefiles"
 cmake --build build --config Release
 \`\`\`
 
-Ergebnis: \`release/PhotoViewer.exe\`
+Die ausführbare Datei wird in \`release/PhotoViewer.exe\` erstellt.
 
-## Unterstützte Formate
+---
 
-BMP, JPG, JPEG, PNG, GIF, TIF, TIFF, ICO, WMF, EMF
+## Tests ausführen
+
+Das Projekt enthält keine automatisierten Unit-Tests. Tests werden manuell durch Ausführen der ausführbaren Datei mit verschiedenen Parametern durchgeführt:
+
+\`\`\`powershell
+release/PhotoViewer.exe /?
+release/PhotoViewer.exe --about
+release/PhotoViewer.exe --formats
+\`\`\`
+
+---
+
+## Bereitstellung
+
+Um die Anwendung bereitzustellen, kopieren Sie einfach die kompilierte Datei \`PhotoViewer.exe\` auf das Zielsystem.
+
+> [!WARNING]
+> **Windows Defender SmartScreen** kann den Start der Anwendung beim ersten Mal blockieren.
+> * **Grund**: Die Anwendung ist nicht mit einem kostenpflichtigen Entwicklerzertifikat signiert, was bei kostenlosen Open-Source-Projekten üblich ist.
+> * **Anleitung**: Um diese Warnung zu umgehen, klicken Sie auf **„Weitere Informationen“** (More info) und wählen Sie dann **„Trotzdem ausführen“** (Run anyway).
+
+---
+
+## Beitragen
+
+Wir freuen uns über jeden Beitrag zur Verbesserung des Projekts! Sie können Fehlerberichte (Issues) erstellen oder eigene Korrekturen (Pull Requests) einreichen.
+
+---
+
+## Versionierung
+
+Dieses Projekt verwendet die semantische Versionierung (SemVer). Alle verfügbaren Versionen und Tags können auf der Registerkarte „Releases“ im Repository eingesehen werden.
+
+---
+
+## Autoren und Mitwirkende
+
+- Erstautor: [Almanex](https://github.com/Almanex)
+- Community und Mitwirkende
+
+---
 
 ## Lizenz
 
-MIT`
+Das Projekt ist unter der freien MIT-Lizenz lizenziert. Weitere Details finden Sie in der Datei [LICENSE](../LICENSE).
+
+---
+
+## Danksagungen
+
+- Entwickler der originalen Bibliothek \`shimgvw.dll\`.
+- Community für Unterstützung und Tests.
+`,
+    guide: `[ English ](GUIDE.md) • [ Русский ](GUIDE_RU.md) • [ Deutsch ](GUIDE_DE.md)
+
+# Shell Image Viewer User Guide
+
+*Step-by-step instructions on how to restore and use the classic photo viewer in Windows 10 and 11.*
+
+This guide describes how to restore the classic Windows photo viewer interface using the portable utility **Shell Image Viewer**.
+
+---
+
+## Step 1. Download the Application
+
+Go to the releases section on GitHub and download the \`PhotoViewer.exe\` executable from the latest version:
+- [Shell Image Viewer Releases on GitHub](https://github.com/Almanex/Classic-Windows-image-viewer-for-Windows-11/releases)
+
+---
+
+## Step 2. Place the Executable File
+
+Move the downloaded \`PhotoViewer.exe\` file to any permanent folder on your computer (for example, to the root directory of drive \`C:\\\` or to \`C:\\Program Files\\PhotoViewer\\\`).
+
+> [!WARNING]
+> **Windows Defender SmartScreen on First Launch:**
+> On the first launch or file association, Windows Defender might show a warning: **"Windows protected your PC"**.
+> This is a standard reaction of Microsoft Defender to new open-source utilities without a paid digital signature.
+> To run the program:
+> 1. Click on the **"More info"** link.
+> 2. Click the **"Run anyway"** button.
+>
+> ![SmartScreen warning](https://g-ek.com/assets/images/00/shell-image-viewer-pic-5.png)
+
+---
+
+## Step 3. Select App for Opening Images
+
+1. Right-click on any image file (e.g., \`.jpg\` or \`.png\`).
+2. Select **"Open with"** → **"Choose another app"**.
+   
+   ![Open with](https://g-ek.com/assets/images/Windows11/shell-image-viewer-pic-1.png)
+
+---
+
+## Step 4. Locate PhotoViewer.exe
+
+1. Scroll down the list of programs and click **"More apps"**.
+2. Click **"Look for another app on this PC"**.
+3. In the Explorer window, navigate to the folder where you saved \`PhotoViewer.exe\` (from Step 2), select it, and click **"Open"**.
+
+   ![Select file in Explorer](https://g-ek.com/assets/images/Windows11/shell-image-viewer-pic-3.png)
+
+---
+
+## Step 5. Associate File Types
+
+Select how you want to use the application:
+- To always use this program for this file type, click **"Always"**.
+- To use it just once, click **"Just once"**.
+
+![Use choice](https://g-ek.com/assets/images/Windows11/shell-image-viewer-pic-4.png)
+
+> [!TIP]
+> **Associate other formats:**
+> Repeat the association steps (Steps 3–5) for the main image formats you use: \`.jpg\`, \`.jpeg\`, \`.png\`, \`.bmp\`, \`.gif\`, \`.tiff\`.
+
+---
+
+## Source
+
+This guide is based on the article:
+- [How to restore classic Photo Viewer in Windows 11 on G-ek.com](https://g-ek.com/klassicheskoe-sredstvo-prosmotra-fotografij-v-windows-11)
+`,
+    guide_ru: `[ English ](GUIDE.md) • [ Русский ](GUIDE_RU.md) • [ Deutsch ](GUIDE_DE.md)
+
+# Руководство пользователя Shell Image Viewer
+
+*Пошаговая инструкция по настройке и использованию классического средства просмотра фотографий в Windows 10 и 11.*
+
+В этой инструкции описано, как вернуть классический интерфейс просмотра изображений с помощью портативного приложения **Shell Image Viewer**.
+
+---
+
+## Шаг 1. Скачивание приложения
+
+Перейдите в раздел релизов на GitHub и скачайте исполняемый файл \`PhotoViewer.exe\` из последней версии:
+- [Релизы Shell Image Viewer на GitHub](https://github.com/Almanex/Classic-Windows-image-viewer-for-Windows-11/releases)
+
+---
+
+## Шаг 2. Размещение исполняемого файла
+
+Переместите скачанный исполняемый файл \`PhotoViewer.exe\` в любую постоянную папку на вашем компьютере (например, в корневой раздел диска \`C:\\\` или в папку \`C:\\Program Files\\PhotoViewer\\\`).
+
+> [!WARNING]
+> **Windows Defender SmartScreen и первый запуск:**
+> При первом запуске или сопоставлении файлов защитник Windows может выдать предупреждение: **«Система Windows защитила ваш компьютер»**.
+> Это стандартная реакция Microsoft Defender на новые независимые утилиты (open-source) без платной цифровой подписи.
+> Чтобы запустить программу:
+> 1. Нажмите на ссылку **«Подробнее»** (More info).
+> 2. Нажмите на появившуюся кнопку **«Выполнить в любом случае»** (Run anyway).
+>
+> ![Предупреждение SmartScreen](https://g-ek.com/assets/images/00/shell-image-viewer-pic-5.png)
+
+---
+
+## Шаг 3. Выбор приложения для открытия изображений
+
+1. Щёлкните правой кнопкой мыши по любому файлу изображения (например, \`.jpg\` или \`.png\`).
+2. Выберите пункт меню **«Открыть с помощью»** (Open with) → **«Выбрать другое приложение»** (Choose another app).
+   
+   ![Открыть с помощью](https://g-ek.com/assets/images/Windows11/shell-image-viewer-pic-1.png)
+
+---
+
+## Шаг 4. Указание пути к PhotoViewer.exe
+
+1. Прокрутите список доступных программ в самый низ и нажмите ссылку **«Еще приложения»** (More apps).
+2. Выберите пункт **«Найти другое приложение на этом компьютере»** (Look for another app on this PC).
+3. В открывшемся окне Проводника перейдите к папке, в которую вы сохранили файл \`PhotoViewer.exe\` (из Шага 2), выберите его и нажмите кнопку **«Открыть»** (Open).
+
+   ![Выбор файла в Проводнике](https://g-ek.com/assets/images/Windows11/shell-image-viewer-pic-3.png)
+
+---
+
+## Шаг 5. Ассоциация типов файлов
+
+Выберите способ использования приложения:
+- Чтобы всегда использовать эту программу для данного типа файла, нажмите кнопку **«Всегда»** (Always).
+- Чтобы использовать один раз, нажмите кнопку **«Только один раз»** (Just once).
+
+![Выбор использования](https://g-ek.com/assets/images/Windows11/shell-image-viewer-pic-4.png)
+
+> [!TIP]
+> **Настройка для всех форматов:**
+> Повторите процедуру сопоставления (Шаги 3–5) для основных форматов изображений, которые вы используете: \`.jpg\`, \`.jpeg\`, \`.png\`, \`.bmp\`, \`.gif\`, \`.tiff\`.
+
+---
+
+## Источник информации
+
+Данное руководство составлено на основе статьи:
+- [Как вернуть классическое Средство Просмотра фотографий в Windows 11 на G-ek.com](https://g-ek.com/klassicheskoe-sredstvo-prosmotra-fotografij-v-windows-11)
+`,
+    guide_de: `[ English ](GUIDE.md) • [ Русский ](GUIDE_RU.md) • [ Deutsch ](GUIDE_DE.md)
+
+# Shell Image Viewer Benutzerhandbuch
+
+*Schritt-für-Schritt-Anleitung zur Einrichtung und Verwendung des klassischen Windows-Bildbetrachters unter Windows 10 und 11.*
+
+Diese Anleitung beschreibt, wie Sie die klassische Benutzeroberfläche zur Bildanzeige mit dem portablen Dienstprogramm **Shell Image Viewer** wiederherstellen.
+
+---
+
+## Schritt 1. Anwendung herunterladen
+
+Gehen Sie zum Release-Bereich auf GitHub und laden Sie die ausführbare Datei \`PhotoViewer.exe\` der neuesten Version herunter:
+- [Shell Image Viewer Releases auf GitHub](https://github.com/Almanex/Classic-Windows-image-viewer-for-Windows-11/releases)
+
+---
+
+## Schritt 2. Ausführbare Datei platzieren
+
+Verschieben Sie die heruntergeladene Datei \`PhotoViewer.exe\` in einen beliebigen permanenten Ordner auf Ihrem Computer (z. B. in das Stammverzeichnis von Laufwerk \`C:\\\` oder in \`C:\\Program Files\\PhotoViewer\\\`).
+
+> [!WARNING]
+> **Windows Defender SmartScreen beim ersten Start:**
+> Beim ersten Start oder der Dateizuordnung zeigt Windows Defender möglicherweise eine Warnung an: **„Der Computer wurde durch Windows geschützt“**.
+> Dies ist eine Standardreaktion von Microsoft Defender auf neue Open-Source-Dienstprogramme, die keine kostenpflichtige digitale Signatur haben.
+> So führen Sie das Programm aus:
+> 1. Klicken Sie auf den Link **„Weitere Informationen“** (More info).
+> 2. Klicken Sie auf die Schaltfläche **„Trotzdem ausführen“** (Run anyway).
+>
+> ![SmartScreen-Warnung](https://g-ek.com/assets/images/00/shell-image-viewer-pic-5.png)
+
+---
+
+## Schritt 3. App zum Öffnen von Bildern auswählen
+
+1. Klicken Sie mit der rechten Maustaste auf eine beliebige Bilddatei (z. B. \`.jpg\` oder \`.png\`).
+2. Wählen Sie **„Öffnen mit“** (Open with) → **„Andere App auswählen“** (Choose another app).
+   
+   ![Öffnen mit](https://g-ek.com/assets/images/Windows11/shell-image-viewer-pic-1.png)
+
+---
+
+## Schritt 4. PhotoViewer.exe suchen
+
+1. Scrollen Sie in der Programmliste nach unten und klicken Sie auf **„Weitere Apps“** (More apps).
+2. Klicken Sie auf **„Andere App auf diesem PC suchen“** (Look for another app on this PC).
+3. Navigieren Sie im Explorer-Fenster zu dem Ordner, in dem Sie \`PhotoViewer.exe\` gespeichert haben (aus Schritt 2), wählen Sie die Datei aus und klicken Sie auf **„Öffnen“** (Open).
+
+   ![Datei im Explorer auswählen](https://g-ek.com/assets/images/Windows11/shell-image-viewer-pic-3.png)
+
+---
+
+## Schritt 5. Dateitypen zuordnen
+
+Wählen Sie aus, wie Sie die Anwendung verwenden möchten:
+- Um dieses Programm immer für diesen Dateityp zu verwenden, klicken Sie auf **„Immer“** (Always).
+- Um es nur einmal zu verwenden, klicken Sie auf **„Nur einmal“** (Just once).
+
+![Verwendung auswählen](https://g-ek.com/assets/images/Windows11/shell-image-viewer-pic-4.png)
+
+> [!TIP]
+> **Weitere Formate zuordnen:**
+> Wiederholen Sie die Zuordnungsschritte (Schritte 3–5) für die wichtigsten Bildformate, die Sie verwenden: \`.jpg\`, \`.jpeg\`, \`.png\`, \`.bmp\`, \`.gif\`, \`.tiff\`.
+
+---
+
+## Quelle
+
+Dieses Handbuch basiert auf dem Artikel:
+- [So stellen Sie den klassischen Bildbetrachter in Windows 11 auf G-ek.com wieder her](https://g-ek.com/klassicheskoe-sredstvo-prosmotra-fotografij-v-windows-11)
+`
   },
   "portable-app-sync": {
     title: "Portable App Sync",
