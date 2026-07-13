@@ -697,114 +697,811 @@ Dieses Projekt lizenziert unter der MIT-Lizenz.`
     license: "MIT",
     github: "https://github.com/Almanex/Gemma-Local-Desktop-",
     image: "images/projects/gemma-local-desktop.jpg",
-    readme: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+    readme: `[ English ](README.md) • [ Русский ](docs/README_RU.md) • [ Deutsch ](docs/README_DE.md)
 
 # Gemma Local Desktop
 
-Native Windows AI assistant and coding workspace. Powered by Google's Gemma via llama.cpp. Works 100% offline without API keys.
+**Native Windows AI assistant and coding workspace powered by Google Gemma via llama.cpp.**
 
-## Experimental Project Status
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Platform: Windows](https://img.shields.io/badge/Platform-Windows-0078d7.svg)](#requirements)
+[![Language: C#](https://img.shields.io/badge/Language-C%23-239120.svg)](https://learn.microsoft.com/dotnet/csharp/)
+[![Framework: .NET 10.0](https://img.shields.io/badge/Framework-.NET%2010.0-512bd4.svg)](https://dotnet.microsoft.com/)
+[![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FGemma-Local-Desktop-)](https://twitter.com/intent/tweet?text=Check%20out%20Gemma%20Local%20Desktop%20-%20native%20Windows%20AI%20assistant%20and%20coding%20workspace&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FGemma-Local-Desktop-)
 
-This is an experimental project designed to push the boundaries of local AI development on Windows.
+---
 
-### Model Performance Notes
+<details open>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 1. Initial Setup Screen</b></summary>
+  <br/>
+  <p align="center"><img src="GemmaChatCsharp/Assets/gemma-chat-win_1.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 2. Chat and Build Workspace</b></summary>
+  <br/>
+  <p align="center"><img src="GemmaChatCsharp/Assets/gemma-chat-win_2.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 3. Code Editor and Live Preview</b></summary>
+  <br/>
+  <p align="center"><img src="GemmaChatCsharp/Assets/gemma-chat-win_3.png" width="95%" /></p>
+</details>
 
-- Small Models (E2B / E4B): Good for quick testing and low-latency interaction.
-- Large Models (26B / 31B): Perfect for complex coding, logic, and reasoning on consumer hardware.
+---
+
+## Overview
+
+Gemma Local Desktop is an experimental, fully functional project designed to push the boundaries of local AI development on Windows. By utilizing Google's Gemma models locally through \`llama.cpp\` integration, it offers a secure, offline environment for AI-assisted coding and conversation. There are no API keys, no subscription fees, and no cloud-dependency.
+
+---
 
 ## Key Features
 
-- Chat Mode: Optimized for dialogue and step-by-step reasoning.
-- Build Mode: Specialized workspace for generating code and web apps with a live preview.
-- One-Click Templates: Ready-to-use starters like Tetris and weather dashboards.
-- GPU Acceleration: NVIDIA GPU detection with CUDA offloading for large models.
-- Zero Config: Automated setup downloads llama.cpp and models on first startup.
+- **Chat Mode**: A conversation workspace optimized for pure dialogue, text summarization, and complex reasoning.
+- **Build Mode**: A split-screen environment that generates code, HTML/JS web apps, and artifacts side-by-side with a 720px live interactive web preview.
+- **One-Click Templates**: Instant high-fidelity template starters to quickly generate functional mini-games, weather dashboards, or interactive UI components.
+- **Full-Screen Preview**: A quick-launch option to open generated web apps directly in the system's default browser.
+- **Workspace Persistence**: Automatic file storage on disk per chat project, enabling the model to read, edit, and reference project files iteratively.
+- **Modern User Experience**: A clean, Windows-native UI implementation with glassmorphism, resizable canvas, and automatic dark mode support.
+- **Hardware Acceleration**: Automatic NVIDIA GPU detection and intelligent model offloading utilizing CUDA, with fallback to CPU execution.
+- **Zero Configuration Setup**: Automatic handling of environment setup, including downloading required \`llama.cpp\` binaries and the recommended Gemma model on first launch.
+
+---
+
+## Tech Stack
+
+| Layer / Component | Technology | Details / Purpose |
+| --- | --- | --- |
+| Application Shell | WPF (.NET 10.0) | Desktop application framework with CommunityToolkit.Mvvm |
+| UI styling | WPF-UI / Custom styles | Modern native Fluent Design look and feel |
+| Web View | Microsoft.Web.WebView2 | Renders the HTML/CSS/JS preview canvas |
+| Markdown Parser | Markdig.Wpf (v0.5.0.1) | Renders rich text messages and chats |
+| Model Runtime | llama.cpp (Local server) | Runs the LLM engine offline with GPU/CPU support |
+| State Persistence | Local JSON + Directory files | Saves workspaces and chats locally |
+
+---
 
 ## Requirements
 
-- Windows 10/11 (64-bit)
-- NVIDIA GPU (optional, for CUDA acceleration) or CPU
-- 4GB+ RAM for 2B model
+- **Operating System**: Windows 10 or Windows 11 (64-bit)
+- **Processor**: x64 CPU (SSE3 support recommended)
+- **Graphics Card**: NVIDIA GPU (optional, for CUDA acceleration)
+- **Memory**: 4GB+ RAM (minimum recommended for Gemma 2B)
 
-## Quick Start
+---
 
+## Getting Started
+
+### Prerequisites
+
+Ensure you have the following installed on your machine:
+- [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
+- [Git](https://git-scm.com/)
+
+### Installation & Running
+
+1. Clone this repository to your local system:
+   \`\`\`powershell
+   git clone https://github.com/Almanex/Gemma-Local-Desktop-.git
+   cd Gemma-Local-Desktop-
+   \`\`\`
+
+2. Run the application using the .NET CLI:
+   \`\`\`powershell
+   cd GemmaChatCsharp
+   dotnet run
+   \`\`\`
+
+On first startup, the application performs the following automated steps:
+- Checks system specs (NVIDIA CUDA support vs CPU fallback).
+- Downloads the compatible \`llama.cpp\` runtime server binaries.
+- Downloads the recommended Gemma model (~1.6GB).
+- Creates the local workspace folders.
+
+---
+
+## Running the Tests
+
+Currently, this repository does not include automated unit tests. When unit tests are implemented, they can be executed from the test project directory using:
 \`\`\`powershell
-# Ensure .NET 10 SDK is installed
-cd GemmaChatCsharp
-dotnet run
+dotnet test
 \`\`\`
+
+---
+
+## Deployment
+
+### Compilation & Build
+
+To compile the application in Release mode:
+\`\`\`powershell
+dotnet build -c Release
+\`\`\`
+
+### Self-Contained Deployment
+
+To publish the application as a single, portable executable file (\`.exe\`) containing all native dependencies:
+\`\`\`powershell
+dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
+\`\`\`
+The output file will be saved in \`bin/Release/net10.0-windows/win-x64/publish/\`.
+
+> [!WARNING]
+> **Windows Defender SmartScreen Warning**
+>
+> Because the compiled executable is self-signed/unsigned (which is standard for free, open-source projects), Windows Defender SmartScreen may display a warning on the first launch of the compiled binary.
+>
+> To run the application:
+> 1. Click **More info**.
+> 2. Click **Run anyway**.
+
+---
+
+## Shortcuts
+
+- \`Ctrl + N\`: New chat
+- \`Ctrl + B\`: Toggle between Chat and Build modes
+- \`Ctrl + \\\`: Toggle Canvas split-pane visibility (Preview / Code)
+
+---
+
+## Contributing
+
+We welcome contributions from the community. If you would like to report bugs, suggest features, or submit pull requests:
+1. Please read our [CONTRIBUTING.md](CONTRIBUTING.md).
+2. Open an issue or submit a pull request on GitHub.
+
+---
+
+## Versioning
+
+This project uses [SemVer](https://semver.org/) for versioning. For the versions available, see the tags on this repository.
+
+---
+
+## Authors & Contributors
+
+- **Almanex** - *Initial Work* - [Almanex GitHub](https://github.com/Almanex)
+
+---
 
 ## License
 
-MIT`,
-    readme_ru: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Acknowledgments
+
+- The [llama.cpp](https://github.com/ggml-org/llama.cpp) project team for the model inference engine.
+- Markdig contributors for the Markdown parser libraries.`,
+    readme_ru: `[ English ](../README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
 
 # Gemma Local Desktop
 
-Нативный ИИ-ассистент и среда разработки для Windows. Работает локально на базе Google Gemma и llama.cpp. Полный офлайн, ключи API не требуются.
+**Локальный AI-ассистент и среда разработки для Windows на базе Google Gemma и llama.cpp.**
 
-## Статус проекта
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../LICENSE)
+[![Platform: Windows](https://img.shields.io/badge/Platform-Windows-0078d7.svg)](#требования)
+[![Language: C#](https://img.shields.io/badge/Language-C%23-239120.svg)](https://learn.microsoft.com/dotnet/csharp/)
+[![Framework: .NET 10.0](https://img.shields.io/badge/Framework-.NET%2010.0-512bd4.svg)](https://dotnet.microsoft.com/)
+[![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FGemma-Local-Desktop-)](https://twitter.com/intent/tweet?text=Check%20out%20Gemma%20Local%20Desktop%20-%20native%20Windows%20AI%20assistant%20and%20coding%20workspace&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FGemma-Local-Desktop-)
 
-Экспериментальный проект для локального запуска больших языковых моделей на потребительском железе Windows.
+---
 
-## Основные функции
+<details open>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 1. Экран первоначальной настройки</b></summary>
+  <br/>
+  <p align="center"><img src="../GemmaChatCsharp/Assets/gemma-chat-win_1.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 2. Рабочая область Чата и Сборки</b></summary>
+  <br/>
+  <p align="center"><img src="../GemmaChatCsharp/Assets/gemma-chat-win_2.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 3. Редактор кода и предпросмотр</b></summary>
+  <br/>
+  <p align="center"><img src="../GemmaChatCsharp/Assets/gemma-chat-win_3.png" width="95%" /></p>
+</details>
 
-- Режим чата: Оптимизирован для диалогов и рассуждений.
-- Режим сборки: Специальное рабочее пространство для генерации кода с живым превью.
-- Готовые шаблоны: Мгновенный запуск мини-игр и виджетов.
-- GPU-ускорение: Поддержка NVIDIA CUDA для быстрого инференса.
-- Быстрый старт: Автоматическое скачивание llama.cpp и весов моделей.
+---
 
-## Системные требования
+## Обзор
 
-- Windows 10/11 (64-bit)
-- Видеокарта NVIDIA (опционально, для ускорения) или CPU
-- От 4 ГБ ОЗУ
+Gemma Local Desktop — это экспериментальный, полностью функциональный проект, созданный для расширения возможностей локального использования искусственного интеллекта на Windows. Благодаря локальной интеграции моделей Google Gemma через \`llama.cpp\` приложение предоставляет безопасную автономную среду для генерации кода и общения. Для его работы не требуются API-ключи, подписки или подключение к интернету.
 
-## Быстрый запуск
+---
 
+## Ключевые возможности
+
+- **Режим чата (Chat Mode)**: Рабочая область, оптимизированная для ведения диалога, суммаризации текстов и логических рассуждений.
+- **Режим сборки (Build Mode)**: Разделенный экран, позволяющий генерировать код HTML/JS-приложений и видеть живой интерактивный предпросмотр шириной 720px в реальном времени.
+- **Шаблоны в один клик**: Быстрый запуск качественных шаблонов для генерации простых игр (например, тетриса), интерактивных панелей погоды или элементов интерфейса.
+- **Полноэкранный просмотр**: Возможность быстро открыть созданное веб-приложение в системном браузере по умолчанию.
+- **Сохранение проектов**: Локальное сохранение файлов для каждого чат-проекта, что позволяет модели итеративно читать, редактировать и дорабатывать файлы.
+- **Современный интерфейс**: Чистый нативный дизайн Windows с поддержкой эффектов размытия (glassmorphism), адаптивным холстом и автоматической темной темой.
+- **Аппаратное ускорение**: Автоматическое обнаружение видеокарт NVIDIA и перенос вычислений на GPU с использованием CUDA, с автоматическим переходом на CPU при их отсутствии.
+- **Установка без настройки**: Автоматическая подготовка окружения, включая скачивание сервера \`llama.cpp\` и рекомендуемой модели Gemma при первом запуске.
+
+---
+
+## Технологический стек
+
+| Слой / Компонент | Технология | Назначение / Описание |
+| --- | --- | --- |
+| Основа приложения | WPF (.NET 10.0) | Настольное приложение с архитектурой MVVM на базе CommunityToolkit.Mvvm |
+| Стилизация UI | WPF-UI / Кастомные стили | Современный нативный дизайн в стиле Fluent Design |
+| Просмотр веб-страниц | Microsoft.Web.WebView2 | Отображение интерактивного окна предпросмотра HTML/CSS/JS |
+| Парсер Markdown | Markdig.Wpf (v0.5.0.1) | Форматирование сообщений и чатов |
+| Движок моделей | llama.cpp (Локальный сервер) | Автономный запуск LLM с поддержкой GPU и CPU |
+| Сохранение состояния | Локальный JSON + Файловая система | Хранение переписки и файлов проектов |
+
+---
+
+## Требования
+
+- **Операционная система**: Windows 10 или Windows 11 (64-бит)
+- **Процессор**: x64 CPU (рекомендуется поддержка инструкций SSE3)
+- **Видеокарта**: NVIDIA GPU (опционально, для ускорения через CUDA)
+- **Оперативная память**: 4 ГБ+ (минимально для работы модели Gemma 2B)
+
+---
+
+## Начало работы
+
+### Предварительные требования
+
+Убедитесь, что на вашем компьютере установлены следующие компоненты:
+- [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
+- [Git](https://git-scm.com/)
+
+### Установка и запуск
+
+1. Клонируйте репозиторий на локальный компьютер:
+   \`\`\`powershell
+   git clone https://github.com/Almanex/Gemma-Local-Desktop-.git
+   cd Gemma-Local-Desktop-
+   \`\`\`
+
+2. Запустите приложение с помощью .NET CLI:
+   \`\`\`powershell
+   cd GemmaChatCsharp
+   dotnet run
+   \`\`\`
+
+При первом запуске приложение выполнит следующие шаги автоматически:
+- Проверит характеристики системы (наличие NVIDIA GPU для CUDA или CPU).
+- Скачает подходящую сборку сервера \`llama.cpp\`.
+- Скачает рекомендуемую модель Gemma (~1.6 ГБ).
+- Создаст структуру локальных папок проекта.
+
+---
+
+## Запуск тестов
+
+На данный момент проект не содержит автоматических юнит-тестов. После их реализации, запуск тестов из тестовой директории можно будет выполнить командой:
 \`\`\`powershell
-cd GemmaChatCsharp
-dotnet run
+dotnet test
 \`\`\`
+
+---
+
+## Развертывание
+
+### Компиляция проекта
+
+Для сборки проекта в режиме Release выполните команду:
+\`\`\`powershell
+dotnet build -c Release
+\`\`\`
+
+### Публикация единого файла (Portable)
+
+Чтобы собрать приложение в один переносимый \`.exe\` файл со всеми зависимостями:
+\`\`\`powershell
+dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
+\`\`\`
+Результат сборки будет находиться по пути: \`bin/Release/net10.0-windows/win-x64/publish/\`.
+
+> [!WARNING]
+> **Предупреждение Windows Defender SmartScreen**
+>
+> Поскольку скомпилированный исполняемый файл не подписан коммерческим сертификатом (что является стандартной практикой для бесплатного ПО с открытым исходным кодом), при первом запуске Windows Defender SmartScreen может выдать предупреждение безопасности.
+>
+> Для запуска приложения:
+> 1. Нажмите **Подробнее** (More info).
+> 2. Нажмите **Выполнить в любом случае** (Run anyway).
+
+---
+
+## Горячие клавиши
+
+- \`Ctrl + N\`: Создать новый чат
+- \`Ctrl + B\`: Переключение между режимом Чата и Сборки
+- \`Ctrl + \\\`: Скрыть/показать панель предпросмотра (Preview / Code)
+
+---
+
+## Участие в разработке
+
+Мы будем рады вашему вкладу в проект. Если вы хотите сообщить об ошибке, предложить улучшения или отправить Pull Request:
+1. Пожалуйста, ознакомьтесь с [CONTRIBUTING.md](../CONTRIBUTING.md).
+2. Создайте Issue или отправьте Pull Request в репозиторий проекта.
+
+---
+
+## Версионирование
+
+В проекте используется семантическое версионирование [SemVer](https://semver.org/). Список доступных версий можно найти в разделе тегов репозитория.
+
+---
+
+## Авторы и участники
+
+- **Almanex** - *Начальная разработка* - [Almanex GitHub](https://github.com/Almanex)
+
+---
 
 ## Лицензия
 
-MIT`,
-    readme_de: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+Этот проект распространяется под лицензией MIT — подробности можно найти в файле [LICENSE](../LICENSE).
+
+---
+
+## Благодарности
+
+- Команде проекта [llama.cpp](https://github.com/ggml-org/llama.cpp) за движок инференса моделей.
+- Создателям библиотеки Markdig за парсер Markdown.
+`,
+    readme_de: `[ English ](../README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
 
 # Gemma Local Desktop
 
-Nativer Windows KI-Assistent und Coding-Workspace. Unterstützt durch Google Gemma via llama.cpp. Funktioniert 100% offline ohne API-Keys.
+**Lokaler Windows-KI-Assistent und Entwicklungsumgebung basierend auf Google Gemma via llama.cpp.**
 
-## Projektstatus
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../LICENSE)
+[![Platform: Windows](https://img.shields.io/badge/Platform-Windows-0078d7.svg)](#systemanforderungen)
+[![Language: C#](https://img.shields.io/badge/Language-C%23-239120.svg)](https://learn.microsoft.com/dotnet/csharp/)
+[![Framework: .NET 10.0](https://img.shields.io/badge/Framework-.NET%2010.0-512bd4.svg)](https://dotnet.microsoft.com/)
+[![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FGemma-Local-Desktop-)](https://twitter.com/intent/tweet?text=Check%20out%20Gemma%20Local%20Desktop%20-%20native%20Windows%20AI%20assistant%20and%20coding%20workspace&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FGemma-Local-Desktop-)
 
-Experimentelles Projekt zur lokalen Ausführung von LLMs auf Windows-Consumer-Hardware.
+---
+
+<details open>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 1. Erster Einrichtungsbildschirm</b></summary>
+  <br/>
+  <p align="center"><img src="../GemmaChatCsharp/Assets/gemma-chat-win_1.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 2. Chat- und Build-Arbeitsbereich</b></summary>
+  <br/>
+  <p align="center"><img src="../GemmaChatCsharp/Assets/gemma-chat-win_2.png" width="95%" /></p>
+</details>
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 3. Code-Editor und Live-Vorschau</b></summary>
+  <br/>
+  <p align="center"><img src="../GemmaChatCsharp/Assets/gemma-chat-win_3.png" width="95%" /></p>
+</details>
+
+---
+
+## Übersicht
+
+Gemma Local Desktop ist ein experimentelles, voll funktionsfähiges Projekt, das entwickelt wurde, um die Grenzen der lokalen KI-Nutzung unter Windows zu erweitern. Durch die lokale Ausführung von Google Gemma-Modellen über die Integration von \`llama.cpp\` bietet die Anwendung eine sichere, vollständig Offline-fähige Umgebung für KI-gestützte Programmierung und Konversationen. Es werden keine API-Schlüssel, keine kostenpflichtigen Abonnements und keine Internetverbindungen benötigt.
+
+---
 
 ## Hauptfunktionen
 
-- Chat-Modus: Optimiert für Dialoge und logische Schlussfolgerungen.
-- Build-Modus: Arbeitsbereich zur Codegenerierung mit Live-Vorschau.
-- One-Click-Vorlagen: Sofortiger Start von Mini-Spielen und Dashboards.
-- GPU-Beschleunigung: NVIDIA CUDA-Unterstützung für große Modelle.
-- Zero Config: Automatisches Herunterladen von llama.cpp und Modellen beim ersten Start.
+- **Chat-Modus (Chat Mode)**: Ein für reinen Dialog, Textzusammenfassungen und logisches Denken optimierter Arbeitsbereich.
+- **Build-Modus (Build Mode)**: Eine geteilte Bildschirmumgebung, mit der HTML/JS-Web-Apps und Code-Artefakte generiert und direkt in einer interaktiven 720px Live-Vorschau angezeigt werden können.
+- **Ein-Klick-Vorlagen**: Schneller Start von Vorlagen zur Generierung einfacher Spiele (wie Tetris), interaktiver Wetter-Dashboards oder Benutzeroberflächen-Elementen.
+- **Vollbild-Vorschau**: Eine Funktion, um die generierte Web-App direkt im Standardbrowser des Systems zu öffnen.
+- **Projekt-Speicherung**: Lokale Speicherung der Dateien für jedes Chat-Projekt, sodass das Modell Projektdateien iterativ lesen, bearbeiten und verfeinern kann.
+- **Moderne Benutzeroberfläche**: Ein klares, natives Windows-UI-Design mit Glassmorphism-Effekten, anpassbarem Vorschaufenster und automatischer Unterstützung für den Dunkelmodus.
+- **Hardwarebeschleunigung**: Automatische Erkennung von NVIDIA-Grafikkarten und Auslagerung von Berechnungen auf die GPU via CUDA mit automatischem Fallback auf CPU.
+- **Einrichtung ohne Konfiguration**: Automatische Vorbereitung der Laufzeitumgebung, einschließlich des Downloads der \`llama.cpp\`-Serverdateien und des empfohlenen Gemma-Modells beim ersten Start.
+
+---
+
+## Technologie-Stack
+
+| Ebene / Komponente | Technologie | Zweck / Beschreibung |
+| --- | --- | --- |
+| Anwendungs-Framework | WPF (.NET 10.0) | Desktop-Anwendung mit MVVM-Architektur über das CommunityToolkit.Mvvm |
+| UI-Styling | WPF-UI / Eigene Stile | Modernes, natives Fluent Design |
+| Web-Vorschau | Microsoft.Web.WebView2 | Anzeige des interaktiven Vorschaufensters für HTML/CSS/JS |
+| Markdown-Parser | Markdig.Wpf (v0.5.0.1) | Formatierung von Chat-Nachrichten |
+| Modell-Laufzeit | llama.cpp (Lokaler Server) | Lokaler Betrieb des LLM-Engines mit GPU- und CPU-Unterstützung |
+| Zustandsspeicherung | Lokales JSON + Dateisystem | Speicherung von Chatverläufen und Projektdateien |
+
+---
 
 ## Systemanforderungen
 
-- Windows 10/11 (64-bit)
-- NVIDIA-Grafikkarte (optional) oder CPU
-- Mindestens 4 GB RAM
+- **Betriebssystem**: Windows 10 oder Windows 11 (64-Bit)
+- **Prozessor**: x64 CPU (Unterstützung für SSE3 empfohlen)
+- **Grafikkarte**: NVIDIA GPU (optional, für CUDA-Beschleunigung)
+- **Arbeitsspeicher**: 4 GB+ RAM (Minimum für das Gemma 2B Modell)
 
-## Schnellstart
+---
 
+## Erste Schritte
+
+### Voraussetzungen
+
+Stellen Sie sicher, dass die folgenden Komponenten auf Ihrem System installiert sind:
+- [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
+- [Git](https://git-scm.com/)
+
+### Installation & Ausführen
+
+1. Klonen Sie das Repository auf Ihren lokalen Computer:
+   \`\`\`powershell
+   git clone https://github.com/Almanex/Gemma-Local-Desktop-.git
+   cd Gemma-Local-Desktop-
+   \`\`\`
+
+2. Starten Sie die Anwendung über die .NET-CLI:
+   \`\`\`powershell
+   cd GemmaChatCsharp
+   dotnet run
+   \`\`\`
+
+Beim ersten Start führt die Anwendung folgende Schritte automatisch aus:
+- Überprüfung der Systemleistung (NVIDIA CUDA GPU vs CPU-Fallback).
+- Download der passenden \`llama.cpp\`-Laufzeitdateien.
+- Download des empfohlenen Gemma-Modells (~1.6 GB).
+- Erstellung lokaler Projektordner.
+
+---
+
+## Tests ausführen
+
+Derzeit enthält dieses Repository keine automatisierten Unit-Tests. Wenn Unit-Tests implementiert sind, können sie aus dem Testprojektverzeichnis mit folgendem Befehl ausgeführt werden:
 \`\`\`powershell
-cd GemmaChatCsharp
-dotnet run
+dotnet test
 \`\`\`
+
+---
+
+## Bereitstellung
+
+### Kompilierung
+
+So kompilieren Sie die Anwendung im Release-Modus:
+\`\`\`powershell
+dotnet build -c Release
+\`\`\`
+
+### Eigenständige Veröffentlichung (Portable)
+
+So veröffentlichen Sie die Anwendung als eine einzige, tragbare \`.exe\`-Datei, die alle nativen Abhängigkeiten enthält:
+\`\`\`powershell
+dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
+\`\`\`
+Die Ausgabedatei wird unter \`bin/Release/net10.0-windows/win-x64/publish/\` gespeichert.
+
+> [!WARNING]
+> **Windows Defender SmartScreen Warnung**
+>
+> Da die kompilierte ausführbare Datei nicht kommerziell signiert ist (was bei kostenlosen Open-Source-Projekten üblich ist), zeigt Windows Defender SmartScreen möglicherweise beim ersten Start des Kompilats eine Warnung an.
+>
+> So führen Sie das Programm trotzdem aus:
+> 1. Klicken Sie auf **Weitere Informationen** (More info).
+> 2. Klicken Sie auf **Trotzdem ausführen** (Run anyway).
+
+---
+
+## Tastaturkürzel
+
+- \`Ctrl + N\`: Neuen Chat erstellen
+- \`Ctrl + B\`: Wechseln zwischen Chat- und Build-Modus
+- \`Ctrl + \\\`: Vorschau- / Code-Bereich ein- oder ausblenden
+
+---
+
+## Mitwirken
+
+Beiträge aus der Community sind herzlich willkommen. Wenn Sie Fehler melden, Funktionen vorschlagen oder Pull Requests einreichen möchten:
+1. Lesen Sie bitte unsere [CONTRIBUTING.md](../CONTRIBUTING.md).
+2. Eröffnen Sie ein Issue oder erstellen Sie einen Pull Request auf GitHub.
+
+---
+
+## Versionierung
+
+Dieses Projekt verwendet [SemVer](https://semver.org/) zur Versionierung. Verfügbare Versionen finden Sie in den Tags dieses Repositories.
+
+---
+
+## Autoren & Mitwirkende
+
+- **Almanex** - *Ursprüngliche Entwicklung* - [Almanex GitHub](https://github.com/Almanex)
+
+---
 
 ## Lizenz
 
-MIT`
+Dieses Projekt lizenziert unter der MIT-Lizenz – Einzelheiten finden Sie in der Datei [LICENSE](../LICENSE).
+
+---
+
+## Danksagungen
+
+- Dem Team hinter [llama.cpp](https://github.com/ggml-org/llama.cpp) für die Inferenz-Engine.
+- Den Entwicklern von Markdig für die Markdown-Bibliotheken.
+`,
+    readme_ru: ``,
+    readme_de: ``,
+    guide: `[ English ](GUIDE.md) • [ Русский ](GUIDE_RU.md) • [ Deutsch ](GUIDE_DE.md)
+
+# Gemma Local Desktop User Guide
+
+Welcome to the User Guide for Gemma Local Desktop. This document provides detailed information on how to configure, run, and optimize your local AI development environment.
+
+---
+
+## 1. Application Layout and Modes
+
+Gemma Local Desktop features a dual-mode interface designed to balance standard conversational AI tasks with interactive application development.
+
+### Chat Mode
+- **Purpose**: Optimized for standard text dialogues, code analysis, debugging advice, and general reasoning.
+- **UI Details**: A clean, single-column chat feed featuring markdown rendering for readable code snippets and structured text blocks.
+
+### Build Mode
+- **Purpose**: Designed to generate and iteratively refine web applications (HTML, CSS, JS) and code artifacts.
+- **UI Details**: Splits the interface to show the conversation panel on the left, and the **Build Canvas** on the right.
+- **Build Canvas**:
+  - Contains a code editor view showing the current generated source files.
+  - Features a live, interactive 720px WebView preview panel.
+  - Includes a quick button to launch the generated application in your default system browser.
+
+---
+
+## 2. Automated Local Setup
+
+The application is designed to run entirely offline with zero manual configurations. On the first launch, the following automated sequence takes place:
+
+### Hardware Detection
+- The app checks for the presence of an NVIDIA graphics card and checks if the system supports CUDA acceleration.
+- If CUDA is supported, it configures \`llama.cpp\` to offload model layers to the GPU for faster inference.
+- If no compatible GPU is detected, it falls back to CPU execution.
+
+### Runtime and Model Download
+- **llama.cpp Server**: The app downloads the appropriate precompiled binaries of \`llama.cpp\` server for your hardware configuration.
+- **Recommended Model**: It downloads the Gemma model weights (~1.6GB) in GGUF format from a secure public repository.
+- **Sandbox Creation**: A local workspace folder is created to store temporary assets, chats, and code files.
+
+---
+
+## 3. Using One-Click Templates
+
+To demonstrate the capabilities of local code generation, the application includes four preset templates:
+
+1. **Mega Portfolio**
+   - *Prompt description*: Generates a single-page developer portfolio with a glassmorphic navigation bar, scroll-reveal animations via IntersectionObserver, and a responsive grid layout.
+2. **Weather Dashboard**
+   - *Prompt description*: Creates a weather app interface featuring animated SVG weather icons, theme-switching logic (sunny, rainy, snowy) through CSS variables, and layout grids.
+3. **Mega Tetris**
+   - *Prompt description*: Generates a functional Tetris clone utilizing 2D array matrix math, wall-kick rotation logic, collision detection, and a neon-glowing CSS canvas.
+4. **Premium Calculator**
+   - *Prompt description*: Builds a scientific calculator layout featuring an expression evaluator state-machine, history of recent operations, and responsive button grid styles.
+
+To launch a template:
+1. Start a new chat.
+2. Click on one of the four template cards displayed in the empty chat state.
+3. The prompt will load automatically into the input box; press Enter to let the model generate the application.
+
+---
+
+## 4. Workspace Persistence and Iterative Development
+
+Every chat session is backed by a persistent directory on your local disk:
+
+- **Local Storage**: Files generated by the assistant (e.g., \`index.html\`, style sheets, scripts) are saved directly in a dedicated subfolder inside the chat's workspace path.
+- **Iterative Updates**: When you ask the assistant to modify the generated app (e.g., "change the theme color to blue" or "add a reset button"), the model does not just regenerate the code in the chat. It rewrites or modifies the target file directly in the workspace directory.
+- **Preview Auto-Reload**: The live preview panel in Build Mode automatically updates to show the updated version of your code as soon as the file modification is saved.
+
+---
+
+## 5. Keyboard Shortcuts
+
+Use these shortcuts to navigate the application quickly:
+
+- \`Ctrl + N\`: Start a new chat session.
+- \`Ctrl + B\`: Toggle split-pane view (switch between Chat Mode and Build Mode).
+- \`Ctrl + \\\`: Toggle the Visibility of the right-side Canvas pane (Preview and Code editor).
+
+---
+
+## 6. Optimization and Troubleshooting
+
+### Performance Tweaks
+- **RAM Constraints**: If you experience system lag during inference, ensure you have at least 4GB of free RAM before launching the model.
+- **GPU Driver**: For optimal CUDA performance, verify that you have the latest NVIDIA drivers installed.
+- **llama.cpp Logs**: Troubleshooting logs for the local server subprocess are stored in your Windows temporary directories or app data folders. If the server fails to launch, check for process conflicts on the default local port.
+`,
+    guide_ru: `[ English ](GUIDE.md) • [ Русский ](GUIDE_RU.md) • [ Deutsch ](GUIDE_DE.md)
+
+# Руководство пользователя Gemma Local Desktop
+
+Добро пожаловать в руководство пользователя Gemma Local Desktop. В этом документе подробно описано, как настроить, запустить и оптимизировать вашу локальную среду разработки искусственного интеллекта.
+
+---
+
+## 1. Интерфейс и режимы работы
+
+Интерфейс приложения поддерживает два режима работы, разработанных для баланса между общением с ИИ и созданием интерактивных приложений.
+
+### Режим чата (Chat Mode)
+- **Назначение**: Оптимизирован для обычного ведения диалога, анализа кода, помощи в отладке и общих рассуждений.
+- **Интерфейс**: Одноколоночная лента чата с поддержкой форматирования Markdown для удобного чтения фрагментов кода и структурированного текста.
+
+### Режим сборки (Build Mode)
+- **Назначение**: Создан для генерации и итеративного улучшения веб-приложений (HTML, CSS, JS) и программных компонентов.
+- **Интерфейс**: Экран делится на две панели: слева отображается чат, а справа — **рабочая область сборки (Build Canvas)**.
+- **Рабочая область сборки (Build Canvas)**:
+  - Включает окно редактора кода с исходными файлами сгенерированного проекта.
+  - Содержит живое интерактивное окно предварительного просмотра WebView шириной 720px.
+  - Предоставляет кнопку быстрого запуска для открытия созданного приложения в системном браузере по умолчанию.
+
+---
+
+## 2. Автоматическая локальная настройка
+
+Приложение разработано для работы полностью в автономном режиме (offline) и не требует ручной настройки при первом запуске:
+
+### Обнаружение оборудования
+- Приложение проверяет наличие видеокарты NVIDIA и поддержку технологии ускорения CUDA.
+- Если CUDA поддерживается, оно настраивает \`llama.cpp\` для переноса слоев модели на графический процессор (GPU) для более быстрого выполнения запросов.
+- Если совместимый графический процессор не обнаружен, вычисления выполняются на центральном процессоре (CPU).
+
+### Загрузка окружения и модели
+- **Сервер llama.cpp**: Приложение скачивает подходящие скомпилированные исполняемые файлы сервера \`llama.cpp\` для вашей конфигурации оборудования.
+- **Рекомендуемая модель**: Скачиваются веса модели Gemma (~1.6 ГБ) в формате GGUF из безопасного публичного репозитория.
+- **Создание песочницы**: Создается папка локального рабочего пространства для хранения временных файлов, чатов и кода.
+
+---
+
+## 3. Использование шаблонов в один клик
+
+Для демонстрации возможностей генерации кода в приложение встроены четыре демонстрационных шаблона:
+
+1. **Mega Portfolio**
+   - *Описание промпта*: Генерирует одностраничное портфолио разработчика с полупрозрачной навигационной панелью (glassmorphism), анимацией появления элементов при прокрутке через IntersectionObserver и адаптивной сеткой.
+2. **Weather Dashboard**
+   - *Описание промпта*: Создает интерфейс панели погоды с анимированными SVG-иконками, логикой переключения тем оформления (солнечно, дождливо, снежно) через CSS-переменные и сеткой прогноза на 5 дней.
+3. **Mega Tetris**
+   - *Описание промпта*: Генерирует полностью рабочий клон игры Тетрис с использованием логики матриц в 2D-массиве, правил поворота фигур (wall-kick), проверкой столкновений и светящимся неоновым CSS-интерфейсом.
+4. **Premium Calculator**
+   - *Описание промпта*: Создает инженерный калькулятор с логикой вычисления выражений на основе конечного автомата, историей последних вычислений и адаптивной сеткой кнопок.
+
+Чтобы запустить шаблон:
+1. Создайте новый чат.
+2. Кликните по одной из четырех карточек шаблонов, отображаемых на стартовом экране пустого чата.
+3. Промпт автоматически загрузится в поле ввода; нажмите Enter для начала генерации.
+
+---
+
+## 4. Сохранение состояния и итеративная разработка
+
+Каждая сессия чата сохраняется в отдельную папку на вашем локальном диске:
+
+- **Локальное хранилище**: Файлы, созданные ассистентом (например, \`index.html\`, стили, скрипты), записываются напрямую в рабочую папку текущего чата.
+- **Итеративные обновления**: Когда вы просите ассистента изменить созданное приложение (например, «измени цвет темы на синий» или «добавь кнопку сброса»), модель не просто выводит обновленный код в чат, а точечно переписывает или редактирует соответствующий файл в вашей рабочей папке.
+- **Автообновление превью**: Окно живого просмотра в режиме сборки автоматически перезагружается, отображая изменения сразу после сохранения файлов.
+
+---
+
+## 5. Горячие клавиши
+
+Используйте эти сочетания клавиш для быстрой навигации по приложению:
+
+- \`Ctrl + N\`: Начать новый сеанс чата.
+- \`Ctrl + B\`: Переключить режим разделенного экрана (между режимом Чат и Сборка).
+- \`Ctrl + \\\`: Показать/скрыть правую панель рабочей области (предпросмотр и редактор кода).
+
+---
+
+## 6. Оптимизация и устранение неполадок
+
+### Повышение производительности
+- **Ограничения оперативной памяти**: Если во время генерации система начинает работать медленно, убедитесь, что на компьютере свободно не менее 4 ГБ оперативной памяти перед запуском модели.
+- **Драйвер видеокарты**: Для достижения максимальной скорости генерации с использованием CUDA обновите драйверы NVIDIA до последней версии.
+- **Логи llama.cpp**: Логи работы локального сервера сохраняются во временных системных папках Windows или каталогах данных приложения. Если сервер не запускается, проверьте, не занят ли порт по умолчанию другим процессом.
+`,
+    guide_de: `[ English ](GUIDE.md) • [ Русский ](GUIDE_RU.md) • [ Deutsch ](GUIDE_DE.md)
+
+# Benutzerhandbuch für Gemma Local Desktop
+
+Willkommen im Benutzerhandbuch für Gemma Local Desktop. Dieses Dokument enthält detaillierte Informationen zur Konfiguration, Ausführung und Optimierung Ihrer lokalen KI-Entwicklungsumgebung.
+
+---
+
+## 1. Benutzeroberfläche und Betriebsmodi
+
+Die Anwendung verfügt über eine duale Benutzeroberfläche, die entwickelt wurde, um standardmäßige dialogbasierte KI-Aufgaben und die interaktive Anwendungsentwicklung auszubalancieren.
+
+### Chat-Modus (Chat Mode)
+- **Zweck**: Optimiert für den klassischen Textdialog, Codeanalysen, Debugging-Hilfen und allgemeines logisches Denken.
+- **Benutzeroberfläche**: Ein einspaltiger Chat-Verlauf mit Markdown-Formatierung für lesbare Code-Auszüge und strukturierten Text.
+
+### Build-Modus (Build Mode)
+- **Zweck**: Entwickelt, um Webanwendungen (HTML, CSS, JS) und Code-Artefakte zu generieren und iterativ zu verbessern.
+- **Benutzeroberfläche**: Teilt den Bildschirm, sodass links das Chat-Panel und rechts der **Build-Arbeitsbereich (Build Canvas)** angezeigt wird.
+- **Build-Arbeitsbereich (Build Canvas)**:
+  - Enthält einen Code-Editor, der die aktuellen generierten Quelldateien anzeigt.
+  - Bietet ein interaktives 720px WebView-Live-Vorschaufenster.
+  - Enthält eine Schnellschaltfläche, um die generierte Anwendung im Standardbrowser Ihres Systems zu öffnen.
+
+---
+
+## 2. Automatische lokale Einrichtung
+
+Die Anwendung ist so konzipiert, dass sie vollständig offline und ohne manuelle Konfigurationen läuft. Beim ersten Start wird folgende automatische Sequenz ausgeführt:
+
+### Hardware-Erkennung
+- Die App prüft das Vorhandensein einer NVIDIA-Grafikkarte und ob das System CUDA-Beschleunigung unterstützt.
+- Wenn CUDA unterstützt wird, konfiguriert sie \`llama.cpp\` so, dass Modellschichten auf die GPU ausgelagert werden, um eine schnellere Inferenz zu ermöglichen.
+- Wenn keine kompatible GPU erkannt wird, wird die CPU als Fallback verwendet.
+
+### Laufzeitumgebung und Modell-Download
+- **llama.cpp Server**: Die App lädt die passenden vorkompilierten Binärdateien des \`llama.cpp\`-Servers für Ihre Hardwarekonfiguration herunter.
+- **Empfohlenes Modell**: Die Modellgewichte für Gemma (~1,6 GB) werden im GGUF-Format aus einem sicheren öffentlichen Repository heruntergeladen.
+- **Erstellung der Sandbox**: Ein lokaler Arbeitsbereichsordner wird erstellt, um temporäre Assets, Chats und Code-Dateien zu speichern.
+
+---
+
+## 3. Nutzung der Ein-Klick-Vorlagen
+
+Um die Fähigkeiten der lokalen Code-Generierung zu demonstrieren, enthält die Anwendung vier voreingestellte Vorlagen:
+
+1. **Mega Portfolio**
+   - *Beschreibung*: Generiert ein einseitiges Entwickler-Portfolio mit einer transparenten Navigationsleiste (Glassmorphism), Einblende-Animationen beim Scrollen über IntersectionObserver und einem responsiven Grid-Layout.
+2. **Weather Dashboard**
+   - *Beschreibung*: Erstellt eine Wetter-App-Oberfläche mit animierten SVG-Wettersymbolen, Logik zum Wechseln des Design-Themas (sonnig, regnerisch, schneebedeckt) über CSS-Variablen und Vorhersage-Grids.
+3. **Mega Tetris**
+   - *Beschreibung*: Generiert einen funktionsfähigen Tetris-Klon unter Verwendung von Matrixberechnungen auf Basis von 2D-Arrays, Wall-Kick-Rotationslogik, Kollisionserkennung und einer neonfarbenen CSS-Benutzeroberfläche.
+4. **Premium Calculator**
+   - *Beschreibung*: Baut einen wissenschaftlichen Rechner mit einer auf einem Zustandsautomaten basierenden Formelauswertung, einem Verlauf der letzten Berechnungen und responsiven Schaltflächenstilen.
+
+So starten Sie eine Vorlage:
+1. Starten Sie einen neuen Chat.
+2. Klicken Sie auf eine der vier Vorlagenkarten, die im leeren Chat-Status angezeigt werden.
+3. Der Prompt wird automatisch in das Eingabefeld geladen; drücken Sie die Eingabetaste, um die Generierung zu starten.
+
+---
+
+## 4. Projekt-Speicherung und iterative Entwicklung
+
+Jede Chat-Sitzung wird in einem persistenten Verzeichnis auf Ihrer lokalen Festplatte gespeichert:
+
+- **Lokaler Speicher**: Vom Assistenten generierte Dateien (z. B. \`index.html\`, Stylesheets, Skripte) werden direkt in einem speziellen Unterordner im Arbeitsbereichspfad des Chats gespeichert.
+- **Iterative Updates**: Wenn Sie den Assistenten bitten, die generierte Anwendung zu ändern (z. B. „Ändere die Designfarbe in Blau“ oder „Füge eine Reset-Schaltfläche hinzu“), gibt das Modell den aktualisierten Code nicht nur im Chat aus, sondern überschreibt oder bearbeitet die Zieldatei direkt im Arbeitsbereichsverzeichnis.
+- **Automatische Vorschau-Aktualisierung**: Das Live-Vorschaufenster im Build-Modus wird automatisch aktualisiert, sobald eine Dateiänderung im Arbeitsbereich gespeichert wird.
+
+---
+
+## 5. Tastaturkürzel
+
+Verwenden Sie diese Tastenkombinationen, um schnell in der Anwendung zu navigieren:
+
+- \`Ctrl + N\`: Startet eine neue Chat-Sitzung.
+- \`Ctrl + B\`: Wechselt die geteilte Bildschirmansicht (Umschalten zwischen Chat- und Build-Modus).
+- \`Ctrl + \\\`: Blendet die rechte Canvas-Ansicht ein oder aus (Vorschau und Code-Editor).
+
+---
+
+## 6. Optimierung und Fehlerbehebung
+
+### Leistungstipps
+- **RAM-Beschränkungen**: Wenn das System während der Inferenz verzögert reagiert, stellen Sie sicher, dass Sie vor dem Start des Modells mindestens 4 GB freien RAM haben.
+- **Grafikkartentreiber**: Installieren Sie für eine optimale CUDA-Leistung die neuesten NVIDIA-Treiber.
+- **llama.cpp-Protokolle**: Fehlerbehebungsprotokolle für den lokalen Server-Subprozess werden in Ihren temporären Windows-Verzeichnissen oder App-Datenordnern gespeichert. Wenn der Server nicht startet, prüfen Sie, ob der Standardport von einem anderen Prozess belegt ist.
+`
   },
   "icoboo": {
     title: "icoboo",
