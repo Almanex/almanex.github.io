@@ -277,8 +277,9 @@ const l = pageLabels[lang];
       <div class="stack" id="stack">
         {Object.entries(PROJECTS_DATA).map(([id, project], index) => {
           const accent = accents[index % accents.length];
-          const firstImg = getFirstImageFromMarkdown(project.readme, project);
-          const coverImg = firstImg || (project.image && project.image.startsWith('/') ? project.image : `/images/projects/cover/cover_${(index % 8) + 1}.avif`);
+          const coverImg = (project.image && (project.image.startsWith('/') || project.image.startsWith('http')))
+            ? project.image
+            : (getFirstImageFromMarkdown(project.readme, project) || `/images/projects/cover/cover_${(index % 8) + 1}.avif`);
           
           // Localized category and subtitle
           const category = PROJECT_TRANSLATIONS[lang]?.[id]?.category || project.category;

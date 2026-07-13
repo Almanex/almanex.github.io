@@ -1309,124 +1309,640 @@ MIT`
     stars: "0",
     license: "MIT",
     github: "https://github.com/Almanex/ShortcutDock",
-    image: "images/projects/shortcutdock.jpg",
+    image: "https://raw.githubusercontent.com/Almanex/ShortcutDock/main/screenshots/screenshot3.png",
     readme: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
 
 # ShortcutDock
 
-**Customizable shortcut dock panel for Windows 11 desktops**
+**Customizable Fluent design shortcut dock panel for Windows 11 desktops**
 
-A desktop dock panel featuring Mica/Acrylic/transparent backdrops, automatic vertical/horizontal orientation layout, Drag-and-Drop, AppBar reservation workspace, and system tray integration.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Platform: Windows](https://img.shields.io/badge/Platform-Windows%2010%20%2F%2011-blue.svg)](#)
+[![Framework: .NET 10](https://img.shields.io/badge/Framework-.NET%2010.0-blueviolet.svg)](https://dotnet.microsoft.com)
+[![Share on X](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FShortcutDock)](https://twitter.com/intent/tweet?text=Check%20out%20ShortcutDock%20--%20a%20beautiful%20customizable%20shortcut%20dock%20for%20Windows%2011%21&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FShortcutDock&hashtags=windows11,wpf,dotnet,opensource)
+
+---
+
+## Overview
+
+ShortcutDock is a modern, lightweight Windows desktop dock panel designed to organize your shortcuts. It features Mica and Acrylic blur effects that sync with the active Windows system theme, support for Drag-and-Drop, automatic vertical and horizontal layout orientation, system AppBar reservation, and tray integration.
+
+> [!IMPORTANT]
+> **First stable release available!**  
+> You can download the ready-made compiled file **\`ShortcutDock.exe\`** on the [Releases](https://github.com/Almanex/ShortcutDock/releases/tag/v1.0.0) page and run it on your computer without installing additional libraries.
+
+For detailed instructions on configuring all features, read the [User Guide (GUIDE.md)](GUIDE.md).
+
+---
+
+## Screenshots
+
+<details open>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 1. Horizontal Layout (Bottom Position)</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot1.png" width="95%" alt="ShortcutDock Horizontal Bottom" />
+  </p>
+</details>
+
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 2. Vertical Layout (Left Position)</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot2.png" width="95%" alt="ShortcutDock Vertical Left" />
+  </p>
+</details>
+
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 3. Fluent Settings Window</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot3.png" width="95%" alt="ShortcutDock Settings" />
+  </p>
+</details>
+
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 4. Context Menu & Customizations</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot4.png" width="95%" alt="ShortcutDock Context Menu" />
+  </p>
+</details>
+
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 5. Horizontal Layout (Top Position)</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot5.png" width="95%" alt="ShortcutDock Top Position" />
+  </p>
+</details>
+
+
+
+
+
+
+---
 
 ## Key Features
 
-- Desktop Panel: Drag-and-drop .exe/.lnk files directly to add.
-- Dynamic Orientation: Switches between vertical (left/right screen positions) and horizontal (top/bottom).
-- Modern Backdrop: Support for Mica and Acrylic blur effects in sync with the active Windows system theme.
-- Auto-Hide: Hides the panel behind screen borders to maximize workspace when not focused.
-- Hover Zoom & Indicators: macOS-style icon zoom animation on hover, and active app indicators.
+- Desktop Panel: Drag-and-drop \`.exe\` or \`.lnk\` files directly onto the panel to add.
+- Dynamic Orientation: Switches between vertical (left/right screen positions) and horizontal (top/bottom) layouts.
+- Modern Backdrop: Support for Mica and Acrylic blur effects in sync with the active Windows theme.
+- Auto-Hide: Panel smoothly hides off-screen when mouse focus is lost to maximize workspace.
+- Hover Zoom & Active Indicators: macOS-style icon zoom animation on hover and accent color dots under running applications.
 
-## Technology Stack
+---
 
-- Language: C# (.NET 8.0)
-- UI Library: WPF + WPF-UI 4.3.0
-- MVVM Toolkit: CommunityToolkit.Mvvm
-- Win32 API: P/Invoke integration (user32, dwmapi, shell32)
+## Tech Stack
+
+| Layer / Component | Technology | Version | Purpose |
+| --- | --- | --- | --- |
+| Language | C# (.NET 10.0) | net10.0-windows | Main programming language |
+| UI Framework | WPF + WPF-UI | 4.3.0 | Modern controls and Mica window shell |
+| Pattern | MVVM Toolkit | 8.4.2 | CommunityToolkit.Mvvm for state binding |
+| Win32 Interop | P/Invoke | - | DWM, WindowStyle, and AppBar APIs |
+| Image Lib | System.Drawing.Common | 10.0.9 | Icon Extraction and PNG rendering |
+
+---
+
+## Project Structure
+
+\`\`\`text
+ShortcutDock/
+├── ShortcutDock.slnx              # Visual Studio Solution (SDK 10 format)
+└── src\\ShortcutDock\\
+    ├── ShortcutDock.csproj         # net10.0-windows configuration
+    ├── app.manifest                # DPI awareness and compatibility manifest
+    ├── App.xaml / App.xaml.cs      # Entry point, DI container, and Tray service
+    ├── MainWindow.xaml / .xaml.cs  # Main panel, DWM blur, DnD, and orientation hooks
+    ├── SettingsWindow.xaml / .cs   # Fluent settings window
+    ├── app_icon.ico                # App icon asset
+    ├── Native\\
+    │   └── Win32.cs                # P/Invoke helper definitions
+    ├── Models\\
+    │   ├── Settings.cs            
+    │   ├── PanelSettings.cs        # Panel preferences
+    │   └── ShortcutItem.cs         # Shortcut model (GUID, path, cached icon)
+    ├── Services\\
+    │   ├── SettingsService.cs      # Load/save settings.json in %AppData%
+    │   ├── ProcessLauncher.cs     # Executes apps, supports admin elevation
+    │   ├── ShortcutResolver.cs     # Resolves shell links (.lnk) via COM interfaces
+    │   └── IconExtractor.cs       # Jumbo icon extraction (256x256) to PNG cache
+    └── ViewModels\\
+        ├── MainViewModel.cs       # Handles main collection and settings
+        └── ShortcutViewModel.cs   # Commands for launch, elevation, and deletion
+\`\`\`
+
+---
+
+## Data & Configuration
+
+Configuration is saved in JSON format under \`%AppData%\\ShortcutDock\\settings.json\`:
+
+\`\`\`json
+{
+  "PanelSettings": {
+    "Position": "Bottom",
+    "IconSize": 48,
+    "KeepOnTop": true,
+    "BackdropType": "Mica",
+    "ShowAddButton": true,
+    "AutoHide": false,
+    "HoverZoom": true,
+    "ShowRunningIndicators": true,
+    "Language": "en"
+  },
+  "Shortcuts": [
+    {
+      "Id": "a1b2c3d4-...",
+      "Name": "Google Chrome",
+      "TargetPath": "C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
+      "IconPath": "%AppData%\\\\ShortcutDock\\\\Cache\\\\chrome_ABCD1234.png"
+    }
+  ]
+}
+\`\`\`
+
+Icon cache is stored under \`%AppData%\\ShortcutDock\\Cache\\*.png\`.
+
+---
 
 ## Getting Started
 
-### Requirements
-- .NET 8.0 SDK or newer
+### Prerequisites
+- .NET 10.0 SDK or newer
 
 ### Build & Run
-\`\`\`bash
+\`\`\`powershell
+# Clone the repository
 git clone https://github.com/Almanex/ShortcutDock.git
 cd ShortcutDock
+
+# Restore dependencies and build
 dotnet build
-dotnet run
+
+# Run project
+dotnet run --project src\\ShortcutDock
 \`\`\`
 
-## License
+### Standalone Publication
+To compile a single executable with all dependencies bundled inside:
+\`\`\`powershell
+dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true
+\`\`\`
+The output file will be saved in \`src\\ShortcutDock\\bin\\Release\\net10.0-windows\\win-x64\\publish\\\`.
 
-MIT`,
+---
+
+## Running the Tests
+This project uses manual UI verification and automated build checks. To verify code formatting:
+\`\`\`powershell
+dotnet build -c Release
+\`\`\`
+
+---
+
+## Contributing
+Please submit issues and pull requests on our GitHub repository. For major changes, open an issue first to discuss what you want to change.
+
+---
+
+## Versioning
+We use SemVer for versioning. For available versions, see the tags on this repository.
+
+---
+
+## Authors & Acknowledgments
+- Almanex - Developer and initial work.
+- WPF-UI community for Fluent styling elements.
+
+---
+
+## License
+This project is licensed under the MIT License - see the \`LICENSE\` file for details.`,
     readme_ru: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
 
 # ShortcutDock
 
-**Кастомная панель быстрого запуска ярлыков для Windows 11**
+**Настраиваемая панель быстрого запуска в стиле Fluent Design для рабочего стола Windows 11**
 
-Настольная dock-панель быстрого запуска с поддержкой эффектов размытия Mica/Acrylic, автоматическим изменением ориентации (вертикальная/горизонтальная), поддержкой Drag-and-Drop и интеграцией в системный трей.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Platform: Windows](https://img.shields.io/badge/Platform-Windows%2010%20%2F%2011-blue.svg)](#)
+[![Framework: .NET 10](https://img.shields.io/badge/Framework-.NET%2010.0-blueviolet.svg)](https://dotnet.microsoft.com)
+[![Share on X](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FShortcutDock)](https://twitter.com/intent/tweet?text=%D0%9F%D0%BE%D1%81%D0%BC%D0%BE%D1%82%D1%80%D0%B8%D1%82%D0%B5%20%D0%BD%D0%B0%20ShortcutDock%20--%20%D0%BA%D1%80%D0%B0%D1%81%D0%B8%D0%B2%D1%83%D1%8E%20%D0%BF%D0%B0%D0%BD%D0%B5%D0%BB%D1%8C%20%D0%B1%D1%8B%D1%81%D1%82%D1%80%D0%BE%D0%B3%D0%BE%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%20%D0%B4%D0%BB%D1%8F%20Windows%2011%21&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FShortcutDock&hashtags=windows11,wpf,dotnet,opensource)
+
+---
+
+## Обзор
+
+ShortcutDock — это современная, легковесная панель ярлыков для рабочего стола Windows, предназначенная для удобной организации ваших приложений. Она поддерживает эффекты размытия Mica и Acrylic, синхронизацию с системной темой Windows, технологию Drag-and-Drop, автоматическое переключение между вертикальной и горизонтальной ориентациями, резервирование экранного пространства (AppBar) и интеграцию с системным треем.
+
+> [!IMPORTANT]
+> **Доступен первый стабильный релиз!**  
+> Вы можете скачать готовый скомпилированный файл **\`ShortcutDock.exe\`** на странице [Релизы](https://github.com/Almanex/ShortcutDock/releases/tag/v1.0.0) и запустить его на своем компьютере без установки дополнительных библиотек.
+
+Подробные инструкции по настройке всех функций приведены в [Руководстве пользователя (GUIDE.md)](GUIDE.md).
+
+---
+
+## Скриншоты
+
+<details open>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 1. Горизонтальное расположение (Снизу)</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot1.png" width="95%" alt="ShortcutDock Горизонтальная внизу" />
+  </p>
+</details>
+
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 2. Вертикальное расположение (Слева)</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot2.png" width="95%" alt="ShortcutDock Вертикальная слева" />
+  </p>
+</details>
+
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 3. Окно настроек Fluent Design</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot3.png" width="95%" alt="ShortcutDock Настройки" />
+  </p>
+</details>
+
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 4. Контекстное меню и настройки</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot4.png" width="95%" alt="ShortcutDock Контекстное меню" />
+  </p>
+</details>
+
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Показать ] 5. Горизонтальное расположение (Сверху)</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot5.png" width="95%" alt="ShortcutDock Позиция сверху" />
+  </p>
+</details>
+
+
+
+
+
+
+---
 
 ## Основные возможности
 
-- Добавление ярлыков: Drag-and-Drop файлов .exe/.lnk прямо на панель.
-- Автоориентация: Автоматический поворот панели при закреплении на разных сторонах экрана.
-- Эффекты Mica/Acrylic: Интеграция с системным оформлением и автоматическая смена темной/светлой тем.
-- Скрытие (Auto-Hide): Сворачивание панели за границы экрана для экономии места.
-- Анимация при наведении: Плавное увеличение значков в стиле macOS.
+- Панель на рабочем столе: Перетаскивайте файлы \`.exe\` или \`.lnk\` с помощью Drag-and-Drop прямо на панель для их быстрого добавления.
+- Динамическая ориентация: Автоматически переключается между вертикальным (при размещении слева или справа на экране) и горизонтальным (сверху или снизу) режимами отображения.
+- Современное размытие: Поддержка эффектов размытия Mica и Acrylic с динамической сменой системной темы оформления (темная/светлая).
+- Автоскрытие: Панель плавно скрывается за пределы экрана при потере фокуса мыши, освобождая рабочую область.
+- Эффект Hover Zoom и индикаторы запуска: macOS-анимация увеличения значков при наведении и аккуратные точки акцентного цвета под запущенными программами.
+
+---
 
 ## Стек технологий
 
-- Язык: C# (.NET 8.0)
-- UI-фреймворк: WPF + WPF-UI 4.3.0
-- Паттерн MVVM: CommunityToolkit.Mvvm
-- Системные вызовы: P/Invoke (user32.dll, dwmapi.dll, shell32.dll)
+| Слой / Компонент | Технология | Версия | Назначение |
+| --- | --- | --- | --- |
+| Язык | C# (.NET 10.0) | net10.0-windows | Основной язык разработки |
+| UI-фреймворк | WPF + WPF-UI | 4.3.0 | Современные элементы управления и окно Mica |
+| Паттерн | MVVM Toolkit | 8.4.2 | Связывание состояния через CommunityToolkit.Mvvm |
+| Интеграция с Win32 | P/Invoke | - | Работа с DWM, стилями окон и API AppBar |
+| Графика | System.Drawing.Common | 10.0.9 | Извлечение значков и рендеринг в PNG |
 
-## Сборка и запуск
+---
 
-### Требования
-- .NET 8.0 SDK или новее
+## Структура проекта
 
-### Команды
-\`\`\`bash
-git clone https://github.com/Almanex/ShortcutDock.git
-cd ShortcutDock
-dotnet build
-dotnet run
+\`\`\`text
+ShortcutDock/
+├── ShortcutDock.slnx              # Файл решения Visual Studio (формат SDK 10)
+└── src\\ShortcutDock\\
+    ├── ShortcutDock.csproj         # Конфигурация проекта net10.0-windows
+    ├── app.manifest                # Манифест совместимости и поддержки DPI
+    ├── App.xaml / App.xaml.cs      # Точка входа, DI-контейнер и служба трея
+    ├── MainWindow.xaml / .xaml.cs  # Главная панель, обработка размытия DWM, DnD и AppBar
+    ├── SettingsWindow.xaml / .cs   # Окно настроек Fluent-дизайна
+    ├── app_icon.ico                # Встроенный значок приложения
+    ├── Native\\
+    │   └── Win32.cs                # Системные вызовы P/Invoke
+    ├── Models\\
+    │   ├── Settings.cs            
+    │   ├── PanelSettings.cs        # Настройки панели
+    │   └── ShortcutItem.cs         # Модель ярлыка (GUID, пути, кэшированная иконка)
+    ├── Services\\
+    │   ├── SettingsService.cs      # Загрузка/сохранение settings.json в %AppData%
+    │   ├── ProcessLauncher.cs     # Запуск приложений (включая права администратора)
+    │   ├── ShortcutResolver.cs     # Разрешение путей .lnk-файлов через COM-интерфейсы
+    │   └── IconExtractor.cs       # Извлечение больших значков (256x256) в кэш PNG
+    └── ViewModels\\
+        ├── MainViewModel.cs       # Управление коллекцией ярлыков и настройками
+        └── ShortcutViewModel.cs   # Команды запуска, удаления и администрирования
 \`\`\`
 
-## Лицензия
+---
 
-MIT`,
+## Данные и конфигурация
+
+Конфигурационный файл сохраняется в формате JSON по пути \`%AppData%\\ShortcutDock\\settings.json\`:
+
+\`\`\`json
+{
+  "PanelSettings": {
+    "Position": "Bottom",
+    "IconSize": 48,
+    "KeepOnTop": true,
+    "BackdropType": "Mica",
+    "ShowAddButton": true,
+    "AutoHide": false,
+    "HoverZoom": true,
+    "ShowRunningIndicators": true,
+    "Language": "ru"
+  },
+  "Shortcuts": [
+    {
+      "Id": "a1b2c3d4-...",
+      "Name": "Google Chrome",
+      "TargetPath": "C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
+      "IconPath": "%AppData%\\\\ShortcutDock\\\\Cache\\\\chrome_ABCD1234.png"
+    }
+  ]
+}
+\`\`\`
+
+Кэш иконок находится в папке \`%AppData%\\ShortcutDock\\Cache\\*.png\`.
+
+---
+
+## С чего начать
+
+### Требования
+- .NET 10.0 SDK или новее
+
+### Сборка и запуск
+\`\`\`powershell
+# Клонирование репозитория
+git clone https://github.com/Almanex/ShortcutDock.git
+cd ShortcutDock
+
+# Восстановление зависимостей и сборка
+dotnet build
+
+# Запуск проекта
+dotnet run --project src\\ShortcutDock
+\`\`\`
+
+### Автономная публикация (Self-Contained EXE)
+Для компиляции единого исполняемого файла со всеми встроенными зависимостями:
+\`\`\`powershell
+dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true
+\`\`\`
+Готовый исполняемый файл будет сохранен в папке \`src\\ShortcutDock\\bin\\Release\\net10.0-windows\\win-x64\\publish\\\`.
+
+---
+
+## Тестирование
+В проекте используется ручное визуальное тестирование интерфейса, а также автоматическая проверка сборки. Чтобы проверить форматирование кода и сборку:
+\`\`\`powershell
+dotnet build -c Release
+\`\`\`
+
+---
+
+## Участие в разработке
+Вы можете отправлять сообщения об ошибках и пулл-реквесты на GitHub. При внесении значительных изменений рекомендуется сначала создать issue для предварительного обсуждения.
+
+---
+
+## Версионирование
+Проект использует систему SemVer. Доступные версии и теги можно посмотреть на странице релизов репозитория.
+
+---
+
+## Авторы и благодарности
+- Almanex - Разработчик и первоначальная реализация.
+- Сообщество WPF-UI за современные элементы Fluent Design.
+
+---
+
+## Лицензия
+Этот проект распространяется под лицензией MIT — подробности смотрите в файле \`LICENSE\`.`,
     readme_de: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
 
 # ShortcutDock
 
-**Anpassbare Shortcut-Dock-Leiste für Windows 11**
+**Anpassbare Fluent-Design-Schnellstartleiste für Windows 11-Desktops**
 
-Eine Desktop-Dock-Leiste mit Unterstützung für Mica/Acryl/Transparenzeffekte, automatischer Ausrichtung, Drag-and-Drop, AppBar-Arbeitsplatzreservierung und System-Tray-Integration.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Platform: Windows](https://img.shields.io/badge/Platform-Windows%2010%20%2F%2011-blue.svg)](#)
+[![Framework: .NET 10](https://img.shields.io/badge/Framework-.NET%2010.0-blueviolet.svg)](https://dotnet.microsoft.com)
+[![Share on X](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FShortcutDock)](https://twitter.com/intent/tweet?text=Schau%20dir%20ShortcutDock%20an%20--%20eine%20wundersch%C3%B6ne%2C%20anpassbare%20Schnellstartleiste%20f%C3%BCr%20Windows%2011%21&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FShortcutDock&hashtags=windows11,wpf,dotnet,opensource)
+
+---
+
+## Übersicht
+
+ShortcutDock ist eine moderne, leichtgewichtige Windows-Desktop-Leiste zur Organisation Ihrer Verknüpfungen. Sie bietet Mica- und Acrylic-Weichzeichnungseffekte, die sich mit dem aktiven Windows-Systemdesign synchronisieren, Drag-and-Drop-Unterstützung, automatische Ausrichtung zwischen vertikaler und horizontaler Ausrichtung, Systemplatzreservierung (AppBar) und System-Tray-Integration.
+
+> [!IMPORTANT]
+> **Erste stabile Version verfügbar!**  
+> Sie können die fertige, kompilierte Datei **\`ShortcutDock.exe\`** auf der [Releases](https://github.com/Almanex/ShortcutDock/releases/tag/v1.0.0)-Seite herunterladen und direkt auf Ihrem Computer ausführen, ohne zusätzliche Bibliotheken installieren zu müssen.
+
+Ausführliche Anweisungen zur Konfiguration aller Funktionen finden Sie im [Benutzerhandbuch (GUIDE.md)](GUIDE.md).
+
+---
+
+## Screenshots
+
+<details open>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 1. Horizontales Layout (Unten)</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot1.png" width="95%" alt="ShortcutDock Horizontal Unten" />
+  </p>
+</details>
+
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 2. Vertikales Layout (Links)</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot2.png" width="95%" alt="ShortcutDock Vertikal Links" />
+  </p>
+</details>
+
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 3. Fluent Einstellungsfenster</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot3.png" width="95%" alt="ShortcutDock Einstellungen" />
+  </p>
+</details>
+
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 4. Kontextmenü und Anpassungen</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot4.png" width="95%" alt="ShortcutDock Kontextmenü" />
+  </p>
+</details>
+
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Anzeigen ] 5. Horizontales Layout (Oben)</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot5.png" width="95%" alt="ShortcutDock Position Oben" />
+  </p>
+</details>
+
+
+
+
+
+
+---
 
 ## Hauptfunktionen
 
-- Desktop-Panel: Drag-and-Drop von .exe/.lnk-Dateien zum schnellen Hinzufügen.
-- Dynamische Ausrichtung: Wechselt automatisch zwischen vertikal und horizontal je nach Bildschirmrand.
-- Modernes Design: Mica- und Acryl-Effekte, synchronisiert mit dem Windows-Design.
-- Auto-Hide: Blendet das Panel bei Inaktivität aus, um Arbeitsbereich freizugeben.
-- Hover-Effekte: Mac-Style-Symbolvergrößerung und aktive Programmindikatoren.
+- Desktop-Leiste: Ziehen Sie \`.exe\`- oder \`.lnk\`-Dateien einfach per Drag-and-Drop direkt auf die Leiste, um sie hinzuzufügen.
+- Dynamische Ausrichtung: Wechselt automatisch zwischen vertikalen (linke/rechte Bildschirmseite) und horizontalen (oben/unten) Layouts.
+- Modernes Design: Unterstützung für Mica- und Acrylic-Weichzeichnungseffekte, synchronisiert mit dem aktiven Windows-Systemdesign (hell/dunkel).
+- Automatisches Ausblenden: Die Leiste wird sanft ausgeblendet, wenn der Mausfokus verloren geht, um die Arbeitsfläche zu maximieren.
+- Hover-Zoom & Aktivitätsindikatoren: macOS-ähnliche Icon-Vergrößerungsanimation beim Überfahren mit der Maus und farbige Punkte unter geöffneten Anwendungen.
 
-## Technologie-Stack
+---
 
-- Sprache: C# (.NET 8.0)
-- UI-Bibliothek: WPF + WPF-UI 4.3.0
-- MVVM: CommunityToolkit.Mvvm
-- Win32 API: P/Invoke (user32, dwmapi, shell32)
+## Technologiestapel
 
-## Build & Ausführung
+| Ebene / Komponente | Technologie | Version | Zweck |
+| --- | --- | --- | --- |
+| Sprache | C# (.NET 10.0) | net10.0-windows | Hauptprogrammiersprache |
+| UI-Framework | WPF + WPF-UI | 4.3.0 | Moderne Steuerelemente und Mica-Fensterrahmen |
+| Entwurfsmuster | MVVM Toolkit | 8.4.2 | Zustandsbindung über CommunityToolkit.Mvvm |
+| Win32-Integration | P/Invoke | - | APIs für DWM, Fensterstile und AppBar |
+| Grafikbibliothek | System.Drawing.Common | 10.0.9 | Icon-Extraktion und PNG-Rendering |
 
-### Anforderungen
-- .NET 8.0 SDK oder neuer
+---
 
-### Befehle
-\`\`\`bash
-git clone https://github.com/Almanex/ShortcutDock.git
-cd ShortcutDock
-dotnet build
-dotnet run
+## Projektstruktur
+
+\`\`\`text
+ShortcutDock/
+├── ShortcutDock.slnx              # Visual Studio-Projektmappe (SDK 10-Format)
+└── src\\ShortcutDock\\
+    ├── ShortcutDock.csproj         # net10.0-windows Konfiguration
+    ├── app.manifest                # DPI-Kompatibilität und Windows-Manifest
+    ├── App.xaml / App.xaml.cs      # Einstiegspunkt, DI-Container und Tray-Service
+    ├── MainWindow.xaml / .xaml.cs  # Hauptleiste, DWM-Blur, DnD- und AppBar-Integration
+    ├── SettingsWindow.xaml / .cs   # Fluent-Design Einstellungsfenster
+    ├── app_icon.ico                # Integriertes Programmsymbol
+    ├── Native\\
+    │   └── Win32.cs                # P/Invoke-Schnittstellendefinitionen
+    ├── Models\\
+    │   ├── Settings.cs            
+    │   ├── PanelSettings.cs        # Leisteneinstellungen
+    │   └── ShortcutItem.cs         # Verknüpfungsmodell (GUID, Pfad, Cache-Symbol)
+    ├── Services\\
+    │   ├── SettingsService.cs      # settings.json in %AppData% laden/speichern
+    │   ├── ProcessLauncher.cs     # Anwendungsstart, auch mit Administratorrechten
+    │   ├── ShortcutResolver.cs     # Auflösen von .lnk-Verknüpfungen über COM
+    │   └── IconExtractor.cs       # Extraktion großer Symbole (256x256) in PNG-Cache
+    └── ViewModels\\
+        ├── MainViewModel.cs       # Verwaltung der Verknüpfungssammlung und Einstellungen
+        └── ShortcutViewModel.cs   # Befehle zum Starten, Entfernen und für Admin-Rechte
 \`\`\`
 
-## Lizenz
+---
 
-MIT`
+## Daten und Konfiguration
+
+Die Einstellungen werden als JSON unter \`%AppData%\\ShortcutDock\\settings.json\` gespeichert:
+
+\`\`\`json
+{
+  "PanelSettings": {
+    "Position": "Bottom",
+    "IconSize": 48,
+    "KeepOnTop": true,
+    "BackdropType": "Mica",
+    "ShowAddButton": true,
+    "AutoHide": false,
+    "HoverZoom": true,
+    "ShowRunningIndicators": true,
+    "Language": "de"
+  },
+  "Shortcuts": [
+    {
+      "Id": "a1b2c3d4-...",
+      "Name": "Google Chrome",
+      "TargetPath": "C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
+      "IconPath": "%AppData%\\\\ShortcutDock\\\\Cache\\\\chrome_ABCD1234.png"
+    }
+  ]
+}
+\`\`\`
+
+Der Icon-Cache wird unter \`%AppData%\\ShortcutDock\\Cache\\*.png\` abgelegt.
+
+---
+
+## Erste Schritte
+
+### Voraussetzungen
+- .NET 10.0 SDK oder neuer
+
+### Bauen & Ausführen
+\`\`\`powershell
+# Repository klonen
+git clone https://github.com/Almanex/ShortcutDock.git
+cd ShortcutDock
+
+# Abhängigkeiten wiederherstellen und bauen
+dotnet build
+
+# Projekt ausführen
+dotnet run --project src\\ShortcutDock
+\`\`\`
+
+### Standalone Veröffentlichung
+So kompilieren Sie eine einzelne, eigenständige ausführbare Datei:
+\`\`\`powershell
+dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true
+\`\`\`
+Die fertige ausführbare Datei wird unter \`src\\ShortcutDock\\bin\\Release\\net10.0-windows\\win-x64\\publish\\\` gespeichert.
+
+---
+
+## Tests ausführen
+Dieses Projekt verwendet manuelle UI-Tests und automatisierte Build-Checks. So überprüfen Sie die Formatierung und den Build:
+\`\`\`powershell
+dotnet build -c Release
+\`\`\`
+
+---
+
+## Mitwirken
+Bitte senden Sie Fehlerberichte (Issues) und Pull Requests auf GitHub. Bei größeren Änderungen erstellen Sie bitte zuerst ein Issue zur Diskussion.
+
+---
+
+## Versionsverwaltung
+Wir verwenden SemVer für die Versionsverwaltung. Verfügbare Versionen und Tags finden Sie unter Releases.
+
+---
+
+## Autoren & Danksagungen
+- Almanex - Entwickler und Erstumsetzung.
+- WPF-UI Community für moderne Designelemente.
+
+---
+
+## Lizenz
+Dieses Projekt ist unter der MIT-Lizenz lizenziert - siehe die \`LICENSE\`-Datei für Details.`
   },
   "shelter-fork": {
     title: "Shelter Fork",

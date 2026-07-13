@@ -57,7 +57,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
   title={`${projectData.title} — Almanex`} 
   activeTab="work" 
   description={subtitle}
-  image={projectData.image ? `/${projectData.image}` : undefined}
+  image={projectData.image ? (projectData.image.startsWith('http') ? projectData.image : `/${projectData.image}`) : undefined}
   type="website"
 >
   <!-- SoftwareApplication JSON-LD -->
@@ -73,7 +73,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
       "priceCurrency": "USD"
     },
     "url": projectData.github,
-    "image": projectData.image ? [new URL(`/${projectData.image}`, Astro.site).href] : undefined
+    "image": projectData.image ? [projectData.image.startsWith('http') ? projectData.image : new URL(`/${projectData.image}`, Astro.site).href] : undefined
   })} />
 
   <div class="detail-container" id="project-detail-container" data-lang={lang}>
