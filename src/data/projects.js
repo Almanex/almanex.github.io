@@ -1233,8 +1233,6 @@ Dieses Projekt lizenziert unter der MIT-Lizenz – Einzelheiten finden Sie in de
 - Dem Team hinter [llama.cpp](https://github.com/ggml-org/llama.cpp) für die Inferenz-Engine.
 - Den Entwicklern von Markdig für die Markdown-Bibliotheken.
 `,
-    readme_ru: ``,
-    readme_de: ``,
     guide: `[ English ](GUIDE.md) • [ Русский ](GUIDE_RU.md) • [ Deutsch ](GUIDE_DE.md)
 
 # Gemma Local Desktop User Guide
