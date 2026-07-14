@@ -71,8 +71,8 @@ const labels = {
 
 const l = labels[lang];
 
-// Localized category, subtitle and tldr highlights
-const category = PROJECT_TRANSLATIONS[lang]?.[project]?.category || projectData.category;
+// Localized subtitle and tldr highlights
+const category = projectData.category;
 const subtitle = PROJECT_TRANSLATIONS[lang]?.[project]?.subtitle || projectData.subtitle;
 const tldr = PROJECT_TRANSLATIONS[lang]?.[project]?.tldr || projectData.tldr || [];
 

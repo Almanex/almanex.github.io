@@ -288,7 +288,7 @@ const l = pageLabels[lang];
             : (getFirstImageFromMarkdown(project.readme, project) || `/images/projects/cover/cover_${(index % 8) + 1}.avif`);
           
           // Localized category and subtitle
-          const category = PROJECT_TRANSLATIONS[lang]?.[id]?.category || project.category;
+          const category = project.category;
           const subtitle = PROJECT_TRANSLATIONS[lang]?.[id]?.subtitle || project.subtitle;
 
           return (

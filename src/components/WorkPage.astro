@@ -49,7 +49,7 @@ const labels = {
           const coverImg = project.firstImg || `/images/projects/cover/cover_${(index % 8) + 1}.avif`;
           
           // Localized category and subtitle
-          const category = PROJECT_TRANSLATIONS[lang]?.[project.id]?.category || project.category;
+          const category = project.category;
           const subtitle = PROJECT_TRANSLATIONS[lang]?.[project.id]?.subtitle || project.subtitle;
 
           // Check if GUIDE is available
