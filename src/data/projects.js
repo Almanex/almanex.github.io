@@ -1,27 +1,27 @@
 import classic_windows_image_viewer from './projects/classic-windows-image-viewer.json';
-import flowguide from './projects/flowguide.json';
 import gemma_local_desktop from './projects/gemma-local-desktop.json';
-import lingospaced from './projects/lingospaced.json';
-import mushroom_spot from './projects/mushroom-spot.json';
 import portable_app_sync from './projects/portable-app-sync.json';
-import rokey from './projects/rokey.json';
 import screentation_v2 from './projects/screentation-v2.json';
-import shelter_fork from './projects/shelter-fork.json';
 import shortcutdock from './projects/shortcutdock.json';
 import webpconverter from './projects/webpconverter.json';
+import rokey from './projects/rokey.json';
+import shelter_fork from './projects/shelter-fork.json';
+import flowguide from './projects/flowguide.json';
+import lingospaced from './projects/lingospaced.json';
+import mushroom_spot from './projects/mushroom-spot.json';
 
 export const PROJECTS_DATA = {
   "classic-windows-image-viewer": classic_windows_image_viewer,
-  "flowguide": flowguide,
   "gemma-local-desktop": gemma_local_desktop,
-  "lingospaced": lingospaced,
-  "mushroom-spot": mushroom_spot,
   "portable-app-sync": portable_app_sync,
-  "rokey": rokey,
   "screentation-v2": screentation_v2,
-  "shelter-fork": shelter_fork,
   "shortcutdock": shortcutdock,
-  "webpconverter": webpconverter
+  "webpconverter": webpconverter,
+  "rokey": rokey,
+  "shelter-fork": shelter_fork,
+  "flowguide": flowguide,
+  "lingospaced": lingospaced,
+  "mushroom-spot": mushroom_spot
 };
 
 if (typeof window !== 'undefined') {
