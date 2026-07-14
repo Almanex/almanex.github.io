@@ -3437,117 +3437,911 @@ Diese Warnung ist Standard für kostenlose Open-Source-Software, die nicht über
 `,
   },
   "lingospaced": {
-    title: "LingoSpaced",
-    subtitle: "An Android flashcard application utilizing spaced repetition for language learning.",
-    category: "Android App",
+    title: "LingoSpaced ",
+    subtitle: "тест",
+    category: "Open Source",
     lang: "Kotlin",
-    platform: "Android",
+    platform: "Windows 11",
     stars: "0",
     license: "MIT",
     github: "https://github.com/Almanex/LingoSpaced-",
-    image: "images/projects/lingospaced.jpg",
-    readme: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+    image: "/images/projects/lingospaced-.webp",
+    readme: `# LingoSpaced
 
-# LingoSpaced
+*Premium mobile application for learning German on Android using a smart automatic spaced repetition algorithm and dynamic glassmorphism interface.*
 
-**Android flashcard application utilizing spaced repetition for language learning**
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Platform: Android](https://img.shields.io/badge/Platform-Android%2016-green.svg?style=flat-square)](https://developer.android.com)
+[![Language: Kotlin](https://img.shields.io/badge/Language-Kotlin%202.3.20-purple.svg?style=flat-square)](https://kotlinlang.org)
+[![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FLingoSpaced-)](https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20project&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FLingoSpaced-)
 
-LingoSpaced is a mobile application for learning German on Android 16 (API 36). It uses an automated spaced repetition algorithm that adapts to user memory based on implicit signals like response speed, mistakes, and hints, without manual difficulty ratings.
+---
 
-## UI/UX Design
+## Overview
 
-The interface follows Taste Rules standards, featuring a fluid glassmorphism effect, spring physics animations, and a dynamic HSL color palette adapting to light/dark themes.
+LingoSpaced is a local-first, offline-capable mobile Android application designed for efficient learning of German vocabulary. It is based on a smart automatic spaced repetition algorithm that adapts to the user's memory using implicit feedback metrics (such as response speed, hint usage, errors, and typos) rather than manual difficulty self-ratings.
 
-## Quick Start
+The application interface follows premium design standards (Taste Rules) featuring a liquid frosted glass effect (Glassmorphism), spring physics animations, and a dynamic HSL palette that automatically adapts to system light and dark themes.
 
-### Requirements
-- Android Studio (Koala / Ladybug or newer)
-- Android SDK 36 (Android 16)
-- JDK 17
+Detailed instructions and documentation:
+* [User Guide](docs/GUIDE.md) - Detailed guide on training mechanics, algorithms, and options.
+* [Developer Guide](docs/DEVELOPER.md) - Internal architecture details, storage schemes, and mathematics.
 
-### Build & Run
+---
+
+## Key Features
+
+* Smart Spaced Repetition: Automates the learning schedule based on user response metrics.
+* Dynamic Glassmorphic UI: Smooth animations based on spring physics and interactive glassmorphic cards.
+* Four Game Mechanics: Includes choice selection, text input with smart typo checking, letter scrambling, and Text-To-Speech listening practice.
+* Phrase Notepad: Offline notebook for saving phrases with custom speech rate, tone, and loop repetition.
+* Local Backup & Restore: Export and import vocabulary via JSON using overwrite or merge strategies.
+* Daily Reminder Notifications: Dynamic daily push notifications scheduled via AlarmManager indicating overdue reviews.
+
+---
+
+## Tech Stack
+
+| Layer / Component | Technology | Details / Purpose |
+| --- | --- | --- |
+| Language | Kotlin (v2.3.20) | jvmToolchain = 17 |
+| UI Framework | Jetpack Compose | Compose Compiler v2.3.20 |
+| Navigation | Jetpack Navigation 3 | androidx.navigation3:1.0.1 |
+| Serialization | Kotlinx Serialization JSON | v1.6.3 |
+| Storage | Local JSON files | words.json and phrases.json in app files directory |
+| Audio/Voice | TextToSpeech (TTS) | Local German speech synthesis |
+| Background Tasks | AlarmManager | Daily notifications scheduling |
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+* Android Studio (Koala / Ladybug or later)
+* Android SDK 36 (Android 16)
+* JDK 17 (recommended to use Android Studio's built-in JBR)
+
+### Installation & Running
+
+1. Clone the repository:
+   \`\`\`bash
+   git clone https://github.com/Almanex/LingoSpaced-.git
+   \`\`\`
+2. Set the \`JAVA_HOME\` environment variable to point to your JDK 17 (or Android Studio JBR):
+   * On Windows (PowerShell):
+     \`\`\`powershell
+     $env:JAVA_HOME="C:\\Program Files\\Android\\Android Studio\\jbr"
+     \`\`\`
+   * On Linux/macOS:
+     \`\`\`bash
+     export JAVA_HOME="/path/to/android-studio/jbr"
+     \`\`\`
+3. Run the application using Android Studio or compile a debug build from the terminal:
+   \`\`\`powershell
+   .\\gradlew.bat assembleDebug
+   \`\`\`
+   The output APK will be available at \`app/build/outputs/apk/debug/app-debug.apk\`.
+
+---
+
+## Running the Tests
+
+To run the unit tests for the interval algorithm and ViewModels:
 \`\`\`powershell
-# Set JDK environment variable
-$env:JAVA_HOME="C:\\Program Files\\Android\\Android Studio\\jbr"
-
-# Run unit tests
 .\\gradlew.bat test
-
-# Build debug APK
-.\\gradlew.bat assembleDebug
 \`\`\`
 
-Output APK path: \`app/build/outputs/apk/debug/app-debug.apk\`
+---
+
+## Deployment
+
+To compile a production or release build:
+\`\`\`powershell
+.\\gradlew.bat assembleRelease
+\`\`\`
+
+---
+
+## Contributing
+
+Contributions, bug reports, and pull requests are welcome. Feel free to open an issue or submit a pull request on GitHub.
+
+---
 
 ## License
 
-MIT`,
-    readme_ru: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+This project is licensed under the MIT License. Refer to the license terms for details.`,
+    readme_ru: `# LingoSpaced
 
-# LingoSpaced
+*Премиальное мобильное приложение для изучения немецкого языка на Android с использованием умного автоматического алгоритма интервального повторения и динамического интерфейса с эффектом матового стекла.*
 
-**Мобильное приложение для изучения немецкого языка с умным интервальным повторением**
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Platform: Android](https://img.shields.io/badge/Platform-Android%2016-green.svg?style=flat-square)](https://developer.android.com)
+[![Language: Kotlin](https://img.shields.io/badge/Language-Kotlin%202.3.20-purple.svg?style=flat-square)](https://kotlinlang.org)
+[![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FLingoSpaced-)](https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20project&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FLingoSpaced-)
 
-LingoSpaced — мобильное приложение под Android 16 (API 36) для эффективного запоминания немецких слов. В основе лежит алгоритм интервальных повторений, адаптирующийся под память пользователя на основе скорости ответа, опечаток и ошибок без ручной оценки сложности.
+---
 
-## Дизайн UI/UX
+## Обзор
 
-Интерфейс спроектирован по канонам нео-брутализма и Glassmorphism: эффект жидкого матового стекла, анимации на основе физики пружин и динамическая HSL-палитра, адаптирующаяся под светлую и темную темы.
+LingoSpaced — это локальное мобильное Android-приложение для эффективного изучения немецкой лексики, работающее полностью в автономном режиме. В его основе лежит умный алгоритм интервального повторения, который адаптируется к памяти пользователя на основе неявных сигналов обратной связи (таких как скорость ответа, использование подсказок, ошибки и опечатки) вместо ручной самооценки сложности.
 
-## Быстрый старт
+Интерфейс приложения разработан в соответствии с премиальными стандартами дизайна (Taste Rules) и включает в себя эффект матового стекла (Glassmorphism), анимации на основе физики пружин и динамическую HSL-палитру, которая автоматически адаптируется под светлую и темную темы системы.
+Подробные инструкции и документация:
+* [Руководство пользователя](GUIDE_RU.md) — Подробное руководство по игровым механикам, алгоритмам и настройкам.
+* [Руководство разработчика](DEVELOPER.md) — Архитектура проекта, схемы хранения данных и математическая модель.
+---
+
+## Ключевые возможности
+
+* Умное интервальное повторение: Автоматическое планирование показов на основе метрик ответов пользователя.
+* Динамический интерфейс Glassmorphic: Плавные анимации на физике пружин и интерактивные карточки с эффектом размытия фона.
+* Четыре игровые механики: Выбор перевода, ввод слова с клавиатуры с автоматическим контролем опечаток, сборка слов из букв и аудирование с использованием Text-To-Speech.
+* Блокнот фраз: Автономный блокнот для сохранения выражений с настраиваемой скоростью, тоном и циклическим воспроизведением.
+* Локальное резервное копирование: Экспорт и импорт словаря через JSON с поддержкой стратегий слияния или перезаписи.
+* Ежедневные напоминания: Динамические пуш-уведомления через AlarmManager с указанием точного количества карточек для повторения.
+
+---
+
+## Стек технологий
+
+| Уровень / Компонент | Технология | Описание / Назначение |
+| --- | --- | --- |
+| Язык программирования | Kotlin (v2.3.20) | jvmToolchain = 17 |
+| UI-фреймворк | Jetpack Compose | Compose Compiler v2.3.20 |
+| Навигация | Jetpack Navigation 3 | androidx.navigation3:1.0.1 |
+| Сериализация | Kotlinx Serialization JSON | v1.6.3 |
+| Хранилище данных | Локальные файлы JSON | words.json и phrases.json во внутреннем кэше приложения |
+| Озвучивание | TextToSpeech (TTS) | Локальный синтез речи для немецкого языка |
+| Фоновые задачи | AlarmManager | Планирование ежедневных уведомлений |
+
+---
+
+## Начало работы
 
 ### Требования
-- Android Studio (Koala / Ladybug или новее)
-- Android SDK 36 (Android 16)
-- JDK 17
 
-### Команды консоли
+* Android Studio (Koala / Ladybug или новее)
+* Android SDK 36 (Android 16)
+* JDK 17 (рекомендуется встроенный JBR в Android Studio)
+
+### Установка и запуск
+
+1. Клонируйте репозиторий:
+   \`\`\`bash
+   git clone https://github.com/Almanex/LingoSpaced-.git
+   \`\`\`
+2. Настройте переменную окружения \`JAVA_HOME\`, чтобы она указывала на JDK 17 (или Android Studio JBR):
+   * В Windows (PowerShell):
+     \`\`\`powershell
+     $env:JAVA_HOME="C:\\Program Files\\Android\\Android Studio\\jbr"
+     \`\`\`
+   * В Linux/macOS:
+     \`\`\`bash
+     export JAVA_HOME="/path/to/android-studio/jbr"
+     \`\`\`
+3. Откройте проект в Android Studio или соберите отладочную версию через терминал:
+   \`\`\`powershell
+   .\\gradlew.bat assembleDebug
+   \`\`\`
+   Готовый файл APK будет сохранен по пути \`app/build/outputs/apk/debug/app-debug.apk\`.
+
+---
+
+## Запуск тестов
+
+Для запуска модульных тестов алгоритма интервалов и ViewModels выполните:
 \`\`\`powershell
-$env:JAVA_HOME="C:\\Program Files\\Android\\Android Studio\\jbr"
-
-# Запуск тестов
 .\\gradlew.bat test
-
-# Сборка APK
-.\\gradlew.bat assembleDebug
 \`\`\`
+
+---
+
+## Развертывание
+
+Для сборки релизной или рабочей версии выполните:
+\`\`\`powershell
+.\\gradlew.bat assembleRelease
+\`\`\`
+
+---
+
+## Участие в разработке
+
+Приветствуются любые предложения, отчеты об ошибках и пул-реквесты. Вы можете создать тему для обсуждения или отправить пул-реквест в репозиторий.
+
+---
 
 ## Лицензия
 
-MIT`,
-    readme_de: `[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+Проект распространяется под лицензией MIT. Подробности смотрите в тексте лицензии.
+`,
+    readme_de: `# LingoSpaced
 
-# LingoSpaced
+*Premium-Mobilanwendung zum Deutschlernen auf Android mit einem intelligenten automatischen Spaced-Repetition-Algorithmus und einer dynamischen Benutzeroberfläche in Glassmorphism-Optik.*
 
-**Android-Karteikarten-App mit Spaced Repetition zum Sprachenlernen**
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Platform: Android](https://img.shields.io/badge/Platform-Android%2016-green.svg?style=flat-square)](https://developer.android.com)
+[![Language: Kotlin](https://img.shields.io/badge/Language-Kotlin%202.3.20-purple.svg?style=flat-square)](https://kotlinlang.org)
+[![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FLingoSpaced-)](https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20project&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FLingoSpaced-)
 
-LingoSpaced is eine mobile App zum Deutschlernen für Android 16 (API 36). Sie nutzt einen automatischen Spaced-Repetition-Algorithmus, der sich anhand impliziter Signale (Antwortgeschwindigkeit, Fehler, Nutzung von Hinweisen) an das Gedächtnis des Nutzers anpasst.
+---
 
-## UI/UX-Design
+## Übersicht
 
-Das Interface folgt modernen Design-Standards und bietet Glassmorphismus-Effekte, Physik-basierte Animationen sowie eine dynamische HSL-Farbpalette für helle und dunkle System-Designs.
+LingoSpaced ist eine lokale, offline-fähige Android-Mobilanwendung, die für das effiziente Erlernen von deutschem Vokabular entwickelt wurde. Sie basiert auf einem intelligenten, automatischen Spaced-Repetition-Algorithmus, der sich mithilfe impliziter Feedback-Metriken (wie Antwortgeschwindigkeit, Verwendung von Hinweisen, Fehler und Tippfehler) an das Gedächtnis des Benutzers anpasst, anstatt eine manuelle Selbsteinschätzung des Schwierigkeitsgrades zu erfordern.
 
-## Schnellstart
+Die Benutzeroberfläche folgt Premium-Designstandards (Taste Rules) mit einem flüssigen Milchglaseffekt (Glassmorphism), auf Federphysik basierenden Animationen und einer dynamischen HSL-Palette, die sich automatisch an die hellen und dunklen Systemthemen anpasst.
 
-### Anforderungen
-- Android Studio (Koala / Ladybug oder neuer)
-- Android SDK 36 (Android 16)
-- JDK 17
+Detaillierte Anleitungen und Dokumentation:
+* [Benutzerhandbuch](GUIDE_DE.md) – Detaillierte Anleitung zu Trainingsmechaniken, Algorithmen und Optionen.
+* [Entwicklerhandbuch](DEVELOPER.md) – Interne Architekturdetails, Speicherschemata und mathematische Modelle.
 
-### Build & Test
+---
+
+## Hauptmerkmale
+
+* Intelligente Spaced Repetition: Automatische Planung von Wiederholungen basierend auf den Antwortmetriken des Benutzers.
+* Dynamische Glassmorphic UI: Fließende, auf Federphysik basierende Animationen und interaktive Karten mit Unschärfe-Effekten.
+* Vier Spielmechaniken: Übersetzungsauswahl, Tastatureingabe mit intelligenter Tippfehlerprüfung, Zusammenbauen von Wörtern aus Buchstaben und Hörverstehen mit Text-To-Speech.
+* Phrasen-Notizbuch: Offline-Notizbuch zum Speichern von Phrasen mit anpassbarer Sprachgeschwindigkeit, Tonhöhe und zyklischer Wiederholung.
+* Lokales Backup & Wiederherstellung: Export und Import des Wortschatzes über JSON mit Unterstützung von Überschreib- oder Zusammenführungsstrategien.
+* Tägliche Erinnerungen: Dynamische tägliche Push-Benachrichtigungen über den AlarmManager mit Angabe der genauen Anzahl der fälligen Karten.
+
+---
+
+## Technologie-Stack
+
+| Ebene / Komponente | Technologie | Details / Zweck |
+| --- | --- | --- |
+| Programmiersprache | Kotlin (v2.3.20) | jvmToolchain = 17 |
+| UI-Framework | Jetpack Compose | Compose Compiler v2.3.20 |
+| Navigation | Jetpack Navigation 3 | androidx.navigation3:1.0.1 |
+| Serialisierung | Kotlinx Serialization JSON | v1.6.3 |
+| Datenspeicher | Lokale JSON-Dateien | words.json und phrases.json im App-Dateiverzeichnis |
+| Audio/Stimme | TextToSpeech (TTS) | Lokale deutsche Sprachsynthese |
+| Hintergrundaufgaben | AlarmManager | Planung täglicher Benachrichtigungen |
+
+---
+
+## Erste Schritte
+
+### Voraussetzungen
+
+* Android Studio (Koala / Ladybug oder neuer)
+* Android SDK 36 (Android 16)
+* JDK 17 (empfohlen wird das integrierte JBR von Android Studio)
+
+### Installation und Ausführung
+
+1. Klonen Sie das Repository:
+   \`\`\`bash
+   git clone https://github.com/Almanex/LingoSpaced-.git
+   \`\`\`
+2. Richten Sie die Umgebungsvariable \`JAVA_HOME\` so ein, dass sie auf Ihr JDK 17 (oder Android Studio JBR) verweist:
+   * Unter Windows (PowerShell):
+     \`\`\`powershell
+     $env:JAVA_HOME="C:\\Program Files\\Android\\Android Studio\\jbr"
+     \`\`\`
+   * Unter Linux/macOS:
+     \`\`\`bash
+     export JAVA_HOME="/path/to/android-studio/jbr"
+     \`\`\`
+3. Öffnen Sie das Projekt in Android Studio oder kompilieren Sie eine Debug-Version über das Terminal:
+   \`\`\`powershell
+   .\\gradlew.bat assembleDebug
+   \`\`\`
+   Die fertige APK-Datei wird unter dem Pfad \`app/build/outputs/apk/debug/app-debug.apk\` gespeichert.
+
+---
+
+## Tests ausführen
+
+Um die Unit-Tests für den Intervallalgorithmus und die ViewModels auszuführen:
 \`\`\`powershell
-$env:JAVA_HOME="C:\\Program Files\\Android\\Android Studio\\jbr"
-
-# Tests ausführen
 .\\gradlew.bat test
-
-# Debug-APK erstellen
-.\\gradlew.bat assembleDebug
 \`\`\`
+
+---
+
+## Bereitstellung
+
+Um eine Produktions- oder Release-Version zu kompilieren:
+\`\`\`powershell
+.\\gradlew.bat assembleRelease
+\`\`\`
+
+---
+
+## Mitwirken
+
+Beiträge, Fehlerberichte und Pull-Requests sind herzlich willkommen. Sie können gerne ein Issue erstellen oder einen Pull-Request im Repository einreichen.
+
+---
 
 ## Lizenz
 
-MIT`,
+Dieses Projekt ist unter der MIT-Lizenz lizenziert. Weitere Einzelheiten finden Sie in den Lizenzbedingungen.
+`,
+    guide: `# User Guide: LingoSpaced
+
+Welcome to LingoSpaced! This application is designed to help you efficiently and permanently learn German vocabulary without rote memorization. You do not need to manually rate the difficulty of words (like "easy" or "hard") or set schedules — the algorithm will handle it all for you based on your response speed and accuracy.
+
+---
+
+## Two-Stage Learning Cycle
+
+The process of mastering each word consists of two consecutive stages:
+
+### Stage 1: Intensive Study (Intensive)
+* Goal: Consolidate the word in short-term memory.
+* Rule: You need to give 9 correct answers for the word.
+* Frequency of showings:
+  * For a correct answer, the word is scheduled for the next show in 8 hours (averaging 3 showings per day).
+  * In case of an error, the word does not lose its accumulated points but is scheduled to be shown in 2 hours so that you can repeat and consolidate it faster.
+* Transition: After the 9th successful answer, the word automatically transitions to the "Spaced" status (\`SPACED\`).
+
+### Stage 2: Spaced Repetition (Spaced Repetition)
+* Goal: Transfer the word into long-term memory with maximum intervals between showings.
+* Rule: Base intervals grow by powers of two: $2^{\\text{step}}$ days.
+  * Step 0: 1 day
+  * Step 1: 2 days
+  * Step 2: 4 days
+  * Step 3: 8 days
+  * Step 4: 16 days
+  * ... up to Step 9: 512 days.
+* Difficulty Adjustment: The interval is automatically adjusted based on your performance (the \`difficultyFactor\` coefficient). If you answer quickly, without using hints or making typos, the word will be shown less frequently. Errors or hint usage will lower the factor, causing the word to return to the queue sooner.
+
+---
+
+## Game Mechanics (Task Types)
+
+Each card randomly selects one of four game mechanics during a session to comprehensively practice the word:
+
+1. Translation Choice (Choice):
+   * You are presented with a German word and 4 translation options in Russian. Select the correct one.
+2. Listening Practice (Listening):
+   * The word itself is not shown on the screen; only a large [Speaker] button is displayed. The German word is voiced automatically when the card is opened.
+   * You need to listen to the word and choose its translation from 4 options.
+   * The German spelling and transcription will be revealed only after you select an answer.
+3. Word Scramble (Scramble):
+   * You are given the translation of the word and a scrambled row of letters of the German word. Click the letters in the correct order to assemble the German word.
+4. Text Input (Input):
+   * The most challenging task. Write the German translation of the word using the keyboard.
+   * Smart Typo Control: The algorithm evaluates the input using Levenshtein distance. If you make 1 minor mistake (for short words up to 6 letters) or up to 2 mistakes (for long words), the answer is accepted as correct but marked as a "Typo", and the word's difficulty factor increases slightly.
+
+---
+
+## Word Pronunciation (Text-to-Speech)
+
+During workouts, voice pronunciation of the German word is available to you:
+* On each card, next to the main word (or its translation), a [Speaker] button is displayed.
+* You can click it at any time during the practice (both before and after answering) to listen to the correct pronunciation.
+* Voice settings: The pronunciation on training cards uses the common speed and tone settings set in the Phrase Notepad (the [Settings] button in the Notepad). Changes there are immediately applied to workouts.
+
+---
+
+## Hint System
+
+If you forget a word, click the [Hint] button in the upper right corner of the card:
+* In translation choice: Removes two incorrect options.
+* In word scramble: Automatically fills in the next correct letter.
+* In manual text input: Fills in the correct word character by character in the text field.
+* Note: Using a hint is recorded by the algorithm and lowers the difficulty factor of the word, causing it to appear in the repetition queue sooner.
+
+---
+
+## Adjusting Intervals to Your Needs
+
+You can adjust the overall learning speed by opening the settings window (the [Settings] button on the main screen):
+* Fast (0.5x): Cuts all intervals in half. Ideal before exams.
+* Standard (1.0x): The optimal balance of forgetting, set by default.
+* Slow (2.0x): Doubles the intervals, giving you more time between repetitions.
+* Fine-tuning (Slider): You can manually set any multiplier from 0.2x to 3.0x using the slider.
+
+---
+
+## Free Practice
+
+If you have repeated all the words for today and the "For Today" counter is 0, you can start a free practice session:
+* It starts a session of 10 random words from your database.
+* Important rule: To avoid throwing off the interval calculations, correct answers for words in the Spaced phase (\`SPACED\`) are saved to history but do not change the date of the next show or the repetition step. Progress for words in the Intensive phase (\`INTENSIVE\`) accumulates as usual.
+
+---
+
+## Progress Statistics and Analytics
+
+The "Statistics and Progress" section on the main screen helps you track your achievements:
+* Ratio Chart: Visually displays the number of words in the process of learning (Intensive) and those that have transitioned to long-term memory (Spaced).
+* Accuracy: The percentage of your correct answers. Aim to keep it above 85-90%!
+* Speed: The average response time per card. Indicates your level of automaticity.
+* Hints: Shows how often you resort to assistance.
+* Total Answers: The total volume of work you have done.
+
+---
+
+## Phrase Notepad
+
+The Phrase Notepad is a standalone section of the application designed to practice listening comprehension and memorize whole German expressions.
+
+> [!NOTE]
+> Phrases saved in the notepad live exclusively there and are not mixed with the vocabulary and study cards.
+
+### Key Capabilities:
+1. Adding Expressions:
+   * Enter a phrase in German.
+   * Add a translation (optional) and click "Save to Notepad".
+2. Pronunciation (TTS):
+   * Click the [Speaker] button next to the phrase for a single playback.
+   * Pronunciation uses the native Android Text-to-Speech engine (GERMAN locale).
+3. Loop Repeat:
+   * Click the [Repeat] button to run the phrase on auto-repeat. It will be pronounced automatically at the set time interval.
+   * Click the [Stop] button on the phrase itself or the global "Stop" button on the saved phrases panel to stop playback.
+4. Voice Fine-Tuning:
+   * Click the [Settings] button in the notepad to open the pronunciation settings panel.
+   * Adjust the Speed (from 0.5x to 2.0x) and Tone (Pitch, from 0.5 to 2.0) of the voice using the sliders.
+   * Choose the repetition interval between cycles (2s, 3s, 4s, 5s, 8s).
+5. Deletion:
+   * You can delete a phrase by clicking the [Delete] icon.
+
+---
+
+## Word Backup and Import (JSON)
+
+In the app settings, "Export" and "Import" buttons are available for saving and restoring your card vocabulary.
+
+> [!NOTE]
+> Export and import apply only to vocabulary cards. Phrases in the Notepad are not affected.
+
+### Export
+Click "Export" -> choose where to save the file. The application will create a \`lingospaced_backup.json\` file with full information: all words, learning progress, intervals, and answer history.
+
+### Import
+Click "Import" -> select the JSON file -> choose the strategy:
+
+| Strategy | When to use |
+|---|---|
+| **Merge (Merge)** | Add new words from the file without losing current progress. If a word already exists, the card with the best progress is kept. |
+| **Overwrite All (Overwrite)** | Full restore from a backup. The current vocabulary will be replaced. |
+
+### JSON File Format for Creating an Import Table
+
+The file is a JSON array \`[ ... ]\`. Each element of the array is one word. To add new words, it is sufficient to fill in 4 fields:
+
+| Field | Description | Example |
+|---|---|---|
+| \`original\` | Word in German | \`"der Hund"\` |
+| \`transcription\` | Transcription | \`"[hʊnt]"\` |
+| \`translation\` | Translation | \`"собака"\` |
+| \`context\` | Example sentence | \`"Der Hund bellt laut."\` |
+
+**Minimal example of an import file:**
+\`\`\`json
+[
+  {
+    "original": "das Buch",
+    "transcription": "[buːx]",
+    "translation": "книга",
+    "context": "Ich lese ein Buch."
+  },
+  {
+    "original": "der Tisch",
+    "transcription": "[tɪʃ]",
+    "translation": "стол",
+    "context": "Der Tisch ist aus Holz."
+  }
+]
+\`\`\`
+
+> [!TIP]
+> You can add any additional comment fields to the JSON (for example, \`"category"\` or \`"notes"\`) — the application will safely ignore them.
+
+### Full Field Table (for advanced users)
+
+If you want to transfer words along with progress (for example, from one phone to another), here is the complete list of fields:
+
+| Field | Type | Default | Description |
+|---|---|---|---|
+| \`id\` | String | Auto (UUID) | Unique card ID |
+| \`original\` | String | — | German word (key for duplicate detection) |
+| \`transcription\` | String | — | Transcription |
+| \`translation\` | String | — | Translation |
+| \`context\` | String | — | Example usage |
+| \`status\` | \`"INTENSIVE"\` / \`"SPACED"\` | \`"INTENSIVE"\` | Study stage |
+| \`stage1CorrectCount\` | Number 0–9 | \`0\` | Number of correct answers in the intensive stage |
+| \`difficultyFactor\` | Number 0.1–1.0 | \`1.0\` | Difficulty coefficient |
+| \`lastShowedTime\` | Number / \`null\` | \`null\` | Timestamp of last showing (Unix ms) |
+| \`nextScheduledTime\` | Number | Now | Timestamp of next scheduled showing (Unix ms) |
+| \`spacedStep\` | Number 0–9 | \`0\` | Spaced repetition step |
+| \`lastAnswerLogs\` | Array | \`[]\` | History of the last 10 answers |
+`,
+    guide_ru: `# Руководство пользователя: LingoSpaced<p align="center">
+  <img src="/images/projects/cover/cover_1.avif" alt="Описание картинки" width="49%" />
+</p>
+
+Добро пожаловать в LingoSpaced! Это приложение разработано для того, чтобы помочь вам эффективно и надолго выучить немецкие слова без зубрёжки. Вам не нужно самостоятельно оценивать сложность слов («легко», «сложно») или настраивать расписание — алгоритм сделает это за вас на основе вашего темпа и точности ответов.
+
+---
+
+## Двухэтапный цикл обучения
+
+Процесс освоения каждого слова состоит из двух последовательных этапов:
+
+### Этап 1: Интенсивное изучение (Intensive)
+* Цель: Закрепить слово в краткосрочной памяти.
+* Правило: Вам нужно дать 9 правильных ответов на слово.
+* Периодичность показов:
+  * При правильном ответе слово запланируется на следующий показ через 8 часов (в среднем 3 показа в день).
+  * При ошибке слово не теряет набранные баллы, но запланируется на показ через 2 часа, чтобы вы могли быстрее повторить и закрепить его.
+* Переход: После 9-го успешного ответа слово автоматически переходит в статус «Интервалы» (\`SPACED\`).
+
+### Этап 2: Интервальные повторения (Spaced Repetition)
+* Цель: Перевести слово в долгосрочную память с максимальными промежутками между показами.
+* Правило: Базовые интервалы растут по степени двойки: $2^{\\text{step}}$ дней.
+  * Шаг 0: 1 день
+  * Шаг 1: 2 дня
+  * Шаг 2: 4 дня
+  * Шаг 3: 8 дней
+  * Шаг 4: 16 дней
+  * ... до Шага 9: 512 дней.
+* Коррекция сложности: Интервал автоматически корректируется на основе вашей успеваемости (коэффициента сложности \`difficultyFactor\`). Если вы отвечаете быстро, без подсказок и опечаток, слово будет показываться реже. Ошибки или использование подсказок снизят коэффициент, и слово вернется в очередь быстрее.
+
+---
+
+## Игровые механики (Типы заданий)
+
+Каждая карточка при показе случайно выбирает одну из четырех игровых механик для всесторонней проработки слова:
+
+1. Выбор перевода (Choice):
+   * Вам предлагается немецкое слово и 4 варианта перевода на русский. Выберите правильный.
+2. Аудирование (Listening):
+   * Самого слова на экране нет, отображается только большая кнопка озвучки [Динамик]. Немецкое слово озвучивается автоматически при открытии карточки.
+   * Вам необходимо прослушать слово и выбрать его перевод на русский из 4 вариантов.
+   * Немецкое написание слова и транскрипция откроются только после выбора ответа.
+3. Сборка слова из букв (Scramble):
+   * Дается перевод слова на русский язык и перемешанная лента букв немецкого слова. Нажимайте на буквы в правильном порядке, чтобы собрать немецкое слово.
+4. Ввод слова с клавиатуры (Input):
+   * Наиболее сложное задание. Напишите перевод слова на немецкий язык с клавиатуры.
+   * Умный контроль опечаток: Алгоритм оценивает ввод по расстоянию Левенштейна. Если вы сделали 1 мелкую ошибку (для коротких слов до 6 букв) или до 2 ошибок (для длинных слов), ответ засчитается как правильный, но с пометкой «Опечатка», и сложность слова немного увеличится.
+
+---
+
+## Озвучивание слов (Text-to-Speech)
+
+Во время тренировок вам доступно голосовое прослушивание немецкого слова:
+* На каждой карточке рядом с основным словом (или его переводом) отображается кнопка [Динамик].
+* Вы можете нажать её в любой момент тренировки (как до ответа, так и после), чтобы прослушать правильное произношение.
+* Настройка голоса: Озвучка тренировочных карточек использует общие настройки скорости и тона, заданные в Блокноте фраз (кнопка [Настройки] в Блокноте). Изменения там мгновенно применяются и к тренировкам.
+
+---
+
+## Система подсказок
+
+Если вы забыли слово, нажмите кнопку с лампочкой [Подсказка] в правом верхнем углу карточки:
+* В выборе перевода: Убирает два неправильных варианта.
+* В сборке слова: Автоматически подставляет следующую правильную букву.
+* В ручном вводе: Посимвольно открывает правильное слово в текстовом поле.
+* Примечание: Использование подсказки учитывается алгоритмом и снижает коэффициент сложности слова, заставляя его появиться в очереди повторения раньше.
+
+---
+
+## Настройка интервалов под себя
+
+Вы можете изменить общую скорость обучения, открыв окно настроек (кнопка [Настройки] на главном экране):
+* Быстрый (0.5x): Сокращает все интервалы в два раза. Идеально перед экзаменами.
+* Стандартный (1.0x): Оптимальный баланс забывания, установленный по умолчанию.
+* Замедленный (2.0x): Увеличивает интервалы в два раза, давая больше времени между повторениями.
+* Точная подстройка (Слайдер): Вы можете вручную задать абсолютно любой множитель от 0.2x до 3.0x с помощью ползунка.
+
+---
+
+## Свободная тренировка (Free Practice)
+
+Если вы повторили все слова на сегодня и счетчик «На сегодня» равен 0, вы можете запустить свободную тренировку:
+* Она запускает сессию из 10 случайных слов из вашей базы данных.
+* Важное правило: Чтобы не сбить расчёт интервалов, правильные ответы для слов в статусе повторения (\`SPACED\`) сохраняются в историю, но не изменяют дату следующего показа и шаг повторения. Прогресс для слов на стадии интенсивного изучения (\`INTENSIVE\`) начисляется как обычно.
+
+---
+
+## Статистика и аналитика прогресса
+
+Раздел «Статистика и Прогресс» на главном экране помогает вам отслеживать успехи:
+* Диаграмма соотношения: Наглядно показывает количество слов, находящихся в процессе заучивания (Интенсив) и перешедших в долгосрочную память (Интервалы).
+* Точность: Процент ваших правильных ответов. Стремитесь держать его выше 85-90%!
+* Скорость: Среднее время ответа на карточку. Свидетельствует об уровне автоматизма.
+* Подсказки: Показывает, насколько часто вы прибегаете к помощи.
+* Ответов всего: Суммарный объем вашей проделанной работы.
+
+---
+
+## Блокнот фраз (Phrase Notepad)
+
+Блокнот фраз — это автономный раздел приложения, созданный для тренировки восприятия на слух и запоминания целых немецких выражений. 
+
+> [!NOTE]
+> Фразы, сохранённые в блокноте, живут исключительно в нём и не смешиваются со словарем и обучающими карточками.
+
+### Основные возможности:
+1. Добавление выражений:
+   * Введите фразу на немецком языке.
+   * Добавьте русский перевод (по желанию) и нажмите «Сохранить в блокнот».
+2. Озвучка (TTS):
+   * Нажмите на кнопку [Динамик] рядом с фразой для однократного воспроизведения.
+   * Озвучка использует нативный движок Android Text-to-Speech (локаль GERMAN).
+3. Циклический повтор:
+   * Нажмите кнопку [Повтор], чтобы запустить фразу на автоповтор. Она будет автоматически произноситься через заданный интервал времени.
+   * Нажмите кнопку [Стоп] на самой фразе или общую кнопку «Стоп» на панели сохранённых фраз, чтобы остановить воспроизведение.
+4. Тонкая настройка голоса:
+   * Нажмите на кнопку [Настройки] в блокноте, чтобы открыть панель настройки озвучки.
+   * Отрегулируйте ползунками Скорость (от 0.5x до 2.0x) и Тон (Pitch, от 0.5 до 2.0) голоса.
+   * Выберите интервал повтора между циклами (2с, 3с, 4с, 5с, 8с).
+5. Удаление:
+   * Удалить фразу можно нажатием на иконку [Удалить].
+
+---
+
+## Резервное копирование и импорт слов (JSON)
+
+В настройках приложения доступны кнопки «Экспорт» и «Импорт» для сохранения и восстановления вашего словаря карточек.
+
+> [!NOTE]
+> Экспорт и импорт распространяются только на словарные карточки. Фразы из Блокнота не затрагиваются.
+
+### Экспорт
+Нажмите «Экспорт» -> выберите место для сохранения файла. Приложение создаст файл \`lingospaced_backup.json\` с полной информацией: все слова, прогресс обучения, интервалы и история ответов.
+
+### Импорт
+Нажмите «Импорт» -> выберите JSON-файл -> выберите стратегию:
+
+| Стратегия | Когда использовать |
+|---|---|
+| **Объединить (Merge)** | Добавить новые слова из файла, не теряя текущий прогресс. Если слово уже есть — сохраняется карточка с лучшим прогрессом. |
+| **Перезаписать всё (Overwrite)** | Полное восстановление из резервной копии. Текущий словарь будет заменён. |
+
+### Формат JSON-файла для создания таблицы импорта
+
+Файл — это JSON-массив \`[ ... ]\`. Каждый элемент массива — одно слово. Для добавления новых слов достаточно заполнить 4 поля:
+
+| Поле | Что писать | Пример |
+|---|---|---|
+| \`original\` | Слово на немецком | \`"der Hund"\` |
+| \`transcription\` | Транскрипция | \`"[hʊnt]"\` |
+| \`translation\` | Перевод на русский | \`"собака"\` |
+| \`context\` | Пример предложения | \`"Der Hund bellt laut."\` |
+
+**Минимальный пример файла для импорта:**
+\`\`\`json
+[
+  {
+    "original": "das Buch",
+    "transcription": "[buːx]",
+    "translation": "книга",
+    "context": "Ich lese ein Buch."
+  },
+  {
+    "original": "der Tisch",
+    "transcription": "[tɪʃ]",
+    "translation": "стол",
+    "context": "Der Tisch ist aus Holz."
+  }
+]
+\`\`\`
+
+> [!TIP]
+> Вы можете добавлять в JSON любые дополнительные поля-комментарии (например, \`"category"\` или \`"notes"\`) — приложение их безопасно проигнорирует.
+
+### Полная таблица всех полей (для продвинутых)
+
+Если вы хотите перенести слова вместе с прогрессом (например, с одного телефона на другой), вот полный список полей:
+
+| Поле | Тип | По умолчанию | Описание |
+|---|---|---|---|
+| \`id\` | Строка | Авто (UUID) | Уникальный ID карточки |
+| \`original\` | Строка | — | Ключевое слово на немецком (ключ для определения дубликатов) |
+| \`transcription\` | Строка | — | Транскрипция |
+| \`translation\` | Строка | — | Перевод |
+| \`context\` | Строка | — | Пример использования |
+| \`status\` | \`"INTENSIVE"\` / \`"SPACED"\` | \`"INTENSIVE"\` | Этап обучения |
+| \`stage1CorrectCount\` | Число 0–9 | \`0\` | Правильных ответов на интенсивном этапе |
+| \`difficultyFactor\` | Число 0.1–1.0 | \`1.0\` | Коэффициент сложности |
+| \`lastShowedTime\` | Число / \`null\` | \`null\` | Время последнего показа (Unix ms) |
+| \`nextScheduledTime\` | Число | Сейчас | Время следующего показа (Unix ms) |
+| \`spacedStep\` | Число 0–9 | \`0\` | Шаг интервального повторения |
+| \`lastAnswerLogs\` | Массив | \`[]\` | История последних 10 ответов |
+`,
+    guide_de: `# Benutzerhandbuch: LingoSpaced
+
+Willkommen bei LingoSpaced! Diese Anwendung wurde entwickelt, um Ihnen zu helfen, deutsche Vokabeln effizient und dauerhaft ohne stumpfes Auswendiglernen zu lernen. Sie müssen den Schwierigkeitsgrad von Wörtern nicht manuell bewerten (wie „einfach“ oder „schwer“) oder Pläne erstellen — der Algorithmus erledigt das alles für Sie basierend auf Ihrer Antwortgeschwindigkeit und -genauigkeit.
+
+---
+
+## Zweistufiger Lernzyklus
+
+Der Prozess der Beherrschung jedes Wortes besteht aus zwei aufeinanderfolgenden Phasen:
+
+### Stufe 1: Intensivphase (Intensive)
+* Ziel: Konsolidierung des Wortes im Kurzzeitgedächtnis.
+* Regel: Sie müssen 9 korrekte Antworten für das Wort geben.
+* Häufigkeit der Anzeigen:
+  * Bei einer korrekten Antwort wird das Wort für die nächste Anzeige in 8 Stunden geplant (durchschnittlich 3 Anzeigen pro Tag).
+  * Bei einem Fehler verliert das Wort seine gesammelten Punkte nicht, wird aber für eine Anzeige in 2 Stunden geplant, damit Sie es schneller wiederholen und festigen können.
+* Übergang: Nach der 9. erfolgreichen Antwort wechselt das Wort automatisch in den Status „Spaced“ (\`SPACED\`).
+
+### Stufe 2: Spaced Repetition (Spaced Repetition)
+* Ziel: Übertragung des Wortes in das Langzeitgedächtnis mit maximalen Abständen zwischen den Anzeigen.
+* Regel: Die Basisintervalle wachsen in Zweierpotenzen: $2^{\\text{step}}$ Tage.
+  * Schritt 0: 1 Tag
+  * Schritt 1: 2 Tage
+  * Schritt 2: 4 Tage
+  * Schritt 3: 8 Tage
+  * Schritt 4: 16 Tage
+  * ... bis Schritt 9: 512 Tage.
+* Schwierigkeitsanpassung: Das Intervall wird automatisch basierend auf Ihrer Leistung (dem Koeffizienten \`difficultyFactor\`) angepasst. Wenn Sie schnell, ohne Verwendung von Hinweisen und ohne Tippfehler antworten, wird das Wort seltener angezeigt. Fehler oder die Verwendung von Hinweisen verringern den Faktor, wodurch das Wort schneller in die Warteschlange zurückkehrt.
+
+---
+
+## Spielmechaniken (Aufgabentypen)
+
+Jede Karte wählt während einer Sitzung zufällig eine von vier Spielmechaniken aus, um das Wort umfassend zu üben:
+
+1. Übersetzungsauswahl (Choice):
+   * Ihnen wird ein deutsches Wort und 4 Übersetzungsmöglichkeiten auf Russisch präsentiert. Wählen Sie die richtige aus.
+2. Hörverstehen (Listening):
+   * Das Wort selbst wird nicht auf dem Bildschirm angezeigt; es wird nur eine große Schaltfläche [Lautsprecher] angezeigt. Das deutsche Wort wird beim Öffnen der Karte automatisch ausgesprochen.
+   * Sie müssen sich das Wort anhören und seine Übersetzung aus 4 Optionen auswählen.
+   * Die deutsche Schreibweise und Transkription werden erst nach Auswahl einer Antwort angezeigt.
+3. Worträtsel (Scramble):
+   * Sie erhalten die Übersetzung des Wortes und eine gemischte Reihe von Buchstaben des deutschen Wortes. Klicken Sie auf die Buchstaben in der richtigen Reihenfolge, um das deutsche Wort zusammenzusetzen.
+4. Tastatureingabe (Input):
+   * Die anspruchsvollste Aufgabe. Schreiben Sie die deutsche Übersetzung des Wortes über die Tastatur.
+   * Intelligente Tippfehlerkontrolle: Der Algorithmus bewertet die Eingabe anhand der Levenshtein-Distanz. Wenn Sie 1 kleinen Fehler (bei kurzen Wörtern bis zu 6 Buchstaben) oder bis zu 2 Fehler (bei langen Wörtern) machen, wird die Antwort als korrekt akzeptiert, aber als „Tippfehler“ markiert, und der Schwierigkeitsfaktor des Wortes erhöht sich leicht.
+
+---
+
+## Wortaussprache (Text-to-Speech)
+
+Während der Übungen steht Ihnen die Sprachausgabe des deutschen Wortes zur Verfügung:
+* Auf jeder Karte wird neben dem Hauptwort (oder seiner Übersetzung) eine Schaltfläche [Lautsprecher] angezeigt.
+* Sie können diese jederzeit während der Übung anklicken (sowohl vor als auch nach der Beantwortung), um die korrekte Aussprache anzuhören.
+* Spracheinstellungen: Die Aussprache auf den Trainingskarten verwendet die im Phrasen-Notizbuch festgelegten allgemeinen Einstellungen für Geschwindigkeit und Tonhöhe (Schaltfläche [Einstellungen] im Notizbuch). Änderungen dort werden sofort auf die Übungen angewendet.
+
+---
+
+## Hinweissystem
+
+Wenn Sie ein Wort vergessen haben, klicken Sie auf die Schaltfläche [Hinweis] in der oberen rechten Ecke der Karte:
+* In der Übersetzungsauswahl: Entfernt zwei falsche Optionen.
+* Im Worträtsel: Setzt automatisch den nächsten richtigen Buchstaben ein.
+* In der manuellen Texteingabe: Trägt das richtige Wort Zeichen für Zeichen in das Textfeld ein.
+* Hinweis: Die Verwendung eines Hinweises wird vom Algorithmus registriert und senkt den Schwierigkeitsfaktor des Wortes, sodass es früher in der Wiederholungswarteschlange erscheint.
+
+---
+
+## Intervalle an die eigenen Bedürfnisse anpassen
+
+Sie können die allgemeine Lerngeschwindigkeit anpassen, indem Sie das Einstellungsfenster öffnen (Schaltfläche [Einstellungen] auf dem Hauptbildschirm):
+* Schnell (0.5x): Halbiert alle Intervalle. Ideal vor Prüfungen.
+* Standard (1.0x): Das standardmäßig eingestellte, optimale Gleichgewicht des Vergessens.
+* Langsam (2.0x): Verdoppelt die Intervalle, sodass Sie mehr Zeit zwischen den Wiederholungen haben.
+* Feineinstellung (Schieberegler): Sie können über den Schieberegler manuell jeden Multiplikator von 0.2x bis 3.0x einstellen.
+
+---
+
+## Freies Training
+
+Wenn Sie alle Wörter für heute wiederholt haben und der Zähler „Für heute“ 0 ist, können Sie eine freie Trainingssitzung starten:
+* Sie startet eine Sitzung mit 10 zufälligen Wörtern aus Ihrer Datenbank.
+* Wichtige Regel: Um die Intervallberechnungen nicht zu verfälschen, werden korrekte Antworten für Wörter in der Spaced-Phase (\`SPACED\`) im Verlauf gespeichert, ändern jedoch nicht das Datum der nächsten Anzeige oder den Wiederholungsschritt. Der Fortschritt für Wörter in der Intensivphase (\`INTENSIVE\`) sammelt sich normal an.
+
+---
+
+## Fortschrittsstatistiken und -analysen
+
+Der Bereich „Statistik und Fortschritt“ auf dem Hauptbildschirm hilft Ihnen, Ihre Erfolge zu verfolgen:
+* Verhältnisdiagramm: Zeigt visuell die Anzahl der Wörter an, die sich im Lernprozess befinden (Intensiv) und derjenigen, die in das Langzeitgedächtnis übergegangen sind (Spaced).
+* Genauigkeit: Der Prozentsatz Ihrer richtigen Antworten. Versuchen Sie, diesen über 85-90% zu halten!
+* Geschwindigkeit: Die durchschnittliche Antwortzeit pro Karte. Zeigt den Grad Ihrer Automatisierung an.
+* Hinweise: Zeigt, wie oft Sie auf Hilfe zurückgreifen.
+* Antworten insgesamt: Das Gesamtvolumen der von Ihnen geleisteten Arbeit.
+
+---
+
+## Phrasen-Notizbuch
+
+Das Phrasen-Notizbuch ist ein eigenständiger Bereich der Anwendung, der dazu dient, das Hörverstehen zu üben und ganze deutsche Ausdrücke auswendig zu lernen.
+
+> [!NOTE]
+> Im Notizbuch gespeicherte Phrasen leben ausschließlich dort und werden nicht mit dem Vokabular und den Lernkarten vermischt.
+
+### Hauptfunktionen:
+1. Hinzufügen von Ausdrücken:
+   * Geben Sie eine Phrase auf Deutsch ein.
+   * Fügen Sie eine Übersetzung hinzu (optional) und klicken Sie auf „Im Notizbuch speichern“.
+2. Aussprache (TTS):
+   * Klicken Sie auf die Schaltfläche [Lautsprecher] neben der Phrase für eine einmalige Wiedergabe.
+   * Die Aussprache verwendet die native Android Text-to-Speech-Engine (GERMAN-Sprachpaket).
+3. Endlosschleife:
+   * Klicken Sie auf die Schaltfläche [Wiederholen], um die Phrase in einer Endlosschleife abzuspielen. Sie wird automatisch im eingestellten Zeitintervall ausgesprochen.
+   * Klicken Sie auf die Schaltfläche [Stopp] an der Phrase selbst oder die globale Schaltfläche „Stopp“ im Bereich der gespeicherten Phrasen, um die Wiedergabe zu beenden.
+4. Stimme feineinstellen:
+   * Klicken Sie auf die Schaltfläche [Einstellungen] im Notizbuch, um das Einstellungsfenster für die Aussprache zu öffnen.
+   * Passen Sie die Geschwindigkeit (von 0.5x bis 2.0x) und die Tonhöhe (Pitch, von 0.5 bis 2.0) der Stimme mit den Schiebereglern an.
+   * Wählen Sie das Wiederholungsintervall zwischen den Zyklen (2s, 3s, 4s, 5s, 8s).
+5. Löschen:
+   * Sie können eine Phrase löschen, indem Sie auf das Symbol [Löschen] klicken.
+
+---
+
+## Datensicherung und -import (JSON)
+
+In den App-Einstellungen stehen die Schaltflächen „Export“ und „Import“ zum Speichern und Wiederherstellen Ihres Kartenwortschatzes zur Verfügung.
+
+> [!NOTE]
+> Export und Import gelten nur für Vokabelkarten. Phrasen im Notizbuch sind davon nicht betroffen.
+
+### Export
+Klicken Sie auf „Export“ -> wählen Sie den Speicherort für die Datei. Die Anwendung erstellt eine Datei \`lingospaced_backup.json\` mit vollständigen Informationen: alle Wörter, Lernfortschritt, Intervalle und Antwortverlauf.
+
+### Import
+Klicken Sie auf „Import“ -> wählen Sie die JSON-Datei aus -> wählen Sie die Strategie:
+
+| Strategie | Wann zu verwenden |
+|---|---|
+| **Zusammenführen (Merge)** | Neue Wörter aus der Datei hinzufügen, ohne den aktuellen Fortschritt zu verlieren. Wenn ein Wort bereits existiert, wird die Karte mit dem besten Fortschritt behalten. |
+| **Alles überschreiben (Overwrite)** | Vollständige Wiederherstellung aus einer Sicherung. Der aktuelle Wortschatz wird ersetzt. |
+
+### JSON-Dateiformat zum Erstellen einer Importtabelle
+
+Die Datei ist ein JSON-Array \`[ ... ]\`. Jedes Element des Arrays ist ein Wort. Um neue Wörter hinzuzufügen, reicht es aus, 4 Felder auszufüllen:
+
+| Feld | Beschreibung | Beispiel |
+|---|---|---|
+| \`original\` | Wort auf Deutsch | \`"der Hund"\` |
+| \`transcription\` | Transkription | \`"[hʊnt]"\` |
+| \`translation\` | Übersetzung | \`"собака"\` |
+| \`context\` | Beispielsatz | \`"Der Hund bellt laut."\` |
+
+**Minimales Beispiel einer Importdatei:**
+\`\`\`json
+[
+  {
+    "original": "das Buch",
+    "transcription": "[buːx]",
+    "translation": "книга",
+    "context": "Ich lese ein Buch."
+  },
+  {
+    "original": "der Tisch",
+    "transcription": "[tɪʃ]",
+    "translation": "стол",
+    "context": "Der Tisch ist aus Holz."
+  }
+]
+\`\`\`
+
+> [!TIP]
+> Sie können dem JSON beliebige zusätzliche Kommentarfelder hinzufügen (z. B. \`"category"\` oder \`"notes"\`) — die Anwendung ignoriert diese sicher.
+
+### Vollständige Feldertabelle (für Fortgeschrittene)
+
+Wenn Sie Wörter zusammen mit dem Fortschritt übertragen möchten (z. B. von einem Telefon auf ein anderes), ist hier die vollständige Liste der Felder:
+
+| Feld | Typ | Standard | Beschreibung |
+|---|---|---|---|
+| \`id\` | String | Auto (UUID) | Eindeutige Karten-ID |
+| \`original\` | String | — | Deutsches Wort (Schlüssel für Duplikaterkennung) |
+| \`transcription\` | String | — | Transkription |
+| \`translation\` | String | — | Übersetzung |
+| \`context\` | String | — | Beispielverwendung |
+| \`status\` | \`"INTENSIVE"\` / \`"SPACED"\` | \`"INTENSIVE"\` | Lernstufe |
+| \`stage1CorrectCount\` | Zahl 0–9 | \`0\` | Anzahl der richtigen Antworten in der Intensivphase |
+| \`difficultyFactor\` | Zahl 0.1–1.0 | \`1.0\` | Schwierigkeitskoeffizient |
+| \`lastShowedTime\` | Zahl / \`null\` | \`null\` | Zeitstempel der letzten Anzeige (Unix ms) |
+| \`nextScheduledTime\` | Zahl | Jetzt | Zeitstempel der nächsten geplanten Anzeige (Unix ms) |
+| \`spacedStep\` | Zahl 0–9 | \`0\` | Spaced-Repetition-Schritt |
+| \`lastAnswerLogs\` | Array | \`[]\` | Verlauf der letzten 10 Antworten |
+`,
   },
   "rokey": {
     title: "Rokey",
@@ -5393,6 +6187,49 @@ GPL-3.0`,
     readme: `[ English ](README.md) • [ Русский ](docs/README_RU.md) • [ Deutsch ](docs/README_DE.md)
 
 # Seogeek AI
+
+<details open>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 1. Horizontal Layout (Bottom Position)</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot1.png" width="95%" alt="ShortcutDock Horizontal Bottom" />
+  </p>
+</details>
+
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 2. Vertical Layout (Left Position)</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot2.png" width="95%" alt="ShortcutDock Vertical Left" />
+  </p>
+</details>
+
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 3. Fluent Settings Window</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot3.png" width="95%" alt="ShortcutDock Settings" />
+  </p>
+</details>
+
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 4. Context Menu & Customizations</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot4.png" width="95%" alt="ShortcutDock Context Menu" />
+  </p>
+</details>
+
+<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 5. Horizontal Layout (Top Position)</b></summary>
+  <br/>
+  <p align="center">
+    <img src="screenshots/screenshot5.png" width="95%" alt="ShortcutDock Top Position" />
+  </p>
+</details>
+
+
+
 
 **Seogeek AI** is a professional local desktop application for Windows 11 designed for deep technical and search engine optimization (SEO) website auditing, visibility analysis, and automatic recommendation generation powered by Artificial Intelligence.
 
