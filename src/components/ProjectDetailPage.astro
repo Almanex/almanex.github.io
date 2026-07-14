@@ -2,6 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import { PROJECTS_DATA } from '../data/projects.js';
 import { PROJECT_TRANSLATIONS } from '../data/translations.js';
+import { marked } from 'marked';
+
+// Configure marked options
+marked.setOptions({
+  gfm: true,
+  breaks: false
+});
 
 interface Props {
   lang: 'en' | 'ru' | 'de';
@@ -69,11 +76,169 @@ const category = PROJECT_TRANSLATIONS[lang]?.[project]?.category || projectData.
 const subtitle = PROJECT_TRANSLATIONS[lang]?.[project]?.subtitle || projectData.subtitle;
 const tldr = PROJECT_TRANSLATIONS[lang]?.[project]?.tldr || projectData.tldr || [];
 
-// Check guide availability server-side to set default active state
+// Helper: Resolve a single relative path to GitHub raw/blob URL
+function resolveSinglePathServer(src: string, proj: any, isDocsFolder: boolean) {
+  if (!src || src.startsWith('/') || src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:')) {
+    if (src && src.startsWith('https://github.com/') && src.includes('/blob/')) {
+      return src.replace('/blob/', '/raw/');
+    }
+    return src;
+  }
+  const baseRepo = proj.github.replace(/\/$/, "");
+  const subPath = isDocsFolder ? "/main/docs/" : "/main/";
+  const baseRaw = baseRepo.replace("github.com", "raw.githubusercontent.com") + subPath;
+  const cleanSrc = src.replace(/^\.\//, "");
+  return baseRaw + cleanSrc;
+}
+
+// Helper: Resolve relative images and links inside HTML
+function resolveRelativePathsServer(html: string, proj: any, isDocsFolder: boolean) {
+  if (!html || !proj || !proj.github) return html;
+  const baseRepo = proj.github.replace(/\/$/, "");
+  const subPath = isDocsFolder ? "/main/docs/" : "/main/";
+  const baseRaw = baseRepo.replace("github.com", "raw.githubusercontent.com") + subPath;
+  const baseBlob = baseRepo + "/blob" + subPath;
+
+  // Resolve links
+  html = html.replace(/<a\s+([^>]*?)href=["']([^"']+)["']/gi, (match, before, href) => {
+    if (href && !href.startsWith('/') && !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+      const cleanHref = href.replace(/^\.\//, "");
+      return `<a ${before}href="${baseBlob}${cleanHref}"`;
+    }
+    return match;
+  });
+
+  // Resolve images
+  html = html.replace(/<img\s+([^>]*?)src=["']([^"']+)["']/gi, (match, before, src) => {
+    if (src) {
+      if (src.startsWith('https://github.com/') && src.includes('/blob/')) {
+        return `<img ${before}src="${src.replace('/blob/', '/raw/')}"`;
+      } else if (!src.startsWith('/') && !src.startsWith('http://') && !src.startsWith('https://') && !src.startsWith('data:')) {
+        const cleanSrc = src.replace(/^\.\//, "");
+        return `<img ${before}src="${baseRaw}${cleanSrc}"`;
+      }
+    }
+    return match;
+  });
+
+  return html;
+}
+
+// Helper: Extract images from details blocks and clean them
+function extractSliderImagesOnly(md: string) {
+  const images: Array<{ src: string; alt: string }> = [];
+  if (!md) return { cleanMd: md, images };
+
+  const detailsRegex = /<details[\s\S]*?<\/details>/gi;
+  const matches = md.match(detailsRegex) || [];
+
+  for (const block of matches) {
+    const imgRegex = /<img[^>]+src=["']([^"']+)["']/i;
+    const imgMatch = block.match(imgRegex);
+    if (imgMatch) {
+      const src = imgMatch[1];
+      if (src && !src.toLowerCase().includes('.svg') && !src.includes('shields.io') && !src.includes('badge')) {
+        const altRegex = /alt=["']([^"']+)["']/i;
+        const altMatch = block.match(altRegex);
+        const alt = altMatch ? altMatch[1] : 'Screenshot';
+        images.push({ src, alt });
+      }
+    }
+  }
+
+  let cleanMd = md.replace(detailsRegex, '');
+  cleanMd = cleanMd.replace(/^##+\s*(screenshots|скриншоты)\s*$/gim, '');
+  return { cleanMd, images };
+}
+
+// Helper: parse markdown and remove language navigation lines
+function parseMarkdownServer(md: string) {
+  if (!md) return '';
+  const lines = md.split('\n');
+  const filteredLines = lines.filter(line => {
+    const lower = line.toLowerCase();
+    if (lower.includes('english') && lower.includes('русский') && lower.includes('deutsch')) return false;
+    if (lower.includes('quick start') || lower.includes('user guide') || lower.includes('руководство')) {
+      if (lower.includes('•') || lower.includes('|')) return false;
+    }
+    return true;
+  });
+  return marked.parse(filteredLines.join('\n'));
+}
+
+// Helper: Pre-render full Markdown content to HTML
+function preRenderContent(md: string, isDocs: boolean, proj: any) {
+  if (!md) return '';
+  const { cleanMd } = extractSliderImagesOnly(md);
+  const rawHtml = parseMarkdownServer(cleanMd);
+  let resolvedHtml = resolveRelativePathsServer(rawHtml, proj, isDocs);
+  resolvedHtml = resolvedHtml.replace(/<p>\s*<\/p>/gi, '');
+  return resolvedHtml;
+}
+
+// Build-time pre-rendering for README and GUIDE
+let readme = projectData.readme;
+let isReadmeDocs = false;
+let readmeFilepath = `projects/${project}/README.md`;
+
+if (lang === 'ru' && projectData.readme_ru) {
+  readme = projectData.readme_ru;
+  isReadmeDocs = projectData.readme_ru.includes('](../README.md)');
+  readmeFilepath = `projects/${project}/${isReadmeDocs ? 'docs/README_RU.md' : 'README_RU.md'}`;
+} else if (lang === 'de' && projectData.readme_de) {
+  readme = projectData.readme_de;
+  isReadmeDocs = projectData.readme_de.includes('](../README.md)');
+  readmeFilepath = `projects/${project}/${isReadmeDocs ? 'docs/README_DE.md' : 'README_DE.md'}`;
+}
+const readmeHtml = preRenderContent(readme, isReadmeDocs, projectData);
+
 let guide = projectData.guide || '';
-if (lang === 'ru' && projectData.guide_ru) guide = projectData.guide_ru;
-if (lang === 'de' && projectData.guide_de) guide = projectData.guide_de;
+let guideFilepath = `projects/${project}/docs/GUIDE.md`;
+if (lang === 'ru' && projectData.guide_ru) {
+  guide = projectData.guide_ru;
+  guideFilepath = `projects/${project}/docs/GUIDE_RU.md`;
+} else if (lang === 'de' && projectData.guide_de) {
+  guide = projectData.guide_de;
+  guideFilepath = `projects/${project}/docs/GUIDE_DE.md`;
+}
 const hasGuide = Boolean(guide && guide.trim().length > 0);
+const guideHtml = hasGuide ? preRenderContent(guide, true, projectData) : '';
+
+// Append Back to Top links to pre-rendered HTML if not present
+const topText = lang === 'ru' ? '⬆ Наверх' : (lang === 'de' ? '⬆ Nach oben' : '⬆ Scroll to top');
+function appendScrollToTop(html: string) {
+  if (!html) return '';
+  if (!html.toLowerCase().includes('top') && !html.toLowerCase().includes('наверх') && !html.toLowerCase().includes('oben')) {
+    return html + `<p style="text-align: right; margin-top: 32px; font-family: var(--font-mono); font-size: 13px;"><a href="#" class="top-scroll-btn">${topText}</a></p>`;
+  }
+  return html;
+}
+
+const finalReadmeHtml = appendScrollToTop(readmeHtml);
+const finalGuideHtml = appendScrollToTop(guideHtml);
+
+// Collect all slider images from all 6 views
+const allImages: Array<{ src: string; alt: string }> = [];
+const seenSrcs = new Set();
+
+function collectImages(mdText: string, isDocs: boolean) {
+  if (!mdText) return;
+  const { images } = extractSliderImagesOnly(mdText);
+  for (const img of images) {
+    const resolvedSrc = resolveSinglePathServer(img.src, projectData, isDocs);
+    if (resolvedSrc && !seenSrcs.has(resolvedSrc)) {
+      seenSrcs.add(resolvedSrc);
+      allImages.push({ src: resolvedSrc, alt: img.alt });
+    }
+  }
+}
+
+collectImages(projectData.readme, false);
+if (projectData.readme_ru) collectImages(projectData.readme_ru, projectData.readme_ru.includes('](../README.md)'));
+if (projectData.readme_de) collectImages(projectData.readme_de, projectData.readme_de.includes('](../README.md)'));
+collectImages(projectData.guide, true);
+if (projectData.guide_ru) collectImages(projectData.guide_ru, true);
+if (projectData.guide_de) collectImages(projectData.guide_de, true);
 
 // Resolve download button label
 let downloadLabel = l.downloadGeneric;
@@ -111,7 +276,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     "image": projectData.image ? [projectData.image.startsWith('http') ? projectData.image : new URL(`/${projectData.image}`, Astro.site).href] : undefined
   })} />
 
-  <div class="detail-container" id="project-detail-container" data-lang={lang} data-project={project}>
+  <div class="detail-container" id="project-detail-container" data-lang={lang} data-project={project} data-readmepath={readmeFilepath} data-guidepath={guideFilepath}>
     <a href={getLocalizedPath('/work')} class="back-btn">{l.back}</a>
     
     <div class="proj-header" style="margin-top:24px;">
@@ -160,7 +325,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     )}
 
     <!-- Screenshots Slider -->
-    <div class="project-slider" id="project-slider" style="display: none;">
+    <div class="project-slider" id="project-slider" data-images={JSON.stringify(allImages)} style="display: none;">
       <div class="slider-container">
         <div class="slider-wrapper" id="slider-wrapper"></div>
         <button class="slider-nav prev" id="slider-prev">&lt;</button>
@@ -182,7 +347,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
         </button>
       </div>
       <div class="window-header">
-        <span class="window-title" id="window-filepath">README.md</span>
+        <span class="window-title" id="window-filepath">{hasGuide ? guideFilepath : readmeFilepath}</span>
         <div class="window-controls">
           <span class="control-dot dot-close"></span>
           <span class="control-dot dot-min"></span>
@@ -193,8 +358,9 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
         <div class="line-numbers" id="line-numbers-container">
           <!-- Line numbers will be rendered -->
         </div>
-        <div class="readme-content" id="readme-html">
-          <!-- Rendered Markdown goes here -->
+        <div class="readme-content" id="readme-html" style={hasGuide ? "display: none;" : "display: block;"} set:html={finalReadmeHtml}>
+        </div>
+        <div class="readme-content" id="guide-html" style={hasGuide ? "display: block;" : "display: none;"} set:html={finalGuideHtml}>
         </div>
       </div>
     </div>
@@ -211,122 +377,28 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     </div>
   </div>
 
-  <!-- Bundled script for Markdown rendering and slider controls -->
+  <!-- Zero-JS pre-rendered line numbers and slider controls -->
   <script>
-    import { PROJECTS_DATA } from '../data/projects.js';
-    import { marked } from 'marked';
-
     document.addEventListener('DOMContentLoaded', () => {
       const containerEl = document.getElementById('project-detail-container');
       if (!containerEl) return;
       const lang = containerEl.dataset.lang || 'en';
-
-      // Get project ID from dataset attribute set by server compilation
       const projectId = containerEl.dataset.project || '';
-      const project = PROJECTS_DATA[projectId];
 
-      // Markdown renderer using Marked.js
-      function parseMarkdown(md: string) {
-        if (!md) return '';
-        
-        // Strip the top language navigation and tab links usually found at the beginning of the repo READMEs
-        const lines = md.split('\n');
-        const filteredLines = lines.filter(line => {
-          const lower = line.toLowerCase();
-          if (lower.includes('english') && lower.includes('русский') && lower.includes('deutsch')) return false;
-          if (lower.includes('quick start') || lower.includes('user guide') || lower.includes('руководство')) {
-            if (lower.includes('•') || lower.includes('|')) return false;
+      // Slider initialization
+      const slider = document.getElementById('project-slider');
+      if (slider) {
+        const imagesData = slider.dataset.images;
+        if (imagesData) {
+          try {
+            const images = JSON.parse(imagesData);
+            initSlider(images);
+          } catch (e) {
+            console.error('Failed to parse slider images', e);
           }
-          return true;
-        });
-        md = filteredLines.join('\n');
-
-        marked.setOptions({
-          gfm: true,
-          breaks: false
-        });
-        return marked.parse(md);
+        }
       }
 
-      // Resolve relative images and links in README to their respective GitHub raw/blob locations
-      function resolveRelativePaths(html: string, proj: any, isDocsFolder: boolean = false) {
-        if (!html || !proj || !proj.github) return html;
-        const baseRepo = proj.github.replace(/\/$/, "");
-        const subPath = isDocsFolder ? "/main/docs/" : "/main/";
-        const baseRaw = baseRepo.replace("github.com", "raw.githubusercontent.com") + subPath;
-        const baseBlob = baseRepo + "/blob" + subPath;
-        
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
-        
-        // Resolve links
-        tempDiv.querySelectorAll('a').forEach(a => {
-          const href = a.getAttribute('href');
-          if (href && !href.startsWith('/') && !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
-            const cleanHref = href.replace(/^\.\//, "");
-            a.setAttribute('href', baseBlob + cleanHref);
-          }
-        });
-        
-        // Resolve images
-        tempDiv.querySelectorAll('img').forEach(img => {
-          const src = img.getAttribute('src');
-          if (src) {
-            if (src.startsWith('https://github.com/') && src.includes('/blob/')) {
-              img.setAttribute('src', src.replace('/blob/', '/raw/'));
-            } else if (!src.startsWith('/') && !src.startsWith('http://') && !src.startsWith('https://') && !src.startsWith('data:')) {
-              const cleanSrc = src.replace(/^\.\//, "");
-              img.setAttribute('src', baseRaw + cleanSrc);
-            }
-          }
-        });
-        
-        return tempDiv.innerHTML;
-      }
-
-      // Extract and remove details slider blocks from the parsed body
-      function processReadmeAndExtractImages(html: string) {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
-        
-        const imageUrls: any[] = [];
-        tempDiv.querySelectorAll('img').forEach(img => {
-          const src = img.getAttribute('src');
-          if (src && (src.toLowerCase().includes('.svg') || src.includes('shields.io') || src.includes('badge'))) {
-            return;
-          }
-          
-          const detailsParent = img.closest('details');
-          if (detailsParent) {
-            imageUrls.push({
-              src: src,
-              alt: img.getAttribute('alt') || 'Screenshot'
-            });
-            detailsParent.remove();
-          }
-        });
-        
-        // Remove empty Screenshots header since they are displayed in the slider
-        tempDiv.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(header => {
-          const text = header.textContent.trim().toLowerCase();
-          if (text === 'screenshots' || text === 'скриншоты') {
-            header.remove();
-          }
-        });
-
-        tempDiv.querySelectorAll('p').forEach(p => {
-          if (p.innerHTML.trim() === '') {
-            p.remove();
-          }
-        });
-        
-        return {
-          cleanHtml: tempDiv.innerHTML,
-          images: imageUrls
-        };
-      }
-
-      // Initialize Slider
       function initSlider(images: any[]) {
         const slider = document.getElementById('project-slider');
         const wrapper = document.getElementById('slider-wrapper');
@@ -386,152 +458,90 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
         });
       }
 
-      if (project) {
-        // 1. Gather all slider images from all 6 possible markdown properties
-        const allImages: any[] = [];
-        const seenSrcs = new Set();
+      // Tab Switching
+      const tabReadme = document.getElementById('tab-readme');
+      const tabGuide = document.getElementById('tab-guide');
+      const readmeHtml = document.getElementById('readme-html');
+      const guideHtml = document.getElementById('guide-html');
+      const windowFilepath = document.getElementById('window-filepath');
 
-        const extractFromMd = (mdText: string, isDocs: boolean) => {
-          if (!mdText) return;
-          const html = resolveRelativePaths(parseMarkdown(mdText), project, isDocs);
-          const tempDiv = document.createElement('div');
-          tempDiv.innerHTML = html;
-          tempDiv.querySelectorAll('img').forEach(img => {
-            const src = img.getAttribute('src');
-            if (src && !src.toLowerCase().includes('.svg') && !src.includes('shields.io') && !src.includes('badge')) {
-              const detailsParent = img.closest('details');
-              if (detailsParent && !seenSrcs.has(src)) {
-                seenSrcs.add(src);
-                allImages.push({
-                  src: src,
-                  alt: img.getAttribute('alt') || 'Screenshot'
-                });
-              }
-            }
-          });
-        };
+      // Check guide presence from DOM existence
+      const hasGuide = !!guideHtml && guideHtml.innerHTML.trim().length > 0;
+      if (hasGuide && tabGuide) {
+        tabGuide.style.display = 'inline-flex';
+      }
 
-        // Scan all 6 potential sources for screenshots details blocks
-        extractFromMd(project.readme, false);
-        if (project.readme_ru) extractFromMd(project.readme_ru, project.readme_ru.includes('](../README.md)'));
-        if (project.readme_de) extractFromMd(project.readme_de, project.readme_de.includes('](../README.md)'));
-        extractFromMd(project.guide, true);
-        if (project.guide_ru) extractFromMd(project.guide_ru, true);
-        if (project.guide_de) extractFromMd(project.guide_de, true);
+      // Pre-calculated filepaths
+      const readmeFilepath = containerEl.dataset.readmepath || '';
+      const guideFilepath = containerEl.dataset.guidepath || '';
 
-        // Initialize the top slider with all gathered images
-        initSlider(allImages);
+      function updateLineNumbers() {
+        const activeContainer = (readmeHtml && readmeHtml.style.display === 'block') ? readmeHtml : guideHtml;
+        if (!activeContainer) return;
+        const height = activeContainer.scrollHeight;
+        const lineCount = Math.max(30, Math.ceil(height / 28));
+        let numsHtml = '';
+        for (let i = 1; i <= lineCount; i++) {
+          numsHtml += `${i}<br>`;
+        }
+        const numsContainer = document.getElementById('line-numbers-container');
+        if (numsContainer) numsContainer.innerHTML = numsHtml;
+      }
 
-        // 2. Check for GUIDE availability
-        let guide = project.guide || '';
-        if (lang === 'ru' && project.guide_ru) guide = project.guide_ru;
-        if (lang === 'de' && project.guide_de) guide = project.guide_de;
-        const hasGuide = Boolean(guide && guide.trim().length > 0);
+      function switchTab(mode: string) {
+        if (mode === 'guide' && !hasGuide) mode = 'readme';
+        
+        if (tabReadme) tabReadme.classList.toggle('active', mode === 'readme');
+        if (tabGuide) tabGuide.classList.toggle('active', mode === 'guide');
 
-        const tabReadme = document.getElementById('tab-readme');
-        const tabGuide = document.getElementById('tab-guide');
-        if (hasGuide && tabGuide) {
-          tabGuide.style.display = 'inline-flex';
+        if (readmeHtml) readmeHtml.style.display = mode === 'readme' ? 'block' : 'none';
+        if (guideHtml) guideHtml.style.display = mode === 'guide' ? 'block' : 'none';
+
+        if (windowFilepath) {
+          windowFilepath.textContent = mode === 'readme' ? readmeFilepath : guideFilepath;
         }
 
-        const topText = lang === 'ru' ? '⬆ Наверх' : (lang === 'de' ? '⬆ Nach oben' : '⬆ Scroll to top');
+        updateLineNumbers();
 
-        function renderTabContent(viewMode: string) {
-          let sourceHtml = '';
-          let filepath = '';
-          if (viewMode === 'guide' && hasGuide) {
-            filepath = `projects/${projectId}/docs/GUIDE.md`;
-            if (lang === 'ru' && project.guide_ru) filepath = `projects/${projectId}/docs/GUIDE_RU.md`;
-            if (lang === 'de' && project.guide_de) filepath = `projects/${projectId}/docs/GUIDE_DE.md`;
-            
-            // Clean details blocks from guide content
-            const guideRawHtml = resolveRelativePaths(parseMarkdown(guide), project, true);
-            const guideProcessResult = processReadmeAndExtractImages(guideRawHtml);
-            sourceHtml = guideProcessResult.cleanHtml;
-          } else {
-            let isReadmeDocs = false;
-            let readme = project.readme;
-            if (lang === 'ru' && project.readme_ru) {
-              readme = project.readme_ru;
-              isReadmeDocs = project.readme_ru.includes('](../README.md)');
-              filepath = `projects/${projectId}/${isReadmeDocs ? 'docs/README_RU.md' : 'README_RU.md'}`;
-            } else if (lang === 'de' && project.readme_de) {
-              readme = project.readme_de;
-              isReadmeDocs = project.readme_de.includes('](../README.md)');
-              filepath = `projects/${projectId}/${isReadmeDocs ? 'docs/README_DE.md' : 'README_DE.md'}`;
-            } else {
-              filepath = `projects/${projectId}/README.md`;
-            }
-            
-            // Clean details blocks from readme content
-            const readmeRawHtml = resolveRelativePaths(parseMarkdown(readme), project, isReadmeDocs);
-            const readmeProcessResult = processReadmeAndExtractImages(readmeRawHtml);
-            sourceHtml = readmeProcessResult.cleanHtml;
-          }
-
-          document.getElementById('window-filepath')!.textContent = filepath;
-
-          if (!sourceHtml.toLowerCase().includes('top') && !sourceHtml.toLowerCase().includes('наверх') && !sourceHtml.toLowerCase().includes('oben')) {
-            sourceHtml += `<p style="text-align: right; margin-top: 32px; font-family: var(--font-mono); font-size: 13px;"><a href="#" class="top-scroll-btn">${topText}</a></p>`;
-          }
-          const container = document.getElementById('readme-html')!;
-          container.innerHTML = sourceHtml;
-
-          // Generate line numbers dynamically based on rendered height
-          const height = container.scrollHeight;
-          const lineCount = Math.max(30, Math.ceil(height / 28));
-          let numsHtml = '';
-          for (let i = 1; i <= lineCount; i++) {
-            numsHtml += `${i}<br>`;
-          }
-          document.getElementById('line-numbers-container')!.innerHTML = numsHtml;
+        // Update URL parameter without reloading
+        const url = new URL(window.location.href);
+        if (mode === 'readme') {
+          url.searchParams.set('view', 'readme');
+        } else {
+          url.searchParams.delete('view');
         }
+        window.history.replaceState({}, '', url);
+      }
 
-        function switchTab(mode: string) {
-          if (mode === 'guide' && !hasGuide) mode = 'readme';
-          if (tabReadme) tabReadme.classList.toggle('active', mode === 'readme');
-          if (tabGuide) tabGuide.classList.toggle('active', mode === 'guide');
-          renderTabContent(mode);
+      if (tabReadme) tabReadme.addEventListener('click', () => switchTab('readme'));
+      if (tabGuide) tabGuide.addEventListener('click', () => switchTab('guide'));
 
-          // Update URL parameter without reloading the page
-          const url = new URL(window.location.href);
-          if (mode === 'readme') {
-            url.searchParams.set('view', 'readme');
-          } else {
-            url.searchParams.delete('view');
-          }
-          window.history.replaceState({}, '', url);
-        }
+      // Check URL parameters / hash on initial load
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialMode = (urlParams.get('view') === 'readme' || window.location.hash === '#readme') ? 'readme' : (hasGuide ? 'guide' : 'readme');
+      switchTab(initialMode);
 
-        if (tabReadme) tabReadme.addEventListener('click', () => switchTab('readme'));
-        if (tabGuide) tabGuide.addEventListener('click', () => switchTab('guide'));
-
-        // Check URL parameters / hash on initial load
-        const urlParams = new URLSearchParams(window.location.search);
-        const initialMode = (urlParams.get('view') === 'readme' || window.location.hash === '#readme') ? 'readme' : (hasGuide ? 'guide' : 'readme');
-        switchTab(initialMode);
-
-        // Intercept anchor clicks
-        document.getElementById('readme-html')!.addEventListener('click', (e: any) => {
-          const a = e.target.closest('a');
-          if (a) {
-            const href = a.getAttribute('href');
-            if (href) {
-              if (a.classList.contains('top-scroll-btn') || href === '#' || a.textContent.includes('Наверх') || a.textContent.includes('top') || a.textContent.includes('oben')) {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              } else if (href.startsWith('#') && href.length > 1) {
-                // Internal anchor links (e.g. Table of Contents)
-                e.preventDefault();
-                const targetId = decodeURIComponent(href.slice(1));
-                let targetElement = document.getElementById(targetId) || document.querySelector(`a[name="${targetId}"]`);
-                
-                if (!targetElement) {
-                  // Fallback: search for a heading that matches the slug
-                  const headings = document.getElementById('readme-html')!.querySelectorAll('h1, h2, h3, h4, h5, h6');
+      // Intercept anchor clicks
+      const handleAnchorClick = (e: any) => {
+        const a = e.target.closest('a');
+        if (a) {
+          const href = a.getAttribute('href');
+          if (href) {
+            if (a.classList.contains('top-scroll-btn') || href === '#' || a.textContent.includes('Наверх') || a.textContent.includes('top') || a.textContent.includes('oben')) {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (href.startsWith('#') && href.length > 1) {
+              e.preventDefault();
+              const targetId = decodeURIComponent(href.slice(1));
+              let targetElement = document.getElementById(targetId) || document.querySelector(`a[name="${targetId}"]`);
+              
+              if (!targetElement) {
+                // Search in active tab content
+                const activeContainer = (readmeHtml && readmeHtml.style.display === 'block') ? readmeHtml : guideHtml;
+                if (activeContainer) {
+                  const headings = activeContainer.querySelectorAll('h1, h2, h3, h4, h5, h6');
                   for (let i = 0; i < headings.length; i++) {
                     const h = headings[i];
-                    // Clean heading text to match marked slug behavior
                     const hSlug = h.textContent!.toLowerCase().replace(/[^\w\d\u0400-\u04FF\s-]/g, '').trim().replace(/\s+/g, '-');
                     if (hSlug === targetId || h.id === targetId) {
                       targetElement = h;
@@ -539,17 +549,19 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
                     }
                   }
                 }
-                
-                if (targetElement) {
-                  // Scroll to the target element with smooth animation (offset for padding)
-                  const y = targetElement.getBoundingClientRect().top + window.scrollY - 80;
-                  window.scrollTo({ top: y, behavior: 'smooth' });
-                }
+              }
+              
+              if (targetElement) {
+                const y = targetElement.getBoundingClientRect().top + window.scrollY - 80;
+                window.scrollTo({ top: y, behavior: 'smooth' });
               }
             }
           }
-        });
-      }
+        }
+      };
+
+      if (readmeHtml) readmeHtml.addEventListener('click', handleAnchorClick);
+      if (guideHtml) guideHtml.addEventListener('click', handleAnchorClick);
     });
   </script>
 </Layout>
