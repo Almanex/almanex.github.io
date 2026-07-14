@@ -627,6 +627,22 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     box-shadow: 0 -3px 0 var(--accent, #36c5f0) inset;
   }
 
+  :root:not([data-theme=dark]) .ide-tabs-bar {
+    background: #f0f1f3;
+  }
+  :root:not([data-theme=dark]) .ide-tab {
+    color: #666666;
+  }
+  :root:not([data-theme=dark]) .ide-tab:hover {
+    color: var(--ink);
+    background: rgba(0, 0, 0, 0.05);
+  }
+  :root:not([data-theme=dark]) .ide-tab.active {
+    background: var(--bar);
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+
   .window-header {
     background: var(--bar);
     border-bottom: 2px solid var(--ink);
