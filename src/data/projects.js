@@ -3445,8 +3445,23 @@ Diese Warnung ist Standard für kostenlose Open-Source-Software, die nicht über
     stars: "0",
     license: "MIT",
     github: "https://github.com/Almanex/LingoSpaced-",
-    image: "/images/projects/lingospaced-.webp",
-    readme: `# LingoSpaced
+    image: "/images/projects/cover/cover_1.avif",
+    readme: `# LingoSpaced<details>
+  <summary style="cursor: pointer; padding: 6px; font-family: sans-serif;"><b>[ Show ] 1. Название слайда</b></summary>
+  <br/>
+  <p align="center">
+    <img src="/images/projects/134226971875979945.webp" width="95%" alt="1. Название слайда" />
+  </p>
+	 <p align="center">
+    <img src="/images/projects/134226971875979945.webp" width="95%" alt="1. Название слайда" />
+  </p>
+	 <p align="center">
+    <img src="/images/projects/134226971875979945.webp" width="95%" alt="1. Название слайда" />
+  </p>
+	 <p align="center">
+    <img src="/images/projects/134226971875979945.webp" width="95%" alt="1. Название слайда" />
+  </p>
+</details>
 
 *Premium mobile application for learning German on Android using a smart automatic spaced repetition algorithm and dynamic glassmorphism interface.*
 

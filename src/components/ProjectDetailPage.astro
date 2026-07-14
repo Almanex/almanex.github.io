@@ -284,7 +284,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
         return tempDiv.innerHTML;
       }
 
-      // Extract and remove images from the parsed body
+      // Extract and remove details slider blocks from the parsed body
       function processReadmeAndExtractImages(html: string) {
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = html;
@@ -296,21 +296,13 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
             return;
           }
           
-          imageUrls.push({
-            src: src,
-            alt: img.getAttribute('alt') || 'Screenshot'
-          });
-          
           const detailsParent = img.closest('details');
           if (detailsParent) {
+            imageUrls.push({
+              src: src,
+              alt: img.getAttribute('alt') || 'Screenshot'
+            });
             detailsParent.remove();
-          } else {
-            const parentLink = img.closest('a');
-            if (parentLink) {
-              parentLink.remove();
-            } else {
-              img.remove();
-            }
           }
         });
         
@@ -395,21 +387,40 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
       }
 
       if (project) {
-        // 1. First extract images from README to initialize slider gallery regardless of starting tab
-        let isReadmeDocs = false;
-        let readme = project.readme;
-        if (lang === 'ru' && project.readme_ru) {
-          readme = project.readme_ru;
-          isReadmeDocs = project.readme_ru.includes('](../README.md)');
-        }
-        if (lang === 'de' && project.readme_de) {
-          readme = project.readme_de;
-          isReadmeDocs = project.readme_de.includes('](../README.md)');
-        }
+        // 1. Gather all slider images from all 6 possible markdown properties
+        const allImages: any[] = [];
+        const seenSrcs = new Set();
 
-        const resolvedReadmeHtml = resolveRelativePaths(parseMarkdown(readme), project, isReadmeDocs);
-        const readmeProcessResult = processReadmeAndExtractImages(resolvedReadmeHtml);
-        initSlider(readmeProcessResult.images);
+        const extractFromMd = (mdText: string, isDocs: boolean) => {
+          if (!mdText) return;
+          const html = resolveRelativePaths(parseMarkdown(mdText), project, isDocs);
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = html;
+          tempDiv.querySelectorAll('img').forEach(img => {
+            const src = img.getAttribute('src');
+            if (src && !src.toLowerCase().includes('.svg') && !src.includes('shields.io') && !src.includes('badge')) {
+              const detailsParent = img.closest('details');
+              if (detailsParent && !seenSrcs.has(src)) {
+                seenSrcs.add(src);
+                allImages.push({
+                  src: src,
+                  alt: img.getAttribute('alt') || 'Screenshot'
+                });
+              }
+            }
+          });
+        };
+
+        // Scan all 6 potential sources for screenshots details blocks
+        extractFromMd(project.readme, false);
+        if (project.readme_ru) extractFromMd(project.readme_ru, project.readme_ru.includes('](../README.md)'));
+        if (project.readme_de) extractFromMd(project.readme_de, project.readme_de.includes('](../README.md)'));
+        extractFromMd(project.guide, true);
+        if (project.guide_ru) extractFromMd(project.guide_ru, true);
+        if (project.guide_de) extractFromMd(project.guide_de, true);
+
+        // Initialize the top slider with all gathered images
+        initSlider(allImages);
 
         // 2. Check for GUIDE availability
         let guide = project.guide || '';
@@ -432,17 +443,29 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
             filepath = `projects/${projectId}/docs/GUIDE.md`;
             if (lang === 'ru' && project.guide_ru) filepath = `projects/${projectId}/docs/GUIDE_RU.md`;
             if (lang === 'de' && project.guide_de) filepath = `projects/${projectId}/docs/GUIDE_DE.md`;
-            sourceHtml = resolveRelativePaths(parseMarkdown(guide), project, true);
+            
+            // Clean details blocks from guide content
+            const guideRawHtml = resolveRelativePaths(parseMarkdown(guide), project, true);
+            const guideProcessResult = processReadmeAndExtractImages(guideRawHtml);
+            sourceHtml = guideProcessResult.cleanHtml;
           } else {
+            let isReadmeDocs = false;
+            let readme = project.readme;
             if (lang === 'ru' && project.readme_ru) {
-              const isDocs = project.readme_ru.includes('](../README.md)');
-              filepath = `projects/${projectId}/${isDocs ? 'docs/README_RU.md' : 'README_RU.md'}`;
+              readme = project.readme_ru;
+              isReadmeDocs = project.readme_ru.includes('](../README.md)');
+              filepath = `projects/${projectId}/${isReadmeDocs ? 'docs/README_RU.md' : 'README_RU.md'}`;
             } else if (lang === 'de' && project.readme_de) {
-              const isDocs = project.readme_de.includes('](../README.md)');
-              filepath = `projects/${projectId}/${isDocs ? 'docs/README_DE.md' : 'README_DE.md'}`;
+              readme = project.readme_de;
+              isReadmeDocs = project.readme_de.includes('](../README.md)');
+              filepath = `projects/${projectId}/${isReadmeDocs ? 'docs/README_DE.md' : 'README_DE.md'}`;
             } else {
               filepath = `projects/${projectId}/README.md`;
             }
+            
+            // Clean details blocks from readme content
+            const readmeRawHtml = resolveRelativePaths(parseMarkdown(readme), project, isReadmeDocs);
+            const readmeProcessResult = processReadmeAndExtractImages(readmeRawHtml);
             sourceHtml = readmeProcessResult.cleanHtml;
           }
 
