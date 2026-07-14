@@ -233,15 +233,7 @@ export const PROJECT_TRANSLATIONS = {
       category: "Утилита",
       subtitle: "Утилита для синхронизации портативных приложений между несколькими системами."
     },
-    "ru-privatezilla": {
-      tldr: [
-              "Полная русская локализация утилиты настройки конфиденциальности Privatezilla",
-              "Поясняет каждую настройку телеметрии и слежки Windows на понятном русском языке",
-              "Помогает русскоязычным пользователям безопасно настроить свою ОС"
-      ],
-      category: "Открытый код",
-      subtitle: "Русский перевод для утилиты конфиденциальности Privatezilla от сообщества."
-    },
+
     "mushroom-spot": {
       tldr: [
               "Офлайн-приложение для Android для отметки грибных мест по координатам GPS",
@@ -350,15 +342,7 @@ export const PROJECT_TRANSLATIONS = {
       category: "Dienstprogramm",
       subtitle: "Ein Werkzeug zur Synchronisierung portabler Anwendungen zwischen mehreren Systemen."
     },
-    "ru-privatezilla": {
-      tldr: [
-              "Vollständige russische Übersetzung für das Datenschutz-Tool Privatezilla",
-              "Erklärt jede Windows-Telemetrieoption verständlich auf Russisch",
-              "Hilft russischsprachigen Benutzern, ihr Betriebssystem sicher zu konfigurieren"
-      ],
-      category: "Open Source",
-      subtitle: "Russische Übersetzung der Privatezilla-Datenschutz-Utility durch die Community."
-    },
+
     "mushroom-spot": {
       tldr: [
               "Offline-Android-App zur Markierung von Pilzstellen über GPS-Koordinaten",
