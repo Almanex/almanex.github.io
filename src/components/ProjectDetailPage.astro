@@ -228,6 +228,19 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
       // Markdown renderer using Marked.js
       function parseMarkdown(md: string) {
         if (!md) return '';
+        
+        // Strip the top language navigation and tab links usually found at the beginning of the repo READMEs
+        const lines = md.split('\n');
+        const filteredLines = lines.filter(line => {
+          const lower = line.toLowerCase();
+          if (lower.includes('english') && lower.includes('русский') && lower.includes('deutsch')) return false;
+          if (lower.includes('quick start') || lower.includes('user guide') || lower.includes('руководство')) {
+            if (lower.includes('•') || lower.includes('|')) return false;
+          }
+          return true;
+        });
+        md = filteredLines.join('\n');
+
         marked.setOptions({
           gfm: true,
           breaks: false
