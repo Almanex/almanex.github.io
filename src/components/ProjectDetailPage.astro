@@ -673,14 +673,32 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     opacity: 0.65;
   }
 
-  .ide-tab:hover {
-    color: var(--ink);
-    background: var(--hover, #20242c);
+  #tab-readme:hover {
+    background: rgba(34, 211, 238, 0.08);
+    border-color: rgba(34, 211, 238, 0.25);
     opacity: 0.9;
   }
 
-  .ide-tab.active {
+  #tab-guide:hover {
+    background: rgba(245, 158, 11, 0.08);
+    border-color: rgba(245, 158, 11, 0.25);
+    opacity: 0.9;
+  }
+
+  #tab-readme.active {
     background: var(--cyan, #38bdf8) !important;
+    border-color: var(--ink) !important;
+    color: #111212 !important;
+    position: relative;
+    z-index: 2;
+    margin-bottom: -2px;
+    padding-bottom: 12px;
+    opacity: 1;
+    box-shadow: none;
+  }
+
+  #tab-guide.active {
+    background: var(--amber, #fbbf24) !important;
     border-color: var(--ink) !important;
     color: #111212 !important;
     position: relative;
@@ -700,13 +718,24 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     border-color: var(--ink);
     opacity: 0.7;
   }
-  :root:not([data-theme=dark]) .ide-tab:hover {
-    color: var(--ink);
-    background: #d4d6da;
+  :root:not([data-theme=dark]) #tab-readme:hover {
+    background: rgba(34, 211, 238, 0.12);
+    border-color: rgba(34, 211, 238, 0.4);
     opacity: 0.9;
   }
-  :root:not([data-theme=dark]) .ide-tab.active {
+  :root:not([data-theme=dark]) #tab-guide:hover {
+    background: rgba(245, 158, 11, 0.12);
+    border-color: rgba(245, 158, 11, 0.4);
+    opacity: 0.9;
+  }
+  :root:not([data-theme=dark]) #tab-readme.active {
     background: var(--cyan, #38bdf8) !important;
+    border-color: var(--ink) !important;
+    color: #111212 !important;
+    opacity: 1;
+  }
+  :root:not([data-theme=dark]) #tab-guide.active {
+    background: var(--amber, #fbbf24) !important;
     border-color: var(--ink) !important;
     color: #111212 !important;
     opacity: 1;
