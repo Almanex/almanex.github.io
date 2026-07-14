@@ -5,7 +5,6 @@ import lingospaced from './projects/lingospaced.json';
 import mushroom_spot from './projects/mushroom-spot.json';
 import portable_app_sync from './projects/portable-app-sync.json';
 import rokey from './projects/rokey.json';
-import ru_privatezilla from './projects/ru-privatezilla.json';
 import screentation_v2 from './projects/screentation-v2.json';
 import shelter_fork from './projects/shelter-fork.json';
 import shortcutdock from './projects/shortcutdock.json';
@@ -19,7 +18,6 @@ export const PROJECTS_DATA = {
   "mushroom-spot": mushroom_spot,
   "portable-app-sync": portable_app_sync,
   "rokey": rokey,
-  "ru-privatezilla": ru_privatezilla,
   "screentation-v2": screentation_v2,
   "shelter-fork": shelter_fork,
   "shortcutdock": shortcutdock,

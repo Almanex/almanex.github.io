@@ -221,24 +221,37 @@ const finalGuideHtml = appendScrollToTop(guideHtml);
 const allImages: Array<{ src: string; alt: string }> = [];
 const seenSrcs = new Set();
 
-function collectImages(mdText: string, isDocs: boolean) {
-  if (!mdText) return;
-  const { images } = extractSliderImagesOnly(mdText);
-  for (const img of images) {
-    const resolvedSrc = resolveSinglePathServer(img.src, projectData, isDocs);
-    if (resolvedSrc && !seenSrcs.has(resolvedSrc)) {
-      seenSrcs.add(resolvedSrc);
-      allImages.push({ src: resolvedSrc, alt: img.alt });
+// 1. Load from dedicated screenshots field if present
+if (Array.isArray(projectData.screenshots) && projectData.screenshots.length > 0) {
+  for (const src of projectData.screenshots) {
+    if (src && !seenSrcs.has(src)) {
+      seenSrcs.add(src);
+      allImages.push({ src, alt: 'Screenshot' });
     }
   }
 }
 
-collectImages(projectData.readme, false);
-if (projectData.readme_ru) collectImages(projectData.readme_ru, projectData.readme_ru.includes('](../README.md)'));
-if (projectData.readme_de) collectImages(projectData.readme_de, projectData.readme_de.includes('](../README.md)'));
-collectImages(projectData.guide, true);
-if (projectData.guide_ru) collectImages(projectData.guide_ru, true);
-if (projectData.guide_de) collectImages(projectData.guide_de, true);
+// 2. Fallback to extracting from details tags in Markdown
+if (allImages.length === 0) {
+  const collectImages = (mdText: string, isDocs: boolean) => {
+    if (!mdText) return;
+    const { images } = extractSliderImagesOnly(mdText);
+    for (const img of images) {
+      const resolvedSrc = resolveSinglePathServer(img.src, projectData, isDocs);
+      if (resolvedSrc && !seenSrcs.has(resolvedSrc)) {
+        seenSrcs.add(resolvedSrc);
+        allImages.push({ src: resolvedSrc, alt: img.alt });
+      }
+    }
+  };
+
+  collectImages(projectData.readme, false);
+  if (projectData.readme_ru) collectImages(projectData.readme_ru, projectData.readme_ru.includes('](../README.md)'));
+  if (projectData.readme_de) collectImages(projectData.readme_de, projectData.readme_de.includes('](../README.md)'));
+  collectImages(projectData.guide, true);
+  if (projectData.guide_ru) collectImages(projectData.guide_ru, true);
+  if (projectData.guide_de) collectImages(projectData.guide_de, true);
+}
 
 // Resolve download button label
 let downloadLabel = l.downloadGeneric;
