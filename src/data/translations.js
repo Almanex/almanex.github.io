@@ -118,43 +118,99 @@ export const UI_TRANSLATIONS = {
 export const PROJECT_TRANSLATIONS = {
   "en": {
     "classic-windows-image-viewer": {
-      category: "Open Source",
+      tldr: [
+        "Restores the classic and instant Windows Photo Viewer interface on Windows 11",
+        "Ultra-lightweight native C++ binary with zero background resource footprint",
+        "Simple setup – registers easily in context menus or file associations"
+      ],
       subtitle: "Brings back the classic Windows photo viewer experience to Windows 11."
     },
+    "flowguide": {
+      tldr: [
+        "Interactive guide recording and live playback overlay on top of active application windows",
+        "Smart control capturing using native Windows UI Automation API and global mouse hooks",
+        "Self-contained portable executables (Recorder & Player) requiring no installation"
+      ],
+      subtitle: "Interactive guide recorder and player overlay for Windows applications."
+    },
+    "webpconverter": {
+      tldr: [
+        "Automated WebP image conversion and caching to significantly reduce website load time",
+        "On-the-fly rewriting of JPEGs and PNGs to WebP in the prerendered HTML output",
+        "Dashboard statistics widget and custom manager panel for scanning and queue-based conversion"
+      ],
+      subtitle: "Image optimization and automatic WebP converter component for MODX 3."
+    },
     "portable-app-sync": {
-      category: "Utility",
+      tldr: [
+        "Synchronizes and backs up your portable applications across different computers",
+        "Automates environment paths, registry cleanups, and dynamic addresses",
+        "Works offline or through any cloud storage service (Dropbox, OneDrive, etc.)"
+      ],
       subtitle: "A tool to synchronize portable applications between multiple systems."
     },
     "mushroom-spot": {
-      category: "Mobile",
+      tldr: [
+        "Offline-only Android app to mark mushroom hunting spots using GPS coordinates",
+        "Simple map interface, logs history, and personal notes for each marked location",
+        "Stores all data locally on the device for absolute privacy in the woods"
+      ],
       subtitle: "An Android app to mark mushroom hunting spots and keep logs."
     },
     "gemma-local-desktop": {
-      category: "Utility",
+      tldr: [
+        "Private chat interface to run Google Gemma models completely offline on your PC",
+        "Automatically downloads and configures llama.cpp server and recommended models",
+        "Zero data leaks – no subscriptions, no accounts, and no internet connection required"
+      ],
       subtitle: "Local Windows chat assistant for running Google Gemma LLM models."
     },
     "icoboo": {
-      category: "Graphics",
+      tldr: [
+        "Native WinUI 3 utility for batch generating Windows (.ico, Assets) and Android icons",
+        "Automatically sharpens smaller resolutions to prevent blurriness in File Explorer",
+        "Full support for 3 interface languages (English, Russian, German) out of the box"
+      ],
       subtitle: "Windows WinUI 3 icon generator and converter tool."
     },
     "lingospaced": {
-      category: "Utility",
+      tldr: [
+        "Formats spacing and alignment of comments in multilingual code files",
+        "Makes translation blocks within code highly readable and aligned in editors",
+        "Helps developers maintain clean and tidy multilingual project codebases"
+      ],
       subtitle: "Formatting tool for multilingual inline code comments alignment."
     },
     "rokey": {
-      category: "System",
+      tldr: [
+        "Virtual keyboard driver and hotkey mapping utility for Windows",
+        "Create custom macros, hotkeys, and layout mappings at driver level",
+        "Lightweight system utility with minimal resource consumption"
+      ],
       subtitle: "Custom virtual keyboard driver and key mapping utility for Windows."
     },
     "screentation-v2": {
-      category: "Graphics",
+      tldr: [
+        "Screenshot processor and app presentation mockup builder",
+        "Add stylish background grids, canvas paddings, and device frame templates",
+        "Export polished presentation screenshots for app stores and GitHub"
+      ],
       subtitle: "Screenshot presentation builder and app mockup generator."
     },
     "shortcutdock": {
-      category: "Customization",
+      tldr: [
+        "Minimalist shortcut launcher and organizer panel for Windows desktop",
+        "Modern semi-transparent Mica style fitting Windows 11 interface aesthetics",
+        "Runs as a portable application without installation – fully customizable"
+      ],
       subtitle: "Minimalist desktop shortcut launcher dock in Windows 11 Mica style."
     },
     "shelter-fork": {
-      category: "Mobile",
+      tldr: [
+        "Community-driven fork of Shelter – an Android sandbox for profile isolation",
+        "Isolates background processes, freezes cloned applications, and protects data",
+        "Active development focusing on security patches and dependency updates"
+      ],
       subtitle: "Android sandbox profile manager app fork focusing on privacy."
     }
   },
@@ -257,6 +313,22 @@ export const PROJECT_TRANSLATIONS = {
       ],
       category: "Мобильное",
       subtitle: "Форк приложения с открытым исходным кодом для контроля приватности и песочниц профилей."
+    },
+    "flowguide": {
+      tldr: [
+        "Интерактивное воспроизведение записанных инструкций прямо поверх окон приложений",
+        "Умный захват UI-элементов через Windows UI Automation и перехват кликов мыши",
+        "Портативные исполняемые файлы (Recorder и Player) без необходимости установки"
+      ],
+      subtitle: "Интерактивная система записи и воспроизведения руководств для Windows-приложений."
+    },
+    "webpconverter": {
+      tldr: [
+        "Автоматическая генерация WebP версий изображений для ускорения загрузки сайта",
+        "Динамическая замена путей к картинкам в HTML-выводе MODX на лету",
+        "Удобный виджет статистики сжатия и очистка неиспользуемых файлов в админке"
+      ],
+      subtitle: "Компонент автоматической оптимизации и конвертации изображений в WebP для MODX 3."
     }
   },
   "de": {
@@ -358,6 +430,22 @@ export const PROJECT_TRANSLATIONS = {
       ],
       category: "Mobil",
       subtitle: "Ein Open-Source-App-Fork mit Fokus auf Datenschutz und Systemprofil-Sandboxing."
+    },
+    "flowguide": {
+      tldr: [
+        "Interaktive Wiedergabe aufgezeichneter Schritte als Overlay direkt über Anwendungsfenstern",
+        "Intelligente Erfassung von UI-Elementen über Windows UI Automation und Maus-Hooks",
+        "Portable ausführbare Dateien (Recorder und Player) ohne Installationspflicht"
+      ],
+      subtitle: "Interaktives System zur Aufzeichnung und Wiedergabe von Schritt-für-Schritt-Anleitungen."
+    },
+    "webpconverter": {
+      tldr: [
+        "Automatische WebP-Generierung zur Beschleunigung der Website-Ladezeit",
+        "Dynamische Ersetzung von Bildpfaden im HTML-Code von MODX im laufenden Betrieb",
+        "Praktisches Statistik-Widget und Bereinigung verwaister Bilddateien im Admin-Bereich"
+      ],
+      subtitle: "Bildoptimierungs- und automatisches WebP-Konvertierungstool für MODX 3."
     }
   }
 };
