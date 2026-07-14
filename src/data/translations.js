@@ -116,6 +116,48 @@ export const UI_TRANSLATIONS = {
 };
 
 export const PROJECT_TRANSLATIONS = {
+  "en": {
+    "classic-windows-image-viewer": {
+      category: "Open Source",
+      subtitle: "Brings back the classic Windows photo viewer experience to Windows 11."
+    },
+    "portable-app-sync": {
+      category: "Utility",
+      subtitle: "A tool to synchronize portable applications between multiple systems."
+    },
+    "mushroom-spot": {
+      category: "Mobile",
+      subtitle: "An Android app to mark mushroom hunting spots and keep logs."
+    },
+    "gemma-local-desktop": {
+      category: "Utility",
+      subtitle: "Local Windows chat assistant for running Google Gemma LLM models."
+    },
+    "icoboo": {
+      category: "Graphics",
+      subtitle: "Windows WinUI 3 icon generator and converter tool."
+    },
+    "lingospaced": {
+      category: "Utility",
+      subtitle: "Formatting tool for multilingual inline code comments alignment."
+    },
+    "rokey": {
+      category: "System",
+      subtitle: "Custom virtual keyboard driver and key mapping utility for Windows."
+    },
+    "screentation-v2": {
+      category: "Graphics",
+      subtitle: "Screenshot presentation builder and app mockup generator."
+    },
+    "shortcutdock": {
+      category: "Customization",
+      subtitle: "Minimalist desktop shortcut launcher dock in Windows 11 Mica style."
+    },
+    "shelter-fork": {
+      category: "Mobile",
+      subtitle: "Android sandbox profile manager app fork focusing on privacy."
+    }
+  },
   "ru": {
     "classic-windows-image-viewer": {
       tldr: [
