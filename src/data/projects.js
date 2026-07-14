@@ -638,6 +638,54 @@ Dieses Handbuch basiert auf dem Artikel:
 - **Portable** no installation required, single \`.exe\` file
 - **Modern Fluent UI** styled with WPF-UI 4.3.0, supporting Light/Dark themes and system theme matching
 - **Smart filtering** by default indexes only user applications (with option to show hidden system components)
+
+## System Architecture
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" style="background:var(--bar); border:2px solid var(--ink); border-radius:12px; margin: 24px 0; box-shadow: 4px 4px 0 var(--ink); width: 100%; max-width: 800px; display: block;">
+  <style>
+    .node-rect { fill: var(--surface); stroke: var(--ink); stroke-width: 2px; }
+    .node-text { font-family: var(--font-mono); font-size: 13px; font-weight: bold; fill: var(--ink); text-anchor: middle; }
+    .node-sub { font-family: var(--font-body); font-size: 11px; fill: var(--ink); opacity: 0.8; text-anchor: middle; }
+    .arrow-line { stroke: var(--ink); stroke-width: 2px; fill: none; stroke-dasharray: 4; }
+    .arrow-head { fill: var(--ink); }
+    .center-node { fill: var(--green); }
+    .accent-node { fill: var(--cyan); }
+  </style>
+
+  <defs>
+    <marker id="arrow-right" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head" />
+    </marker>
+    <marker id="arrow-left" viewBox="0 0 10 10" refX="4" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 10 0 L 0 5 L 10 10 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <rect x="50" y="50" width="180" height="110" rx="8" class="node-rect" />
+  <text x="140" y="90" class="node-text">LOCAL PC</text>
+  <text x="140" y="115" class="node-sub">App Files &amp; Folders</text>
+  <text x="140" y="135" class="node-sub">Windows Registry</text>
+
+  <path d="M 230 105 L 300 105" class="arrow-line" marker-end="url(#arrow-right)" marker-start="url(#arrow-left)" />
+
+  <rect x="310" y="30" width="180" height="150" rx="8" class="node-rect center-node" style="fill: var(--green); opacity: 0.9;" />
+  <text x="400" y="75" class="node-text" style="fill: #111212;">PORTABLE APP SYNC</text>
+  <text x="400" y="100" class="node-sub" style="fill: #111212; font-weight: bold;">(PAS Engine)</text>
+  <text x="400" y="125" class="node-sub" style="fill: #111212;">• Path Translation</text>
+  <text x="400" y="145" class="node-sub" style="fill: #111212;">• Reg Export/Import</text>
+  <text x="400" y="165" class="node-sub" style="fill: #111212;">• Smart Sync Logic</text>
+
+  <path d="M 490 105 L 560 105" class="arrow-line" marker-end="url(#arrow-right)" marker-start="url(#arrow-left)" />
+
+  <rect x="570" y="50" width="180" height="110" rx="8" class="node-rect accent-node" style="fill: var(--cyan); opacity: 0.9;" />
+  <text x="660" y="90" class="node-text" style="fill: #111212;">BACKUP &amp; CLOUD</text>
+  <text x="660" y="115" class="node-sub" style="fill: #111212;">Dropbox / OneDrive / etc.</text>
+  <text x="660" y="135" class="node-sub" style="fill: #111212;">External Backup Drive</text>
+
+  <text x="265" y="95" style="font-family: var(--font-mono); font-size: 10px; font-weight: bold; fill: var(--ink); text-anchor: middle;">SYNC</text>
+  <text x="525" y="95" style="font-family: var(--font-mono); font-size: 10px; font-weight: bold; fill: var(--ink); text-anchor: middle;">SYNC</text>
+</svg>
+
 - **Detailed info** background loading of official descriptions and human-readable names. If the app name is not yet loaded, the package ID is displayed instead (they are often identical).
 
 **[Russian version of README / Russian version](docs/README_RU.md)**
@@ -834,6 +882,54 @@ This project is distributed under the MIT License. See the \`LICENSE\` file for 
 - **Портативность:** не требует установки, один исполняемый файл \`.exe\`.
 - **Современный Fluent UI:** стилизован с помощью WPF-UI 4.3.0, поддерживает светлую/темную темы и автоподстройку под системную тему.
 - **Умная фильтрация:** по умолчанию индексируются только пользовательские приложения (с возможностью отображения скрытых и системных компонентов).
+
+## Архитектура системы
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" style="background:var(--bar); border:2px solid var(--ink); border-radius:12px; margin: 24px 0; box-shadow: 4px 4px 0 var(--ink); width: 100%; max-width: 800px; display: block;">
+  <style>
+    .node-rect { fill: var(--surface); stroke: var(--ink); stroke-width: 2px; }
+    .node-text { font-family: var(--font-mono); font-size: 13px; font-weight: bold; fill: var(--ink); text-anchor: middle; }
+    .node-sub { font-family: var(--font-body); font-size: 11px; fill: var(--ink); opacity: 0.8; text-anchor: middle; }
+    .arrow-line { stroke: var(--ink); stroke-width: 2px; fill: none; stroke-dasharray: 4; }
+    .arrow-head { fill: var(--ink); }
+    .center-node { fill: var(--green); }
+    .accent-node { fill: var(--cyan); }
+  </style>
+
+  <defs>
+    <marker id="arrow-right" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head" />
+    </marker>
+    <marker id="arrow-left" viewBox="0 0 10 10" refX="4" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 10 0 L 0 5 L 10 10 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <rect x="50" y="50" width="180" height="110" rx="8" class="node-rect" />
+  <text x="140" y="90" class="node-text">LOCAL PC</text>
+  <text x="140" y="115" class="node-sub">App Files &amp; Folders</text>
+  <text x="140" y="135" class="node-sub">Windows Registry</text>
+
+  <path d="M 230 105 L 300 105" class="arrow-line" marker-end="url(#arrow-right)" marker-start="url(#arrow-left)" />
+
+  <rect x="310" y="30" width="180" height="150" rx="8" class="node-rect center-node" style="fill: var(--green); opacity: 0.9;" />
+  <text x="400" y="75" class="node-text" style="fill: #111212;">PORTABLE APP SYNC</text>
+  <text x="400" y="100" class="node-sub" style="fill: #111212; font-weight: bold;">(PAS Engine)</text>
+  <text x="400" y="125" class="node-sub" style="fill: #111212;">• Path Translation</text>
+  <text x="400" y="145" class="node-sub" style="fill: #111212;">• Reg Export/Import</text>
+  <text x="400" y="165" class="node-sub" style="fill: #111212;">• Smart Sync Logic</text>
+
+  <path d="M 490 105 L 560 105" class="arrow-line" marker-end="url(#arrow-right)" marker-start="url(#arrow-left)" />
+
+  <rect x="570" y="50" width="180" height="110" rx="8" class="node-rect accent-node" style="fill: var(--cyan); opacity: 0.9;" />
+  <text x="660" y="90" class="node-text" style="fill: #111212;">BACKUP &amp; CLOUD</text>
+  <text x="660" y="115" class="node-sub" style="fill: #111212;">Dropbox / OneDrive / etc.</text>
+  <text x="660" y="135" class="node-sub" style="fill: #111212;">External Backup Drive</text>
+
+  <text x="265" y="95" style="font-family: var(--font-mono); font-size: 10px; font-weight: bold; fill: var(--ink); text-anchor: middle;">SYNC</text>
+  <text x="525" y="95" style="font-family: var(--font-mono); font-size: 10px; font-weight: bold; fill: var(--ink); text-anchor: middle;">SYNC</text>
+</svg>
+
 - **Подробная информация:** фоновое скачивание официальных описаний и понятных человеку имен программ. Если название приложения еще не загружено, вместо него отображается Package ID (они часто совпадают).
 
 ---
@@ -1034,7 +1130,55 @@ PAS/
 - **Automatische Protokollierung** aller Vorgänge
 - **Portabel**, keine Installation erforderlich, einzelne „.exe“-Datei
 - **Moderne Fluent-Benutzeroberfläche** im Stil von WPF-UI 4.3.0, unterstützt Hell/Dunkel-Themen und System-Theme-Abgleich
-- **Intelligente Filterung** indiziert standardmäßig nur Benutzeranwendungen (mit der Option, versteckte Systemkomponenten anzuzeigen)
+- **Intelligente Filterung** indiziert standardmäßig nur Benutzeranwendungen
+
+## Systemarchitektur
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" style="background:var(--bar); border:2px solid var(--ink); border-radius:12px; margin: 24px 0; box-shadow: 4px 4px 0 var(--ink); width: 100%; max-width: 800px; display: block;">
+  <style>
+    .node-rect { fill: var(--surface); stroke: var(--ink); stroke-width: 2px; }
+    .node-text { font-family: var(--font-mono); font-size: 13px; font-weight: bold; fill: var(--ink); text-anchor: middle; }
+    .node-sub { font-family: var(--font-body); font-size: 11px; fill: var(--ink); opacity: 0.8; text-anchor: middle; }
+    .arrow-line { stroke: var(--ink); stroke-width: 2px; fill: none; stroke-dasharray: 4; }
+    .arrow-head { fill: var(--ink); }
+    .center-node { fill: var(--green); }
+    .accent-node { fill: var(--cyan); }
+  </style>
+
+  <defs>
+    <marker id="arrow-right" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head" />
+    </marker>
+    <marker id="arrow-left" viewBox="0 0 10 10" refX="4" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 10 0 L 0 5 L 10 10 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <rect x="50" y="50" width="180" height="110" rx="8" class="node-rect" />
+  <text x="140" y="90" class="node-text">LOCAL PC</text>
+  <text x="140" y="115" class="node-sub">App Files &amp; Folders</text>
+  <text x="140" y="135" class="node-sub">Windows Registry</text>
+
+  <path d="M 230 105 L 300 105" class="arrow-line" marker-end="url(#arrow-right)" marker-start="url(#arrow-left)" />
+
+  <rect x="310" y="30" width="180" height="150" rx="8" class="node-rect center-node" style="fill: var(--green); opacity: 0.9;" />
+  <text x="400" y="75" class="node-text" style="fill: #111212;">PORTABLE APP SYNC</text>
+  <text x="400" y="100" class="node-sub" style="fill: #111212; font-weight: bold;">(PAS Engine)</text>
+  <text x="400" y="125" class="node-sub" style="fill: #111212;">• Path Translation</text>
+  <text x="400" y="145" class="node-sub" style="fill: #111212;">• Reg Export/Import</text>
+  <text x="400" y="165" class="node-sub" style="fill: #111212;">• Smart Sync Logic</text>
+
+  <path d="M 490 105 L 560 105" class="arrow-line" marker-end="url(#arrow-right)" marker-start="url(#arrow-left)" />
+
+  <rect x="570" y="50" width="180" height="110" rx="8" class="node-rect accent-node" style="fill: var(--cyan); opacity: 0.9;" />
+  <text x="660" y="90" class="node-text" style="fill: #111212;">BACKUP &amp; CLOUD</text>
+  <text x="660" y="115" class="node-sub" style="fill: #111212;">Dropbox / OneDrive / etc.</text>
+  <text x="660" y="135" class="node-sub" style="fill: #111212;">External Backup Drive</text>
+
+  <text x="265" y="95" style="font-family: var(--font-mono); font-size: 10px; font-weight: bold; fill: var(--ink); text-anchor: middle;">SYNC</text>
+  <text x="525" y="95" style="font-family: var(--font-mono); font-size: 10px; font-weight: bold; fill: var(--ink); text-anchor: middle;">SYNC</text>
+</svg>
+ (mit der Option, versteckte Systemkomponenten anzuzeigen)
 - **Detaillierte Informationen** Laden offizieller Beschreibungen und für Menschen lesbarer Namen im Hintergrund. Wenn der App-Name noch nicht geladen ist, wird stattdessen die Paket-ID angezeigt (diese sind oft identisch).
 
 **[Russische Version von README / Russische Version](README_RU.md)**

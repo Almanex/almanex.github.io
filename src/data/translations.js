@@ -118,92 +118,202 @@ export const UI_TRANSLATIONS = {
 export const PROJECT_TRANSLATIONS = {
   "ru": {
     "classic-windows-image-viewer": {
+      tldr: [
+              "Возвращает классический и мгновенный Просмотрщик фотографий Windows на Windows 11",
+              "Сверхлегкий нативный C++ файл с нулевым фоновым потреблением ресурсов",
+              "Простая настройка – регистрируется в контекстном меню или ассоциациях файлов"
+      ],
       category: "Открытый код",
       subtitle: "Возвращает классический просмотрщик фотографий Windows в Windows 11."
     },
     "portable-app-sync": {
+      tldr: [
+              "Синхронизирует и резервирует ваши портативные приложения на разных компьютерах",
+              "Автоматизирует пути окружения, очистку реестра и динамические адреса",
+              "Работает в офлайне или через любое облачное хранилище (Dropbox, OneDrive и др.)"
+      ],
       category: "Утилита",
       subtitle: "Утилита для синхронизации портативных приложений между несколькими системами."
     },
     "ru-privatezilla": {
+      tldr: [
+              "Полная русская локализация утилиты настройки конфиденциальности Privatezilla",
+              "Поясняет каждую настройку телеметрии и слежки Windows на понятном русском языке",
+              "Помогает русскоязычным пользователям безопасно настроить свою ОС"
+      ],
       category: "Открытый код",
       subtitle: "Русский перевод для утилиты конфиденциальности Privatezilla от сообщества."
     },
     "mushroom-spot": {
+      tldr: [
+              "Офлайн-приложение для Android для отметки грибных мест по координатам GPS",
+              "Простой интерфейс карты, история записей и личные заметки для каждой точки",
+              "Хранит все данные локально на устройстве для полной конфиденциальности в лесу"
+      ],
       category: "Мобильное",
       subtitle: "Приложение для Android, помогающее грибникам отмечать места, отслеживать точки и вести логи."
     },
     "gemma-local-desktop": {
+      tldr: [
+              "Приватный чат-интерфейс для запуска моделей Google Gemma полностью офлайн",
+              "Автоматически скачивает и настраивает сервер llama.cpp и рекомендуемую модель",
+              "Никакие данные не покидают ваш ПК – без подписок, аккаунтов и интернета"
+      ],
       category: "Утилита",
       subtitle: "Локальный Windows-чат-помощник для запуска LLM-моделей Google Gemma."
     },
     "icoboo": {
+      tldr: [
+              "Нативная утилита WinUI 3 для пакетной генерации иконок Windows (.ico, Assets) и Android",
+              "Автоматически повышает резкость для мелких размеров во избежание размытия в Проводнике",
+              "Полная поддержка 3 языков интерфейса (английский, русский, немецкий)"
+      ],
       category: "Графика",
       subtitle: "Генератор и конвертер иконок из стандартных изображений."
     },
     "lingospaced": {
+      tldr: [
+              "Форматирует отступы и выравнивание комментариев в многоязычных файлах кода",
+              "Делает блоки перевода внутри кода читаемыми и выровненными в редакторах",
+              "Помогает разработчикам поддерживать аккуратность многоязычных проектов"
+      ],
       category: "Утилита",
       subtitle: "Инструмент форматирования интервалов для многоязычных комментариев в коде."
     },
     "rokey": {
+      tldr: [
+              "Драйвер виртуальной клавиатуры и утилита переназначения клавиш для Windows",
+              "Создание кастомных макросов, горячих клавиш и раскладок на уровне драйвера",
+              "Легковесная системная утилита с минимальным потреблением ресурсов"
+      ],
       category: "Система",
       subtitle: "Кастомный драйвер виртуальной клавиатуры и утилита маппинга клавиш для Windows."
     },
     "screentation-v2": {
+      tldr: [
+              "Процессор скриншотов и конструктор мокапов для превью приложений",
+              "Добавление стильных фоновых сеток, полей холста и шаблонов рамок устройств",
+              "Экспорт готовых презентационных скриншотов для магазинов приложений и GitHub"
+      ],
       category: "Графика",
       subtitle: "Инструмент для создания скриншотов, мокапов и превью интерфейсов."
     },
     "shortcutdock": {
+      tldr: [
+              "Минималистичная панель запуска и организации ярлыков для рабочего стола Windows",
+              "Современный полупрозрачный стиль Mica в эстетике интерфейса Windows 11",
+              "Работает как портативное приложение без установки – полностью настраиваемое"
+      ],
       category: "Кастомизация",
       subtitle: "Минималистичная панель запуска для кастомизации и организации рабочего стола Windows."
     },
     "shelter-fork": {
+      tldr: [
+              "Сообщественный форк Shelter – песочницы для изоляции профилей Android",
+              "Изолирует фоновые процессы, замораживает клонированные приложения и защищает данные",
+              "Активная разработка с акцентом на безопасность и обновление библиотек"
+      ],
       category: "Мобильное",
       subtitle: "Форк приложения с открытым исходным кодом для контроля приватности и песочниц профилей."
     }
   },
   "de": {
     "classic-windows-image-viewer": {
+      tldr: [
+              "Stellt die klassische, blitzschnelle Windows-Fotoanzeige unter Windows 11 wieder her",
+              "Extrem schlanke native C++-Datei ohne Hintergrund-Ressourcenverbrauch",
+              "Einfache Einrichtung – Registrierung über Kontextmenü oder Dateizuordnungen"
+      ],
       category: "Open Source",
       subtitle: "Stellt den klassischen Windows-Fotoanzeiger unter Windows 11 wieder her."
     },
     "portable-app-sync": {
+      tldr: [
+              "Hält Ihre portablen Anwendungen auf verschiedenen Computern synchron und gesichert",
+              "Automatisiert Umgebungspfade, Bereinigung der Registrierung und dynamische Adressen",
+              "Funktioniert offline oder über jeden Cloud-Speicher (Dropbox, OneDrive usw.)"
+      ],
       category: "Dienstprogramm",
       subtitle: "Ein Werkzeug zur Synchronisierung portabler Anwendungen zwischen mehreren Systemen."
     },
     "ru-privatezilla": {
+      tldr: [
+              "Vollständige russische Übersetzung für das Datenschutz-Tool Privatezilla",
+              "Erklärt jede Windows-Telemetrieoption verständlich auf Russisch",
+              "Hilft russischsprachigen Benutzern, ihr Betriebssystem sicher zu konfigurieren"
+      ],
       category: "Open Source",
       subtitle: "Russische Übersetzung der Privatezilla-Datenschutz-Utility durch die Community."
     },
     "mushroom-spot": {
+      tldr: [
+              "Offline-Android-App zur Markierung von Pilzstellen über GPS-Koordinaten",
+              "Einfache Kartenschnittstelle, Verlaufsprotokoll und Notizen für jeden Ort",
+              "Speichert alle Daten lokal auf dem Gerät für maximalen Datenschutz im Wald"
+      ],
       category: "Mobil",
       subtitle: "Eine Android-App, die Pilzsammlern hilft, Orte zu markieren und Protokolle zu führen."
     },
     "gemma-local-desktop": {
+      tldr: [
+              "Privater KI-Chatbot zur Ausführung von Google Gemma-Modellen komplett offline",
+              "Automatische Installation und Einrichtung von llama.cpp-Server und Modell",
+              "Keine Daten verlassen Ihren PC – keine Abonnements, Konten oder Internet nötig"
+      ],
       category: "Dienstprogramm",
       subtitle: "Ein lokaler Windows-Chatbot zur Ausführung von Google Gemma LLMs."
     },
     "icoboo": {
+      tldr: [
+              "Natives WinUI 3-Tool zur Stapelgenerierung von Windows- (.ico, Assets) und Android-Icons",
+              "Automatische Nachschärfung für kleine Symbole gegen Unschärfe im Explorer",
+              "Volle Unterstützung von 3 Sprachen (Englisch, Russisch, Deutsch) ab Werk"
+      ],
       category: "Grafik",
       subtitle: "Ein Icon-Generator und Konverter-Tool für Standard-Bilddateien."
     },
     "lingospaced": {
+      tldr: [
+              "Formatiert Kommentar-Abstände und Ausrichtung in mehrsprachigen Quellcode-Dateien",
+              "Macht Inline-Übersetzungsblöcke im Code-Editor lesbar und perfekt ausgerichtet",
+              "Hilft Entwicklern, Ordnung in mehrsprachigen Open-Source-Projekten zu halten"
+      ],
       category: "Dienstprogramm",
       subtitle: "Ein Abstandswerkzeug für Entwickler zur Formatierung mehrsprachiger Kommentare."
     },
     "rokey": {
+      tldr: [
+              "Benutzerdefinierter virtueller Tastaturtreiber und Tastenbelegungs-Tool für Windows",
+              "Erstellung eigener Makros, Verknüpfungen und Tastenbelegungen auf Treiber-Ebene",
+              "Leichtgewichtiges System-Tool mit minimaler CPU- und Speicherauslastung"
+      ],
       category: "System",
       subtitle: "Ein benutzerdefinierter Tastaturtreiber und Tastenbelegungs-Tool für Windows."
     },
     "screentation-v2": {
+      tldr: [
+              "Screenshot-Prozessor und Mockup-Generator für App-Vorschauen",
+              "Hinzufügen von Hintergrundgittern, Canvas-Abständen und Geräterahmen",
+              "Export fertiger Präsentations-Screenshots für App Stores und GitHub"
+      ],
       category: "Grafik",
       subtitle: "Ein Werkzeug zum Erstellen von Screenshots, Mockups und Design-Vorschauen."
     },
     "shortcutdock": {
+      tldr: [
+              "Minimalistisches Dock zum Starten und Organisieren von Windows-Apps",
+              "Modernes, halbltransparentes Mica-Design passend zur Windows 11-Ästhetik",
+              "Läuft als portable App ohne Installation – voll konfigurierbar und anpassbar"
+      ],
       category: "Anpassung",
       subtitle: "Ein minimalistisches Dock zur Anpassung und Organisation des Windows-Desktops."
     },
     "shelter-fork": {
+      tldr: [
+              "Community-Fork von Shelter – einer Sandbox zur Profilisolierung auf Android",
+              "Isoliert Hintergrundprozesse, friert Klone ein und schützt persönliche Daten",
+              "Aktive Open-Source-Entwicklung mit Fokus auf Sicherheit und aktuelle Bibliotheken"
+      ],
       category: "Mobil",
       subtitle: "Ein Open-Source-App-Fork mit Fokus auf Datenschutz und Systemprofil-Sandboxing."
     }

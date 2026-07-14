@@ -1214,5 +1214,17 @@ footer.ft .ft-bar {
   }
 }
 
+/* Make all content tables scrollable horizontally on mobile to prevent page horizontal scrolling */
+.prose table,
+.markdown-content table,
+.content table,
+article table,
+table {
+  display: block !important;
+  width: 100% !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
 
 
