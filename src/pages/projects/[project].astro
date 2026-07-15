@@ -3,7 +3,9 @@ import { PROJECTS_DATA } from '../../data/projects.js';
 import ProjectDetailPage from '../../components/ProjectDetailPage.astro';
 
 export async function getStaticPaths() {
-  return Object.keys(PROJECTS_DATA).map(project => ({
+  return Object.keys(PROJECTS_DATA)
+    .filter(project => PROJECTS_DATA[project].status !== 'DRAFT')
+    .map(project => ({
     params: { project }
   }));
 }

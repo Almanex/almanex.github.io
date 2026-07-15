@@ -4,7 +4,8 @@ import BlogDetailPage from '../../../components/BlogDetailPage.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  const dePosts = posts.filter(post => post.id.startsWith('de/'));
+  const activePosts = posts.filter(post => post.data.status !== 'DRAFT');
+  const dePosts = activePosts.filter(post => post.id.startsWith('de/'));
   return dePosts.map(post => {
     const slug = post.id.replace(/^de\//, '');
     return {

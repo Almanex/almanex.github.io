@@ -12,11 +12,12 @@ const { lang } = Astro.props;
 
 // Fetch all posts from content collections, filter by language, and sort
 const posts = await getCollection('blog');
-const langPosts = posts.filter(post => {
+const activePosts = posts.filter(post => post.data.status !== 'DRAFT');
+const langPosts = activePosts.filter(post => {
   if (lang === 'en') return !post.id.startsWith('ru/') && !post.id.startsWith('de/');
   return post.id.startsWith(`${lang}/`);
 });
-const targetPosts = langPosts.length > 0 ? langPosts : posts.filter(post => !post.id.startsWith('ru/') && !post.id.startsWith('de/'));
+const targetPosts = langPosts.length > 0 ? langPosts : activePosts.filter(post => !post.id.startsWith('ru/') && !post.id.startsWith('de/'));
 const sortedPosts = targetPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 // Helper to format date
@@ -281,7 +282,7 @@ const l = pageLabels[lang];
       </div>
       
       <div class="stack" id="stack">
-        {Object.entries(PROJECTS_DATA).map(([id, project], index) => {
+        {Object.entries(PROJECTS_DATA).filter(([_, p]) => p.status !== 'DRAFT').map(([id, project], index) => {
           const accent = accents[index % accents.length];
           const coverImg = (project.image && (project.image.startsWith('/') || project.image.startsWith('http')))
             ? project.image

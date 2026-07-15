@@ -35,7 +35,9 @@ export async function getStaticPaths({ paginate }) {
     return '';
   }
 
-  const projects = Object.entries(PROJECTS_DATA).map(([id, data]) => {
+  const projects = Object.entries(PROJECTS_DATA)
+    .filter(([_, data]) => data.status !== 'DRAFT')
+    .map(([id, data]) => {
     let firstImg = '';
     if (data.image) {
       if (data.image.startsWith('/') || data.image.startsWith('http')) {

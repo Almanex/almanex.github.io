@@ -28,7 +28,8 @@ const formattedDate = formatLocalizedDate(post.data.pubDate, lang);
 
 // Fetch same-language posts for recommendation
 const allPosts = await getCollection('blog');
-const langPosts = allPosts.filter(p => {
+const activePosts = allPosts.filter(p => p.data.status !== 'DRAFT');
+const langPosts = activePosts.filter(p => {
   if (lang === 'en') return !p.id.startsWith('ru/') && !p.id.startsWith('de/');
   return p.id.startsWith(`${lang}/`);
 });

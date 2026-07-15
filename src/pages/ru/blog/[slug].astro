@@ -4,7 +4,8 @@ import BlogDetailPage from '../../../components/BlogDetailPage.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  const ruPosts = posts.filter(post => post.id.startsWith('ru/'));
+  const activePosts = posts.filter(post => post.data.status !== 'DRAFT');
+  const ruPosts = activePosts.filter(post => post.id.startsWith('ru/'));
   return ruPosts.map(post => {
     const slug = post.id.replace(/^ru\//, '');
     return {
