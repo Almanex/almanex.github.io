@@ -650,19 +650,22 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     box-shadow: 6px 6px 0px var(--ink);
     background: var(--surface);
     margin-bottom: 60px;
-    transition: background-color 0.2s ease;
   }
   
-  .proj-card-window.view-readme,
-  .proj-card-window.view-readme .window-header,
-  .proj-card-window.view-readme .window-body {
-    background: var(--cyan-soft) !important;
+  .proj-card-window.view-readme .window-header {
+    background: var(--cyan, #38bdf8) !important;
+    border-bottom: 2px solid var(--ink) !important;
+  }
+  .proj-card-window.view-readme .window-header .window-title {
+    color: #111212 !important;
   }
   
-  .proj-card-window.view-guide,
-  .proj-card-window.view-guide .window-header,
-  .proj-card-window.view-guide .window-body {
-    background: var(--amber-soft) !important;
+  .proj-card-window.view-guide .window-header {
+    background: var(--amber, #fbbf24) !important;
+    border-bottom: 2px solid var(--ink) !important;
+  }
+  .proj-card-window.view-guide .window-header .window-title {
+    color: #111212 !important;
   }
   
   .ide-tabs-bar {
@@ -725,13 +728,15 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
   }
   
   #tab-readme.active {
-    background: var(--cyan-soft) !important;
-    color: var(--ink) !important;
+    background: var(--cyan, #38bdf8) !important;
+    color: #111212 !important;
+    border-bottom: 2px solid var(--cyan, #38bdf8) !important;
   }
   
   #tab-guide.active {
-    background: var(--amber-soft) !important;
-    color: var(--ink) !important;
+    background: var(--amber, #fbbf24) !important;
+    color: #111212 !important;
+    border-bottom: 2px solid var(--amber, #fbbf24) !important;
   }
 
   .window-header {
@@ -778,7 +783,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     text-align: right;
     padding: 24px 14px 24px 0;
     border-right: 2px solid var(--line);
-    background: rgba(0, 0, 0, 0.04);
+    background: var(--bar);
     user-select: none;
     opacity: 0.6;
   }
