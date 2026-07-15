@@ -185,9 +185,9 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 			</a>
 			<!-- Desktop integrated language switcher -->
 			<div class="header-lang-desktop">
-				<a href={getPathForLang('en')} class={currentLang === 'en' ? 'lang-toggle-btn active' : 'lang-toggle-btn'}>EN</a>
-				<a href={getPathForLang('ru')} class={currentLang === 'ru' ? 'lang-toggle-btn active' : 'lang-toggle-btn'}>RU</a>
-				<a href={getPathForLang('de')} class={currentLang === 'de' ? 'lang-toggle-btn active' : 'lang-toggle-btn'}>DE</a>
+				<a href={getPathForLang('en')} class={currentLang === 'en' ? 'lang-toggle-btn active' : 'lang-toggle-btn'} onclick="localStorage.setItem('alex-lang-pref', 'en')">EN</a>
+				<a href={getPathForLang('ru')} class={currentLang === 'ru' ? 'lang-toggle-btn active' : 'lang-toggle-btn'} onclick="localStorage.setItem('alex-lang-pref', 'ru')">RU</a>
+				<a href={getPathForLang('de')} class={currentLang === 'de' ? 'lang-toggle-btn active' : 'lang-toggle-btn'} onclick="localStorage.setItem('alex-lang-pref', 'de')">DE</a>
 			</div>
 			<button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-mobile">
 				<span></span><span></span><span></span>
@@ -205,9 +205,9 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 				<span style="font-size: 11px; opacity: 0.6;">▾</span>
 			</button>
 			<div class="m-lang-choice-container hidden" id="m-lang-choice-container">
-				<a href={getPathForLang('en')} class={`m-lang-choice-btn ${currentLang === 'en' ? 'active' : ''}`}>EN</a>
-				<a href={getPathForLang('ru')} class={`m-lang-choice-btn ${currentLang === 'ru' ? 'active' : ''}`}>RU</a>
-				<a href={getPathForLang('de')} class={`m-lang-choice-btn ${currentLang === 'de' ? 'active' : ''}`}>DE</a>
+				<a href={getPathForLang('en')} class={`m-lang-choice-btn ${currentLang === 'en' ? 'active' : ''}`} onclick="localStorage.setItem('alex-lang-pref', 'en')">EN</a>
+				<a href={getPathForLang('ru')} class={`m-lang-choice-btn ${currentLang === 'ru' ? 'active' : ''}`} onclick="localStorage.setItem('alex-lang-pref', 'ru')">RU</a>
+				<a href={getPathForLang('de')} class={`m-lang-choice-btn ${currentLang === 'de' ? 'active' : ''}`} onclick="localStorage.setItem('alex-lang-pref', 'de')">DE</a>
 			</div>
 
 			<a href={getLocalizedPath('/contact')} class={`m-contact ${activeTab === 'contact' ? 'active' : ''}`}>{t["nav.contact"]}</a>
@@ -295,13 +295,13 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 						<div class="dash-col">
 							<div class="dash-col-title">[SYS_LANGUAGE]</div>
 							<p class="code-line">
-								<a href={getPathForLang('en')} class={currentLang === 'en' ? 'term-lang-active' : ''}>> SET_LANG_EN.SH</a>
+								<a href={getPathForLang('en')} class={currentLang === 'en' ? 'term-lang-active' : ''} onclick="localStorage.setItem('alex-lang-pref', 'en')">> SET_LANG_EN.SH</a>
 							</p>
 							<p class="code-line">
-								<a href={getPathForLang('ru')} class={currentLang === 'ru' ? 'term-lang-active' : ''}>> SET_LANG_RU.SH</a>
+								<a href={getPathForLang('ru')} class={currentLang === 'ru' ? 'term-lang-active' : ''} onclick="localStorage.setItem('alex-lang-pref', 'ru')">> SET_LANG_RU.SH</a>
 							</p>
 							<p class="code-line">
-								<a href={getPathForLang('de')} class={currentLang === 'de' ? 'term-lang-active' : ''}>> SET_LANG_DE.SH</a>
+								<a href={getPathForLang('de')} class={currentLang === 'de' ? 'term-lang-active' : ''} onclick="localStorage.setItem('alex-lang-pref', 'de')">> SET_LANG_DE.SH</a>
 							</p>
 						</div>
 						<div class="dash-col stack-col">
