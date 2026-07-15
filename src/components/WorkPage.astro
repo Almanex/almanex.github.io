@@ -37,7 +37,7 @@ const labels = {
 <Layout title={`${UI_TRANSLATIONS[lang]["nav.projects"]} — Almanex`} activeTab="work" description="Almanex's open source software engineering portfolio, showing utilities, tools, and desktop applications.">
   <div id="work-page-container" data-lang={lang}>
     <header class="page-header">
-      <p class="kicker">selected work</p>
+      <p class="kicker">git show-ref --tags</p>
       <h1>{UI_TRANSLATIONS[lang]["projects.title"]}</h1>
       <p class="sub">{UI_TRANSLATIONS[lang]["projects.sub"]}</p>
     </header>
@@ -137,6 +137,12 @@ const labels = {
 </script>
 
 <style is:global>
+  #work-page-container .page-header .kicker {
+    font-family: var(--font-hand);
+    font-size: 30px;
+    transform: rotate(-3deg);
+    display: inline-block;
+  }
   /* Reduce spacing between page header and projects section */
   #work-page-container .page-header {
     padding-bottom: 20px !important;
