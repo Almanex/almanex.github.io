@@ -360,7 +360,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     </div>
 
     <!-- IDE File Viewer -->
-    <div class="proj-card-window">
+    <div class={`proj-card-window ${hasGuide ? 'view-guide' : 'view-readme'}`}>
       <div class="window-header">
         <span class="window-title" id="window-filepath">{hasGuide ? guideFilepath : readmeFilepath}</span>
         <div class="window-controls">
@@ -509,6 +509,12 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
         if (tabReadme) tabReadme.classList.toggle('active', mode === 'readme');
         if (tabGuide) tabGuide.classList.toggle('active', mode === 'guide');
 
+        const windowEl = document.querySelector('.proj-card-window');
+        if (windowEl) {
+          windowEl.classList.toggle('view-readme', mode === 'readme');
+          windowEl.classList.toggle('view-guide', mode === 'guide');
+        }
+
         if (readmeHtml) readmeHtml.style.display = mode === 'readme' ? 'block' : 'none';
         if (guideHtml) guideHtml.style.display = mode === 'guide' ? 'block' : 'none';
 
@@ -644,6 +650,19 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     box-shadow: 6px 6px 0px var(--ink);
     background: var(--surface);
     margin-bottom: 60px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .proj-card-window.view-readme,
+  .proj-card-window.view-readme .window-header,
+  .proj-card-window.view-readme .window-body {
+    background: var(--cyan-soft) !important;
+  }
+  
+  .proj-card-window.view-guide,
+  .proj-card-window.view-guide .window-header,
+  .proj-card-window.view-guide .window-body {
+    background: var(--amber-soft) !important;
   }
   
   .ide-tabs-bar {
@@ -704,6 +723,16 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     box-shadow: none;
     z-index: 6;
   }
+  
+  #tab-readme.active {
+    background: var(--cyan-soft) !important;
+    color: var(--ink) !important;
+  }
+  
+  #tab-guide.active {
+    background: var(--amber-soft) !important;
+    color: var(--ink) !important;
+  }
 
   .window-header {
     background: var(--bar);
@@ -749,7 +778,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     text-align: right;
     padding: 24px 14px 24px 0;
     border-right: 2px solid var(--line);
-    background: var(--bar);
+    background: rgba(0, 0, 0, 0.04);
     user-select: none;
     opacity: 0.6;
   }
