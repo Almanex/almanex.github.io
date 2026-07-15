@@ -206,8 +206,8 @@ const l = pageLabels[lang];
       <div class="enter-button-wrapper">
         <div id="keyboard-backdrop" class="keyboard-backdrop"></div>
         <a href={getLocalizedPath('/contact')} class="cta keycap-iso-enter">
-          <svg class="keycap-svg" viewBox="0 -24 174 94">
-            <path class="key-face" d="M 66,-24 H 162 A 6,6 0 0 1 168,-18 V 58 A 6,6 0 0 1 162,64 H 16 A 6,6 0 0 1 10,58 V 30 A 6,6 0 0 1 16,24 H 54 A 6,6 0 0 0 60,18 V -18 A 6,6 0 0 1 66,-24 Z" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"></path>
+          <svg class="keycap-svg" viewBox="0 -21 166 92">
+            <path class="key-face" d="M 64,-21 H 160 A 6,6 0 0 1 166,-15 V 65 A 6,6 0 0 1 160,71 H 6 A 6,6 0 0 1 0,65 V 31 A 6,6 0 0 1 6,25 H 52 A 6,6 0 0 0 58,19 V -15 A 6,6 0 0 1 64,-21 Z" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"></path>
           </svg>
           <div class="keycap-content">
             <div class="keycap-top-stem">
@@ -865,24 +865,27 @@ const l = pageLabels[lang];
     position: relative !important;
   }
   .enter-button-wrapper {
-    position: relative !important;
-    display: inline-flex !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    width: 174px !important;
-    height: 100px !important; /* Adjusted to fit 94px SVG viewBox + shadow */
-    margin-top: 55px !important; /* Shifted lower by 5mm (19px) */
-    margin-left: 4px !important; /* Offset for right extension */
+    width: 166px !important;
+    height: 92px !important;
+    margin-top: 25px !important; /* Centered between row 0 and 1 */
+    margin-left: 0px !important;
     z-index: 10 !important;
   }
   .keycap-iso-enter {
-    width: 174px !important;
-    height: 100px !important; /* Adjusted to prevent aspect-ratio scaling shrink */
-    top: 10px !important;
+    width: 166px !important;
+    height: 92px !important;
+    top: 0px !important;
   }
   .keycap-iso-enter .keycap-bottom-base {
     top: 37px !important; /* Move text a bit lower in the appendix */
-    left: 24px !important; /* Shift right to align with shortened appendix */
+    left: 14px !important; /* Restore to 14px since bottom starts at x=0 */
   }
   .keycap-iso-enter .key-text {
     color: var(--gray) !important; /* Make label less bright/slightly transparent like other keys */
