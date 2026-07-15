@@ -1179,7 +1179,7 @@ footer.ft .ft-bar {
   .project-terminal .fc-img .frame {
     position: absolute !important;
     inset: 0 !important;
-    outline: 1.5px solid var(--ink) !important;
+    outline: 1.5px solid var(--accent) !important;
     border-radius: 8px !important;
     overflow: hidden !important;
   }
