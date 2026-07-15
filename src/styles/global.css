@@ -1174,12 +1174,12 @@ footer.ft .ft-bar {
   text-transform: none !important;
   letter-spacing: normal !important;
   max-width: 32ch !important;
-  transform: none !important;
+  transform: rotate(-2deg) !important;
   display: inline-block;
 }
 .arc {
-  height: auto !important;
-  padding: 80px 0 50px !important;
+  height: 48px !important;
+  transform: rotate(-2deg) !important;
 }
 .works-intro {
   padding: 50px 0 0 !important;
