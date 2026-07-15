@@ -213,6 +213,13 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 	<footer class="ft">
 		<div class="ft-card">
 			<div class="terminal-window">
+				<div class="terminal-titlebar">
+					<div class="terminal-win-controls">
+						<button class="win-btn" aria-label="Minimize">─</button>
+						<button class="win-btn" aria-label="Maximize">❑</button>
+						<button class="win-btn win-close" aria-label="Close">✕</button>
+					</div>
+				</div>
 				<div class="terminal-header">
 					<div class="terminal-tabs">
 						<a href={getLocalizedPath('/')} class={`term-tab ${activeTab === 'index' ? 'active-tab' : ''}`}>
@@ -243,11 +250,6 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 						<a href={getPathForLang('de')} class={`term-tab footer-lang-tab ${currentLang === 'de' ? 'active-tab' : ''}`}>
 							de.lang
 						</a>
-					</div>
-					<div class="terminal-win-controls">
-						<button class="win-btn" aria-label="Minimize">─</button>
-						<button class="win-btn" aria-label="Maximize">❑</button>
-						<button class="win-btn win-close" aria-label="Close">✕</button>
 					</div>
 				</div>
 				<div class="terminal-body dashboard-layout">
@@ -556,13 +558,23 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 		flex-shrink: 0 !important;
 	}
 
+	.terminal-titlebar {
+		background: var(--bar);
+		border-bottom: 2px solid var(--ink);
+		height: 30px;
+		display: flex;
+		justify-content: flex-end; /* Shift elements to the right edge */
+		align-items: center;
+		padding-right: 10px;
+		user-select: none;
+	}
+
 	.terminal-header {
 		background: var(--bar);
 		border-bottom: 2px solid var(--ink);
 		padding: 0;
 		display: flex;
-		justify-content: space-between;
-		align-items: stretch;
+		align-items: flex-end;
 		height: 42px;
 		overflow: hidden;
 		user-select: none;
@@ -625,7 +637,7 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 	.terminal-win-controls {
 		display: flex;
 		align-items: center;
-		padding-right: 10px;
+		height: 100%;
 	}
 
 	.win-btn {
@@ -663,25 +675,14 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 		}
 	}
 	@media (max-width: 600px) {
+		.terminal-titlebar {
+			height: 26px;
+		}
 		.terminal-header {
-			flex-direction: column-reverse;
-			height: auto;
-			align-items: stretch;
-		}
-		.terminal-win-controls {
-			justify-content: flex-end;
-			padding: 4px 10px;
-			border-bottom: 1.5px dashed var(--line-strong);
-			background: var(--bar);
-			height: 28px;
-		}
-		.terminal-win-controls .win-btn {
-			height: 24px;
-			width: 28px;
+			height: 38px;
 		}
 		.terminal-tabs {
 			padding-left: 6px;
-			height: 38px;
 		}
 	}
 </style>
