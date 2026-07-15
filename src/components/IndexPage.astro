@@ -92,7 +92,7 @@ const pageLabels = {
     heroAvail: "Available for coding projects & open-source",
     heroContact: "Contact me",
     techStack: "tech stack",
-    statement: "We do what we must, because we can",
+    statement: "reality is just a draft //",
     reposKicker: "git show-ref --tags",
     reposTitle: "REPOSITORIES",
     reposSub: "A mix of open-source tools, localization projects, and weekend desktop experiments I’m proud to share.",
@@ -121,7 +121,7 @@ const pageLabels = {
     heroAvail: "Доступен для коммерческих и open-source проектов",
     heroContact: "Написать мне",
     techStack: "технологический стек",
-    statement: "Мы делаем то, что должны, потому что можем",
+    statement: "реальность — это просто черновик //",
     reposKicker: "git show-ref --tags",
     reposTitle: "РЕПОЗИТОРИИ",
     reposSub: "Смесь инструментов с открытым исходным кодом, локализаций и десктопных экспериментов выходного дня, которыми я рад поделиться.",
@@ -150,7 +150,7 @@ const pageLabels = {
     heroAvail: "Verfügbar für Coding-Projekte & Open-Source",
     heroContact: "Kontaktieren",
     techStack: "Tech-Stack",
-    statement: "Wir tun, was wir tun müssen, weil wir es können",
+    statement: "Realität ist nur ein Entwurf //",
     reposKicker: "git show-ref --tags",
     reposTitle: "REPOSITORIES",
     reposSub: "Eine Mischung aus Open-Source-Tools, Lokalisierungsprojekten und Desktop-Experimenten fürs Wochenende, die ich gerne teile.",
@@ -261,11 +261,11 @@ const l = pageLabels[lang];
     <section class="statement">
       <h2 data-reveal>
         {lang === 'ru' ? (
-          <>Мы делаем <span class="g cyan"><svg viewBox="0 0 24 24" fill="none"><path d="M8 6L3 12l5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16 6l5 6-5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 4l-4 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></span> то, что должны, потому <span class="g magenta"><svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="18" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="6" cy="19" r="2.2" stroke="currentColor" stroke-width="2"></circle><path d="M6 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M18 7c0 5-5 7-12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></span> что можем</>
+          <>реальность <span class="g cyan"><svg viewBox="0 0 24 24" fill="none"><path d="M8 6L3 12l5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16 6l5 6-5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 4l-4 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></span> это просто <span class="g magenta"><svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="18" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="6" cy="19" r="2.2" stroke="currentColor" stroke-width="2"></circle><path d="M6 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M18 7c0 5-5 7-12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></span> черновик //</>
         ) : lang === 'de' ? (
-          <>Wir tun <span class="g cyan"><svg viewBox="0 0 24 24" fill="none"><path d="M8 6L3 12l5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16 6l5 6-5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 4l-4 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></span> was wir müssen, weil <span class="g magenta"><svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="18" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="6" cy="19" r="2.2" stroke="currentColor" stroke-width="2"></circle><path d="M6 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M18 7c0 5-5 7-12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></span> wir es können</>
+          <>Realität <span class="g cyan"><svg viewBox="0 0 24 24" fill="none"><path d="M8 6L3 12l5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16 6l5 6-5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 4l-4 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></span> ist nur ein <span class="g magenta"><svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="18" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="6" cy="19" r="2.2" stroke="currentColor" stroke-width="2"></circle><path d="M6 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M18 7c0 5-5 7-12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></span> Entwurf //</>
         ) : (
-          <>We do <span class="g cyan"><svg viewBox="0 0 24 24" fill="none"><path d="M8 6L3 12l5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16 6l5 6-5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 4l-4 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></span> what we must, because <span class="g magenta"><svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="18" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="6" cy="19" r="2.2" stroke="currentColor" stroke-width="2"></circle><path d="M6 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M18 7c0 5-5 7-12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></span> we can</>
+          <>reality <span class="g cyan"><svg viewBox="0 0 24 24" fill="none"><path d="M8 6L3 12l5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16 6l5 6-5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 4l-4 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></span> is just a <span class="g magenta"><svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="18" cy="5" r="2.2" stroke="currentColor" stroke-width="2"></circle><circle cx="6" cy="19" r="2.2" stroke="currentColor" stroke-width="2"></circle><path d="M6 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M18 7c0 5-5 7-12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></span> draft //</>
         )}
       </h2>
     </section>
