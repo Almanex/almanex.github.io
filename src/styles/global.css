@@ -219,7 +219,7 @@ header.nav.nav-hidden{top:-80px!important;box-shadow:none!important;}
 }
 .dash-bottom-row {
   display: grid !important;
-  grid-template-columns: 1fr 1fr 1fr !important;
+  grid-template-columns: 1.1fr 1.1fr 1fr 1.1fr !important;
   gap: 24px !important;
 }
 .stack-col .progress-line {

@@ -240,16 +240,6 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 						<a href="/bsod" title="Open New Tab" class="term-tab-plus">
 							+
 						</a>
-						<div class="lang-tabs-spacer"></div>
-						<a href={getPathForLang('en')} class={`term-tab footer-lang-tab ${currentLang === 'en' ? 'active-tab' : ''}`}>
-							en.lang
-						</a>
-						<a href={getPathForLang('ru')} class={`term-tab footer-lang-tab ${currentLang === 'ru' ? 'active-tab' : ''}`}>
-							ru.lang
-						</a>
-						<a href={getPathForLang('de')} class={`term-tab footer-lang-tab ${currentLang === 'de' ? 'active-tab' : ''}`}>
-							de.lang
-						</a>
 					</div>
 				</div>
 				<div class="terminal-body dashboard-layout">
@@ -292,6 +282,18 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 							<p class="code-line"><a href="#" class="obfuscated-email-link" data-user="almanex" data-domain="zohomail.eu">> SEND_EMAIL.CMD</a></p>
 							<p class="code-line"><a href={getLocalizedPath('/contact')}>> BOOK_MEETING.BAT</a></p>
 							<p class="code-line"><a href="https://github.com/Almanex" target="_blank">> GITHUB_PROFILE.URL</a></p>
+						</div>
+						<div class="dash-col">
+							<h5>[SYS_LANGUAGE]</h5>
+							<p class="code-line">
+								<a href={getPathForLang('en')} class={currentLang === 'en' ? 'term-lang-active' : ''}>> SET_LANG_EN.SH</a>
+							</p>
+							<p class="code-line">
+								<a href={getPathForLang('ru')} class={currentLang === 'ru' ? 'term-lang-active' : ''}>> SET_LANG_RU.SH</a>
+							</p>
+							<p class="code-line">
+								<a href={getPathForLang('de')} class={currentLang === 'de' ? 'term-lang-active' : ''}>> SET_LANG_DE.SH</a>
+							</p>
 						</div>
 						<div class="dash-col stack-col">
 							<h5>[SYS_STACK]</h5>
@@ -558,6 +560,11 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 		flex-shrink: 0 !important;
 	}
 
+	html, body {
+		overflow-x: hidden !important;
+		max-width: 100% !important;
+	}
+
 	.terminal-titlebar {
 		background: var(--bar);
 		border-bottom: 2px solid var(--ink);
@@ -575,7 +582,7 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 		padding: 0;
 		display: flex;
 		align-items: flex-end;
-		height: 42px;
+		height: 48px; /* Increased from 42px to fit tabs vertically */
 		overflow: hidden;
 		user-select: none;
 	}
@@ -620,20 +627,6 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 		transition: background 0.15s;
 	}
 
-	.lang-tabs-spacer {
-		flex-grow: 1;
-	}
-
-	.footer-lang-tab {
-		padding: 0 12px;
-		font-size: 11px;
-		margin-right: 4px;
-		border-color: var(--cyan);
-	}
-	.footer-lang-tab:last-child {
-		margin-right: 12px;
-	}
-
 	.terminal-win-controls {
 		display: flex;
 		align-items: center;
@@ -658,6 +651,13 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 		font-size: 13px;
 		transition: background 0.15s, color 0.15s;
 	}
+
+	/* Active language link styling inside terminal body */
+	.term-lang-active {
+		color: var(--cyan) !important;
+		font-weight: 800 !important;
+		text-shadow: 0 0 4px rgba(34, 211, 238, 0.4) !important;
+	}
 	
 	@media (max-width: 960px) {
 		.nav-mobile {
@@ -679,7 +679,7 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 			height: 26px;
 		}
 		.terminal-header {
-			height: 38px;
+			height: 44px; /* Increased from 38px on mobile */
 		}
 		.terminal-tabs {
 			padding-left: 6px;
