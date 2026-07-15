@@ -1,0 +1,28 @@
+# Alex's Portfolio
+
+> An interactive developer portfolio showcasing open-source Win32/C++ tools, custom Windows utilities, localization packages, and technical blog posts by Alex (Almanex).
+
+## Profile & Contact
+
+- [Biography & Bio](/about): Software engineering skills, workflow specifications, and background.
+- [Get in Touch](/contact): Collaboration channels, email obfuscation details, and communication preferences.
+- [GitHub Profile](https://github.com/Almanex): Hosted source repositories for all featured utilities.
+
+## Featured Software Projects
+
+- [Classic Windows Image Viewer](/projects/classic-windows-image-viewer): Restores the vintage, lightweight Windows Photo Viewer experience to Windows 11.
+- [Rokey](/projects/rokey): Ultra-lightweight Win32/C++ background hook utility to correct mistyped text keyboard layouts.
+- [Gemma Local Desktop](/projects/gemma-local-desktop): Local GUI application for interacting with Google's Gemma models offline.
+- [Portable App Sync](/projects/portable-app-sync): Cloud-based configuration and application state synchronization service.
+- [WebP Converter](/projects/webpconverter): Batch image processing program for converting and optimizing raster images to WebP.
+- [ShortcutDock](/projects/shortcutdock): Monospace-styled quick application launcher dock.
+- [flowguide](/projects/flowguide): Dynamic layout engine for formatting structural documents and flowcharts.
+- [Mushroom Spot](/projects/mushroom-spot): Mobile computer-vision app for identifying wild mushroom varieties.
+- [Lingospaced](/projects/lingospaced): Vocabulary spacing helper tool for language acquisition.
+- [Shelter Fork](/projects/shelter-fork): Custom-themed fork of the F-Droid application market client.
+- [Screentation V2](/projects/screentation-v2): Screen capturing and quick image cropping utility.
+
+## Technical Blog Logs
+
+- [Developer Blog](/blog): Technical guides, case studies, and engineering logs.
+- [Running Linux Containers under WSL](/blog/wsl-containers): In-depth guide covering Docker, Podman, and virtualized container management on Windows Subsystem for Linux.
