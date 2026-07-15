@@ -207,7 +207,7 @@ const l = pageLabels[lang];
         <div id="keyboard-backdrop" class="keyboard-backdrop"></div>
         <a href={getLocalizedPath('/contact')} class="cta keycap-iso-enter">
           <svg class="keycap-svg" viewBox="0 -24 174 94">
-            <path class="key-face" d="M 68,-24 H 164 A 6,6 0 0 1 170,-18 V 62 A 6,6 0 0 1 164,68 H 10 A 6,6 0 0 1 4,62 V 28 A 6,6 0 0 1 10,22 H 56 A 6,6 0 0 0 62,16 V -18 A 6,6 0 0 1 68,-24 Z" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"></path>
+            <path class="key-face" d="M 66,-24 H 162 A 6,6 0 0 1 168,-18 V 58 A 6,6 0 0 1 162,64 H 11 A 6,6 0 0 1 5,58 V 30 A 6,6 0 0 1 11,24 H 54 A 6,6 0 0 0 60,18 V -18 A 6,6 0 0 1 66,-24 Z" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"></path>
           </svg>
           <div class="keycap-content">
             <div class="keycap-top-stem">
@@ -878,11 +878,11 @@ const l = pageLabels[lang];
   .keycap-iso-enter {
     width: 174px !important;
     height: 100px !important; /* Adjusted to prevent aspect-ratio scaling shrink */
-    top: 3px !important; /* Perfectly offset vertically to align with row top/bottom bounds */
+    top: 10px !important;
   }
   .keycap-iso-enter .keycap-bottom-base {
     top: 37px !important; /* Move text a bit lower in the appendix */
-    left: 18px !important; /* Shift right to align with x=4 shortened appendix */
+    left: 19px !important; /* Shift right to align with shortened appendix */
   }
   .keycap-iso-enter .key-text {
     color: var(--gray) !important; /* Make label less bright/slightly transparent like other keys */
