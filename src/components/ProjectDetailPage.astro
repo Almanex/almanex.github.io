@@ -639,7 +639,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
   
   .proj-card-window {
     border: 2px solid var(--ink);
-    border-radius: 14px;
+    border-radius: 0 14px 14px 14px; /* Square top-left corner under tab */
     overflow: hidden;
     box-shadow: 6px 6px 0px var(--ink);
     background: var(--surface);
@@ -951,14 +951,17 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     .readme-content {
       padding: 20px;
     }
+    .ide-tabs-bar {
+      gap: 4px;
+    }
     .ide-tab {
-      font-size: 12px;
-      padding: 6px 12px;
+      font-size: 11px;
+      padding: 5px 8px;
       margin-top: 10px;
     }
     .ide-tab.active {
       margin-top: 2px;
-      padding: 10px 14px 8px;
+      padding: 9px 12px 6px;
     }
   }
 
