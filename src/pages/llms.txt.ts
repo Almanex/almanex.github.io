@@ -21,9 +21,9 @@ export async function GET() {
   // Add Language Versions as required by multi-language standard
   const langVersionsSection = [
     '## Language Versions',
-    `* [English version](${siteUrl}/) - Main English site and projects.`,
-    `* [Русская версия](${siteUrl}/ru) - Russian localized version of the portfolio.`,
-    `* [Deutsche Version](${siteUrl}/de) - German localized version of the portfolio.`,
+    `- [English version](${siteUrl}/): Main English site and projects.`,
+    `- [Русская версия](${siteUrl}/ru): Russian localized version of the portfolio.`,
+    `- [Deutsche Version](${siteUrl}/de): German localized version of the portfolio.`,
   ].join('\n');
 
   // Generate Projects list (English, Limit 10)

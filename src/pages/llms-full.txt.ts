@@ -22,9 +22,9 @@ export async function GET() {
   // Add Language Versions
   const langVersionsSection = [
     '## Language Versions',
-    `* [English version](${siteUrl}/) - Main English site.`,
-    `* [Русская версия](${siteUrl}/ru) - Russian localized site.`,
-    `* [Deutsche Version](${siteUrl}/de) - German localized site.`,
+    `- [English version](${siteUrl}/): Main English site.`,
+    `- [Русская версия](${siteUrl}/ru): Russian localized site.`,
+    `- [Deutsche Version](${siteUrl}/de): German localized site.`,
   ].join('\n');
 
   // Generate Projects list (English subtitles, No Limit)
