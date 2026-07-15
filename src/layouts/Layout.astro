@@ -59,6 +59,7 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 	<meta name="color-scheme" content="light dark" />
 	<script is:inline>
 		(function(){
+			// 1. Theme Configuration
 			const themeDefault = "light";
 			const themeToggle = true;
 			try {
@@ -68,7 +69,46 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 			} catch (e) {
 				document.documentElement.dataset.theme = themeDefault;
 			}
+
+			// 2. Language Auto-Redirection
+			try {
+				const path = window.location.pathname;
+				// Only auto-redirect when visiting the root homepage "/" or "/index.html"
+				if (path === "/" || path === "/index.html") {
+					const savedLang = localStorage.getItem("alex-lang-pref");
+					if (savedLang) {
+						if (savedLang === "ru") {
+							window.location.replace("/ru" + window.location.search + window.location.hash);
+						} else if (savedLang === "de") {
+							window.location.replace("/de" + window.location.search + window.location.hash);
+						}
+					} else {
+						// First-time visit: detect preferred browser locale
+						const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase().split('-')[0];
+						if (browserLang === "ru") {
+							localStorage.setItem("alex-lang-pref", "ru");
+							window.location.replace("/ru" + window.location.search + window.location.hash);
+						} else if (browserLang === "de") {
+							localStorage.setItem("alex-lang-pref", "de");
+							window.location.replace("/de" + window.location.search + window.location.hash);
+						} else {
+							localStorage.setItem("alex-lang-pref", "en");
+						}
+					}
+				}
+			} catch (e) {
+				console.error("Language redirect error:", e);
+			}
 		})();
+	</script>
+	<script is:inline>
+		// Save language preference on landing on any page (so we remember manually switched languages)
+		try {
+			const currentLang = document.documentElement.lang;
+			if (currentLang) {
+				localStorage.setItem("alex-lang-pref", currentLang);
+			}
+		} catch (e) {}
 	</script>
 	<meta name="format-detection" content="telephone=no" />
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
