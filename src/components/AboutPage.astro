@@ -127,7 +127,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
 
 <Layout title={l.title} activeTab="about">
   <header class="page-header">
-    <p class="kicker">about me!</p>
+    <p class="kicker">whoami //</p>
     <h1 set:html={l.heading}></h1>
     <p class="sub">{l.sub}</p>
   </header>
@@ -459,6 +459,12 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
 </Layout>
 
 <style>
+  .page-header .kicker {
+    font-family: var(--font-hand);
+    font-size: 30px;
+    transform: rotate(-3deg);
+    display: inline-block;
+  }
   .connect-actions a:hover {
     transform: translate(-2px, -2px) !important;
     box-shadow: 5px 5px 0px var(--ink) !important;
