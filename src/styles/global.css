@@ -1090,6 +1090,7 @@ footer.ft .terminal-window {
   border-radius: 0 !important;
   box-shadow: none !important;
   width: 100% !important;
+  margin-bottom: 0 !important;
 }
 
 footer.ft .terminal-header {
