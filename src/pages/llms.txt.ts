@@ -1,5 +1,6 @@
 import { getCollection } from 'astro:content';
 import { PROJECTS_DATA } from '../data/projects.js';
+import { PROJECT_TRANSLATIONS } from '../data/translations.js';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -16,24 +17,24 @@ export async function GET() {
     // Fallback to default intro
   }
 
-  // Generate Projects list
+  // Generate Projects list (using English overrides)
   const projectsList = Object.entries(PROJECTS_DATA)
     .filter(([_, p]: [string, any]) => p.status !== 'DRAFT')
     .map(([id, p]: [string, any]) => {
-      return `- [${p.title}](/projects/${id}): ${p.subtitle || ''}`;
+      const englishSubtitle = PROJECT_TRANSLATIONS.en?.[id]?.subtitle || p.subtitle || '';
+      return `- [${p.title}](/projects/${id}): ${englishSubtitle}`;
     })
     .join('\n');
 
-  // Generate Blog posts list
+  // Generate Blog posts list (English only)
   const posts = await getCollection('blog');
   const activePosts = posts.filter(post => post.data.status !== 'DRAFT');
-  const sortedPosts = activePosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  const enPosts = activePosts.filter(post => !post.id.startsWith('ru/') && !post.id.startsWith('de/'));
+  const sortedPosts = enPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
   
   const blogList = sortedPosts
     .map(post => {
-      const cleanSlug = post.id.replace(/^(ru|de)\//, '');
-      const prefix = post.id.startsWith('ru/') ? '/ru' : post.id.startsWith('de/') ? '/de' : '';
-      return `- [${post.data.title}](${prefix}/blog/${cleanSlug}): ${post.data.description || ''}`;
+      return `- [${post.data.title}](/blog/${post.id}): ${post.data.description || ''}`;
     })
     .join('\n');
 
