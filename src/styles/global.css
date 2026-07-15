@@ -141,12 +141,20 @@ header.nav.nav-hidden{top:-80px!important;box-shadow:none!important;}
   color: var(--magenta) !important;
   transform: translateX(4px) !important;
 }
-.dash-col h5 {
+.dash-col h5, .dash-col .dash-col-title {
   font-size: 12px !important;
   color: #6272a4 !important;
   margin: 0 0 12px 0 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.05em !important;
+  font-weight: bold !important;
+}
+
+.blog-kicker {
+  color: var(--amber) !important;
+}
+:root:not([data-theme=dark]) .blog-kicker {
+  color: #8f6100 !important;
 }
 
 @media (max-width: 768px) {
@@ -186,12 +194,13 @@ header.nav.nav-hidden{top:-80px!important;box-shadow:none!important;}
   color: #6272a4 !important;
   font-weight: bold !important;
 }
-.logs-col h5 {
+.logs-col h5, .logs-col .dash-col-title {
   font-size: 12px !important;
   color: #6272a4 !important;
   margin: 0 0 8px 0 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.05em !important;
+  font-weight: bold !important;
 }
 .logs-window {
   background: #101114 !important;
@@ -944,7 +953,8 @@ header.nav.nav-hidden{top:-80px!important;box-shadow:none!important;}
 :root:not([data-theme=dark]) .logs-window p {
   color: #444 !important;
 }
-:root:not([data-theme=dark]) .dash-col h5 {
+:root:not([data-theme=dark]) .dash-col h5,
+:root:not([data-theme=dark]) .dash-col .dash-col-title {
   color: #555 !important;
   border-bottom-color: #ccc !important;
 }

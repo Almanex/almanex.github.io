@@ -268,7 +268,7 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 							</div>
 						</div>
 						<div class="dash-col logs-col">
-							<h5>[SYS_LOGS]</h5>
+							<div class="dash-col-title">[SYS_LOGS]</div>
 							<div class="logs-window">
 								<p><span class="timestamp">[ 0.00s ]</span> Initializing Almanex Core...</p>
 								<p><span class="timestamp">[ 0.08s ]</span> Loading languages: C++, C#, Kotlin, Python, JS</p>
@@ -281,19 +281,19 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 					<hr class="dash-divider" />
 					<div class="dash-bottom-row">
 						<div class="dash-col">
-							<h5>[SYS_EXPLORE]</h5>
+							<div class="dash-col-title">[SYS_EXPLORE]</div>
 							<p class="code-line"><a href={getLocalizedPath('/work')}>> WORK_PORTFOLIO.EXE</a></p>
 							<p class="code-line"><a href={getLocalizedPath('/about')}>> USER_PROFILE.SYS</a></p>
 							<p class="code-line"><a href={getLocalizedPath('/blog')}>> BLOG_LOGS.TXT</a></p>
 						</div>
 						<div class="dash-col">
-							<h5>[SYS_CONNECT]</h5>
+							<div class="dash-col-title">[SYS_CONNECT]</div>
 							<p class="code-line"><a href="#" class="obfuscated-email-link" data-user="almanex" data-domain="zohomail.eu">> SEND_EMAIL.CMD</a></p>
 							<p class="code-line"><a href={getLocalizedPath('/contact')}>> BOOK_MEETING.BAT</a></p>
 							<p class="code-line"><a href="https://github.com/Almanex" target="_blank">> GITHUB_PROFILE.URL</a></p>
 						</div>
 						<div class="dash-col">
-							<h5>[SYS_LANGUAGE]</h5>
+							<div class="dash-col-title">[SYS_LANGUAGE]</div>
 							<p class="code-line">
 								<a href={getPathForLang('en')} class={currentLang === 'en' ? 'term-lang-active' : ''}>> SET_LANG_EN.SH</a>
 							</p>
@@ -305,7 +305,7 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 							</p>
 						</div>
 						<div class="dash-col stack-col">
-							<h5>[SYS_STACK]</h5>
+							<div class="dash-col-title">[SYS_STACK]</div>
 							<p class="progress-line"><span class="tech-name">C++</span> <span class="progress-bar">[||||||||||]</span></p>
 							<p class="progress-line"><span class="tech-name">C#</span> <span class="progress-bar">[||||||||| ]</span></p>
 							<p class="progress-line"><span class="tech-name">Kotlin</span> <span class="progress-bar">[||||||||  ]</span></p>
