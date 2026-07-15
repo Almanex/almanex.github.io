@@ -1174,7 +1174,7 @@ footer.ft .ft-bar {
   text-transform: none !important;
   letter-spacing: normal !important;
   max-width: 32ch !important;
-  transform: rotate(-1.5deg);
+  transform: none !important;
   display: inline-block;
 }
 .arc {
