@@ -902,10 +902,18 @@ header.nav.nav-hidden{top:-80px!important;box-shadow:none!important;}
   border-bottom-color: var(--ink) !important;
 }
 :root:not([data-theme=dark]) .terminal-title {
-  color: #555 !important;
+  color: #333 !important;
 }
 :root:not([data-theme=dark]) .terminal-body {
   background: #ffffff !important;
+  color: var(--ink) !important;
+}
+
+/* ── Inactive Term Tabs ── */
+:root:not([data-theme=dark]) .term-tab {
+  color: #555 !important;
+}
+:root:not([data-theme=dark]) .term-tab.active-tab {
   color: var(--ink) !important;
 }
 
@@ -921,13 +929,13 @@ header.nav.nav-hidden{top:-80px!important;box-shadow:none!important;}
 :root:not([data-theme=dark]) .sys-specs p,
 :root:not([data-theme=dark]) .label,
 :root:not([data-theme=dark]) .timestamp {
-  color: #555 !important;
+  color: #444 !important;
 }
 :root:not([data-theme=dark]) .sys-status {
-  color: #2eb67d !important;
+  color: #1a7f37 !important;
 }
 :root:not([data-theme=dark]) .success {
-  color: #2eb67d !important;
+  color: #1a7f37 !important;
 }
 :root:not([data-theme=dark]) .logs-window {
   background: #f4f5f7 !important;
@@ -950,7 +958,7 @@ header.nav.nav-hidden{top:-80px!important;box-shadow:none!important;}
   color: #333 !important;
 }
 :root:not([data-theme=dark]) .progress-bar {
-  color: var(--cyan) !important;
+  color: #0b6885 !important;
 }
 :root:not([data-theme=dark]) .dash-divider {
   border-color: #ccc !important;
@@ -964,8 +972,7 @@ header.nav.nav-hidden{top:-80px!important;box-shadow:none!important;}
   background: #f0f1f3 !important;
 }
 :root:not([data-theme=dark]) .project-terminal .terminal-title {
-  color: var(--accent, var(--cyan)) !important;
-  filter: brightness(0.85) !important;
+  color: #0b6885 !important;
 }
 :root:not([data-theme=dark]) .project-terminal .terminal-body {
   background: #ffffff !important;
@@ -982,7 +989,11 @@ header.nav.nav-hidden{top:-80px!important;box-shadow:none!important;}
   color: var(--ink) !important;
 }
 :root:not([data-theme=dark]) .project-terminal .fc-meta {
-  filter: brightness(0.8) !important;
+  color: #444 !important;
+  filter: none !important;
+}
+:root:not([data-theme=dark]) .project-terminal .fc-view {
+  color: #0b6885 !important;
 }
 
 /* ── CMD testimonial windows ── */
