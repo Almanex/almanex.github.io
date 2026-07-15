@@ -182,17 +182,17 @@ const l = pageLabels[lang];
   <div id="homepage-container" data-lang={lang}>
     <section class="hero">
       <div class="clock" id="clock">--:--:--</div>
-      <img class="avatar flt1" src="https://skillicons.dev/icons?i=cs" alt="C#" style="top:30%;left:11%;transform:rotate(-7deg);border-radius:12px;box-shadow:var(--shadow-sticker);border:1.8px solid var(--ink);width:56px;height:56px;">
-      <img class="avatar flt2" src="https://skillicons.dev/icons?i=cpp" alt="C++" style="top:31%;right:10%;transform:rotate(6deg);border-radius:12px;box-shadow:var(--shadow-sticker);border:1.8px solid var(--ink);width:56px;height:56px;">
-      <img class="avatar flt3" src="https://skillicons.dev/icons?i=dotnet" alt=".NET" style="top:45%;left:13%;transform:rotate(5deg);border-radius:12px;box-shadow:var(--shadow-sticker);border:1.8px solid var(--ink);width:56px;height:56px;">
-      <img class="avatar flt4" src="https://skillicons.dev/icons?i=java" alt="Java" style="top:60%;right:14%;transform:rotate(-8deg);border-radius:12px;box-shadow:var(--shadow-sticker);border:1.8px solid var(--ink);width:56px;height:56px;">
-      <img class="avatar flt5" src="https://skillicons.dev/icons?i=kotlin" alt="Kotlin" style="bottom:20%;left:13%;transform:rotate(-6deg);border-radius:12px;box-shadow:var(--shadow-sticker);border:1.8px solid var(--ink);width:56px;height:56px;">
+      <img class="avatar flt1" src="https://skillicons.dev/icons?i=cs" alt="C#" style="top:30%;left:11%;transform:rotate(-7deg);border-radius:12px;box-shadow:var(--shadow-sticker);border:1.8px solid var(--ink);width:56px;height:56px;" width="56" height="56" loading="lazy">
+      <img class="avatar flt2" src="https://skillicons.dev/icons?i=cpp" alt="C++" style="top:31%;right:10%;transform:rotate(6deg);border-radius:12px;box-shadow:var(--shadow-sticker);border:1.8px solid var(--ink);width:56px;height:56px;" width="56" height="56" loading="lazy">
+      <img class="avatar flt3" src="https://skillicons.dev/icons?i=dotnet" alt=".NET" style="top:45%;left:13%;transform:rotate(5deg);border-radius:12px;box-shadow:var(--shadow-sticker);border:1.8px solid var(--ink);width:56px;height:56px;" width="56" height="56" loading="lazy">
+      <img class="avatar flt4" src="https://skillicons.dev/icons?i=java" alt="Java" style="top:60%;right:14%;transform:rotate(-8deg);border-radius:12px;box-shadow:var(--shadow-sticker);border:1.8px solid var(--ink);width:56px;height:56px;" width="56" height="56" loading="lazy">
+      <img class="avatar flt5" src="https://skillicons.dev/icons?i=kotlin" alt="Kotlin" style="bottom:20%;left:13%;transform:rotate(-6deg);border-radius:12px;box-shadow:var(--shadow-sticker);border:1.8px solid var(--ink);width:56px;height:56px;" width="56" height="56" loading="lazy">
       <span class="cursor flt6" style="bottom:24%;left:22%;transform:rotate(8deg)">
         <svg viewBox="0 0 24 24" fill="var(--amber)"><path d="M4 2l16 7-7 2-2 7z" stroke="#111" stroke-width="1.4" stroke-linejoin="round"></path></svg>
       </span>
-      <img class="avatar flt7" src="https://skillicons.dev/icons?i=php" alt="PHP" style="bottom:21%;right:14%;transform:rotate(4deg);border-radius:12px;box-shadow:var(--shadow-sticker);border:1.8px solid var(--ink);width:56px;height:56px;">
-      <img class="avatar flt1" src="https://skillicons.dev/icons?i=docker" alt="Docker" style="top:18%;left:22%;transform:rotate(12deg);border-radius:12px;box-shadow:var(--shadow-sticker);border:1.8px solid var(--ink);width:56px;height:56px;">
-      <img class="avatar flt2" src="https://skillicons.dev/icons?i=windows" alt="Windows" style="top:16%;right:22%;transform:rotate(-10deg);border-radius:12px;box-shadow:var(--shadow-sticker);border:1.8px solid var(--ink);width:56px;height:56px;">
+      <img class="avatar flt7" src="https://skillicons.dev/icons?i=php" alt="PHP" style="bottom:21%;right:14%;transform:rotate(4deg);border-radius:12px;box-shadow:var(--shadow-sticker);border:1.8px solid var(--ink);width:56px;height:56px;" width="56" height="56" loading="lazy">
+      <img class="avatar flt1" src="https://skillicons.dev/icons?i=docker" alt="Docker" style="top:18%;left:22%;transform:rotate(12deg);border-radius:12px;box-shadow:var(--shadow-sticker);border:1.8px solid var(--ink);width:56px;height:56px;" width="56" height="56" loading="lazy">
+      <img class="avatar flt2" src="https://skillicons.dev/icons?i=windows" alt="Windows" style="top:16%;right:22%;transform:rotate(-10deg);border-radius:12px;box-shadow:var(--shadow-sticker);border:1.8px solid var(--ink);width:56px;height:56px;" width="56" height="56" loading="lazy">
       
       <p class="hand myname">my focus <u>is</u></p>
       <h1 class="display-name ide-name-container">
@@ -334,7 +334,7 @@ const l = pageLabels[lang];
                       </div>
                     </div>
                     <div class="fc-img">
-                      <div class="frame"><img src={coverImg} alt={project.title} loading="lazy" /></div>
+                      <div class="frame"><img src={coverImg} alt={project.title} loading="lazy" width="600" height="375" /></div>
                       <span class="handle tl"></span><span class="handle tr"></span><span class="handle bl"></span><span class="handle br"></span>
                       <span class="jpg"><b>{project.lang.toUpperCase()}</b> {id}</span>
                     </div>
@@ -400,7 +400,7 @@ const l = pageLabels[lang];
 
                 <!-- Dynamic Preview -->
                 <div class="fm-preview-content" id="fm-dynamic-preview">
-                  <img class="fm-preview-img" id="fm-prev-img" src="" alt="" loading="lazy">
+                  <img class="fm-preview-img" id="fm-prev-img" src="" alt="" loading="lazy" width="480" height="210">
                   <div class="fm-preview-body">
                     <span class="fm-preview-cat" id="fm-prev-cat"></span>
                     <span class="fm-preview-date" id="fm-prev-date"></span>
