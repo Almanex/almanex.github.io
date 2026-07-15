@@ -4,7 +4,7 @@ header.nav.nav-hidden{top:-80px!important;box-shadow:none!important;}
 
 /* Terminal Footer Styles */
 .terminal-window {
-  background: #141519 !important;
+  background: var(--surface) !important;
   color: #a9b1d6 !important;
   font-family: var(--font-mono) !important;
   border: 2px solid var(--ink) !important;
@@ -143,7 +143,7 @@ header.nav.nav-hidden{top:-80px!important;box-shadow:none!important;}
 }
 .dash-col h5, .dash-col .dash-col-title {
   font-size: 12px !important;
-  color: #6272a4 !important;
+  color: #7f8ebb !important;
   margin: 0 0 12px 0 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.05em !important;
@@ -191,12 +191,12 @@ header.nav.nav-hidden{top:-80px!important;box-shadow:none!important;}
   color: #a9b1d6 !important;
 }
 .sys-specs .label {
-  color: #6272a4 !important;
+  color: #7f8ebb !important;
   font-weight: bold !important;
 }
 .logs-col h5, .logs-col .dash-col-title {
   font-size: 12px !important;
-  color: #6272a4 !important;
+  color: #7f8ebb !important;
   margin: 0 0 8px 0 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.05em !important;
