@@ -775,7 +775,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
   
   .window-body {
     display: grid;
-    grid-template-columns: 46px 1fr;
+    grid-template-columns: 46px minmax(0, 1fr);
   }
   
   .line-numbers {
@@ -830,13 +830,16 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     margin-bottom: 6px;
   }
   
-  .readme-content code {
+  .readme-content :not(pre) > code {
     font-family: var(--font-mono);
     background: var(--hover);
     border: 1.5px solid var(--line-strong);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 0.9em;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
   }
   
   .readme-content pre {
@@ -854,6 +857,9 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     padding: 0;
     font-size: 13.5px;
     line-height: 1.5;
+    word-break: normal;
+    overflow-wrap: normal;
+    white-space: pre;
   }
   
   .back-btn {
@@ -973,7 +979,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
   
   @media (max-width: 600px) {
     .window-body {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
     .line-numbers {
       display: none;

@@ -110,7 +110,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
                       <span class="diff-pipe"> | </span>
                       <span class="diff-add">+{meta.insertions}</span> <span class="diff-del">-0</span>
                       <span class="diff-pipe"> </span>
-                      <span style="color:var(--green);">{Array(Math.floor(meta.insertions / 3)).fill('█').join('')}</span>
+                      <span style="color:var(--green);">{Array(Math.min(15, Math.floor(meta.insertions / 3))).fill('█').join('')}</span>
                     </div>
                     <div class="diff-summary">1 file changed, {meta.insertions} insertions(+), 0 deletions(-) &nbsp;|&nbsp; {meta.size}</div>
                   </div>
@@ -376,7 +376,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
   /* ── Commit Entry ── */
   .commit-entry {
     display: grid;
-    grid-template-columns: 56px 1fr;
+    grid-template-columns: 56px minmax(0, 1fr);
     gap: 0;
     position: relative;
   }
@@ -598,7 +598,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
   /* ── Graph Separator between commits ── */
   .graph-separator {
     display: grid;
-    grid-template-columns: 56px 1fr;
+    grid-template-columns: 56px minmax(0, 1fr);
     gap: 0;
   }
   .graph-sep-col {
@@ -689,10 +689,10 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
   /* ── Responsive ── */
   @media (max-width: 600px) {
     .commit-entry {
-      grid-template-columns: 36px 1fr;
+      grid-template-columns: 36px minmax(0, 1fr);
     }
     .graph-separator {
-      grid-template-columns: 36px 1fr;
+      grid-template-columns: 36px minmax(0, 1fr);
     }
     .commit-node {
       width: 14px;
