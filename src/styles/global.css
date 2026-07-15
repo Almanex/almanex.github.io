@@ -1099,7 +1099,7 @@ footer.ft .terminal-header {
   border-top: none !important;
   border-bottom: 2px solid var(--ink) !important;
   border-radius: 0 !important;
-  padding: 12px max(26px, calc((100% - 1200px) / 2)) !important;
+  padding: 12px max(26px, calc((100% - 1200px) / 2)) 0 max(26px, calc((100% - 1200px) / 2)) !important;
 }
 
 footer.ft .dashboard-layout {
