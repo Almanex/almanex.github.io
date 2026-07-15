@@ -213,41 +213,41 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 	<footer class="ft">
 		<div class="ft-card">
 			<div class="terminal-window">
-				<div class="terminal-header" style="background:var(--bar) !important; border-bottom:2px solid var(--ink) !important; padding:0 !important; display:flex !important; justify-content:space-between !important; align-items:stretch !important; height:42px !important; overflow:hidden !important; user-select:none !important;">
-					<div class="terminal-tabs" style="display:flex !important; align-items:flex-end !important; flex-grow:1 !important; padding-left:10px !important; height:100% !important;">
-						<a href={getLocalizedPath('/')} class={`term-tab ${activeTab === 'index' ? 'active-tab' : ''}`} style="display:flex !important; align-items:center !important; gap:6px !important; padding:0 16px !important; height:32px !important; text-decoration:none !important; margin-right:4px !important; font-size:12px !important; font-weight:bold !important; font-family:var(--font-mono) !important;">
+				<div class="terminal-header">
+					<div class="terminal-tabs">
+						<a href={getLocalizedPath('/')} class={`term-tab ${activeTab === 'index' ? 'active-tab' : ''}`}>
 							home.sh
 						</a>
-						<a href={getLocalizedPath('/work')} class={`term-tab ${activeTab === 'work' ? 'active-tab' : ''}`} style="display:flex !important; align-items:center !important; gap:6px !important; padding:0 16px !important; height:32px !important; text-decoration:none !important; margin-right:4px !important; font-size:12px !important; font-weight:bold !important; font-family:var(--font-mono) !important;">
+						<a href={getLocalizedPath('/work')} class={`term-tab ${activeTab === 'work' ? 'active-tab' : ''}`}>
 							projects.exe
 						</a>
-						<a href={getLocalizedPath('/blog')} class={`term-tab ${activeTab === 'blog' ? 'active-tab' : ''}`} style="display:flex !important; align-items:center !important; gap:6px !important; padding:0 16px !important; height:32px !important; text-decoration:none !important; margin-right:4px !important; font-size:12px !important; font-weight:bold !important; font-family:var(--font-mono) !important;">
+						<a href={getLocalizedPath('/blog')} class={`term-tab ${activeTab === 'blog' ? 'active-tab' : ''}`}>
 							blog.txt
 						</a>
-						<a href={getLocalizedPath('/about')} class={`term-tab ${activeTab === 'about' ? 'active-tab' : ''}`} style="display:flex !important; align-items:center !important; gap:6px !important; padding:0 16px !important; height:32px !important; text-decoration:none !important; margin-right:4px !important; font-size:12px !important; font-weight:bold !important; font-family:var(--font-mono) !important;">
+						<a href={getLocalizedPath('/about')} class={`term-tab ${activeTab === 'about' ? 'active-tab' : ''}`}>
 							about.sys
 						</a>
-						<a href={getLocalizedPath('/contact')} class={`term-tab ${activeTab === 'contact' ? 'active-tab' : ''}`} style="display:flex !important; align-items:center !important; gap:6px !important; padding:0 16px !important; height:32px !important; text-decoration:none !important; margin-right:4px !important; font-size:12px !important; font-weight:bold !important; font-family:var(--font-mono) !important;">
+						<a href={getLocalizedPath('/contact')} class={`term-tab ${activeTab === 'contact' ? 'active-tab' : ''}`}>
 							contact.bat
 						</a>
-						<a href="/bsod" title="Open New Tab" style="display:flex !important; align-items:center !important; justify-content:center !important; width:28px !important; height:28px !important; border:2px solid transparent !important; border-radius:6px !important; font-family:var(--font-mono) !important; font-size:16px !important; font-weight:bold !important; text-decoration:none !important; color:var(--ink) !important; margin-left:6px !important; margin-bottom:2px !important; transition:background 0.15s !important;">
+						<a href="/bsod" title="Open New Tab" class="term-tab-plus">
 							+
 						</a>
-						<div class="lang-tabs-spacer" style="flex-grow: 1;"></div>
-						<a href={getPathForLang('en')} class={`term-tab footer-lang-tab ${currentLang === 'en' ? 'active-tab' : ''}`} style="display:flex !important; align-items:center !important; gap:6px !important; padding:0 12px !important; height:32px !important; text-decoration:none !important; margin-right:4px !important; font-size:11px !important; font-weight:bold !important; font-family:var(--font-mono) !important; border-color: var(--cyan) !important;">
+						<div class="lang-tabs-spacer"></div>
+						<a href={getPathForLang('en')} class={`term-tab footer-lang-tab ${currentLang === 'en' ? 'active-tab' : ''}`}>
 							en.lang
 						</a>
-						<a href={getPathForLang('ru')} class={`term-tab footer-lang-tab ${currentLang === 'ru' ? 'active-tab' : ''}`} style="display:flex !important; align-items:center !important; gap:6px !important; padding:0 12px !important; height:32px !important; text-decoration:none !important; margin-right:4px !important; font-size:11px !important; font-weight:bold !important; font-family:var(--font-mono) !important; border-color: var(--cyan) !important;">
+						<a href={getPathForLang('ru')} class={`term-tab footer-lang-tab ${currentLang === 'ru' ? 'active-tab' : ''}`}>
 							ru.lang
 						</a>
-						<a href={getPathForLang('de')} class={`term-tab footer-lang-tab ${currentLang === 'de' ? 'active-tab' : ''}`} style="display:flex !important; align-items:center !important; gap:6px !important; padding:0 12px !important; height:32px !important; text-decoration:none !important; margin-right:12px !important; font-size:11px !important; font-weight:bold !important; font-family:var(--font-mono) !important; border-color: var(--cyan) !important;">
+						<a href={getPathForLang('de')} class={`term-tab footer-lang-tab ${currentLang === 'de' ? 'active-tab' : ''}`}>
 							de.lang
 						</a>
 					</div>
-					<div class="terminal-win-controls" style="display:flex !important; align-items:center !important; padding-right:10px !important;">
-						<button class="win-btn" aria-label="Minimize" style="background:none !important; border:none !important; color:var(--ink) !important; width:36px !important; height:100% !important; font-size:11px !important; cursor:pointer !important; display:flex !important; align-items:center !important; justify-content:center !important; transition:background 0.15s !important;">─</button>
-						<button class="win-btn" aria-label="Maximize" style="background:none !important; border:none !important; color:var(--ink) !important; width:36px !important; height:100% !important; font-size:11px !important; cursor:pointer !important; display:flex !important; align-items:center !important; justify-content:center !important; transition:background 0.15s !important;">❑</button>
-						<button class="win-btn win-close" aria-label="Close" style="background:none !important; border:none !important; color:var(--ink) !important; width:36px !important; height:100% !important; font-size:13px !important; cursor:pointer !important; display:flex !important; align-items:center !important; justify-content:center !important; transition:background 0.15s, color 0.15s !important;">✕</button>
+					<div class="terminal-win-controls">
+						<button class="win-btn" aria-label="Minimize">─</button>
+						<button class="win-btn" aria-label="Maximize">❑</button>
+						<button class="win-btn win-close" aria-label="Close">✕</button>
 					</div>
 				</div>
 				<div class="terminal-body dashboard-layout">
@@ -555,6 +555,97 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 	.terminal-tabs > a {
 		flex-shrink: 0 !important;
 	}
+
+	.terminal-header {
+		background: var(--bar);
+		border-bottom: 2px solid var(--ink);
+		padding: 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: stretch;
+		height: 42px;
+		overflow: hidden;
+		user-select: none;
+	}
+
+	.terminal-tabs {
+		display: flex;
+		align-items: flex-end;
+		flex-grow: 1;
+		padding-left: 10px;
+		height: 100%;
+	}
+
+	.term-tab {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		padding: 0 16px;
+		height: 32px;
+		text-decoration: none;
+		margin-right: 4px;
+		font-size: 12px;
+		font-weight: bold;
+		font-family: var(--font-mono);
+		color: var(--ink);
+	}
+
+	.term-tab-plus {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 28px;
+		height: 28px;
+		border: 2px solid transparent;
+		border-radius: 6px;
+		font-family: var(--font-mono);
+		font-size: 16px;
+		font-weight: bold;
+		text-decoration: none;
+		color: var(--ink);
+		margin-left: 6px;
+		margin-bottom: 2px;
+		transition: background 0.15s;
+	}
+
+	.lang-tabs-spacer {
+		flex-grow: 1;
+	}
+
+	.footer-lang-tab {
+		padding: 0 12px;
+		font-size: 11px;
+		margin-right: 4px;
+		border-color: var(--cyan);
+	}
+	.footer-lang-tab:last-child {
+		margin-right: 12px;
+	}
+
+	.terminal-win-controls {
+		display: flex;
+		align-items: center;
+		padding-right: 10px;
+	}
+
+	.win-btn {
+		background: none;
+		border: none;
+		color: var(--ink);
+		width: 36px;
+		height: 100%;
+		font-size: 11px;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: background 0.15s;
+	}
+
+	.win-close {
+		font-size: 13px;
+		transition: background 0.15s, color 0.15s;
+	}
 	
 	@media (max-width: 960px) {
 		.nav-mobile {
@@ -569,6 +660,28 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 		.nav-right {
 			gap: 8px !important;
 			margin-left: 8px !important;
+		}
+	}
+	@media (max-width: 600px) {
+		.terminal-header {
+			flex-direction: column-reverse;
+			height: auto;
+			align-items: stretch;
+		}
+		.terminal-win-controls {
+			justify-content: flex-end;
+			padding: 4px 10px;
+			border-bottom: 1.5px dashed var(--line-strong);
+			background: var(--bar);
+			height: 28px;
+		}
+		.terminal-win-controls .win-btn {
+			height: 24px;
+			width: 28px;
+		}
+		.terminal-tabs {
+			padding-left: 6px;
+			height: 38px;
 		}
 	}
 </style>
