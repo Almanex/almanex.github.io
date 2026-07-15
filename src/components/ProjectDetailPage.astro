@@ -650,7 +650,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     display: flex;
     background: transparent;
     border: none;
-    padding: 0 16px;
+    padding: 0; /* Left edge aligned exactly with the window border */
     gap: 8px;
     overflow-x: auto;
     margin-bottom: -2px; /* Pull window up so tabs sit on top of window border */
@@ -666,90 +666,43 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--surface-2, #181b20);
-    border: 2px solid rgba(255, 255, 255, 0.12);
-    border-bottom: none;
     border-radius: 8px 8px 0 0;
     padding: 8px 16px;
     font-family: var(--font-mono);
     font-size: 13px;
     font-weight: 800;
-    color: var(--gray-2);
     cursor: pointer;
     transition: all 0.15s ease;
     margin-top: 12px; /* Sits lower */
     white-space: nowrap;
-    opacity: 0.65;
+    opacity: 0.6; /* Softens inactive tab colors and borders */
+    z-index: 4;
   }
 
-  #tab-readme:hover {
-    background: rgba(34, 211, 238, 0.08);
-    border-color: rgba(34, 211, 238, 0.25);
-    color: var(--ink);
-    opacity: 0.9;
-  }
-
-  #tab-guide:hover {
-    background: rgba(245, 158, 11, 0.08);
-    border-color: rgba(245, 158, 11, 0.25);
-    color: var(--ink);
-    opacity: 0.9;
-  }
-
-  #tab-readme.active {
+  #tab-readme {
     background: var(--cyan, #38bdf8) !important;
     border: 2px solid var(--ink) !important;
     border-bottom: none !important;
     color: #111212 !important;
-    margin-top: 0px; /* Rises up taller */
-    padding: 12px 18px 10px; /* Taller */
-    opacity: 1;
-    box-shadow: none;
-    z-index: 6;
   }
 
-  #tab-guide.active {
+  #tab-guide {
     background: var(--amber, #fbbf24) !important;
     border: 2px solid var(--ink) !important;
     border-bottom: none !important;
     color: #111212 !important;
-    margin-top: 0px; /* Rises up taller */
-    padding: 12px 18px 10px; /* Taller */
-    opacity: 1;
-    box-shadow: none;
-    z-index: 6;
   }
 
-  :root:not([data-theme=dark]) .ide-tab {
-    color: var(--ink);
-    background: #e1e3e6;
-    border: 2px solid rgba(0, 0, 0, 0.12);
-    border-bottom: none;
-    opacity: 0.7;
+  .ide-tab:hover {
+    opacity: 0.85;
   }
-  :root:not([data-theme=dark]) #tab-readme:hover {
-    background: rgba(34, 211, 238, 0.12);
-    border-color: rgba(34, 211, 238, 0.35);
-    opacity: 0.9;
-  }
-  :root:not([data-theme=dark]) #tab-guide:hover {
-    background: rgba(245, 158, 11, 0.12);
-    border-color: rgba(245, 158, 11, 0.35);
-    opacity: 0.9;
-  }
-  :root:not([data-theme=dark]) #tab-readme.active {
-    background: var(--cyan, #38bdf8) !important;
-    border: 2px solid var(--ink) !important;
-    border-bottom: none !important;
-    color: #111212 !important;
-    opacity: 1;
-  }
-  :root:not([data-theme=dark]) #tab-guide.active {
-    background: var(--amber, #fbbf24) !important;
-    border: 2px solid var(--ink) !important;
-    border-bottom: none !important;
-    color: #111212 !important;
-    opacity: 1;
+
+  .ide-tab.active {
+    margin-top: 0px; /* Rises up taller */
+    padding: 12px 18px 10px; /* Taller */
+    opacity: 1 !important;
+    box-shadow: none;
+    z-index: 6;
   }
 
   .window-header {
