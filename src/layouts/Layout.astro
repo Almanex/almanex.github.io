@@ -679,10 +679,21 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 			height: 26px;
 		}
 		.terminal-header {
-			height: 44px; /* Increased from 38px on mobile */
+			height: 54px; /* Increased from 44px on mobile to prevent vertical overflow */
 		}
 		.terminal-tabs {
-			padding-left: 6px;
+			padding-left: 0; /* Align left edge of first tab to window boundary */
+		}
+		.term-tab {
+			padding: 0 8px; /* Reduced from 16px to fit all tabs on one line */
+			margin-right: 2px; /* Reduced from 4px */
+			font-size: 11px; /* Slightly smaller font to save space */
+		}
+		.term-tab-plus {
+			margin-left: 2px;
+			width: 24px;
+			height: 24px;
+			margin-bottom: 4px;
 		}
 	}
 </style>
