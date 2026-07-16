@@ -1311,5 +1311,13 @@ table {
   letter-spacing: normal !important;
 }
 
+.ft-bar .made {
+  font-family: var(--font-hand) !important;
+  font-size: 19px !important;
+  font-weight: 600 !important;
+  letter-spacing: normal !important;
+  color: var(--gray-2) !important;
+}
+
 
 
