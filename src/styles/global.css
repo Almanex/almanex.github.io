@@ -1298,5 +1298,18 @@ table {
   font-weight: 500 !important;
 }
 
+/* ── Handwriting Font & Works Note Overrides ── */
+:root {
+  --font-hand: 'Caveat', cursive !important;
+}
+
+.works-note {
+  font-family: var(--font-hand) !important;
+  font-size: 21px !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
+  letter-spacing: normal !important;
+}
+
 
 
