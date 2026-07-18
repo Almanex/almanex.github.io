@@ -148,7 +148,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
   </article>
 
   <script is:inline>
-    document.addEventListener('DOMContentLoaded', () => {
+    const initBlogDetail = () => {
       const progressFill = document.getElementById('scroll-progress-fill');
       if (progressFill) {
         window.addEventListener('scroll', () => {
@@ -158,7 +158,13 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
           progressFill.style.width = scrolled + '%';
         }, { passive: true });
       }
-    });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initBlogDetail);
+    } else {
+      initBlogDetail();
+    }
   </script>
 </Layout>
 

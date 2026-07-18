@@ -163,7 +163,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
   </div>
 
   <script is:inline>
-    document.addEventListener('DOMContentLoaded', () => {
+    const initBlogPage = () => {
       const filterBtns = document.querySelectorAll('.flag-btn');
       const commits = document.querySelectorAll('.commit-entry');
       const separators = document.querySelectorAll('.graph-separator');
@@ -210,7 +210,13 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
           });
         });
       });
-    });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initBlogPage);
+    } else {
+      initBlogPage();
+    }
   </script>
 </Layout>
 

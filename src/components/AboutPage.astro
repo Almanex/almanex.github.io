@@ -406,7 +406,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
 
   <script is:inline>
     // Stats Counter Animation
-    document.addEventListener('DOMContentLoaded', () => {
+    const initAboutPage = () => {
       // Obfuscated Email Button handling
       document.querySelectorAll('.obfuscated-email-btn').forEach(btn => {
         const user = btn.dataset.user;
@@ -454,7 +454,13 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
       } else {
         counters.forEach(c => animateCounter(c));
       }
-    });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAboutPage);
+    } else {
+      initAboutPage();
+    }
   </script>
 </Layout>
 

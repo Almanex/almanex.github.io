@@ -120,7 +120,7 @@ const labels = {
 </Layout>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  const initWorkPage = () => {
     // Intercept card click to open Page View
     document.querySelectorAll('.wk-card').forEach(card => {
       card.addEventListener('click', (e) => {
@@ -133,7 +133,13 @@ const labels = {
         }
       });
     });
-  });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWorkPage);
+  } else {
+    initWorkPage();
+  }
 </script>
 
 <style is:global>

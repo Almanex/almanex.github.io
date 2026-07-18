@@ -376,7 +376,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
 
   <!-- Zero-JS pre-rendered line numbers and slider controls -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    const initProjectDetail = () => {
       const containerEl = document.getElementById('project-detail-container');
       if (!containerEl) return;
       const lang = containerEl.dataset.lang || 'en';
@@ -565,7 +565,13 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
 
       if (readmeHtml) readmeHtml.addEventListener('click', handleAnchorClick);
       if (guideHtml) guideHtml.addEventListener('click', handleAnchorClick);
-    });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initProjectDetail);
+    } else {
+      initProjectDetail();
+    }
   </script>
 </Layout>
 

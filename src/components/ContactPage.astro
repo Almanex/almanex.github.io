@@ -260,7 +260,7 @@ const l = contactLabels[lang];
 </Layout>
 
 <script is:inline define:vars={{ l }}>
-  document.addEventListener('DOMContentLoaded', () => {
+  const initContactPage = () => {
     // Live Clock
     const clockEl = document.getElementById('contact-live-clock');
     if (clockEl) {
@@ -286,14 +286,12 @@ const l = contactLabels[lang];
       });
     });
 
-    // Copy Email to Clipboard
-    const copyBtn = document.getElementById('copy-email-btn');
+    // Copy Email helper
+    const copyBtn = document.getElementById('contact-copy-email-btn');
     if (copyBtn) {
       copyBtn.addEventListener('click', () => {
-        const user = copyBtn.getAttribute('data-user');
-        const domain = copyBtn.getAttribute('data-domain');
-        const email = `${user}@${domain}`;
-        navigator.clipboard.writeText(email).then(() => {
+        const text = 'almanex@zohomail.eu';
+        navigator.clipboard.writeText(text).then(() => {
           copyBtn.innerHTML = `<span>${l.copied}</span>`;
           copyBtn.classList.add('copied');
           setTimeout(() => {
@@ -349,12 +347,8 @@ const l = contactLabels[lang];
           }, idx * 400);
         });
 
-        // 4. Submit to Formspree if the endpoint is updated (not "yourFormId")
+        // 4. Submit to Formspree
         const action = form.getAttribute('action');
-        if (action.includes('yourFormId')) {
-          // Mock success
-          return;
-        }
 
         try {
           const formData = new FormData(form);
@@ -380,7 +374,13 @@ const l = contactLabels[lang];
         }
       });
     }
-  });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContactPage);
+  } else {
+    initContactPage();
+  }
 </script>
 
 <style>
