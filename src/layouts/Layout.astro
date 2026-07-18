@@ -356,7 +356,7 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 		// Scroll shadow on nav
 		const nav = document.getElementById('nav');
 		if (nav) {
-			let lastScrollY = window.scrollY;
+			let lastScrollY = 0;
 			const onScroll = () => {
 				const currentScrollY = window.scrollY;
 				nav.classList.toggle('scrolled', currentScrollY > 8);
@@ -371,8 +371,10 @@ const defaultHref = new URL(getPathForLang('en'), Astro.site).href;
 				}
 				lastScrollY = currentScrollY;
 			};
-			onScroll();
 			window.addEventListener('scroll', onScroll, { passive: true });
+			requestAnimationFrame(() => {
+				if (nav) onScroll();
+			});
 		}
 
 		// Mobile menu burger toggle
