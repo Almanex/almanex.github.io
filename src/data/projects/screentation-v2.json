@@ -21,26 +21,37 @@
     "/images/projects/Screentation_de_03.webp"
   ],
   "tldr": [
-    "Screenshot processor and app presentation mockup builder",
-    "Add stylish background grids",
-    "canvas paddings",
-    "and device frame templates",
-    "Export polished presentation screenshots for app stores and GitHub"
+    "Отслеживание буфера обмена: Автоматический импорт скриншотов",
+    "сделанных стандартными системными средствами Windows.\nАппаратное ускорение Win2D: Нативный быстрый рендеринг для плавной отрисовки фигур и текста поверх картинок.\nИнструменты разметки: Указательные стрелки",
+    "рамки",
+    "текст",
+    "маркеры подсветки и размытие по Гауссу для конфиденциальных данных.\nАвтонумерация шагов: Удобные маркеры шагов (цифрами или буквами) для мгновенного создания туториалов.\nZwischenablageüberwachung: Automatischer Import von Screenshots",
+    "die mit Standard-Windows-Systemtools erstellt wurden.\nWin2D-Hardwarebeschleunigung: Schnelles natives Rendering für flüssiges Zeichnen von Formen und Text über Bildern.\nMarkierungswerkzeuge: Pfeile",
+    "Rahmen",
+    "Text",
+    "Hervorhebungsmarkierungen und Gaußscher Weichzeichner für sensible Daten. Automatische Schrittnummerierung: Praktische Schrittmarkierungen (Zahlen oder Buchstaben) für die sofortige Erstellung von Tutorials.\nClipboard monitoring: Automatically imports screenshots taken using standard Windows tools.\nWin2D hardware acceleration: Fast",
+    "native rendering for smooth drawing of shapes and text over images.\nMarkup tools: Arrows",
+    "frames",
+    "text",
+    "highlighters",
+    "and Gaussian blur for sensitive data.\nAutomatic step numbering: Convenient step markers (numbers or letters) for instantly creating tutorials.\nSmart cropping: Crop images while automatically shifting and scaling all previously added elements."
   ],
   "subtitle_ru": "Инструмент для создания скриншотов, мокапов и превью интерфейсов.",
   "category_ru": "Графика",
   "tldr_ru": [
-    "Процессор скриншотов и конструктор мокапов для превью приложений",
-    "Добавление стильных фоновых сеток",
-    "полей холста и шаблонов рамок устройств",
-    "Экспорт готовых презентационных скриншотов для магазинов приложений и GitHub"
+    "Отслеживание буфера обмена: Автоматический импорт скриншотов",
+    "сделанных стандартными системными средствами Windows.\nАппаратное ускорение Win2D: Нативный быстрый рендеринг для плавной отрисовки фигур и текста поверх картинок.\nИнструменты разметки: Указательные стрелки",
+    "рамки",
+    "текст",
+    "маркеры подсветки и размытие по Гауссу для конфиденциальных данных.\nАвтонумерация шагов: Удобные маркеры шагов (цифрами или буквами) для мгновенного создания туториалов.\nУмное кадрирование: Возможность обрезки изображения с автоматическим сдвигом и масштабированием всех ранее нанесенных элементов."
   ],
   "subtitle_de": "Ein Werkzeug zum Erstellen von Screenshots, Mockups und Design-Vorschauen.",
   "category_de": "Grafik",
   "tldr_de": [
-    "Screenshot-Prozessor und Mockup-Generator für App-Vorschauen",
-    "Hinzufügen von Hintergrundgittern",
-    "Canvas-Abständen und Geräterahmen",
-    "Export fertiger Präsentations-Screenshots für App Stores und GitHub"
+    "Zwischenablageüberwachung: Automatischer Import von Screenshots",
+    "die mit Standard-Windows-Systemtools erstellt wurden.\nWin2D-Hardwarebeschleunigung: Schnelles natives Rendering für flüssiges Zeichnen von Formen und Text über Bildern.\nMarkierungswerkzeuge: Pfeile",
+    "Rahmen",
+    "Text",
+    "Hervorhebungsmarkierungen und Gaußscher Weichzeichner für sensible Daten. Automatische Schrittnummerierung: Praktische Schrittmarkierungen (Zahlen oder Buchstaben) für die sofortige Erstellung von Tutorials.\nIntelligentes Zuschneiden: Bilder werden mit automatischer Verschiebung und Skalierung aller zuvor angewendeten Elemente zugeschnitten."
   ]
 }
