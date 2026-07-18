@@ -14,27 +14,8 @@
   "guide": "",
   "guide_ru": "",
   "guide_de": "",
-  "tldr": [
-    "Community-driven fork of Shelter – an Android sandbox for profile isolation",
-    "Isolates background processes",
-    "freezes cloned applications",
-    "and protects data",
-    "Active development focusing on security patches and dependency updates"
-  ],
   "subtitle_ru": "Форк приложения с открытым исходным кодом для контроля приватности и песочниц профилей.",
   "category_ru": "Мобильное",
-  "tldr_ru": [
-    "Сообщественный форк Shelter – песочницы для изоляции профилей Android",
-    "Изолирует фоновые процессы",
-    "замораживает клонированные приложения и защищает данные",
-    "Активная разработка с акцентом на безопасность и обновление библиотек"
-  ],
   "subtitle_de": "Ein Open-Source-App-Fork mit Fokus auf Datenschutz und Systemprofil-Sandboxing.",
-  "category_de": "Mobil",
-  "tldr_de": [
-    "Community-Fork von Shelter – einer Sandbox zur Profilisolierung auf Android",
-    "Isoliert Hintergrundprozesse",
-    "friert Klone ein und schützt persönliche Daten",
-    "Aktive Open-Source-Entwicklung mit Fokus auf Sicherheit und aktuelle Bibliotheken"
-  ]
+  "category_de": "Mobil"
 }

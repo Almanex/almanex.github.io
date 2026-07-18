@@ -29,7 +29,6 @@ const labels = {
     top: "⬆ Scroll to top",
     tabReadme: "Tech Specs // README",
     tabGuide: "User Guide // MANUAL",
-    tldrHeader: "TL;DR // Quick Summary",
     downloadWindows: "DOWNLOAD RELEASE (.EXE / .ZIP) ↓",
     downloadAndroid: "DOWNLOAD RELEASE (.APK) ↓",
     downloadGeneric: "DOWNLOAD RELEASE ↓"
@@ -45,7 +44,6 @@ const labels = {
     top: "⬆ Наверх",
     tabReadme: "Технический обзор // README",
     tabGuide: "Руководство // GUIDE",
-    tldrHeader: "TL;DR // Коротко о главном",
     downloadWindows: "СКАЧАТЬ РЕЛИЗ (.EXE / .ZIP) ↓",
     downloadAndroid: "СКАЧАТЬ РЕЛИЗ (.APK) ↓",
     downloadGeneric: "СКАЧАТЬ РЕЛИЗ ↓"
@@ -61,7 +59,6 @@ const labels = {
     top: "⬆ Nach oben",
     tabReadme: "Tech-Übersicht // README",
     tabGuide: "Anleitung // GUIDE",
-    tldrHeader: "TL;DR // Kurz zusammengefasst",
     downloadWindows: "RELEASE HERUNTERLADEN (.EXE / .ZIP) ↓",
     downloadAndroid: "RELEASE HERUNTERLADEN (.APK) ↓",
     downloadGeneric: "RELEASE HERUNTERLADEN ↓"
@@ -70,10 +67,9 @@ const labels = {
 
 const l = labels[lang];
 
-// Localized category, subtitle and tldr highlights
+// Localized category and subtitle
 const category = projectData[`category_${lang}`] || projectData.category;
 const subtitle = projectData[`subtitle_${lang}`] || projectData.subtitle;
-const tldr = projectData[`tldr_${lang}`] || projectData.tldr || [];
 
 // Helper: Resolve a single relative path to GitHub raw/blob URL
 function resolveSinglePathServer(src: string, proj: any, isDocsFolder: boolean) {
@@ -321,20 +317,7 @@ const getLocalizedPath = (path: string) => lang === 'en' ? path : `/${lang}${pat
       </div>
     </div>
 
-    <!-- TL;DR Summary Section -->
-    {tldr && tldr.length > 0 && (
-      <div class="tldr-container">
-        <div class="tldr-header">
-          <span class="tldr-icon">💡</span>
-          <span>{l.tldrHeader}</span>
-        </div>
-        <ul class="tldr-list">
-          {tldr.map((item: string) => (
-            <li>{item}</li>
-          ))}
-        </ul>
-      </div>
-    )}
+
 
     <!-- Screenshots Slider -->
     <div class="project-slider" id="project-slider" data-images={JSON.stringify(allImages)} style="display: none;">
