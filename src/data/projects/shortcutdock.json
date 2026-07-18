@@ -1,6 +1,6 @@
 {
   "title": "ShortcutDock",
-  "subtitle": "Настраиваемая панель быстрого запуска в стиле Fluent Design для рабочего стола Windows 11",
+  "subtitle": "Minimalist desktop shortcut launcher dock in Windows 11 Mica style.",
   "category": "Customization",
   "lang": "C#",
   "platform": "Windows",
@@ -20,5 +20,25 @@
     "/images/projects/screenshot1.webp",
     "/images/projects/screenshot4.webp",
     "/images/projects/screenshot5.webp"
+  ],
+  "tldr": [
+    "Minimalist shortcut launcher and organizer panel for Windows desktop",
+    "Modern semi-transparent Mica style fitting Windows 11 interface aesthetics",
+    "Runs as a portable application without installation – fully customizable"
+  ],
+  "subtitle_ru": "Минималистичная панель запуска для кастомизации и организации рабочего стола Windows.",
+  "category_ru": "Кастомизация",
+  "tldr_ru": [
+    "Минималистичная панель запуска и организации ярлыков для рабочего стола Windows",
+    "Современный полупрозрачный стиль Mica в эстетике интерфейса Windows 11",
+    "Работает как портативное приложение без установки – полностью настраиваемое"
+  ],
+  "subtitle_de": "Ein minimalistisches Dock zur Anpassung und Organisation des Windows-Desktops.",
+  "category_de": "Anpassung",
+  "tldr_de": [
+    "Minimalistisches Dock zum Starten und Organisieren von Windows-Apps",
+    "Modernes",
+    "halbltransparentes Mica-Design passend zur Windows 11-Ästhetik",
+    "Läuft als portable App ohne Installation – voll konfigurierbar und anpassbar"
   ]
 }

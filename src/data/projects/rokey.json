@@ -1,6 +1,6 @@
 {
   "title": "Rokey",
-  "subtitle": "Легковесная утилита Windows для быстрого перевода выделенного текста из неверной раскладки клавиатуры в нужную",
+  "subtitle": "Custom virtual keyboard driver and key mapping utility for Windows.",
   "category": "System",
   "lang": "C++",
   "platform": "Windows",
@@ -14,5 +14,28 @@
   "guide": "",
   "guide_ru": "",
   "guide_de": "",
-  "status": "DRAFT"
+  "status": "DRAFT",
+  "tldr": [
+    "Virtual keyboard driver and hotkey mapping utility for Windows",
+    "Create custom macros",
+    "hotkeys",
+    "and layout mappings at driver level",
+    "Lightweight system utility with minimal resource consumption"
+  ],
+  "subtitle_ru": "Кастомный драйвер виртуальной клавиатуры и утилита маппинга клавиш для Windows.",
+  "category_ru": "Система",
+  "tldr_ru": [
+    "Драйвер виртуальной клавиатуры и утилита переназначения клавиш для Windows",
+    "Создание кастомных макросов",
+    "горячих клавиш и раскладок на уровне драйвера",
+    "Легковесная системная утилита с минимальным потреблением ресурсов"
+  ],
+  "subtitle_de": "Ein benutzerdefinierter Tastaturtreiber und Tastenbelegungs-Tool für Windows.",
+  "category_de": "System",
+  "tldr_de": [
+    "Benutzerdefinierter virtueller Tastaturtreiber und Tastenbelegungs-Tool für Windows",
+    "Erstellung eigener Makros",
+    "Verknüpfungen und Tastenbelegungen auf Treiber-Ebene",
+    "Leichtgewichtiges System-Tool mit minimaler CPU- und Speicherauslastung"
+  ]
 }

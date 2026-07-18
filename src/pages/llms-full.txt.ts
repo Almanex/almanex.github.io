@@ -1,6 +1,5 @@
 import { getCollection } from 'astro:content';
 import { PROJECTS_DATA } from '../data/projects.js';
-import { PROJECT_TRANSLATIONS } from '../data/translations.js';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -33,7 +32,7 @@ export async function GET() {
   
   const projectsList = activeProjects
     .map(([id, p]: [string, any]) => {
-      const englishSubtitle = PROJECT_TRANSLATIONS.en?.[id]?.subtitle || p.subtitle || '';
+      const englishSubtitle = p.subtitle || '';
       return `- [${p.title}](${siteUrl}/projects/${id}): ${englishSubtitle}`;
     })
     .join('\n');

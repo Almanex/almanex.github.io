@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import { PROJECTS_DATA } from '../data/projects.js';
-import { PROJECT_TRANSLATIONS } from '../data/translations.js';
 
 interface Props {
   lang: 'en' | 'ru' | 'de';
@@ -282,8 +281,8 @@ const l = pageLabels[lang];
             : (getFirstImageFromMarkdown(project.readme, project) || `/images/projects/cover/cover_${(index % 8) + 1}.avif`);
           
           // Localized category and subtitle
-          const category = project.category;
-          const subtitle = PROJECT_TRANSLATIONS[lang]?.[id]?.subtitle || project.subtitle;
+          const category = project[`category_${lang}`] || project.category;
+          const subtitle = project[`subtitle_${lang}`] || project.subtitle;
 
           return (
             <article class="folder-card" data-project-id={id} style="display: none;">

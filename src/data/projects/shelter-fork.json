@@ -1,6 +1,6 @@
 {
   "title": "Shelter Fork",
-  "subtitle": "Изолированное пространство для ваших приложений с использованием рабочего профиля Android, оптимизированное для Android 16 (API 36).",
+  "subtitle": "Android sandbox profile manager app fork focusing on privacy.",
   "category": "Mobile",
   "lang": "Java",
   "platform": "Android",
@@ -13,5 +13,28 @@
   "readme_de": "# Shelter (Android 16 Fork)\n\n*Ein isolierter Bereich für Ihre Anwendungen unter Nutzung des Android-Arbeitsprofils, vollständig optimiert für Android 16 (API 36).*\n\n[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](../LICENSE)\n[![Platform: Android](https://img.shields.io/badge/Platform-Android-green.svg)](https://developer.android.com)\n[![Target SDK: 36](https://img.shields.io/badge/Target_SDK-36-blue.svg)](https://developer.android.com/about/versions/16)\n[![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FShelter-fork)](https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20Android%2016%20Work%20Profile%20isolation%20tool%20Shelter-fork&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FShelter-fork)\n\n## Übersicht\n\nShelter ist eine kostenlose und Open-Source-App (FOSS), die die „Arbeitsprofil“-Funktion von Android nutzt, um einen isolierten Bereich bereitzustellen, in dem Sie Apps installieren oder klonen können.\n\nDieser Fork wurde speziell für Android 16 (API 36) angepasst und bietet volle Unterstützung für Pixel 9a sowie moderne Android-Funktionen wie die Edge-to-Edge-Benutzeroberfläche, Material You Farbthemen und die vorausschauende Zurück-Navigation (Predictive Back).\n\n## Hauptmerkmale\n\n- **Arbeitsprofil-Isolierung**: Installieren Sie Apps in einem isolierten Profil, um zu verhindern, dass sie auf Ihre Hauptprofildaten zugreifen.\n- **Inaktive Apps einfrieren**: Frieren Sie Hintergrund-Apps im Arbeitsprofil ein, um Akku zu sparen und unkontrollierte Aktivitäten zu verhindern.\n- **Klonen von Apps**: Führen Sie zwei separate Instanzen der selben App auf einem Gerät aus.\n- **Android 16 Edge-to-Edge**: Volle Unterstützung für das obligatorische Edge-to-Edge-Design unter Android 16.\n- **Optimierte Navigation**: Fließende Animationen bei der Zurück-Geste und moderne Navigationsmuster.\n- **Pixel 9a Kompatibilität**: Hardware- und Displayoptimierungen speziell für den 6.3\" Bildschirm.\n\n## Tech-Stack\n\n| Ebene / Komponente | Technologie | Details / Zweck |\n| --- | --- | --- |\n| Betriebssystem | Android | Target SDK 36 (Android 16), Min SDK 24 (Android 7.0) |\n| Programmiersprache | Java / AIDL | Hauptanwendungslogik und Interprozesskommunikation (IPC) |\n| Build-System | Gradle (v8.6.0 plugin) | Build-Automatisierung des Android-Projekts |\n| UI-Framework | Material Design | Android Jetpack (AppCompat, Preference, Material Components) |\n\n## Erste Schritte\n\n### Voraussetzungen\n- JDK 17\n- Android SDK (API 36 Befehlszeilen-Tools oder Android Studio)\n- Ein Android-Gerät mit Android 16 (API 36) oder höher für optimale Kompatibilität.\n\n### Installation & Ausführung\n1. Klonen Sie das Repository:\n   ```bash\n   git clone https://github.com/Almanex/Shelter-fork.git\n   cd Shelter-fork\n   ```\n2. Debug-Version bauen:\n   ```bash\n   ./gradlew assembleDebug\n   ```\n3. APK auf dem Gerät installieren:\n   ```bash\n   adb install app/build/outputs/apk/debug/app-debug.apk\n   ```\n\n## Tests ausführen\n\nSo führen Sie Unit-Tests aus:\n```bash\n./gradlew test\n```\n\nSo führen Sie Instrumentierungstests aus (erfordert ein angeschlossenes Gerät oder einen Emulator):\n```bash\n./gradlew connectedAndroidTest\n```\n\n## Bereitstellung\n\nSo erstellen Sie einen produktionsbereiten Release-Build der App:\n```bash\n./gradlew assembleRelease\n```\nDie kompilierte APK-Datei befindet sich im Ordner `app/build/outputs/apk/release/`.\n\nBitte beachten Sie, dass Release-Builds für Android 16 ordnungsgemäß signiert sein müssen, um installiert werden zu können.\n\n### Windows Defender SmartScreen-Warnung\nBeim Ausführen von Build-Skripten unter Windows kann eine SmartScreen-Warnung erscheinen. So umgehen Sie diese:\n- Klicken Sie auf **Weitere Informationen**\n- Klicken Sie auf **Trotzdem ausführen**\n\n## Beteiligung\n\nBeiträge zum Projekt sind willkommen. Bitte beachten Sie unsere Richtlinien und senden Sie Fehlerberichte oder Pull-Requests über GitHub.\n\n## Lizenz\n\nDieses Projekt ist unter der GNU General Public License v3.0 lizenziert – Details finden Sie in der Datei [LICENSE](../LICENSE).\n",
   "guide": "",
   "guide_ru": "",
-  "guide_de": ""
+  "guide_de": "",
+  "tldr": [
+    "Community-driven fork of Shelter – an Android sandbox for profile isolation",
+    "Isolates background processes",
+    "freezes cloned applications",
+    "and protects data",
+    "Active development focusing on security patches and dependency updates"
+  ],
+  "subtitle_ru": "Форк приложения с открытым исходным кодом для контроля приватности и песочниц профилей.",
+  "category_ru": "Мобильное",
+  "tldr_ru": [
+    "Сообщественный форк Shelter – песочницы для изоляции профилей Android",
+    "Изолирует фоновые процессы",
+    "замораживает клонированные приложения и защищает данные",
+    "Активная разработка с акцентом на безопасность и обновление библиотек"
+  ],
+  "subtitle_de": "Ein Open-Source-App-Fork mit Fokus auf Datenschutz und Systemprofil-Sandboxing.",
+  "category_de": "Mobil",
+  "tldr_de": [
+    "Community-Fork von Shelter – einer Sandbox zur Profilisolierung auf Android",
+    "Isoliert Hintergrundprozesse",
+    "friert Klone ein und schützt persönliche Daten",
+    "Aktive Open-Source-Entwicklung mit Fokus auf Sicherheit und aktuelle Bibliotheken"
+  ]
 }

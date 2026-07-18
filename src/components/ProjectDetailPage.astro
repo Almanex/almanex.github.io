@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { PROJECTS_DATA } from '../data/projects.js';
-import { PROJECT_TRANSLATIONS } from '../data/translations.js';
 import { marked } from 'marked';
 
 // Configure marked options
@@ -71,10 +70,10 @@ const labels = {
 
 const l = labels[lang];
 
-// Localized subtitle and tldr highlights
-const category = projectData.category;
-const subtitle = PROJECT_TRANSLATIONS[lang]?.[project]?.subtitle || projectData.subtitle;
-const tldr = PROJECT_TRANSLATIONS[lang]?.[project]?.tldr || projectData.tldr || [];
+// Localized category, subtitle and tldr highlights
+const category = projectData[`category_${lang}`] || projectData.category;
+const subtitle = projectData[`subtitle_${lang}`] || projectData.subtitle;
+const tldr = projectData[`tldr_${lang}`] || projectData.tldr || [];
 
 // Helper: Resolve a single relative path to GitHub raw/blob URL
 function resolveSinglePathServer(src: string, proj: any, isDocsFolder: boolean) {

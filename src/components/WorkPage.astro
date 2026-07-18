@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { UI_TRANSLATIONS, PROJECT_TRANSLATIONS } from '../data/translations.js';
+import { UI_TRANSLATIONS } from '../data/translations.js';
 
 interface Props {
   lang: 'en' | 'ru' | 'de';
@@ -49,8 +49,8 @@ const labels = {
           const coverImg = project.firstImg || `/images/projects/cover/cover_${(index % 8) + 1}.avif`;
           
           // Localized category and subtitle
-          const category = project.category;
-          const subtitle = PROJECT_TRANSLATIONS[lang]?.[project.id]?.subtitle || project.subtitle;
+          const category = project[`category_${lang}`] || project.category;
+          const subtitle = project[`subtitle_${lang}`] || project.subtitle;
 
           // Check if GUIDE is available
           const guideStr = project.guide || project.guide_ru || project.guide_de;

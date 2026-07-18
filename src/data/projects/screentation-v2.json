@@ -1,6 +1,6 @@
 {
   "title": "Screentation V2",
-  "subtitle": "Screentation — это нативное Windows-приложение для редактирования и аннотирования скриншотов. ",
+  "subtitle": "Screenshot presentation builder and app mockup generator.",
   "category": "Open Source",
   "lang": "C#",
   "platform": "Windows 11",
@@ -19,5 +19,28 @@
     "/images/projects/Screentation_en_0_02.webp",
     "/images/projects/Screentation_001.webp",
     "/images/projects/Screentation_de_03.webp"
+  ],
+  "tldr": [
+    "Screenshot processor and app presentation mockup builder",
+    "Add stylish background grids",
+    "canvas paddings",
+    "and device frame templates",
+    "Export polished presentation screenshots for app stores and GitHub"
+  ],
+  "subtitle_ru": "Инструмент для создания скриншотов, мокапов и превью интерфейсов.",
+  "category_ru": "Графика",
+  "tldr_ru": [
+    "Процессор скриншотов и конструктор мокапов для превью приложений",
+    "Добавление стильных фоновых сеток",
+    "полей холста и шаблонов рамок устройств",
+    "Экспорт готовых презентационных скриншотов для магазинов приложений и GitHub"
+  ],
+  "subtitle_de": "Ein Werkzeug zum Erstellen von Screenshots, Mockups und Design-Vorschauen.",
+  "category_de": "Grafik",
+  "tldr_de": [
+    "Screenshot-Prozessor und Mockup-Generator für App-Vorschauen",
+    "Hinzufügen von Hintergrundgittern",
+    "Canvas-Abständen und Geräterahmen",
+    "Export fertiger Präsentations-Screenshots für App Stores und GitHub"
   ]
 }
