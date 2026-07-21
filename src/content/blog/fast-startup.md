@@ -1,11 +1,13 @@
 ---
-title: "Why You Should Disable Fast Startup in Windows 11/10"
-description: "A detailed guide on Windows Fast Startup: why it interferes with updates, breaks restarts, causes unexpected wakeups, and how to properly disable it."
-pubDate: 2026-07-21
-category: "Windows"
-image: "/images/blog/fast-startup.jpg"
-readTime: "6 min"
-status: "DFT"
+title: Why You Should Disable Fast Startup in Windows 11/10
+description: >-
+  A detailed guide on Windows Fast Startup: why it interferes with updates,
+  breaks restarts, causes unexpected wakeups, and how to properly disable it.
+pubDate: '2026-07-21T00:00:00.000Z'
+category: Windows
+image: /images/blog/fast-startup.jpg
+readTime: 5 min
+status: DFT
 ---
 
 The Fast Startup feature is enabled by default in all modern versions of Windows, starting with Windows 8. The goal of Microsoft engineers was simple: reduce the wait time when powering on your PC. However, in practice, this feature often becomes the source of mysterious glitches and issues that users struggle with for years, never realizing the true cause.
