@@ -8,6 +8,7 @@ import shelter_fork from './projects/shelter-fork.json';
 import flowguide from './projects/flowguide.json';
 import lingospaced from './projects/lingospaced.json';
 import mushroom_spot from './projects/mushroom-spot.json';
+import habanada from './projects/habanada.json';
 
 export const PROJECTS_DATA = {
   "classic-windows-image-viewer": classic_windows_image_viewer,
@@ -19,7 +20,8 @@ export const PROJECTS_DATA = {
   "shelter-fork": shelter_fork,
   "flowguide": flowguide,
   "lingospaced": lingospaced,
-  "mushroom-spot": mushroom_spot
+  "mushroom-spot": mushroom_spot,
+  "habanada": habanada
 };
 
 if (typeof window !== 'undefined') {
