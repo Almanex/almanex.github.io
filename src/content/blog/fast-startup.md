@@ -7,7 +7,7 @@ pubDate: '2026-07-21T00:00:00.000Z'
 category: Windows
 image: /images/blog/fast-startup.jpg
 readTime: 5 min
-status: DFT
+status: PUB
 ---
 
 The Fast Startup feature is enabled by default in all modern versions of Windows, starting with Windows 8. The goal of Microsoft engineers was simple: reduce the wait time when powering on your PC. However, in practice, this feature often becomes the source of mysterious glitches and issues that users struggle with for years, never realizing the true cause.

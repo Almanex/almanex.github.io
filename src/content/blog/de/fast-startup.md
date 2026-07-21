@@ -8,7 +8,7 @@ pubDate: '2026-07-21T00:00:00.000Z'
 category: Windows
 image: /images/blog/fast-startup.jpg
 readTime: 5 min
-status: DFT
+status: PUB
 ---
 
 Die Schnellstart-Funktion (Fast Startup) ist standardmäßig in allen modernen Windows-Versionen seit Windows 8 aktiviert. Die Idee der Microsoft-Entwickler war simpel: Die Wartezeit beim Einschalten des Computers zu verkürzen. In der Praxis erweist sich diese Option jedoch oft als Quelle für mysteriöse Systemfehler, mit denen Benutzer jahrelang kämpfen, ohne die wahre Ursache zu kennen.
